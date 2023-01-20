@@ -1,0 +1,278 @@
+[2022/11/28 01:44:54:099] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 3
+[2022/11/28 01:44:54:114] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 5
+[2022/11/28 01:44:54:114] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 5
+[2022/11/28 01:44:54:114] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 0
+[2022/11/28 01:45:23:172] User: admin - Pass: 1 - UserId: 2 Login successful
+[2022/11/28 01:45:42:316] User: admin - Pass: 1 - UserId: 2 Login successful
+[2022/11/28 01:45:57:439] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 01:47:46:687] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 01:47:50:486] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 13
+[2022/11/28 01:47:50:489] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 5
+[2022/11/28 01:47:50:489] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 9
+[2022/11/28 01:47:50:491] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 3
+[2022/11/28 01:51:12:596] admin da ha boss Android 13
+[2022/11/28 01:52:09:640] admin da ha boss Android 15
+[2022/11/28 01:52:13:234] admin da ha boss Android 14
+[2022/11/28 02:14:08:176] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 02:21:44:067] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 02:21:52:404] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 11:43:59:867] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 11:52:32:767] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 11:52:43:615] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 11:52:44:436] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 9
+[2022/11/28 11:52:44:439] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 4
+[2022/11/28 11:52:44:440] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 10
+[2022/11/28 11:52:44:441] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 12
+[2022/11/28 11:57:54:353] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 12:01:28:582] User: quylao - Pass: 1 - UserId: 3 Login successful
+[2022/11/28 12:06:37:341] User: admin - Pass: 1 - UserId: 2 Login successful
+[2022/11/28 12:22:18:272] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 12:36:32:366] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 12:37:40:095] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 12:55:56:886] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 12:58:38:946] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 01:01:49:263] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:01:55:141] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:02:11:270] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:02:50:779] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:04:19:332] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:05:31:533] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:07:54:273] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:09:59:930] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:10:11:421] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:10:25:737] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:10:58:290] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:11:22:129] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:13:24:155] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:14:51:614] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:29:23:122] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:29:44:131] User: ngocmicutis1tg - Pass: tranthiminhchau - UserId: 4 Login successful
+[2022/11/28 01:30:07:565] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 02:28:22:943] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 02:28:47:217] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 08:17:54:434] User: ky - Pass: ky - UserId: 1 Login successful
+[2022/11/28 08:19:10:521] User: admin - Pass: 1 - UserId: 2 Login successful
+[2022/11/28 08:19:54:216] User: admin - Pass: 1 - UserId: 2 Login successful
+[2022/11/28 08:20:06:296] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 4
+[2022/11/28 08:20:06:298] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 10
+[2022/11/28 08:20:06:299] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 14
+[2022/11/28 08:20:06:300] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 4
+[2022/11/28 08:20:20:431] User: admin - Pass: 1 - UserId: 2 Login successful
+[2022/11/28 08:51:06:294] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 12
+[2022/11/28 08:51:06:294] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 4
+[2022/11/28 08:51:06:310] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 5
+[2022/11/28 08:51:06:310] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 13
+[2022/11/28 08:51:22:199] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 08:51:41:177] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 08:56:41:114] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 13
+[2022/11/28 08:56:41:120] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 0
+[2022/11/28 08:56:41:121] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 7
+[2022/11/28 08:56:41:123] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 1
+[2022/11/28 08:56:41:604] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 08:56:53:183] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 08:59:08:984] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 6
+[2022/11/28 08:59:08:999] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 14
+[2022/11/28 08:59:08:999] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 5
+[2022/11/28 08:59:08:999] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 4
+[2022/11/28 09:20:33:936] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 09:23:44:672] Boss: Kuku ?ã xu?t hi?n t?i Thung l?ng Nappa khu v?c 0
+[2022/11/28 09:27:12:883] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 09:40:46:325] User: 123kimcuong - Pass: 123456 - UserId: 5 Login successful
+[2022/11/28 09:55:17:973] User: 123kimcuong - Pass: 123456 - UserId: 5 Login successful
+[2022/11/28 09:59:54:615] User: 123kimcuong - Pass: 123456 - UserId: 5 Login successful
+[2022/11/28 10:02:42:585] User: 123kimcuong - Pass: 123456 - UserId: 5 Login successful
+[2022/11/28 10:04:22:282] User: 123kimcuong - Pass: 123456 - UserId: 5 Login successful
+[2022/11/28 10:17:48:198] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 10:29:43:588] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 10:29:58:696] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 10:33:42:746] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 10:36:07:871] User: hihihi - Pass: zxcvbnm - UserId: 7 Login successful
+[2022/11/28 10:36:08:369] User: nmhan38 - Pass: 123abc - UserId: 4 Login successful
+[2022/11/28 10:37:21:974] User: hihihi - Pass: zxcvbnm - UserId: 7 Login successful
+[2022/11/28 10:38:14:015] Boss: Kuku ?ã xu?t hi?n t?i Núi Appule khu v?c 12
+[2022/11/28 10:39:21:176] User: hihihi - Pass: zxcvbnm - UserId: 7 Login successful
+[2022/11/28 10:40:48:305] User: nmhan38 - Pass: 123abc - UserId: 4 Login successful
+[2022/11/28 10:41:40:781] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 0
+[2022/11/28 10:41:40:781] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 12
+[2022/11/28 10:41:40:781] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 13
+[2022/11/28 10:41:40:781] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 2
+[2022/11/28 10:41:45:855] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 10:43:13:310] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 10:46:16:885] User: nmhan38 - Pass: 123abc - UserId: 4 Login successful
+[2022/11/28 10:46:44:207] User: hihihi - Pass: zxcvbnm - UserId: 7 Login successful
+[2022/11/28 10:49:56:015] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 10:50:16:878] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 10:50:32:566] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 10:51:25:446] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 10:52:23:219] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 11:12:02:245] User: hihihi - Pass: zxcvbnm - UserId: 7 Login successful
+[2022/11/28 11:27:54:051] User: daovip - Pass: 123abc - UserId: 6 Login successful
+[2022/11/28 11:46:52:713] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 11:47:06:352] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 12:03:54:235] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 2
+[2022/11/28 12:03:54:241] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 10
+[2022/11/28 12:03:54:242] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 2
+[2022/11/28 12:03:54:242] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 1
+[2022/11/28 12:06:31:684] User: vuagame - Pass: 123123 - UserId: 8 Login successful
+[2022/11/28 12:06:35:804] User: vuagame - Pass: 123123 - UserId: 8 Login successful
+[2022/11/28 12:06:40:277] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 8
+[2022/11/28 12:06:40:278] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 6
+[2022/11/28 12:06:40:279] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 10
+[2022/11/28 12:06:40:280] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 3
+[2022/11/28 12:08:40:675] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 0
+[2022/11/28 12:08:40:678] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 8
+[2022/11/28 12:08:40:679] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 4
+[2022/11/28 12:08:40:680] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 7
+[2022/11/28 12:09:06:551] User: vuagame - Pass: 123123 - UserId: 8 Login successful
+[2022/11/28 12:16:48:522] User: vuagame - Pass: 123123 - UserId: 8 Login successful
+[2022/11/28 12:19:18:262] User: vuagame - Pass: 123123 - UserId: 8 Login successful
+[2022/11/28 12:19:25:978] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 4
+[2022/11/28 12:19:25:982] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 1
+[2022/11/28 12:19:25:983] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 14
+[2022/11/28 12:19:25:984] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 2
+[2022/11/28 12:21:55:270] User: vuagame - Pass: 123123 - UserId: 8 Login successful
+[2022/11/28 12:21:57:798] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 14
+[2022/11/28 12:21:57:800] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 10
+[2022/11/28 12:21:57:802] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 11
+[2022/11/28 12:21:57:803] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 6
+[2022/11/28 12:25:30:558] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 14
+[2022/11/28 12:25:30:558] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 11
+[2022/11/28 12:25:30:558] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 5
+[2022/11/28 12:25:30:558] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 14
+[2022/11/28 12:26:10:227] User: vuagame - Pass: 123123 - UserId: 8 Login successful
+[2022/11/28 12:28:31:710] User: vuagame - Pass: 123123 - UserId: 8 Login successful
+[2022/11/28 12:28:37:712] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 12
+[2022/11/28 12:28:37:717] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 11
+[2022/11/28 12:28:37:720] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 1
+[2022/11/28 12:28:37:722] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 4
+[2022/11/28 12:29:40:530] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 12
+[2022/11/28 12:29:40:546] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 6
+[2022/11/28 12:29:40:546] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 3
+[2022/11/28 12:29:40:546] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 3
+[2022/11/28 12:33:09:351] User: hihihi - Pass: zxcvbnm - UserId: 7 Login successful
+[2022/11/28 12:34:11:747] User: vuagame - Pass: 123123 - UserId: 8 Login successful
+[2022/11/28 12:35:18:261] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 12:46:22:651] User: daovip - Pass: 123abc - UserId: 6 Login successful
+[2022/11/28 01:08:59:136] User: daovip - Pass: 123abc - UserId: 6 Login successful
+[2022/11/28 01:10:08:122] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 01:12:19:680] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 01:12:55:876] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 01:14:36:447] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 01:15:04:277] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 01:15:14:734] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 01:20:15:917] User: daovip - Pass: 123abc - UserId: 6 Login successful
+[2022/11/28 01:30:16:961] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 02:10:36:442] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 11
+[2022/11/28 02:10:36:442] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 7
+[2022/11/28 02:10:36:442] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 9
+[2022/11/28 02:10:36:442] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 13
+[2022/11/28 02:33:05:432] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 02:33:27:370] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 02:34:02:046] User: admin123 - Pass: qmen0987650 - UserId: 1 Login successful
+[2022/11/28 02:37:12:696] User: admin123 - Pass: qmen0987650 - UserId: 1 Login successful
+[2022/11/28 02:37:15:311] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 9
+[2022/11/28 02:37:15:490] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 10
+[2022/11/28 02:37:15:491] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 3
+[2022/11/28 02:37:15:531] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 1
+[2022/11/28 02:38:59:528] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 02:39:53:139] User: kunai - Pass: 123abc - UserId: 9 Login successful
+[2022/11/28 02:46:11:420] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 10
+[2022/11/28 02:46:11:423] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 5
+[2022/11/28 02:46:11:424] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 10
+[2022/11/28 02:46:11:424] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 8
+[2022/11/28 02:47:08:300] User: kunai - Pass: 123abc - UserId: 9 Login successful
+[2022/11/28 02:47:17:780] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 02:49:07:364] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 6
+[2022/11/28 02:49:07:380] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 4
+[2022/11/28 02:49:07:380] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 10
+[2022/11/28 02:49:07:380] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 1
+[2022/11/28 02:49:12:282] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 02:49:44:893] User: kunai - Pass: 123abc - UserId: 9 Login successful
+[2022/11/28 02:51:56:561] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 02:52:05:032] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 7
+[2022/11/28 02:52:05:034] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 14
+[2022/11/28 02:52:05:035] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 12
+[2022/11/28 02:52:05:036] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 7
+[2022/11/28 02:52:24:153] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 02:55:26:415] User: kunai - Pass: 123abc - UserId: 9 Login successful
+[2022/11/28 02:56:30:739] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 02:56:40:144] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 2
+[2022/11/28 02:56:40:146] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 10
+[2022/11/28 02:56:40:146] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 4
+[2022/11/28 02:56:40:148] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 5
+[2022/11/28 02:57:25:552] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 02:58:02:059] User: kunai - Pass: 123abc - UserId: 9 Login successful
+[2022/11/28 03:01:37:028] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 03:01:49:274] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 13
+[2022/11/28 03:01:49:277] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 2
+[2022/11/28 03:01:49:277] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 5
+[2022/11/28 03:01:49:277] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 7
+[2022/11/28 03:03:12:672] User: kunai - Pass: 123abc - UserId: 9 Login successful
+[2022/11/28 03:10:10:721] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 03:10:22:476] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 12
+[2022/11/28 03:10:22:480] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 3
+[2022/11/28 03:10:22:481] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 11
+[2022/11/28 03:10:22:483] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 6
+[2022/11/28 03:10:30:375] User: kunai - Pass: 123abc - UserId: 9 Login successful
+[2022/11/28 03:22:38:607] User: kunai - Pass: 123abc - UserId: 9 Login successful
+[2022/11/28 04:19:11:256] User: kunai - Pass: 123abc - UserId: 9 Login successful
+[2022/11/28 04:43:07:836] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 05:05:53:806] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 05:07:28:979] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 05:10:56:522] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 05:11:08:725] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 2
+[2022/11/28 05:11:08:729] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 1
+[2022/11/28 05:11:08:731] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 7
+[2022/11/28 05:11:08:732] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 0
+[2022/11/28 05:14:01:034] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 05:14:10:455] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 1
+[2022/11/28 05:14:10:457] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 12
+[2022/11/28 05:14:10:459] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 13
+[2022/11/28 05:14:10:459] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 2
+[2022/11/28 05:23:31:591] User: admin1 - Pass: qmen01 - UserId: 2 Login successful
+[2022/11/28 05:24:11:317] User: admin123 - Pass: qmen0987650 - UserId: 1 Login successful
+[2022/11/28 05:25:01:098] User: admin123 - Pass: qmen0987650 - UserId: 1 Login successful
+[2022/11/28 05:25:16:435] User: admin123 - Pass: qmen0987650 - UserId: 1 Login successful
+[2022/11/28 05:26:34:006] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 9
+[2022/11/28 05:26:34:032] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 14
+[2022/11/28 05:26:34:033] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 5
+[2022/11/28 05:26:34:034] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 5
+[2022/11/28 05:26:54:717] User: admin123 - Pass: qmen0987650 - UserId: 1 Login successful
+[2022/11/28 06:02:22:734] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 6
+[2022/11/28 06:02:22:734] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 14
+[2022/11/28 06:02:22:734] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 4
+[2022/11/28 06:02:22:734] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 4
+[2022/11/28 06:02:48:709] User: admin1 - Pass: qmen01 - UserId: 2 - IP:  Login successful
+[2022/11/28 06:03:05:788] User: admin1 - Pass: qmen01 - UserId: 2 - IP:  Login successful
+[2022/11/28 06:04:38:808] User: admin1 - Pass: qmen01 - UserId: 2 - IP:  Login successful
+[2022/11/28 06:04:49:369] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 6
+[2022/11/28 06:04:51:276] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 5
+[2022/11/28 06:04:51:276] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 8
+[2022/11/28 06:04:51:276] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 2
+[2022/11/28 06:08:27:238] User: admin1 - Pass: qmen01 - UserId: 2 - IP:  Login successful
+[2022/11/28 06:08:35:560] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 10
+[2022/11/28 06:08:35:669] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 10
+[2022/11/28 06:08:35:935] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 13
+[2022/11/28 06:08:35:946] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 14
+[2022/11/28 06:09:49:276] User: admin1 - Pass: qmen01 - UserId: 2 - IP: 27.3.185.34  Login successful
+[2022/11/28 06:10:01:227] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 4
+[2022/11/28 06:10:01:229] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 11
+[2022/11/28 06:10:01:230] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 7
+[2022/11/28 06:10:01:231] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 3
+[2022/11/28 06:10:49:839] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.185.34 Login successful
+[2022/11/28 06:10:59:538] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 3
+[2022/11/28 06:10:59:554] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 13
+[2022/11/28 06:10:59:554] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 13
+[2022/11/28 06:10:59:554] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 9
+[2022/11/28 06:14:36:858] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.185.34 Login successful
+[2022/11/28 06:14:48:058] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 12
+[2022/11/28 06:14:48:060] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 9
+[2022/11/28 06:14:48:108] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 6
+[2022/11/28 06:14:48:383] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 9
+[2022/11/28 07:32:42:619] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /59.153.242.134 Login successful
+[2022/11/28 07:43:53:875] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /59.153.242.134 Login successful
+[2022/11/28 07:44:04:430] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /59.153.242.134 Login successful
+[2022/11/28 07:46:17:656] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /59.153.242.134 Login successful
+[2022/11/28 09:10:43:759] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /59.153.242.134 Login successful
+[2022/11/28 09:59:12:748] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/28 09:59:25:982] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful

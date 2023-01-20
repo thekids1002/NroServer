@@ -1,0 +1,880 @@
+[2022/11/30 12:00:46:424] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.7.38.85 Login successful
+[2022/11/30 12:00:47:371] User: tanhquan12 - Pass: quan252 - UserId: 31 - IP: /171.255.112.113 Login successful
+[2022/11/30 12:02:41:713] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 12:03:00:280] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:03:12:067] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:05:00:432] User: avatarmay113 - Pass: hanh308661 - UserId: 30 - IP: /171.255.166.143 Login successful
+[2022/11/30 12:05:42:501] User: 0907053111 - Pass: vipvipvip - UserId: 32 - IP: /8.38.147.13 Login successful
+[2022/11/30 12:06:20:588] User: tanhquan12 - Pass: quan252 - UserId: 31 - IP: /171.255.112.113 Login successful
+[2022/11/30 12:06:47:533] User: tanhquan12 - Pass: quan252 - UserId: 31 - IP: /171.255.112.113 Login successful
+[2022/11/30 12:06:56:867] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:09:22:539] User: avatarmay113 - Pass: hanh308661 - UserId: 30 - IP: /171.255.166.143 Login successful
+[2022/11/30 12:10:05:519] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:10:14:606] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 12:11:14:614] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 12:11:51:997] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /171.255.112.113 Login successful
+[2022/11/30 12:16:57:037] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 12:16:59:504] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 12:17:06:287] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 12:17:20:238] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:18:12:085] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:27:13:976] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:27:14:949] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:27:24:014] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 12:27:24:077] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 14
+[2022/11/30 12:27:24:117] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 6
+[2022/11/30 12:27:24:131] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 4
+[2022/11/30 12:27:24:131] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 5
+[2022/11/30 12:27:49:241] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:28:00:314] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /117.2.122.71 Login successful
+[2022/11/30 12:28:24:071] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /117.2.122.71 Login successful
+[2022/11/30 12:29:36:995] User: 0907053111 - Pass: vipvipvip - UserId: 32 - IP: /104.28.237.72 Login successful
+[2022/11/30 12:29:45:733] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:30:38:683] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /171.255.112.113 Login successful
+[2022/11/30 12:30:38:809] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:30:40:354] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 12:31:09:168] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:32:01:605] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:33:46:276] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 12:33:49:819] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:33:51:077] User: 0907053111 - Pass: vipvipvip - UserId: 32 - IP: /104.28.237.72 Login successful
+[2022/11/30 12:33:56:561] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 0
+[2022/11/30 12:33:56:566] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 8
+[2022/11/30 12:33:56:567] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 0
+[2022/11/30 12:33:56:568] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 4
+[2022/11/30 12:34:05:970] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:34:09:106] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:34:10:642] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:34:41:371] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /171.255.112.113 Login successful
+[2022/11/30 12:35:10:623] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.7.38.76 Login successful
+[2022/11/30 12:36:40:701] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /171.255.112.113 Login successful
+[2022/11/30 12:37:57:788] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.7.38.65 Login successful
+[2022/11/30 12:40:35:714] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:40:36:503] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:40:43:273] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.1.129 Login successful
+[2022/11/30 12:40:46:615] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 13
+[2022/11/30 12:40:46:618] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 14
+[2022/11/30 12:40:46:619] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 6
+[2022/11/30 12:40:46:620] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 0
+[2022/11/30 12:40:52:564] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:41:15:288] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:41:16:890] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.7.38.85 Login successful
+[2022/11/30 12:41:18:495] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:41:18:717] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 12:41:26:395] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 6
+[2022/11/30 12:41:26:397] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 1
+[2022/11/30 12:41:26:399] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 14
+[2022/11/30 12:41:26:400] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 7
+[2022/11/30 12:41:28:198] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:41:34:438] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:41:35:449] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:42:30:814] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 12:42:40:035] User: 0907053111 - Pass: vipvipvip - UserId: 32 - IP: /104.28.237.72 Login successful
+[2022/11/30 12:44:36:545] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:44:41:775] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:44:46:261] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 3
+[2022/11/30 12:44:46:264] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 9
+[2022/11/30 12:44:46:264] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 7
+[2022/11/30 12:44:46:265] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 14
+[2022/11/30 12:44:48:702] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:45:19:043] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 12:47:23:905] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:47:23:912] User: 0907053111 - Pass: vipvipvip - UserId: 32 - IP: /183.80.39.252 Login successful
+[2022/11/30 12:47:26:866] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:47:34:618] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 9
+[2022/11/30 12:47:34:620] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 11
+[2022/11/30 12:47:34:621] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 8
+[2022/11/30 12:47:34:622] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 14
+[2022/11/30 12:47:46:618] User: 0907053111 - Pass: vipvipvip - UserId: 32 - IP: /183.80.39.252 Login successful
+[2022/11/30 12:47:53:746] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:48:00:463] User: avatarmay113 - Pass: hanh308661 - UserId: 30 - IP: /171.255.166.143 Login successful
+[2022/11/30 12:49:15:560] User: 0907053111 - Pass: vipvipvip - UserId: 32 - IP: /183.80.39.252 Login successful
+[2022/11/30 12:49:17:844] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:49:18:974] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 12:49:22:781] User: 0907053111 - Pass: vipvipvip - UserId: 32 - IP: /183.80.39.252 Login successful
+[2022/11/30 12:49:23:042] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 14
+[2022/11/30 12:49:23:043] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 2
+[2022/11/30 12:49:23:045] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 1
+[2022/11/30 12:49:23:046] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 6
+[2022/11/30 12:49:31:039] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /14.252.112.239 Login successful
+[2022/11/30 12:49:32:007] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:49:50:108] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:50:11:849] User: hanhdz - Pass: hanhdz1311 - UserId: 34 - IP: /171.236.56.135 Login successful
+[2022/11/30 12:51:00:041] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:52:02:584] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:53:18:169] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:53:41:583] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:53:41:643] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 12:53:51:655] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 2
+[2022/11/30 12:53:51:658] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 0
+[2022/11/30 12:53:51:660] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 2
+[2022/11/30 12:53:51:660] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 5
+[2022/11/30 12:53:53:679] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 12:54:04:994] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:54:08:252] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /14.252.112.239 Login successful
+[2022/11/30 12:54:26:495] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:54:59:816] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:55:06:037] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:55:20:195] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:55:54:754] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 12:58:06:038] User: lebaoduy123 - Pass: minh831113 - UserId: 28 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:58:11:759] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.1.129 Login successful
+[2022/11/30 01:00:25:818] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 01:01:10:430] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 01:02:59:908] User: hanhdz - Pass: hanhdz1311 - UserId: 34 - IP: /171.236.56.135 Login successful
+[2022/11/30 01:03:23:433] User: hanhdz - Pass: hanhdz1311 - UserId: 34 - IP: /171.236.56.135 Login successful
+[2022/11/30 01:04:23:134] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 01:04:42:798] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /1.55.41.29 Login successful
+[2022/11/30 01:09:57:573] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 01:17:56:932] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 01:20:24:856] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.7.38.67 Login successful
+[2022/11/30 01:21:25:139] User: hanhdz - Pass: hanhdz1311 - UserId: 34 - IP: /171.236.56.135 Login successful
+[2022/11/30 01:29:35:213] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.7.38.92 Login successful
+[2022/11/30 01:30:28:265] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 01:31:43:685] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 01:32:52:365] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /14.252.112.239 Login successful
+[2022/11/30 01:33:47:251] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /171.255.112.113 Login successful
+[2022/11/30 01:34:14:686] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /14.252.112.239 Login successful
+[2022/11/30 01:36:37:834] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 01:39:10:087] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /14.252.112.239 Login successful
+[2022/11/30 01:39:49:824] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /113.164.215.23 Login successful
+[2022/11/30 01:40:13:501] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /113.164.215.23 Login successful
+[2022/11/30 01:49:56:344] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /27.68.159.122 Login successful
+[2022/11/30 01:51:33:290] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 02:10:38:270] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 02:10:57:662] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 02:13:21:479] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 02:22:34:089] minh7tuoi da ha boss Kuku
+[2022/11/30 02:24:54:137] minh7tuoi da ha boss M?p ??u ?inh
+[2022/11/30 02:27:37:908] minh7tuoi da ha boss Rambo
+[2022/11/30 02:32:36:119] Boss: Kuku ?ã xu?t hi?n t?i V?c c?m khu v?c 2
+[2022/11/30 02:34:55:911] Boss: M?p ??u ?inh ?ã xu?t hi?n t?i Núi dây leo khu v?c 9
+[2022/11/30 02:37:38:225] Boss: Rambo ?ã xu?t hi?n t?i Thung l?ng ch?t khu v?c 9
+[2022/11/30 02:39:13:558] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 02:50:16:629] minh7tuoi da ha boss S? 4
+[2022/11/30 02:53:38:053] minh7tuoi da ha boss S? 3
+[2022/11/30 02:57:44:159] minh7tuoi da ha boss S? 1
+[2022/11/30 03:01:18:682] minh7tuoi da ha boss S? 2
+[2022/11/30 03:04:23:836] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /14.252.112.239 Login successful
+[2022/11/30 03:07:30:583] minh7tuoi da ha boss Ti?u ??i Tr??ng
+[2022/11/30 03:09:04:063] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 03:12:33:010] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /14.252.112.239 Login successful
+[2022/11/30 03:13:24:011] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 03:17:32:249] Boss: TDST ?ã xu?t hi?n t?i Núi kh? ?en khu v?c 12
+[2022/11/30 03:27:30:895] User: tanhquan12 - Pass: quan252 - UserId: 31 - IP: /113.164.215.23 Login successful
+[2022/11/30 03:27:31:348] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 03:32:11:800] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 03:34:28:398] User: gnabgnab - Pass: bangbang - UserId: 35 - IP: /14.173.22.235 Login successful
+[2022/11/30 03:48:21:961] stixaylol da ha boss S? 4
+[2022/11/30 03:52:36:565] stixaylol da ha boss S? 3
+[2022/11/30 03:55:01:240] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 03:57:26:616] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 03:58:29:268] stixaylol da ha boss S? 1
+[2022/11/30 04:00:38:040] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 04:03:58:360] stixaylol da ha boss S? 2
+[2022/11/30 04:10:39:634] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 04:11:48:415] stixaylol da ha boss Ti?u ??i Tr??ng
+[2022/11/30 04:21:18:929] User: gnabgnab - Pass: bangbang - UserId: 35 - IP: /14.173.22.235 Login successful
+[2022/11/30 04:21:49:074] Boss: TDST ?ã xu?t hi?n t?i Núi kh? ?? khu v?c 11
+[2022/11/30 04:30:50:540] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 04:31:08:993] User: gnabgnab - Pass: bangbang - UserId: 35 - IP: /14.173.22.235 Login successful
+[2022/11/30 05:52:23:241] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 06:02:04:860] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 06:06:24:268] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.255.167.219 Login successful
+[2022/11/30 06:11:11:750] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 06:19:44:733] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 06:20:18:382] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 06:22:14:382] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 06:24:05:361] User: thinh29 - Pass: 123456 - UserId: 29 - IP: /171.255.167.219 Login successful
+[2022/11/30 06:26:59:627] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 06:27:53:780] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 06:30:53:637] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 06:39:47:833] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 06:40:40:859] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 06:42:53:490] User: hanhdz - Pass: hanhdz1311 - UserId: 34 - IP: /171.236.56.135 Login successful
+[2022/11/30 06:45:51:986] User: nsocantv - Pass: 123456a - UserId: 11 - IP: /113.185.51.60 Login successful
+[2022/11/30 06:59:43:958] User: nsocantv - Pass: 123456a - UserId: 11 - IP: /113.185.51.60 Login successful
+[2022/11/30 07:01:53:415] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.255.167.219 Login successful
+[2022/11/30 07:09:45:418] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 07:11:19:091] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /27.68.153.232 Login successful
+[2022/11/30 07:16:05:485] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /14.224.132.59 Login successful
+[2022/11/30 07:16:09:988] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /117.2.82.231 Login successful
+[2022/11/30 07:17:03:293] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 07:18:18:724] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /113.185.77.98 Login successful
+[2022/11/30 07:19:33:782] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /113.185.77.98 Login successful
+[2022/11/30 07:22:57:216] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /113.185.77.98 Login successful
+[2022/11/30 07:23:37:911] User: thinh29 - Pass: 123456 - UserId: 29 - IP: /27.68.153.232 Login successful
+[2022/11/30 07:23:56:499] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /27.68.153.232 Login successful
+[2022/11/30 07:24:04:096] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /171.244.216.74 Login successful
+[2022/11/30 07:24:16:648] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 07:24:46:660] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 07:25:33:775] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /113.185.77.98 Login successful
+[2022/11/30 07:25:46:197] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 07:26:28:920] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 07:27:14:357] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 07:27:34:580] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 07:27:50:562] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 07:29:38:742] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 07:32:28:121] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 07:37:02:605] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /27.68.153.232 Login successful
+[2022/11/30 07:37:19:870] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /27.68.153.232 Login successful
+[2022/11/30 07:37:58:309] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /27.68.153.232 Login successful
+[2022/11/30 07:38:04:221] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /113.185.77.98 Login successful
+[2022/11/30 07:38:27:459] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 07:38:38:212] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /27.68.153.232 Login successful
+[2022/11/30 07:39:50:609] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 07:40:25:833] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 07:40:47:259] minh7tuoi da ha boss Fide ??i Ca 1
+[2022/11/30 07:41:00:803] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 07:42:23:781] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /113.185.77.98 Login successful
+[2022/11/30 07:43:59:839] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 07:49:35:975] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 07:52:34:706] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 07:55:14:632] minh7tuoi da ha boss Fide ??i Ca 2
+[2022/11/30 07:57:16:713] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 08:03:33:170] minh7tuoi da ha boss Fide ??i Ca 3
+[2022/11/30 08:03:49:467] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 08:04:07:538] User: gnabgnab - Pass: bangbang - UserId: 35 - IP: /14.173.22.235 Login successful
+[2022/11/30 08:05:44:631] bulma da ha boss Kuku
+[2022/11/30 08:06:10:257] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 08:08:43:494] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /171.244.222.211 Login successful
+[2022/11/30 08:13:55:186] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 08:15:04:166] User: gnabgnab - Pass: bangbang - UserId: 35 - IP: /14.173.22.235 Login successful
+[2022/11/30 08:15:45:265] Boss: Kuku ?ã xu?t hi?n t?i Thung l?ng Nappa khu v?c 12
+[2022/11/30 08:28:47:876] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 08:31:07:727] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 08:34:48:401] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 08:36:09:131] User: nsocantv - Pass: 123456a - UserId: 11 - IP: /113.185.53.40 Login successful
+[2022/11/30 08:36:53:475] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /1.55.41.29 Login successful
+[2022/11/30 08:37:55:029] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 08:39:59:227] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 08:44:10:265] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 08:44:29:956] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 08:45:10:327] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 08:46:35:351] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 08:49:44:224] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 08:49:51:192] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 08:50:46:754] User: nsocantv - Pass: 123456a - UserId: 11 - IP: /14.241.5.229 Login successful
+[2022/11/30 08:54:30:440] User: gnabgnab - Pass: bangbang - UserId: 35 - IP: /14.173.22.235 Login successful
+[2022/11/30 08:56:38:151] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 09:06:06:123] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /1.52.153.170 Login successful
+[2022/11/30 09:10:17:170] s7hotel da ha boss Kuku
+[2022/11/30 09:19:49:448] User: nsocantv - Pass: 123456a - UserId: 11 - IP: /14.241.5.229 Login successful
+[2022/11/30 09:20:18:662] Boss: Kuku ?ã xu?t hi?n t?i C?n c? Raspberry khu v?c 5
+[2022/11/30 09:20:24:115] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.129.191.248 Login successful
+[2022/11/30 09:21:11:288] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /113.185.73.34 Login successful
+[2022/11/30 09:21:23:723] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /113.185.73.34 Login successful
+[2022/11/30 09:21:48:123] User: thinh29 - Pass: 123456 - UserId: 29 - IP: /171.254.149.31 Login successful
+[2022/11/30 09:22:11:896] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.129.191.230 Login successful
+[2022/11/30 09:22:30:733] Boss: M?p ??u ?inh ?ã xu?t hi?n t?i Tr?i q?y già khu v?c 6
+[2022/11/30 09:23:53:325] bulma da ha boss S? 4
+[2022/11/30 09:25:29:344] bulma da ha boss S? 3
+[2022/11/30 09:25:54:855] Boss: Rambo ?ã xu?t hi?n t?i Thung l?ng ch?t khu v?c 14
+[2022/11/30 09:29:25:226] s7hotel da ha boss M?p ??u ?inh
+[2022/11/30 09:29:55:957] bulma da ha boss S? 1
+[2022/11/30 09:32:17:919] bulma da ha boss S? 2
+[2022/11/30 09:32:45:607] s7hotel da ha boss Rambo
+[2022/11/30 09:33:04:844] User: thinh29 - Pass: 123456 - UserId: 29 - IP: /171.254.149.31 Login successful
+[2022/11/30 09:33:24:531] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 09:33:48:781] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 09:34:24:784] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 09:36:56:909] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.191 Login successful
+[2022/11/30 09:37:05:992] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 09:37:12:681] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /113.185.75.31 Login successful
+[2022/11/30 09:37:16:139] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.164 Login successful
+[2022/11/30 09:39:26:890] Boss: M?p ??u ?inh ?ã xu?t hi?n t?i Tr?i lính Fide khu v?c 6
+[2022/11/30 09:42:47:009] Boss: Rambo ?ã xu?t hi?n t?i Núi ?á khu v?c 2
+[2022/11/30 09:43:51:448] User: shirunaisk - Pass: 123456 - UserId: 16 - IP: /113.169.12.20 Login successful
+[2022/11/30 09:44:45:726] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /27.79.81.248 Login successful
+[2022/11/30 09:45:35:102] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 09:46:10:975] Boss: TDST ?ã xu?t hi?n t?i Hang kh? ?en khu v?c 10
+[2022/11/30 09:49:12:877] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /113.185.75.31 Login successful
+[2022/11/30 09:49:59:888] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.182 Login successful
+[2022/11/30 09:53:10:134] giangho9x da ha boss S? 4
+[2022/11/30 09:54:44:810] giangho9x da ha boss S? 3
+[2022/11/30 09:56:43:394] s7hotel da ha boss S? 1
+[2022/11/30 09:58:21:037] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 09:59:08:058] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 09:59:08:453] minh7tuoi da ha boss Android 19
+[2022/11/30 09:59:15:251] giangho9x da ha boss S? 2
+[2022/11/30 09:59:35:245] User: nsocantv - Pass: 123456a - UserId: 11 - IP: /14.241.5.229 Login successful
+[2022/11/30 09:59:35:778] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /27.79.81.248 Login successful
+[2022/11/30 10:00:47:574] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 10:01:36:215] giangho9x da ha boss Ti?u ??i Tr??ng
+[2022/11/30 10:06:05:583] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.172 Login successful
+[2022/11/30 10:06:48:978] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /113.185.75.31 Login successful
+[2022/11/30 10:09:39:625] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:09:55:811] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 10:10:53:051] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 10:11:17:736] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:11:38:149] Boss: TDST ?ã xu?t hi?n t?i Núi kh? ?? khu v?c 3
+[2022/11/30 10:13:30:167] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:13:52:696] s7hotel da ha boss S? 4
+[2022/11/30 10:14:47:255] s7hotel da ha boss S? 3
+[2022/11/30 10:17:23:378] s7hotel da ha boss S? 2
+[2022/11/30 10:17:28:457] User: nsocantv - Pass: 123456a - UserId: 11 - IP: /14.241.5.229 Login successful
+[2022/11/30 10:18:20:257] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /113.185.75.31 Login successful
+[2022/11/30 10:18:45:164] s7hotel da ha boss Ti?u ??i Tr??ng
+[2022/11/30 10:20:02:388] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.164 Login successful
+[2022/11/30 10:22:35:294] zamdi da ha boss Kuku
+[2022/11/30 10:23:06:323] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 10:23:43:342] zamdi da ha boss M?p ??u ?inh
+[2022/11/30 10:25:27:762] zamdi da ha boss Rambo
+[2022/11/30 10:27:58:185] User: gnabgnab - Pass: bangbang - UserId: 35 - IP: /14.173.22.235 Login successful
+[2022/11/30 10:28:46:947] Boss: TDST ?ã xu?t hi?n t?i Hang kh? ?en khu v?c 4
+[2022/11/30 10:28:49:231] User: gnabgnab - Pass: bangbang - UserId: 35 - IP: /14.173.22.235 Login successful
+[2022/11/30 10:30:36:056] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:32:37:027] Boss: Kuku ?ã xu?t hi?n t?i Núi Appule khu v?c 2
+[2022/11/30 10:33:45:064] Boss: M?p ??u ?inh ?ã xu?t hi?n t?i Núi cây qu? khu v?c 9
+[2022/11/30 10:34:39:892] s7hotel da ha boss S? 4
+[2022/11/30 10:35:29:254] Boss: Rambo ?ã xu?t hi?n t?i Khe núi t? th?n khu v?c 9
+[2022/11/30 10:35:56:550] giangho9x da ha boss S? 3
+[2022/11/30 10:38:03:910] s7hotel da ha boss S? 1
+[2022/11/30 10:39:49:449] minh7tuoi da ha boss Dr.Kôrê
+[2022/11/30 10:39:53:066] s7hotel da ha boss S? 2
+[2022/11/30 10:41:50:710] s7hotel da ha boss Ti?u ??i Tr??ng
+[2022/11/30 10:43:01:933] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /27.79.81.248 Login successful
+[2022/11/30 10:48:09:458] User: gnabgnab - Pass: bangbang - UserId: 35 - IP: /14.173.22.235 Login successful
+[2022/11/30 10:48:26:170] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /113.185.75.31 Login successful
+[2022/11/30 10:49:50:413] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 3
+[2022/11/30 10:51:00:743] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 10:51:52:191] Boss: TDST ?ã xu?t hi?n t?i Núi kh? ?? khu v?c 3
+[2022/11/30 10:54:00:848] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.52.153.122 Login successful
+[2022/11/30 10:55:38:669] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /113.161.254.103 Login successful
+[2022/11/30 10:56:11:106] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /113.161.185.46 Login successful
+[2022/11/30 10:57:46:899] namec da ha boss Kuku
+[2022/11/30 10:58:08:198] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:58:20:612] namec da ha boss M?p ??u ?inh
+[2022/11/30 10:59:02:593] namec da ha boss Rambo
+[2022/11/30 11:02:51:307] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 11:03:59:531] User: ngocronggia - Pass: matkhaunay - UserId: 37 - IP: /118.68.234.76 Login successful
+[2022/11/30 11:04:14:822] User: ngocronggia - Pass: matkhaunay - UserId: 37 - IP: /118.68.234.76 Login successful
+[2022/11/30 11:05:55:307] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /27.79.81.248 Login successful
+[2022/11/30 11:06:02:612] zamdi da ha boss S? 4
+[2022/11/30 11:06:58:685] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.178 Login successful
+[2022/11/30 11:07:27:756] zamdi da ha boss S? 3
+[2022/11/30 11:07:48:829] Boss: Kuku ?ã xu?t hi?n t?i Thung l?ng Raspberry khu v?c 0
+[2022/11/30 11:08:21:313] Boss: M?p ??u ?inh ?ã xu?t hi?n t?i V?c ch?t khu v?c 13
+[2022/11/30 11:08:22:798] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /27.79.81.248 Login successful
+[2022/11/30 11:08:28:184] User: ngocronggia - Pass: matkhaunay - UserId: 37 - IP: /118.68.234.76 Login successful
+[2022/11/30 11:09:02:849] Boss: Rambo ?ã xu?t hi?n t?i Núi ?á khu v?c 0
+[2022/11/30 11:09:09:680] User: avatarmay113 - Pass: hanh308661 - UserId: 30 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:09:36:282] giangho9x da ha boss S? 1
+[2022/11/30 11:10:59:650] User: avatarmay113 - Pass: hanh308661 - UserId: 30 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:11:47:388] User: hanhdz - Pass: hanhdz1311 - UserId: 34 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:12:25:466] giangho9x da ha boss S? 2
+[2022/11/30 11:12:43:414] User: hanhdz - Pass: hanhdz1311 - UserId: 34 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:12:51:083] User: hanhdz - Pass: hanhdz1311 - UserId: 34 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:13:44:062] giangho9x da ha boss Ti?u ??i Tr??ng
+[2022/11/30 11:14:38:527] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.165 Login successful
+[2022/11/30 11:15:01:384] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 11:16:12:154] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.165 Login successful
+[2022/11/30 11:16:30:720] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 11:17:32:621] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /113.164.215.23 Login successful
+[2022/11/30 11:18:07:251] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.189 Login successful
+[2022/11/30 11:18:59:707] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 11:19:06:164] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /113.164.215.23 Login successful
+[2022/11/30 11:19:13:020] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /27.79.81.248 Login successful
+[2022/11/30 11:22:05:248] s7hotel da ha boss Android 19
+[2022/11/30 11:23:44:580] Boss: TDST ?ã xu?t hi?n t?i Núi kh? ?? khu v?c 8
+[2022/11/30 11:25:16:297] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 11:26:42:043] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 11:28:27:070] namec da ha boss S? 4
+[2022/11/30 11:28:46:663] s7hotel da ha boss Dr.Kôrê
+[2022/11/30 11:29:10:374] namec da ha boss S? 3
+[2022/11/30 11:30:06:673] namec da ha boss S? 1
+[2022/11/30 11:30:42:754] namec da ha boss S? 2
+[2022/11/30 11:31:20:089] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 11:32:09:783] namec da ha boss Ti?u ??i Tr??ng
+[2022/11/30 11:32:39:098] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /123.22.158.154 Login successful
+[2022/11/30 11:33:45:954] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 11:33:48:000] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 11:36:55:205] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 11:37:30:835] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:38:25:831] User: gnabgnab - Pass: bangbang - UserId: 35 - IP: /14.173.22.235 Login successful
+[2022/11/30 11:38:47:375] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 7
+[2022/11/30 11:39:11:837] namec da ha boss Fide ??i Ca 1
+[2022/11/30 11:39:23:594] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 11:40:26:549] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.169 Login successful
+[2022/11/30 11:40:55:110] namec da ha boss Fide ??i Ca 2
+[2022/11/30 11:42:10:203] Boss: TDST ?ã xu?t hi?n t?i Hang kh? ?en khu v?c 9
+[2022/11/30 11:45:24:604] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 11:45:26:648] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:45:27:231] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /113.164.215.23 Login successful
+[2022/11/30 11:45:33:349] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 8
+[2022/11/30 11:45:33:351] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 4
+[2022/11/30 11:45:33:351] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 8
+[2022/11/30 11:45:33:352] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 6
+[2022/11/30 11:45:46:080] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.166 Login successful
+[2022/11/30 11:45:51:756] User: ngocronggia - Pass: matkhaunay - UserId: 37 - IP: /118.68.234.76 Login successful
+[2022/11/30 11:46:23:061] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 11:46:34:271] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.52.153.122 Login successful
+[2022/11/30 11:52:55:235] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 11:54:13:313] zamdi da ha boss S? 4
+[2022/11/30 11:54:36:787] namec da ha boss Fide ??i Ca 3
+[2022/11/30 11:54:37:005] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 11:55:13:539] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:55:14:495] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 2
+[2022/11/30 11:55:14:495] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 10
+[2022/11/30 11:55:14:495] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 2
+[2022/11/30 11:55:14:495] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 1
+[2022/11/30 11:55:19:437] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 11:56:10:263] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.185 Login successful
+[2022/11/30 11:57:06:279] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:57:08:006] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 11:57:15:216] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 1
+[2022/11/30 11:57:15:216] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 3
+[2022/11/30 11:57:15:232] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 4
+[2022/11/30 11:57:15:232] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 8
+[2022/11/30 11:57:23:589] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:58:26:939] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 11:59:02:710] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 11:59:13:074] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 11:59:27:449] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /171.255.112.113 Login successful
+[2022/11/30 12:00:29:697] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 12:01:08:660] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 12:01:09:524] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:01:12:676] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 12:01:16:070] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 12
+[2022/11/30 12:01:16:073] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 5
+[2022/11/30 12:01:16:074] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 8
+[2022/11/30 12:01:16:075] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 2
+[2022/11/30 12:01:33:197] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 12:01:51:374] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 12:02:25:524] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 12:11:00:038] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:11:10:884] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 7
+[2022/11/30 12:11:10:894] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 7
+[2022/11/30 12:11:10:895] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 6
+[2022/11/30 12:11:10:897] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 7
+[2022/11/30 12:11:18:750] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:11:48:754] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 12:12:34:004] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /103.249.23.127 Login successful
+[2022/11/30 12:12:58:793] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.52.153.122 Login successful
+[2022/11/30 12:13:14:823] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 12:13:43:483] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 12:17:22:989] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:17:29:197] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 11
+[2022/11/30 12:17:29:496] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 3
+[2022/11/30 12:17:29:500] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 3
+[2022/11/30 12:17:29:501] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 8
+[2022/11/30 12:18:01:596] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.52.153.122 Login successful
+[2022/11/30 12:18:29:218] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 12:20:43:529] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /113.164.215.23 Login successful
+[2022/11/30 12:20:45:984] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.52.153.122 Login successful
+[2022/11/30 12:20:50:534] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /113.164.215.23 Login successful
+[2022/11/30 12:20:52:780] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:20:55:148] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 7
+[2022/11/30 12:20:55:148] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 0
+[2022/11/30 12:20:55:148] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 13
+[2022/11/30 12:20:55:148] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 12
+[2022/11/30 12:20:57:996] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 12:21:01:369] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 12:21:02:525] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.52.153.122 Login successful
+[2022/11/30 12:21:16:906] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 12:21:18:780] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /113.164.215.23 Login successful
+[2022/11/30 12:21:20:268] User: sieuphamgia - Pass: matkhaunay - UserId: 38 - IP: /118.68.234.76 Login successful
+[2022/11/30 12:24:36:731] bulma da ha boss Fide ??i Ca 1
+[2022/11/30 12:24:57:303] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 12:26:06:271] bulma da ha boss Fide ??i Ca 2
+[2022/11/30 12:26:24:305] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 12:27:09:935] namec da ha boss Fide ??i Ca 3
+[2022/11/30 12:27:19:951] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 12:28:08:140] bulma da ha boss S? 4
+[2022/11/30 12:28:11:757] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 12:28:42:140] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 12:29:13:752] bulma da ha boss S? 3
+[2022/11/30 12:30:05:640] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 12:30:39:233] zamdi da ha boss S? 1
+[2022/11/30 12:31:40:643] namec da ha boss S? 2
+[2022/11/30 12:32:49:780] zamdi da ha boss Ti?u ??i Tr??ng
+[2022/11/30 12:35:34:505] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:37:06:727] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 12:41:18:542] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 12:41:29:689] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 12:42:19:969] s7hotel da ha boss Fide ??i Ca 1
+[2022/11/30 12:42:50:014] Boss: TDST ?ã xu?t hi?n t?i Núi kh? ?en khu v?c 12
+[2022/11/30 12:42:54:032] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /113.164.215.23 Login successful
+[2022/11/30 12:43:31:925] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 12:44:03:980] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:44:58:373] s7hotel da ha boss Fide ??i Ca 2
+[2022/11/30 12:45:52:169] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 12:46:45:922] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:47:03:185] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 12:48:07:432] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:49:11:039] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:51:23:156] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:52:22:009] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /113.164.215.23 Login successful
+[2022/11/30 12:52:25:725] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 12:52:27:563] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 12:52:32:053] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:52:32:945] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 11
+[2022/11/30 12:52:32:947] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 4
+[2022/11/30 12:52:32:950] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 2
+[2022/11/30 12:52:32:952] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 4
+[2022/11/30 12:52:47:007] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:52:54:397] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 12:52:54:442] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 12:53:14:058] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 12:53:22:866] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 12:53:36:328] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 12:53:38:466] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 12:54:09:685] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 12:56:04:912] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 12:58:42:220] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /103.249.21.189 Login successful
+[2022/11/30 01:02:02:642] User: lebaoduy123 - Pass: minh831113 - UserId: 28 - IP: /1.55.41.29 Login successful
+[2022/11/30 01:03:37:902] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 01:05:47:489] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 01:13:44:534] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 01:19:28:549] minh7tuoi da ha boss Android 15
+[2022/11/30 01:19:41:045] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /1.55.41.29 Login successful
+[2022/11/30 01:21:04:435] User: nsocantv - Pass: 123456a - UserId: 11 - IP: /113.185.55.211 Login successful
+[2022/11/30 01:24:38:188] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /171.243.83.13 Login successful
+[2022/11/30 01:25:26:971] minh7tuoi da ha boss Android 14
+[2022/11/30 01:34:26:608] minh7tuoi da ha boss Android 13
+[2022/11/30 01:41:17:023] namec da ha boss Android 19
+[2022/11/30 01:41:26:208] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 01:41:52:693] namec da ha boss Dr.Kôrê
+[2022/11/30 01:42:10:728] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 01:44:02:322] User: vanepq7 - Pass: taipqu23 - UserId: 19 - IP: /171.243.83.13 Login successful
+[2022/11/30 01:46:17:482] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 01:51:52:902] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 11
+[2022/11/30 01:52:51:440] User: nsocantv - Pass: 123456a - UserId: 11 - IP: /113.185.55.213 Login successful
+[2022/11/30 01:55:51:762] s7hotel da ha boss Fide ??i Ca 1
+[2022/11/30 01:55:55:415] minh7tuoi da ha boss Poc
+[2022/11/30 01:55:56:870] bulma da ha boss Android 19
+[2022/11/30 01:57:13:788] s7hotel da ha boss Fide ??i Ca 2
+[2022/11/30 01:59:03:738] s7hotel da ha boss Fide ??i Ca 3
+[2022/11/30 01:59:15:276] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 01:59:27:580] bulma da ha boss Dr.Kôrê
+[2022/11/30 01:59:47:365] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.254.149.31 Login successful
+[2022/11/30 02:03:14:589] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /1.55.41.29 Login successful
+[2022/11/30 02:03:49:326] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 02:05:14:742] minh7tuoi da ha boss Pic
+[2022/11/30 02:06:45:323] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /27.67.92.75 Login successful
+[2022/11/30 02:09:27:774] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 9
+[2022/11/30 02:14:38:891] minh7tuoi da ha boss King Kong
+[2022/11/30 02:14:43:590] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 02:15:15:496] User: avatarmay113 - Pass: hanh308661 - UserId: 30 - IP: /171.255.166.143 Login successful
+[2022/11/30 02:19:26:392] giangho9x da ha boss Fide ??i Ca 1
+[2022/11/30 02:22:08:483] stixaylol da ha boss Fide ??i Ca 2
+[2022/11/30 02:25:40:215] stixaylol da ha boss Fide ??i Ca 3
+[2022/11/30 02:33:08:869] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 02:34:24:035] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 02:40:56:803] bulma da ha boss Android 15
+[2022/11/30 02:41:40:661] bulma da ha boss Android 14
+[2022/11/30 02:42:24:918] bulma da ha boss Android 13
+[2022/11/30 02:48:04:770] stixaylol da ha boss Fide ??i Ca 1
+[2022/11/30 02:48:44:796] User: nsocantv - Pass: 123456a - UserId: 11 - IP: /14.160.252.247 Login successful
+[2022/11/30 02:50:01:217] bulma da ha boss Poc
+[2022/11/30 02:51:07:723] stixaylol da ha boss Fide ??i Ca 2
+[2022/11/30 02:52:54:307] bulma da ha boss Pic
+[2022/11/30 02:54:17:453] stixaylol da ha boss Fide ??i Ca 3
+[2022/11/30 02:54:54:280] bulma da ha boss King Kong
+[2022/11/30 02:56:05:847] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 02:57:29:760] namec da ha boss Android 15
+[2022/11/30 02:58:02:025] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /27.67.92.75 Login successful
+[2022/11/30 02:58:04:763] namec da ha boss Android 14
+[2022/11/30 02:58:42:166] namec da ha boss Android 13
+[2022/11/30 02:59:52:288] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /113.164.215.23 Login successful
+[2022/11/30 02:59:56:714] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /171.244.216.74 Login successful
+[2022/11/30 03:00:13:197] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 03:03:55:156] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 03:03:57:818] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 03:05:06:658] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 03:06:30:539] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 03:07:25:291] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 03:07:26:049] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 03:07:29:960] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:07:31:632] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 03:07:34:301] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 03:07:34:554] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 7
+[2022/11/30 03:07:34:563] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 4
+[2022/11/30 03:07:34:565] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 13
+[2022/11/30 03:07:34:566] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 2
+[2022/11/30 03:07:35:636] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 03:07:37:467] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:07:43:714] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 03:08:06:844] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /27.67.92.75 Login successful
+[2022/11/30 03:08:12:440] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 03:09:44:217] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /1.55.41.29 Login successful
+[2022/11/30 03:10:46:557] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 03:11:34:475] User: avatarmay113 - Pass: hanh308661 - UserId: 30 - IP: /171.255.166.143 Login successful
+[2022/11/30 03:11:49:581] User: avatarmay113 - Pass: hanh308661 - UserId: 30 - IP: /171.255.166.143 Login successful
+[2022/11/30 03:16:41:645] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 11
+[2022/11/30 03:16:41:650] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 1
+[2022/11/30 03:16:41:651] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 5
+[2022/11/30 03:16:41:652] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 4
+[2022/11/30 03:16:45:221] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 03:16:46:221] User: shirunaisk - Pass: 123456 - UserId: 16 - IP: /113.169.12.20 Login successful
+[2022/11/30 03:17:09:389] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 03:17:10:184] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 03:17:10:801] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 03:17:15:880] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 03:17:38:961] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /27.67.92.75 Login successful
+[2022/11/30 03:17:47:602] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 03:17:50:426] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:18:10:866] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.161.243 Login successful
+[2022/11/30 03:18:18:392] User: shirunaisk - Pass: 123456 - UserId: 16 - IP: /113.169.12.20 Login successful
+[2022/11/30 03:43:16:564] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 9
+[2022/11/30 03:43:16:570] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 0
+[2022/11/30 03:43:16:571] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 2
+[2022/11/30 03:43:16:572] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 7
+[2022/11/30 03:43:39:835] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 03:44:33:733] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /113.161.184.174 Login successful
+[2022/11/30 03:45:09:600] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /113.161.184.174 Login successful
+[2022/11/30 03:45:12:098] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /113.161.184.174 Login successful
+[2022/11/30 03:46:39:376] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /27.67.92.75 Login successful
+[2022/11/30 03:48:00:826] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /113.185.77.45 Login successful
+[2022/11/30 03:48:02:170] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 03:48:07:299] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 10
+[2022/11/30 03:48:07:301] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 0
+[2022/11/30 03:48:07:302] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 11
+[2022/11/30 03:48:07:303] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 1
+[2022/11/30 03:48:41:438] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /103.249.23.116 Login successful
+[2022/11/30 03:49:03:745] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:49:43:052] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:49:59:095] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:50:19:967] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 03:50:37:630] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:51:03:790] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:51:05:646] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 03:51:07:159] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /113.164.215.23 Login successful
+[2022/11/30 03:51:07:391] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /27.67.92.75 Login successful
+[2022/11/30 03:51:13:013] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /171.255.79.18 Login successful
+[2022/11/30 03:51:14:470] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 2
+[2022/11/30 03:51:14:474] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 2
+[2022/11/30 03:51:14:478] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 13
+[2022/11/30 03:51:14:478] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 0
+[2022/11/30 03:51:39:133] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /27.67.92.75 Login successful
+[2022/11/30 03:52:05:017] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /171.255.79.18 Login successful
+[2022/11/30 03:53:14:062] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:53:15:323] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:53:25:622] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 03:53:26:035] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 12
+[2022/11/30 03:53:26:037] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 11
+[2022/11/30 03:53:26:038] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 5
+[2022/11/30 03:53:26:039] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 10
+[2022/11/30 03:53:58:342] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:54:03:416] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 03:55:03:428] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /113.164.215.23 Login successful
+[2022/11/30 03:55:22:626] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:57:05:281] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 03:57:33:640] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /103.249.23.102 Login successful
+[2022/11/30 03:57:45:531] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /103.249.23.121 Login successful
+[2022/11/30 03:57:49:983] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /113.185.77.45 Login successful
+[2022/11/30 03:57:56:924] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 03:58:50:839] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 03:59:33:835] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 03:59:33:871] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /27.67.92.75 Login successful
+[2022/11/30 03:59:58:261] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /27.67.92.75 Login successful
+[2022/11/30 04:02:38:141] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 04:02:44:636] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 04:02:45:194] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 04:02:47:394] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 11
+[2022/11/30 04:02:47:396] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 8
+[2022/11/30 04:02:47:398] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 9
+[2022/11/30 04:02:47:398] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 4
+[2022/11/30 04:04:26:485] namec da ha boss Poc
+[2022/11/30 04:04:36:763] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 04:05:29:555] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 04:05:35:508] namec da ha boss Pic
+[2022/11/30 04:06:08:560] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 04:07:07:334] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 04:07:24:589] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 04:11:06:658] namec da ha boss King Kong
+[2022/11/30 04:11:43:967] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /171.244.216.74 Login successful
+[2022/11/30 04:13:03:434] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /113.164.215.23 Login successful
+[2022/11/30 04:13:16:693] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 04:17:38:426] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 04:23:05:981] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 04:23:18:607] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 04:26:38:867] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 04:30:16:523] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /27.67.92.75 Login successful
+[2022/11/30 06:09:25:679] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /59.153.243.205 Login successful
+[2022/11/30 06:09:26:960] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 13
+[2022/11/30 06:09:27:160] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 1
+[2022/11/30 06:09:27:160] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 11
+[2022/11/30 06:09:27:160] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 11
+[2022/11/30 06:09:29:393] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 06:09:39:695] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 06:12:00:065] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 06:12:10:512] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 06:12:21:776] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 06:15:08:216] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 06:18:26:124] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /59.153.243.205 Login successful
+[2022/11/30 06:24:18:984] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 06:24:31:220] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 06:24:34:641] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 06:25:25:285] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 06:25:27:557] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /1.55.41.29 Login successful
+[2022/11/30 06:25:28:588] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /1.55.41.29 Login successful
+[2022/11/30 06:25:31:178] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /1.55.41.29 Login successful
+[2022/11/30 06:25:32:955] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /1.55.41.29 Login successful
+[2022/11/30 06:25:35:448] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /1.55.41.29 Login successful
+[2022/11/30 06:25:57:695] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 06:26:06:916] User: lebaoduy123 - Pass: minh831113 - UserId: 28 - IP: /1.55.41.29 Login successful
+[2022/11/30 06:27:10:611] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /14.224.132.59 Login successful
+[2022/11/30 06:27:49:213] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 06:28:08:388] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /14.224.132.59 Login successful
+[2022/11/30 06:28:31:330] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 06:29:18:846] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /59.153.243.205 Login successful
+[2022/11/30 06:29:49:440] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 06:37:39:249] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 06:42:26:888] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 06:46:22:393] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 06:47:51:364] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /116.98.0.182 Login successful
+[2022/11/30 06:47:52:381] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 06:54:39:561] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 06:57:56:545] namec da ha boss Xên B? Hung 1
+[2022/11/30 06:58:52:580] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /171.244.222.81 Login successful
+[2022/11/30 07:00:36:915] namec da ha boss Xên B? Hung 2
+[2022/11/30 07:01:52:498] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 07:02:08:164] namec da ha boss Xên Hoàn Thi?n
+[2022/11/30 07:02:16:442] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 07:03:18:533] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /171.244.222.81 Login successful
+[2022/11/30 07:06:20:639] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 07:08:19:591] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 07:08:37:529] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 07:10:05:422] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 07:11:25:626] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 07:16:09:464] bulma da ha boss Xên B? Hung 1
+[2022/11/30 07:18:43:310] bulma da ha boss Xên B? Hung 2
+[2022/11/30 07:18:49:589] User: huavankhuyen - Pass: nguginoi - UserId: 20 - IP: /171.244.222.81 Login successful
+[2022/11/30 07:22:04:823] bulma da ha boss Xên Hoàn Thi?n
+[2022/11/30 07:27:50:013] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /59.153.243.205 Login successful
+[2022/11/30 07:33:07:814] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 07:33:32:794] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 07:34:07:258] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 07:34:33:713] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 07:35:23:130] minh7tuoi da ha boss Xên B? Hung 1
+[2022/11/30 07:36:23:738] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 07:37:30:938] minh7tuoi da ha boss Xên B? Hung 2
+[2022/11/30 07:39:47:566] minh7tuoi da ha boss Xên Hoàn Thi?n
+[2022/11/30 07:43:48:430] User: lebaoduy - Pass: minh831113 - UserId: 23 - IP: /1.55.41.29 Login successful
+[2022/11/30 07:46:19:585] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 07:57:33:362] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 07:58:33:150] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 08:00:32:746] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 08:00:52:578] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 08:01:11:672] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 08:01:33:246] User: ngocronggia - Pass: matkhaunay - UserId: 37 - IP: /118.68.234.76 Login successful
+[2022/11/30 08:06:48:380] s7hotel da ha boss Fide ??i Ca 1
+[2022/11/30 08:07:14:571] User: 0344427773 - Pass: quan2003 - UserId: 21 - IP: /171.244.216.74 Login successful
+[2022/11/30 08:08:21:783] s7hotel da ha boss Fide ??i Ca 2
+[2022/11/30 08:09:37:387] s7hotel da ha boss Fide ??i Ca 3
+[2022/11/30 08:10:23:162] namec da ha boss Xên Hoàn Thi?n
+[2022/11/30 08:11:02:008] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 08:20:01:269] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 08:23:57:028] User: ngocronggia - Pass: matkhaunay - UserId: 37 - IP: /118.68.234.76 Login successful
+[2022/11/30 08:24:13:508] User: ngocronggia - Pass: matkhaunay - UserId: 37 - IP: /118.68.234.76 Login successful
+[2022/11/30 08:25:04:287] User: sieuphamgia - Pass: matkhaunay - UserId: 38 - IP: /118.68.234.76 Login successful
+[2022/11/30 08:25:38:569] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 08:26:11:268] stixaylol da ha boss Kuku
+[2022/11/30 08:26:34:904] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 08:28:11:054] User: giangho9x - Pass: namdz2642005 - UserId: 12 - IP: /27.71.121.41 Login successful
+[2022/11/30 08:30:08:456] User: namdzvip - Pass: namdz2642005 - UserId: 10 - IP: /27.71.121.41 Login successful
+[2022/11/30 08:36:12:638] Boss: Kuku ?ã xu?t hi?n t?i V?c c?m khu v?c 11
+[2022/11/30 08:37:35:889] User: cona299 - Pass: namdz2642005 - UserId: 43 - IP: /27.71.121.41 Login successful
+[2022/11/30 08:44:04:115] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 08:53:55:068] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 09:18:59:261] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 09:19:39:679] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 09:23:25:274] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 09:24:41:423] User: lephamminh - Pass: minh831113 - UserId: 17 - IP: /1.55.41.29 Login successful
+[2022/11/30 09:25:34:078] User: thinh27 - Pass: 123456 - UserId: 22 - IP: /171.244.214.37 Login successful
+[2022/11/30 09:35:05:375] User: nanhko - Pass: mk47347714 - UserId: 14 - IP: /171.228.136.103 Login successful
+[2022/11/30 09:59:23:962] User: hentaiz - Pass: 1 - UserId: 45 - IP: /27.68.86.65 Login successful
+[2022/11/30 10:00:21:853] User: nsocantv - Pass: 123456a - UserId: 11 - IP: /27.68.86.65 Login successful
+[2022/11/30 10:01:14:562] User: sieuphamgia - Pass: matkhaunay - UserId: 38 - IP: /118.68.234.76 Login successful
+[2022/11/30 10:02:37:502] User: sieuphamgia - Pass: matkhaunay - UserId: 38 - IP: /118.68.234.76 Login successful
+[2022/11/30 10:03:42:389] User: sieuphamgia - Pass: matkhaunay - UserId: 38 - IP: /118.68.234.76 Login successful
+[2022/11/30 10:08:24:554] User: sieuphamgia - Pass: matkhaunay - UserId: 38 - IP: /118.68.234.76 Login successful
+[2022/11/30 10:10:22:421] User: quocan313dl - Pass: quocan313dl - UserId: 24 - IP: /42.119.144.88 Login successful
+[2022/11/30 10:12:38:286] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:17:34:756] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:18:08:879] User: sieuphamgia - Pass: matkhaunay - UserId: 38 - IP: /118.68.234.76 Login successful
+[2022/11/30 10:18:36:377] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:18:49:033] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:20:40:710] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 9
+[2022/11/30 10:20:40:725] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 0
+[2022/11/30 10:20:40:725] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 1
+[2022/11/30 10:20:40:725] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 13
+[2022/11/30 10:20:50:568] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:24:46:334] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:24:55:299] User: narutongu - Pass: matkhaunay - UserId: 40 - IP: /118.68.234.76 Login successful
+[2022/11/30 10:28:12:291] User: sieuphamgia - Pass: matkhaunay - UserId: 38 - IP: /118.68.234.76 Login successful
+[2022/11/30 10:37:09:653] User: narutongu - Pass: matkhaunay - UserId: 40 - IP: /118.68.234.76 Login successful
+[2022/11/30 10:38:04:508] User: narutongu - Pass: matkhaunay - UserId: 40 - IP: /118.68.234.76 Login successful
+[2022/11/30 10:45:14:757] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:46:01:848] User: admin123 - Pass: qmen0987650 - UserId: 1 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:47:50:536] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 1
+[2022/11/30 10:47:50:541] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 9
+[2022/11/30 10:47:50:542] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 7
+[2022/11/30 10:47:50:543] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 10
+[2022/11/30 10:48:00:866] User: admin123 - Pass: qmen0987650 - UserId: 1 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:48:15:950] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:48:33:387] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:50:27:318] User: admin1234 - Pass: qmen01 - UserId: 46 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:50:59:272] User: admin1234 - Pass: qmen01 - UserId: 46 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:51:19:972] User: admin1234 - Pass: qmen01 - UserId: 46 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:51:41:907] User: admin1234 - Pass: qmen01 - UserId: 46 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:52:39:230] User: ngocronggia - Pass: matkhaunay - UserId: 37 - IP: /118.68.234.76 Login successful
+[2022/11/30 10:53:54:003] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 7
+[2022/11/30 10:53:54:003] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 12
+[2022/11/30 10:53:54:003] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 11
+[2022/11/30 10:53:54:003] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 6
+[2022/11/30 10:55:32:796] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /27.67.92.75 Login successful
+[2022/11/30 10:57:19:499] User: admin1234 - Pass: qmen01 - UserId: 46 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:57:34:764] User: admin1234 - Pass: qmen01 - UserId: 46 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:58:12:334] User: admin123 - Pass: qmen0987650 - UserId: 1 - IP: /27.3.186.165 Login successful
+[2022/11/30 10:58:32:486] User: admin1234 - Pass: qmen01 - UserId: 46 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:00:00:219] User: admin1234 - Pass: qmen01 - UserId: 46 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:00:43:013] User: admin1234 - Pass: qmen01 - UserId: 46 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:00:48:338] Boss: apk ?ã xu?t hi?n t?i ??o Balê khu v?c 12
+[2022/11/30 11:00:48:340] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 4
+[2022/11/30 11:00:48:340] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 5
+[2022/11/30 11:00:48:342] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 3
+[2022/11/30 11:02:14:099] User: admin1234 - Pass: qmen01 - UserId: 46 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:02:14:709] Boss: apk ?ã xu?t hi?n t?i Thành ph? phía nam khu v?c 5
+[2022/11/30 11:02:14:711] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 2
+[2022/11/30 11:02:14:712] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 9
+[2022/11/30 11:02:14:712] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 11
+[2022/11/30 11:03:06:046] User: admin1234 - Pass: qmen01 - UserId: 46 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:03:52:047] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:04:23:048] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:05:06:780] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:07:58:538] User: bachiengia - Pass: matkhaunay - UserId: 39 - IP: /103.186.155.73 Login successful
+[2022/11/30 11:08:02:239] User: tanhquan13 - Pass: quan252 - UserId: 33 - IP: /27.67.92.75 Login successful
+[2022/11/30 11:08:12:610] User: ngocronggia - Pass: matkhaunay - UserId: 37 - IP: /103.186.155.73 Login successful
+[2022/11/30 11:11:47:133] User: sieuphamgia - Pass: matkhaunay - UserId: 38 - IP: /103.186.155.73 Login successful
+[2022/11/30 11:12:18:984] User: bachiengia - Pass: matkhaunay - UserId: 39 - IP: /103.186.155.73 Login successful
+[2022/11/30 11:12:27:779] User: sieuphamgia - Pass: matkhaunay - UserId: 38 - IP: /103.186.155.73 Login successful
+[2022/11/30 11:17:27:795] User: narutongu - Pass: matkhaunay - UserId: 40 - IP: /103.186.155.73 Login successful
+[2022/11/30 11:28:00:051] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:29:35:324] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:29:57:743] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:30:33:584] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:31:00:830] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:31:22:277] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:34:53:691] User: tinhtaz - Pass: tinhtaz05 - UserId: 48 - IP: /1.55.6.242 Login successful
+[2022/11/30 11:44:18:426] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:44:39:946] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:45:16:123] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:48:36:262] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:49:12:829] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:51:32:283] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:52:29:802] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:52:36:981] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:53:03:130] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:54:17:937] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:57:11:967] User: tinhtaz - Pass: tinhtaz05 - UserId: 48 - IP: /1.55.6.242 Login successful
+[2022/11/30 11:57:25:620] User: avatarmay113 - Pass: hanh308661 - UserId: 30 - IP: /171.255.156.194 Login successful
+[2022/11/30 11:57:42:143] User: avatarmay113 - Pass: hanh308661 - UserId: 30 - IP: /171.255.156.194 Login successful
+[2022/11/30 11:57:46:650] User: admin1 - Pass: qmen01 - UserId: 2 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:57:52:894] Boss: apk ?ã xu?t hi?n t?i Cao nguyên khu v?c 2
+[2022/11/30 11:57:52:900] Boss: Xên Hoàn Thi?n ?ã xu?t hi?n t?i Võ ?ài Xên b? hung khu v?c 9
+[2022/11/30 11:57:52:904] Boss: Chilled ?ã xu?t hi?n t?i Làng Plant nguyên th?y khu v?c 4
+[2022/11/30 11:57:52:905] Boss: Zamasu ?ã xu?t hi?n t?i Thung l?ng phía b?c khu v?c 6
+[2022/11/30 11:57:55:641] User: admint - Pass: qmen01 - UserId: 47 - IP: /27.3.186.165 Login successful
+[2022/11/30 11:58:18:610] User: tinhtaz - Pass: tinhtaz05 - UserId: 48 - IP: /1.55.6.242 Login successful
