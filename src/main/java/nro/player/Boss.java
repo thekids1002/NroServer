@@ -1056,7 +1056,7 @@ public class Boss extends Player {
             this.y = yBoss;
             this.typePk = 5;
             this.isBOSS = true;
-        }/* else if (type == 53) {
+        } else if (type == 53) {
             this.name = "Rati";
             this.head = 490;
             this.hpGoc = 100;
@@ -1075,7 +1075,7 @@ public class Boss extends Player {
             this.y = yBoss;
             this.typePk = 5;
             this.isBOSS = true;
-        } */else if (type == 54) {
+        } else if (type == 54) {
             this.name = "Fide Vàng";
             this.head = 502;
             this.hpGoc = 100;
@@ -1094,7 +1094,7 @@ public class Boss extends Player {
             this.y = yBoss;
             this.typePk = 5;
             this.isBOSS = true;
-        } /*else if (type == 55) {
+        } else if (type == 55) {
             this.name = "Ăn Trộm " + Id;
             this.head = 201;
             this.hpGoc = 100;
@@ -1113,7 +1113,7 @@ public class Boss extends Player {
             this.y = yBoss;
             this.typePk = 5;
             this.isBOSS = true;
-        } */else if (type == 56) {
+        } else if (type == 56) {
             this.name = "Vegito Quyền Năng";
             this.head = 870;
             this.hpGoc = 2000000000;
