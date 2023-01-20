@@ -2070,10 +2070,10 @@ public class Menu {
                         Service.gI().updateItemBody(p.detu);
                         //                    p.LOADCAITRANGTOME();
                     } else if (select == 5) { // MOT CO NGUOI YEU LUA DAO
-                        //                    p.sendAddchatYellow("Bay màu nhé!");
-                        p.tiemNang += (long) 200000000;
-                        p.power += (long) 200000000;
-                        p.UpdateSMTN((byte) 2, (long) 200000000);
+                                           p.sendAddchatYellow("Có cái đầu bùi nhé con!");
+                       // p.tiemNang += (long) 200000000;
+                       // p.power += (long) 200000000;
+                       // p.UpdateSMTN((byte) 2, (long) 200000000);
                     } else if (select == 6) {
                         p.critNr = (byte) (p.critNr + 2) > (byte) 10 ? (byte) 10 : (byte) (p.critNr + 2);
                         Service.gI().loadPoint(p.session, p);

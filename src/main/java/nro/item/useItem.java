@@ -198,7 +198,7 @@ public class useItem {
                         //UI CHON DIEU UOC
                         p.menuID = -1;
                         p.menuNPCID = 24;
-                        Menu.doMenuArray(p, 24, "Hãy mau chọn điều ước, hay ngươi muốn một chiếc quần như con lợn Uron kia?", new String[]{"Đẹp trai nhất\nvũ trụ", "Găng đang mang\nlên 1 cấp", "Đổi skill 2, 3\nđệ tử", "Đổi skill 3, 4\nđệ tử", "Găng đệ tử đang\nmang lên 1 cấp", "200 Tr Sức\nmạnh, Tiềm năng", "Chí mạng +2%", "Giàu có\n5.000 ngọc"});
+                        Menu.doMenuArray(p, 24, "Hãy mau chọn điều ước, hay ngươi muốn một chiếc quần như con lợn Uron kia?", new String[]{"Đẹp trai nhất\nvũ trụ", "Găng đang mang\nlên 1 cấp", "Đổi skill 2, 3\nđệ tử", "Đổi skill 3, 4\nđệ tử", "Găng đệ tử đang\nmang lên 1 cấp", "Có ny\nđể thoát FA", "Chí mạng +2%", "Giàu có\n5.000 ngọc"});
                     } else {
                         p.sendAddchatYellow("Hãy thu thập đủ 7 viên ngọc rồng để có thể ước");
                     }
