@@ -3,6 +3,7 @@ package nro.main;
 import io.LogHistory;
 import nro.part.Part;
 import nro.part.PartImage;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.ByteArrayInputStream;
@@ -32,10 +33,14 @@ import nro.player.Player;
 import nro.player.Detu;
 import nro.player.Boss;
 import nro.player.PlayerManger;
+import nro.task.PetProtectTask;
 import nro.task.TaskService;
 import nro.skill.Skill;
+
 import static nro.main.GameScr.saveFile;
+
 import nro.io.Message;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Calendar;
@@ -432,11 +437,22 @@ public class Service {
             Item item = player.getIndexBag(indexBuy);
             if (item != null) {
                 if (actionBuy == 0) {
-                    Service.gI().SaleDone(player, typeBuy, "Bạn có muốn bán\n" + "x" + player.ItemBag[indexBuy].quantity + " " + player.ItemBag[indexBuy].template.name + "\nVới giá 1 vàng không?", indexBuy);
+                    if (item.template.id == 457) {
+                        Service.gI().SaleDone(player, typeBuy, "Bạn có muốn bán\n" + " x1 " + player.ItemBag[indexBuy].template.name + "\nVới giá 500tr vàng không?", indexBuy);
+                    }
+                    else{
+                        Service.gI().SaleDone(player, typeBuy, "Bạn có muốn bán\n" + "x" + player.ItemBag[indexBuy].quantity + " " + player.ItemBag[indexBuy].template.name + "\nVới giá 1 vàng không?", indexBuy);
+                    }
                 } else if (actionBuy == 1) {
+                    if(item.template.id == 457 && player.ItemBag[indexBuy].quantity >= 1){
+                        int soluong =  player.ItemBag[indexBuy].quantity - 1;
+                        player.vang += 500000000;
+                    }
+                    else{
+                        player.vang += 1;
+                    }
                     player.removeItemBag(indexBuy);
                     Service.gI().updateItemBag(player);
-                    player.vang += 1;
                     Service.gI().buyDone(player);
                 } else {
                     player.sendAddchatYellow("Bán vật phẩm không thành công");
@@ -646,7 +662,7 @@ public class Service {
         }
     }
 
-//    public void imageSource(Session session) {
+    //    public void imageSource(Session session) {
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -2288,7 +2304,8 @@ public class Service {
                 }
                 timerHs.cancel();
             }
-        ;
+
+            ;
         };
         timerHs.schedule(tt, 10000);
         p.timerHSDe = timerHs;
@@ -3785,11 +3802,13 @@ public class Service {
                     public void run() {
                         Server.gI().supportNV = false;
                     }
-                ;
+
+                    ;
                 };
                 endSupportTDST.schedule(endTDST, 7200000);
             }
-        ;
+
+            ;
         };
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 17); //SERVER 1
@@ -4099,11 +4118,13 @@ public class Service {
                             }
                         }
                     }
-                ;
+
+                    ;
                 };
                 timerEndNRSD.schedule(endNRSD, 3600000);
             }
-        ;
+
+            ;
         };
         timerNRSD.schedule(NRSD, 10000);
 //        Calendar calendar = Calendar.getInstance();
@@ -4194,11 +4215,13 @@ public class Service {
                             }
                         }
                     }
-                ;
+
+                    ;
                 };
                 timerEndMabu.schedule(endMabu, 3600000);
             }
-        ;
+
+            ;
         };
 //        timerMabu.schedule(Mabu, 10000);
 
@@ -4376,7 +4399,8 @@ public class Service {
                     listMap.remove(index);
                 }
             }
-        ;
+
+            ;
         };
         timerNRNM.schedule(NRNM, 5000);
 //        Calendar calendar = Calendar.getInstance();
@@ -4517,7 +4541,8 @@ public class Service {
                     //INIT LAI NGOC RONG NAMEC
                     initNgocRongNamec((byte) 0);
                 }
-            ;
+
+                ;
             };
             timerNRNM.schedule(NRNM, time);
         }
@@ -4669,14 +4694,16 @@ public class Service {
                             }
                         }
                     }
-                ;
+
+                    ;
                 };
                 timerEndNRSD.schedule(endNRSD, 3600000);
             }
-        ;
+
+            ;
         };
 //        timerNRSD.schedule(NRSD, 5000);
-        
+
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 22); //SERVER 1
 //        calendar.set(Calendar.HOUR_OF_DAY, 10); //SERVER 2
@@ -4781,7 +4808,8 @@ public class Service {
                     Server.gI().maps[129].area[i].loadBossNoCharge(_boss);
                 }
             }
-        ;
+
+            ;
         };
 
         timerYardrat.schedule(yardrat, 5000);
@@ -4821,7 +4849,8 @@ public class Service {
                         timerConLaiDT.cancel();
                     }
                 }
-            ;
+
+                ;
             };
             timerConLaiDT.schedule(conlaiDT, 0, 300000);
 
@@ -4850,7 +4879,8 @@ public class Service {
                         timerEndDT.cancel();
                     }
                 }
-            ;
+
+                ;
             };
             timerEndDT.schedule(endDT, 1800000);
         } else if (index == (byte) 2) { //TUONG THANH3 INIT TRUNG UY TRANG
@@ -5424,7 +5454,8 @@ public class Service {
                     timerConLaiDT.cancel();
                 }
             }
-        ;
+
+            ;
         };
         timerConLaiDT.schedule(conlaiDT, 0, 300000);
 //        Util.log("AJCJKAHCKA :" + level);
@@ -5453,7 +5484,8 @@ public class Service {
                     timerEndDT.cancel();
                 }
             }
-        ;
+
+            ;
         };
         timerEndDT.schedule(endDT, 1800000);
         clan.timerGas = timerEndDT;
@@ -5499,7 +5531,8 @@ public class Service {
                         clan.timerGas.cancel();
                     }
                 }
-            ;
+
+                ;
             };
             timerEndDT.schedule(endDT, 30000);
         }
@@ -5602,7 +5635,8 @@ public class Service {
                     timerGiapLT.cancel();
                 }
             }
-        ;
+
+            ;
         };
         timerGiapLT.schedule(giapLT, 0, 60000);
         p.timerGLT = timerGiapLT;
@@ -5641,7 +5675,8 @@ public class Service {
                 }
                 timerTauNgam.cancel();
             }
-        ;
+
+            ;
         };
         timerTauNgam.schedule(tauNgam, time);
         p.timeTauNgam = timerTauNgam;
@@ -5763,7 +5798,8 @@ public class Service {
                         p.timerCSKB = null;
                         resetMayDo.cancel();
                     }
-                ;
+
+                    ;
                 };
                 resetMayDo.schedule(rsMayDo, time);
                 p.timerCSKB = resetMayDo;
@@ -5789,7 +5825,8 @@ public class Service {
                         Service.gI().loadPoint(p.session, p);
                         resetCN.cancel();
                     }
-                ;
+
+                    ;
                 };
                 resetCN.schedule(rsCN, time);
                 p.timerCN = resetCN;
@@ -5815,7 +5852,8 @@ public class Service {
                         Service.gI().loadPoint(p.session, p);
                         resetBH.cancel();
                     }
-                ;
+
+                    ;
                 };
                 resetBH.schedule(rsBH, time);
                 p.timerBH = resetBH;
@@ -5840,7 +5878,8 @@ public class Service {
                         Service.gI().loadPoint(p.session, p);
                         resetBK.cancel();
                     }
-                ;
+
+                    ;
                 };
                 resetBK.schedule(rsBK, time);
                 p.timerBK = resetBK;
@@ -5863,7 +5902,8 @@ public class Service {
                         p.timerGX = null;
                         resetGX.cancel();
                     }
-                ;
+
+                    ;
                 };
                 resetGX.schedule(rsGX, time);
                 p.timerGX = resetGX;
@@ -5890,7 +5930,8 @@ public class Service {
                         Service.gI().loadPoint(p.session, p);
                         resetTM.cancel();
                     }
-                ;
+
+                    ;
                 };
                 resetTM.schedule(rsTM, time);
                 p.timerTM = resetTM;
@@ -5924,7 +5965,8 @@ public class Service {
                         Service.gI().loadPoint(p.session, p);
                         resetTA.cancel();
                     }
-                ;
+
+                    ;
                 };
                 resetTA.schedule(rsTA, time);
                 p.timerTA = resetTA;

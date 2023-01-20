@@ -290,7 +290,8 @@ public class MainManager {
                 sell.buyGold = Integer.parseInt(res.getString("buyGold"));
                 sell.buyType = Byte.parseByte(res.getString("buyType"));
                 sell.isNew = res.getBoolean("isNew");
-                sell.canbuy = Integer.parseInt(res.getString("canbuy"));
+               // sell.canbuy = Integer.parseInt(res.getString("canbuy"));
+                sell.canbuy = 0; 
                 Item item = new Item();
                 item.id = sell.id;
                 item.template = ItemTemplate.ItemTemplateID(item.id);

@@ -737,18 +737,18 @@ public class useItem {
                     Service.gI().updateItemBag(p);
                     return;
                 } //USE THOI VANG
-                else if(item.id == 457 && p.ItemBag[(byte)index].quantity >= 1)
-                {
-                    p.ItemBag[(byte)index].quantity -= 1;
-                    if(p.ItemBag[(byte)index].quantity == 0) {
-                        p.ItemBag[(byte)index] = null;
-                    }
-                    Service.gI().updateItemBag(p);
-                    long _vang = ((long)p.vang + 500000000) > 2000000000L ? 2000000000L : ((long)p.vang + 500000000);
-                    p.vang = _vang;
-                    Service.gI().buyDone(p);
-                    return;
-                } //USE PET
+                // else if(item.id == 457 && p.ItemBag[(byte)index].quantity >= 1)
+                // {
+                //     p.ItemBag[(byte)index].quantity -= 1;
+                //     if(p.ItemBag[(byte)index].quantity == 0) {
+                //         p.ItemBag[(byte)index] = null;
+                //     }
+                //     Service.gI().updateItemBag(p);
+                //     long _vang = ((long)p.vang + 500000000) > 2000000000L ? 2000000000L : ((long)p.vang + 500000000);
+                //     p.vang = _vang;
+                //     Service.gI().buyDone(p);
+                //     return;
+                // } //USE PET
                 else if(item.id == 1008 || item.id == 967 || item.id == 944 || item.id == 943 || item.id == 942 || item.id == 936 ||
                         item.id == 919 || item.id == 918 || item.id == 917 || item.id == 916 || item.id == 910 || item.id == 909 || item.id == 908 || item.id == 893 || item. id == 892 ||
                         item.id == 1039 || item.id == 1040 || item.id == 1046 || item.id == 1107 || item.id == 1114)

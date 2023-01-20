@@ -1827,11 +1827,21 @@ public class Controller {
                         } else if (itemBuy.buyType == 1) {
                             if (player.ngocKhoa >= itemBuy.buyCoin) {
                                 player.ngocKhoa -= itemBuy.buyCoin;
-                                player.buyitemdelay = System.currentTimeMillis() + 1000L;
+                                if(itemBuy.item.template.id == 457){
+                                    player.buyitemdelay = System.currentTimeMillis() + 30000L;
+                                }
+                                else{
+                                    player.buyitemdelay = System.currentTimeMillis() + 1000L;
+                                }
                                 isCanBuy = true;
                             } else if (player.ngoc >= itemBuy.buyCoin) {
                                 player.ngoc -= itemBuy.buyCoin;
-                                player.buyitemdelay = System.currentTimeMillis() + 1000L;
+                                if(itemBuy.item.template.id == 457){
+                                    player.buyitemdelay = System.currentTimeMillis() + 30000L;
+                                }
+                                else{
+                                    player.buyitemdelay = System.currentTimeMillis() + 1000L;
+                                }
                                 isCanBuy = true;
                             } else {
                                 player.sendAddchatYellow("Bạn không đủ ngọc để mua vật phẩm");
@@ -1852,7 +1862,12 @@ public class Controller {
                                 Service.gI().updateItemBag(player);
                                 Service.gI().buyDone(player);
                                 player.sendAddchatYellow("Mua thành công " + itemBuy.item.template.name);
-                                player.buyitemdelay = System.currentTimeMillis() + 1000L;
+                                if(itemBuy.item.template.id == 457){
+                                    player.buyitemdelay = System.currentTimeMillis() + 30000L;
+                                }
+                                else{
+                                    player.buyitemdelay = System.currentTimeMillis() + 1000L;
+                                }
                             } else {
                                 Service.gI().updateItemBag(player);
                                 Service.gI().buyDone(player);
