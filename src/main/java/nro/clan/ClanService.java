@@ -129,7 +129,7 @@ public class ClanService {
             ArrayList<Clan> clans = ClanManager.gI().search(text);
             msg = new Message(-47);
             msg.writer().writeByte((byte) clans.size());
-            if (clans.size() > 0) {
+            if ( clans!= null && clans.size() > 0) {
                 for (Clan clan : clans) {
                     msg.writer().writeInt(clan.id);
                     msg.writer().writeUTF(clan.name);
@@ -147,7 +147,7 @@ public class ClanService {
             session.sendMessage(msg);
             msg.cleanup();
         } catch (Exception e) {
-            System.out.println("-47 " + e.toString());
+            System.out.println("-47 Lỗi clan không quan trọng" + e.toString());
         }
     }
 

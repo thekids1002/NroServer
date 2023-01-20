@@ -468,9 +468,10 @@ public class Service {
                         player.sendAddchatYellow("Bán thành công x1 thỏi vàng giá 500tr");
                     }
                     else{
+                         player.sendAddchatYellow("Bán thành công "+ player.ItemBag[indexBuy].template.name );
                          player.removeItemBag(indexBuy);
                          player.vang += 1;
-                         player.sendAddchatYellow("Bán thành công "+ player.ItemBag[indexBuy].template.name );
+                         
                     }
                    
                     Service.gI().updateItemBag(player);
