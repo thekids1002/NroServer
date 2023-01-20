@@ -1324,7 +1324,7 @@ public class Menu {
                         p.menuID = select;
                         break;
                     } else if (select == 3) {
-                        doMenuArray(p, idNpc, "|2|Nhân ngày giáng sinh TeamKun chúc các bạn\n|2|Có 1 ngày vui vẻ và thật nhiều hạnh phúc <3\n|7|Bên dưới là món quà TeamKun muốn gửi đến bạn\n|1|Chúc các bạn chơi game vui vẻ", new String[]{"Nhận Quà\nGiáng Sinh", "Từ Chối"});
+                        doMenuArray(p, idNpc, "|2|Nhân ngày giáng sinh NRO LỎ chúc các bạn\n|2|Có 1 ngày vui vẻ và thật nhiều hạnh phúc <3\n|7|Bên dưới là món quà NRO LOR muốn gửi đến bạn\n|1|Chúc các bạn chơi game vui vẻ", new String[]{"Nhận Quà\nGiáng Sinh", "Từ Chối"});
                         p.menuID = select;
                         break;
                     }
@@ -1363,7 +1363,7 @@ public class Menu {
                 if (p.map.id == 102) {
                     if (p.menuID == -1) {
                         if (select == 0) {
-                            Service.chatNPC(p, (short) p.menuNPCID, "TeamKun.Vn, Website tải game bạn biêt chưa!");
+                            Service.chatNPC(p, (short) p.menuNPCID, "NRO LOR.Vn, Website tải game bạn biêt chưa!");
                             break;
                         } else if (select == 1) {
                             TabItemShop[] test = Shop.getTabShop(37, 0).toArray(new TabItemShop[0]);
@@ -2372,7 +2372,7 @@ public class Menu {
                             p.zone.goMapTransport(p, 143);
                             break;
                         } else if (p.menuID == 2 && select == 1) {//HUONG DAN
-                            Service.chatNPC(p, (short) p.menuNPCID, "Hiện tại, map chưa được hoàn thiện TeamKun đang mở để cho các bạn trải nghiệm!");
+                            Service.chatNPC(p, (short) p.menuNPCID, "Hiện tại, map chưa được hoàn thiện NRO LOR đang mở để cho các bạn trải nghiệm!");
                             break;
                         }
                     }
@@ -2396,7 +2396,7 @@ public class Menu {
                     if (p.menuID != -1) {
                     }
                     if (select == 0) {
-                        Service.chatNPC(p, (short) p.menuNPCID, "TeamKun, là tên máy chủ chắc không cần nhắc thì con cũng biết là trang chủ TeamKun.Vn nhỉ ?");
+                        Service.chatNPC(p, (short) p.menuNPCID, "NRO LOR, là tên máy chủ chắc không cần nhắc thì con cũng biết là trang chủ NRO LOR.Vn nhỉ ?");
                         p.menuID = select;
                     }
                 }
@@ -2445,7 +2445,7 @@ public class Menu {
                     if (p.menuID != -1) {
                     }
                     if (select == 0) {
-                        Service.chatNPC(p, (short) p.menuNPCID, "Hiện tại TeamKun chưa hoàn thiện xong map này vui lòng quay lại sau..!");
+                        Service.chatNPC(p, (short) p.menuNPCID, "Hiện tại NRO LOR chưa hoàn thiện xong map này vui lòng quay lại sau..!");
                     }
                     if (select == 1) {
                         p.zone.goMapTransport(p, 48);
@@ -2552,7 +2552,7 @@ public class Menu {
                             if (Server.gI().isServer == (byte) 1) {
                                 ClanService.gI().distoryClan(p);
                             } else {
-                                p.sendAddchatYellow("Chỉ thực hiện tại TeamKun 01");
+                                p.sendAddchatYellow("Chỉ thực hiện tại NRO LOR 01");
                             }
                             break;
                         } else if (p.menuID == 3 && select == 1) { //KHU VUC BANG HOI
@@ -2564,7 +2564,7 @@ public class Menu {
                                 break;
                             }
                         } else if (p.menuID == 4 && select == 1) { //HUONG DAN
-                            Service.chatNPC(p, (short) p.menuNPCID, "Hiện tại kho báu dưới biển chưa hoàn thiện TeamKun chỉ mở để cho các bạn trải nghiệm map này!");
+                            Service.chatNPC(p, (short) p.menuNPCID, "Hiện tại kho báu dưới biển chưa hoàn thiện NRO LOR chỉ mở để cho các bạn trải nghiệm map này!");
                             break;
                         }
                     }
@@ -3345,7 +3345,7 @@ public class Menu {
             doMenuArray(p, idnpc, "Con muốn quay về sao?", new String[]{"Về Thần Điện", "Thánh Địa\nKaio", "Con Đường\nRắn Độc", "Từ Chối"});
             return;
         } else if (p.menuNPCID == 18 && p.map.id == 46) {  //THAN MEO
-            doMenuArray(p, idnpc, "Tải Game Tại TeamKun.Vn?", new String[]{"Nói Chuyện", "Từ Chối"});
+            doMenuArray(p, idnpc, "Tải Game Tại NRO LOR.Vn?", new String[]{"Nói Chuyện", "Từ Chối"});
             return;
         } else if (p.menuNPCID == 19 && p.map.id == 141) {
             doMenuArray(p, idnpc, "Giỏi lắm tiêu diệt được đám quái vật đó rồi à, Ta còn nhiệm vụ khác cho con đây !", new String[]{"Đến Chỗ\nCađíc", "Về\nThánh Địa\nKaio", "Từ Chối"});
