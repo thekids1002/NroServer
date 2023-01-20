@@ -19,7 +19,6 @@ nro\main\Service$7.class
 nro\map\Zone$23.class
 nro\daihoi\DaiHoiService$1$2.class
 nro\task\PetProtectTask$1.class
-nro\map\Zone$27$30$1$2.class
 nro\item\ItemTemplates.class
 nro\main\Service$24.class
 nro\map\Zone$27$18.class
@@ -36,7 +35,6 @@ nro\task\DelayUseBomTask$2.class
 nro\map\MobTemplate.class
 nro\task\ResetBlindTask.class
 nro\map\Zone$15.class
-nro\map\Zone$27$30$1$1.class
 nro\main\DataSource.class
 nro\task\ResetHuytSaoTask.class
 nro\card\RadaCard.class
@@ -82,7 +80,6 @@ nro\map\WayPoint.class
 nro\map\Mob.class
 nro\map\Zone$8$1.class
 nro\map\Zone$27$29.class
-io\LogHistory.class
 nro\main\Draw.class
 nro\map\Zone$27$11.class
 nro\map\Zone$27$26.class
@@ -190,7 +187,6 @@ nro\task\ResetDeTrungUpTask.class
 nro\main\Service$8$1.class
 nro\map\MapData.class
 nro\item\ItemService.class
-nro\map\Zone$27$30$1.class
 nro\map\Zone$27$14.class
 nro\map\Zone$23$1.class
 nro\map\Zone$27$6.class

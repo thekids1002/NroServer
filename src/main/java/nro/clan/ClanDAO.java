@@ -123,6 +123,19 @@ public class ClanDAO {
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                    ps = null;
+                }
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return clans;
     }
@@ -160,6 +173,19 @@ public class ClanDAO {
             conn.close();
         } catch (SQLException e) {
             System.out.println("error getMembers: " + e.toString());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                    ps = null;
+                }
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return members;
     }
@@ -419,7 +445,7 @@ public class ClanDAO {
         return clans;
     }
 
-     public static void updateAllDataClan(Clan clan) {
+    public static void updateAllDataClan(Clan clan) {
         Connection conn = null;
         PreparedStatement ps = null;
         try {

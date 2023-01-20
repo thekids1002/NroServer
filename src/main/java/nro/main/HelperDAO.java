@@ -1,9 +1,6 @@
 package nro.main;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 import nro.constant.Constant;
 import org.json.simple.JSONArray;
@@ -16,8 +13,9 @@ public class HelperDAO {
         String SELECT_TOP_POWER = "SELECT name, power FROM player ORDER BY power DESC LIMIT " + Constant.MAX_TOP_POWER;
         PreparedStatement ps;
         ResultSet rs;
+        Connection conn = null;
         try {
-            Connection conn = DataSource.getConnection();
+            conn = DataSource.getConnection();
             ps = conn.prepareStatement(SELECT_TOP_POWER);
             conn.setAutoCommit(false);
 
@@ -30,43 +28,32 @@ public class HelperDAO {
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        return sb.toString();
-    }
-    public static String getTopTask() {
-        StringBuffer sb = new StringBuffer("");
-
-        String SELECT_TOP_CARD = "SELECT name, task_id FROM player WHERE task_id > 0 ORDER BY recharge DESC LIMIT " + Constant.MAX_TOP_TASK;
-        PreparedStatement ps;
-        ResultSet rs;
-        try {
-            Connection conn = DataSource.getConnection();
-            ps = conn.prepareStatement(SELECT_TOP_CARD);
-            conn.setAutoCommit(false);
-            rs = ps.executeQuery();
-            byte i = 1;
-            while(rs.next()) {
-                sb.append(i).append(".").append(rs.getString("name")).append("\b");
-                i++;
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         return sb.toString();
     }
+
     public static String getTopCard() {
         StringBuffer sb = new StringBuffer("");
 
         String SELECT_TOP_CARD = "SELECT name, recharge FROM player WHERE recharge > 0 ORDER BY recharge DESC LIMIT " + Constant.MAX_TOP_CARD;
         PreparedStatement ps;
         ResultSet rs;
+        Connection conn = null;
         try {
-            Connection conn = DataSource.getConnection();
+            conn = DataSource.getConnection();
             ps = conn.prepareStatement(SELECT_TOP_CARD);
             conn.setAutoCommit(false);
+
             rs = ps.executeQuery();
             byte i = 1;
             while(rs.next()) {
@@ -76,6 +63,15 @@ public class HelperDAO {
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return sb.toString();

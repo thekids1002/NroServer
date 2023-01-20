@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GiftCode {
+
     String code;
-    int countLeft;
+    int Soluong;
     public HashMap<Integer, Integer> detail = new HashMap<>();
     public ArrayList<Integer> listIdPlayer = new ArrayList<>();
 

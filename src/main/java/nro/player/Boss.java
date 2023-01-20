@@ -4,7 +4,7 @@ import nro.main.Util;
 
 public class Boss extends Player {
 
-    public byte _typeBoss = 0; //1: Broly 2: Super broly, 3:Cooler 1, 4:Cooler, 5: Black Goku, 6: Super Black Goku
+    public byte _typeBoss = 0; //1: Broly, 2: Super broly, 3:Cooler 1, 4:Cooler, 5: Black Goku, 6: Super Black Goku
     public int _numberBoss = 0;
     public boolean isBoom = false;
     public long callXenCon = 0;
@@ -38,17 +38,17 @@ public class Boss extends Player {
         this.power = 1200;
         this.tiemNang = 0;
         this.limitPower = 0;
-         if (type == 1) {
+        if (type == 1) {
             this.name = "Broly " + Id;
             this.head = 291;
-            this.hpGoc = Util.nextInt(500, 60000);
+            this.hpGoc = 500;
             this.mpGoc = 500;
             this.hp = this.hpGoc;
             this.mp = this.mpGoc;
             this.damGoc = 50;
             this.defGoc = 0;
             this.critGoc = 0;
-            this.hpFull = this.hpGoc;
+            this.hpFull = 500;
             this.mpFull = 500;
             this.damFull = 50;
             this.defFull = 0;
@@ -57,13 +57,10 @@ public class Boss extends Player {
             this.y = yBoss;
             this.typePk = 5;
             this.isBOSS = true;
-        }  else if (type == 2) {
+        } else if (type == 2) {
             this.name = "Super Broly " + Id;
             this.head = 294;
-            this.hpGoc = Util.nextInt(1000000, 16070777);
-            if (this.hpGoc > 14000000) {
-                this.hpGoc = 16070777;
-            }
+            this.hpGoc = Util.nextInt(2000000, 20000001);
             this.mpGoc = 500;
             this.hp = this.hpGoc;
             this.mp = this.mpGoc;
@@ -1015,6 +1012,158 @@ public class Boss extends Player {
             this.hpFull = 1000000000;
             this.mpFull = 1000000000;
             this.damFull = 250000;
+            this.defFull = 0;
+            this.critFull = 0;
+            this.x = xBoss;
+            this.y = yBoss;
+            this.typePk = 5;
+            this.isBOSS = true;
+        } else if (type == 51) {
+            this.name = "Sơn Tinh";
+            this.head = 314;
+            this.hpGoc = 2000000;
+            this.mpGoc = 2000000;
+            this.hp = this.hpGoc;
+            this.mp = this.mpGoc;
+            this.damGoc = 30000;
+            this.defGoc = 0;
+            this.critGoc = 0;
+            this.hpFull = 2000000;
+            this.mpFull = 2000000;
+            this.damFull = 30000;
+            this.defFull = 0;
+            this.critFull = 0;
+            this.x = xBoss;
+            this.y = yBoss;
+            this.typePk = 5;
+            this.isBOSS = true;
+        } else if (type == 52) {
+            this.name = "Thuỷ Tinh";
+            this.head = 311;
+            this.hpGoc = 2000000;
+            this.mpGoc = 2000000;
+            this.hp = this.hpGoc;
+            this.mp = this.mpGoc;
+            this.damGoc = 30000;
+            this.defGoc = 0;
+            this.critGoc = 0;
+            this.hpFull = 2000000;
+            this.mpFull = 2000000;
+            this.damFull = 30000;
+            this.defFull = 0;
+            this.critFull = 0;
+            this.x = xBoss;
+            this.y = yBoss;
+            this.typePk = 5;
+            this.isBOSS = true;
+        } else if (type == 53) {
+            this.name = "Rati";
+            this.head = 490;
+            this.hpGoc = 100;
+            this.mpGoc = 100;
+            this.hp = this.hpGoc;
+            this.mp = this.mpGoc;
+            this.damGoc = 1;
+            this.defGoc = 1;
+            this.critGoc = 1;
+            this.hpFull = 100;
+            this.mpFull = 100;
+            this.damFull = 1;
+            this.defFull = 0;
+            this.critFull = 0;
+            this.x = xBoss;
+            this.y = yBoss;
+            this.typePk = 5;
+            this.isBOSS = true;
+        } else if (type == 54) {
+            this.name = "Fide Vàng";
+            this.head = 502;
+            this.hpGoc = 100;
+            this.mpGoc = 100;
+            this.hp = this.hpGoc;
+            this.mp = this.mpGoc;
+            this.damGoc = 1;
+            this.defGoc = 1;
+            this.critGoc = 1;
+            this.hpFull = 100;
+            this.mpFull = 100;
+            this.damFull = 1;
+            this.defFull = 0;
+            this.critFull = 0;
+            this.x = xBoss;
+            this.y = yBoss;
+            this.typePk = 5;
+            this.isBOSS = true;
+        } else if (type == 55) {
+            this.name = "Ăn Trộm " + Id;
+            this.head = 201;
+            this.hpGoc = 100;
+            this.mpGoc = 100;
+            this.hp = this.hpGoc;
+            this.mp = this.mpGoc;
+            this.damGoc = 1;
+            this.defGoc = 1;
+            this.critGoc = 1;
+            this.hpFull = 100;
+            this.mpFull = 100;
+            this.damFull = 1;
+            this.defFull = 0;
+            this.critFull = 0;
+            this.x = xBoss;
+            this.y = yBoss;
+            this.typePk = 5;
+            this.isBOSS = true;
+        } else if (type == 56) {
+            this.name = "Vegito Quyền Năng";
+            this.head = 870;
+            this.hpGoc = 2000000000;
+            this.mpGoc = 2000000000;
+            this.hp = this.hpGoc;
+            this.mp = this.mpGoc;
+            this.damGoc = Util.nextInt(2000000, 3000000);
+            this.defGoc = 1;
+            this.critGoc = 20;
+            this.hpFull = 2000000000;
+            this.mpFull = 2000000000;
+            this.damFull = Util.nextInt(2000000, 3000000);
+            this.defFull = 0;
+            this.critFull = 0;
+            this.x = xBoss;
+            this.y = yBoss;
+            this.typePk = 5;
+            this.isBOSS = true;
+        } else if (type == 57) {
+            this.name = " Super Vegito";
+            this.head = 867;
+            this.hpGoc = 2000000000;
+            this.mpGoc = 2000000000;
+            this.hp = this.hpGoc;
+            this.mp = this.mpGoc;
+            this.damGoc = Util.nextInt(2000000, 3000000);
+            this.defGoc = 1;
+            this.critGoc = 20;
+            this.hpFull = 2000000000;
+            this.mpFull = 2000000000;
+            this.damFull = Util.nextInt(2000000, 3000000);
+            this.defFull = 0;
+            this.critFull = 0;
+            this.x = xBoss;
+            this.y = yBoss;
+            this.typePk = 5;
+            this.isBOSS = true;
+        } else if (type == 58) {
+            this.name = "Piccolo Tối Thượng";
+            this.head = 669;
+            this.hpGoc = 2000000000;
+            this.mpGoc = 2000000000;
+            this.hp = this.hpGoc;
+            this.mp = this.mpGoc;
+            this.damGoc = Util.nextInt(2000000, 3000000);
+            this.defGoc = 1;
+            this.critGoc = 20;
+            this.hpFull = 2000000000;
+            this.mpFull = 2000000000;
+            this.damFull = Util.nextInt(2000000, 3000000);
             this.defFull = 0;
             this.critFull = 0;
             this.x = xBoss;

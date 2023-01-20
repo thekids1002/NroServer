@@ -178,15 +178,15 @@ public class Item {
         if (_star == 0) {
             return 50;
         }  else if(_star == 1) {
-            return 20;
+            return 30;
         } else if (_star == 2) {
-            return 10;
+            return 20;
         } else if (_star == 3) {
-            return 5;
+            return 10;
         } else if (_star == 4) {
-            return 3;
+            return 5;
         } else if (_star == 5) {
-            return 2;
+            return 1;
         } else if (_star == 6) {
             return 1;
         } else if (_star == 7) {

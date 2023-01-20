@@ -32,15 +32,16 @@ public class Mob {
         this.template = MobTemplate.entrys.get(idtemplate);
         this.level = level;
         this.hp = maxHp = template.maxHp;
-        this.xpup = 10000;
+       this.xpup = 100000; 
         this.isDie = false;
         this.isRefresh = true;
         this.level = level;
-        this.xpup = 100000L;
+        this.xpup = 10000L;
         this.isDie = false;
         this.timeFight = -1L;
         
     }
+
     public static MobTemplate getMob(int id) {
         for (MobTemplate mob : MobTemplate.entrys) {
             if (mob.tempId == id) {

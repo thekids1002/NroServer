@@ -20,8 +20,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import nro.daihoi.DaiHoiService;
 
-
 public class Server {
+
     private static Server instance;
     public static Object LOCK_MYSQL = new Object();
     public static boolean isDebug = false;
@@ -36,11 +36,11 @@ public class Server {
     public boolean openHiru = false;
     public boolean openMabu = false;
     //NGOC RONG NAMEC
-    public int mapNrNamec[] = {-1,-1,-1,-1,-1,-1,-1};
-    public String nameNrNamec[] = {"","","","","","",""};
-    public byte zoneNrNamec[] = {-1,-1,-1,-1,-1,-1,-1};
-    public String pNrNamec[] = {"","","","","","",""};
-    public int idpNrNamec[] = {-1,-1,-1,-1,-1,-1,-1};
+    public int mapNrNamec[] = {-1, -1, -1, -1, -1, -1, -1};
+    public String nameNrNamec[] = {"", "", "", "", "", "", ""};
+    public byte zoneNrNamec[] = {-1, -1, -1, -1, -1, -1, -1};
+    public String pNrNamec[] = {"", "", "", "", "", "", ""};
+    public int idpNrNamec[] = {-1, -1, -1, -1, -1, -1, -1};
     public long timeNrNamec = 0;
     public boolean firstNrNamec = true;
     public long tOpenNrNamec = 0;
@@ -50,11 +50,13 @@ public class Server {
     public short maxDoanhTrai = 200;
     public short maxKhiGas = 200;
     public boolean isPassDHVT = true;
-    public boolean isCTG = false;
+    public boolean isCTG = true;
+    public boolean isPassNPC = true;
+    public boolean isGiaoDich = false;
     public int idBossCall = 1000;
     //
-    public byte isServer = (byte)1;
-;
+    public byte isServer = (byte) 1;
+    ;
 
     public int mapKUKU = 0;
     public int khuKUKU = 0;
@@ -92,7 +94,7 @@ public class Server {
             this.maps[i] = new Map(MapTemplate.arrTemplate[i]);
             this.maps[i].start();
         }
-        
+
         NoiTaiTemplate.initNoiTai();
         Util.log("GET LIST NOI TAI XONG");
         //START AUTO SAVE
@@ -106,7 +108,7 @@ public class Server {
         }
         return instance;
     }
-    
+
     public static void main(String[] args) {
         Server.gI().run();
     }
@@ -117,11 +119,11 @@ public class Server {
             Util.log("Start server...");
             listenSocket = new ServerSocket(Server.manager.port);
             int idBROLY = 1;
-            for(int i = 0; i < idMapBroly.length; i++) {
+            for (int i = 0; i < idMapBroly.length; i++) {
                 int xBroly = Util.getToaDoXBROLY(idMapBroly[i]);
                 int yBroly = Util.getToaDoYBROLY(idMapBroly[i]);
-                for(int j = 0; j < 2; j++) {
-                    Boss _sBroly = new Boss(idBROLY, (byte)1, (short)xBroly, (short)yBroly);
+                for (int j = 0; j < 2; j++) {
+                    Boss _sBroly = new Boss(idBROLY, (byte) 1, (short) xBroly, (short) yBroly);
                     idBROLY++;
                     int _rdZone = maps[idMapBroly[i]].getIndexMapNoBroly();
                     maps[idMapBroly[i]].area[_rdZone].bossMap.add(_sBroly);
@@ -131,53 +133,52 @@ public class Server {
             }
             Util.log("INIT BROLY XONG");
             int _rdZoneCooler = Util.nextInt(0, 5);
-            Boss _cooler = new Boss(101, (byte)3, (short)243, (short)168);
+            Boss _cooler = new Boss(101, (byte) 3, (short) 243, (short) 168);
             maps[107].area[_rdZoneCooler].bossMap.add(_cooler);
             maps[107].area[_rdZoneCooler].loadBossNoPet(_cooler);
             Util.log("INIT COOLER XONG " + maps[107].template.name + " KHU " + _rdZoneCooler);
-            
+
             Timer timerBLACKXuatHien = new Timer();
             TimerTask ttBLACKXuatHien = new TimerTask() {
-                public void run()
-                {
+                public void run() {
                     int idMap = Util.nextInt(91, 93); //index 91 la map 92, index 92 la map 93
                     int IDZONE = Util.nextInt(0, maps[idMap].area.length);
                     short xBlack = 228;
-                    if(idMap == 91) {
+                    if (idMap == 91) {
                         xBlack = 1296;
                     }
-                    Boss _rBlack = new Boss(102, (byte)5, xBlack, (short)360);
+                    Boss _rBlack = new Boss(102, (byte) 5, xBlack, (short) 360);
                     maps[idMap].area[IDZONE].bossMap.add(_rBlack);
                     maps[idMap].area[IDZONE].loadBossNoPet(_rBlack);
                     Util.log("INIT BLACK XONG KHU " + IDZONE);
                     timerBLACKXuatHien.cancel();
-                };
+                }
+            ;
             };
             timerBLACKXuatHien.schedule(ttBLACKXuatHien, 30000);
 
             Timer timerKUKUX = new Timer();
             TimerTask ttKUKU = new TimerTask() {
-                public void run()
-                {
+                public void run() {
                     int idMap = 68;
-                    short xKu = (short)758;
-                    short yKu = (short)408;
+                    short xKu = (short) 758;
+                    short yKu = (short) 408;
                     idMap = Util.nextInt(68, 73);
                     int IDZONE = Util.nextInt(0, maps[idMap].area.length);
-                    if(idMap == 69) {
-                        xKu = (short)808;
-                        yKu = (short)384;
-                    } else if(idMap == 70) {
-                        xKu = (short)301;
-                        yKu = (short)360;
-                    } else if(idMap == 71) {
-                        xKu = (short)282;
-                        yKu = (short)168;
-                    } else if(idMap == 72) {
-                        xKu = (short)1017;
-                        yKu = (short)312;
+                    if (idMap == 69) {
+                        xKu = (short) 808;
+                        yKu = (short) 384;
+                    } else if (idMap == 70) {
+                        xKu = (short) 301;
+                        yKu = (short) 360;
+                    } else if (idMap == 71) {
+                        xKu = (short) 282;
+                        yKu = (short) 168;
+                    } else if (idMap == 72) {
+                        xKu = (short) 1017;
+                        yKu = (short) 312;
                     }
-                    Boss _rKuku = new Boss(110, (byte)7, xKu, yKu);
+                    Boss _rKuku = new Boss(110, (byte) 7, xKu, yKu);
                     maps[idMap].area[IDZONE].bossMap.add(_rKuku);
                     maps[idMap].area[IDZONE].loadBossNoPet(_rKuku);
                     //
@@ -186,24 +187,24 @@ public class Server {
                     Util.log("INIT KUKU XONG MAP " + maps[idMap].template.name + ", " + IDZONE);
 
                     idMap = 64;
-                    xKu = (short)794;
-                    yKu = (short)312;
+                    xKu = (short) 794;
+                    yKu = (short) 312;
                     idMap = Util.nextInt(63, 68);
                     IDZONE = Util.nextInt(0, maps[idMap].area.length);
-                    if(idMap == 65) {
-                        xKu = (short)1246;
-                        yKu = (short)240;
-                    } else if(idMap == 63) {
-                        xKu = (short)695;
-                        yKu = (short)144;
-                    } else if(idMap == 66) {
-                        xKu = (short)993;
-                        yKu = (short)360;
-                    } else if(idMap == 67) {
-                        xKu = (short)972;
-                        yKu = (short)720;
-                    } 
-                    Boss _rMapDinh = new Boss(115, (byte)8, xKu, yKu);
+                    if (idMap == 65) {
+                        xKu = (short) 1246;
+                        yKu = (short) 240;
+                    } else if (idMap == 63) {
+                        xKu = (short) 695;
+                        yKu = (short) 144;
+                    } else if (idMap == 66) {
+                        xKu = (short) 993;
+                        yKu = (short) 360;
+                    } else if (idMap == 67) {
+                        xKu = (short) 972;
+                        yKu = (short) 720;
+                    }
+                    Boss _rMapDinh = new Boss(115, (byte) 8, xKu, yKu);
                     maps[idMap].area[IDZONE].bossMap.add(_rMapDinh);
                     maps[idMap].area[IDZONE].loadBossNoPet(_rMapDinh);
                     mapMDD = idMap;
@@ -211,79 +212,75 @@ public class Server {
                     Util.log("INIT _rMapDinh XONG MAP " + maps[idMap].template.name + ", " + IDZONE);
 
                     idMap = 73;
-                    xKu = (short)324;
-                    yKu = (short)168;
+                    xKu = (short) 324;
+                    yKu = (short) 168;
                     idMap = Util.nextInt(73, 77);
                     IDZONE = Util.nextInt(0, maps[idMap].area.length);
-                    if(idMap == 74) {
-                        xKu = (short)532;
-                        yKu = (short)336;
-                    } else if(idMap == 75) {
-                        xKu = (short)515;
-                        yKu = (short)216;
-                    } else if(idMap == 76) {
-                        xKu = (short)845;
-                        yKu = (short)240;
-                    } else if(idMap == 77) {
-                        xKu = (short)701;
-                        yKu = (short)288;
-                    } 
-                    Boss _rRambo = new Boss(120, (byte)9, xKu, yKu);
+                    if (idMap == 74) {
+                        xKu = (short) 532;
+                        yKu = (short) 336;
+                    } else if (idMap == 75) {
+                        xKu = (short) 515;
+                        yKu = (short) 216;
+                    } else if (idMap == 76) {
+                        xKu = (short) 845;
+                        yKu = (short) 240;
+                    } else if (idMap == 77) {
+                        xKu = (short) 701;
+                        yKu = (short) 288;
+                    }
+                    Boss _rRambo = new Boss(120, (byte) 9, xKu, yKu);
                     maps[idMap].area[IDZONE].bossMap.add(_rRambo);
                     maps[idMap].area[IDZONE].loadBossNoPet(_rRambo);
                     mapRAMBO = idMap;
                     khuRAMBO = IDZONE;
                     Util.log("INIT _rRambo XONG MAP " + maps[idMap].template.name + ", " + IDZONE);
                     timerKUKUX.cancel();
-                };
+                }
+            ;
             };
             timerKUKUX.schedule(ttKUKU, 60000);
 
             Timer timerTDST = new Timer();
             TimerTask ttTDST = new TimerTask() {
-                public void run()
-                {
+                public void run() {
                     int idMap = Util.nextInt(0, 3);
-                    short xSo4 = (short)1392;
-                    short ySo4 = (short)240;
-                    short xSo3 = (short)1361;
-//                    short ySo3 = (short)240;
-                    short xSo2 = (short)1330;
-//                    short ySo2 = (short)240;
-                    short xSo1 = (short)1300;
-//                    short ySo1 = (short)240;
-                    short xSo0 = (short)1270;
-//                    short ySo0 = (short)240;
-                    if(idMap == 0) {
+                    short xSo4 = (short) 1392;
+                    short ySo4 = (short) 240;
+                    short xSo3 = (short) 1361;
+                    short xSo2 = (short) 1330;
+                    short xSo1 = (short) 1300;
+                    short xSo0 = (short) 1270;
+                    if (idMap == 0) {
                         idMap = 81;
-                    } else if(idMap == 1) {
+                    } else if (idMap == 1) {
                         idMap = 82;
-                        xSo4 = (short)1446;
-                        xSo3 = (short)1416;
-                        xSo2 = (short)1386;
-                        xSo1 = (short)1356;
-                        xSo0 = (short)1326;
-                        ySo4 = (short)336;
+                        xSo4 = (short) 1446;
+                        xSo3 = (short) 1416;
+                        xSo2 = (short) 1386;
+                        xSo1 = (short) 1356;
+                        xSo0 = (short) 1326;
+                        ySo4 = (short) 336;
                     } else {
                         idMap = 78;
-                        xSo4 = (short)150;
-                        xSo3 = (short)180;
-                        xSo2 = (short)210;
-                        xSo1 = (short)240;
-                        xSo0 = (short)270;
-                        ySo4 = (short)360;
+                        xSo4 = (short) 150;
+                        xSo3 = (short) 180;
+                        xSo2 = (short) 210;
+                        xSo1 = (short) 240;
+                        xSo0 = (short) 270;
+                        ySo4 = (short) 360;
                     }
                     int IDZONE = Util.nextInt(0, maps[idMap].area.length);
-                    Boss _So4 = new Boss(125, (byte)10, xSo4, ySo4);
-                    Boss _So3 = new Boss(150, (byte)11, xSo3, ySo4);
-                    Boss _So2 = new Boss(151, (byte)12, xSo2, ySo4);
-                    Boss _So1 = new Boss(152, (byte)13, xSo1, ySo4);
-                    Boss _So0 = new Boss(153, (byte)14, xSo0, ySo4);
-                    
+                    Boss _So4 = new Boss(125, (byte) 10, xSo4, ySo4);
+                    Boss _So3 = new Boss(150, (byte) 11, xSo3, ySo4);
+                    Boss _So2 = new Boss(151, (byte) 12, xSo2, ySo4);
+                    Boss _So1 = new Boss(152, (byte) 13, xSo1, ySo4);
+                    Boss _So0 = new Boss(153, (byte) 14, xSo0, ySo4);
+
                     maps[idMap].area[IDZONE].bossMap.add(_So4);
                     maps[idMap].area[IDZONE].loadBossNoPet(_So4);
                     Service.gI().sendThongBaoServer("BOSS " + _So4.name + " vừa xuất hiện tại " + maps[idMap].template.name);
-                    
+
                     maps[idMap].area[IDZONE].loadInfoBoss(_So3);
                     maps[idMap].area[IDZONE].bossMap.add(_So3);
                     Service.gI().sendThongBaoServer("BOSS " + _So3.name + " vừa xuất hiện tại " + maps[idMap].template.name);
@@ -299,19 +296,21 @@ public class Server {
                     mapTDST = idMap;
                     khuTDST = IDZONE;
                     Util.log("INIT TDST XONG MAP " + maps[idMap].template.name + ", " + IDZONE);
-                };
+                }
+            ;
             };
             timerTDST.schedule(ttTDST, 10000);
 
             Timer timerFIDE = new Timer();
             TimerTask ttFIDE = new TimerTask() {
-                public void run()
-                {
+                public void run() {
                     int IDZONE = Util.nextInt(0, maps[79].area.length);
-                    Boss _rFide = new Boss(130, (byte)15, (short)224, (short)192);
+                    Boss _rFide = new Boss(130, (byte) 15, (short) 224, (short) 192);
                     maps[79].area[IDZONE].bossMap.add(_rFide);
                     maps[79].area[IDZONE].loadBossNoPet(_rFide);
                     Util.log("INIT _rFide XONG MAP " + maps[79].template.name + ", " + IDZONE);
+                    //antrom
+                    Service.gI().initBossNgoc();
                     //INIT ANDROID 1920
                     Service.gI().initAndroid1920();
                     //INIT ANDROID 151413
@@ -325,7 +324,8 @@ public class Server {
                     Service.gI().initZamasu();
 //                    Service.gI().initBillWhis();
                     timerFIDE.cancel();
-                };
+                }
+            ;
             };
             timerFIDE.schedule(ttFIDE, 15000);
 
@@ -333,15 +333,15 @@ public class Server {
             Service.gI().initMabu12h();
             Service.gI().initHirudegarn();
             DaiHoiService.gI().initDaiHoiVoThuat();
-            Service.gI().initNgocRongNamec((byte)0);
+            Service.gI().initNgocRongNamec((byte) 0);
             Service.gI().initMapYardrat();
             //INIT SUPPORT NHIEM VU
             Service.gI().supportTDST();
 
             Util.log("INIT MOB AUTO");
-            for(Map _map: maps) {
-                if(_map.area[0].mobs.size() > 0 && _map.id != 0 && _map.id != 7 && _map.id != 14 && (_map.id < 53 || _map.id > 62)) {
-                    for(int i = 0; i < _map.area.length; i++) {
+            for (Map _map : maps) {
+                if (_map.area[0].mobs.size() > 0 && _map.id != 0 && _map.id != 7 && _map.id != 14 && (_map.id < 53 || _map.id > 62)) {
+                    for (int i = 0; i < _map.area.length; i++) {
                         _map.area[i].updateMobAuto();
                     }
                 }
@@ -350,7 +350,7 @@ public class Server {
 
             while (true) {
                 Socket sc = listenSocket.accept();
-                Util.log("Session connect: " + sc.getPort());
+//                Util.log("Session connect: " + sc.getPort());
                 new Session(sc);
             }
         } catch (Exception e) {

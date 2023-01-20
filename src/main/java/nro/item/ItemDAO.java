@@ -1,9 +1,7 @@
 package nro.item;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+
 import nro.main.DataSource;
 
 import org.json.simple.JSONArray;
@@ -14,8 +12,9 @@ public class ItemDAO {
 
     public static Item load(int itemId) {
         Item item = null;
+        Connection conn = null;
         try {
-            Connection conn = DataSource.getConnection();
+            conn = DataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM item WHERE id=? LIMIT 1");
             ps.setInt(1, itemId);
             ResultSet rs = ps.executeQuery();
@@ -38,6 +37,15 @@ public class ItemDAO {
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return item;
     }

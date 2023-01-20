@@ -7,7 +7,8 @@ import nro.player.Player;
 import nro.main.GameScr;
 import nro.main.Util;
 
-public final class Map{
+public final class Map {
+
     public int id;
     public byte planetId;
     public byte tileId;
@@ -26,35 +27,42 @@ public final class Map{
     private Object LOCK;
     private Thread threadUpdate;
 
-    public boolean MapCold(){
-        return id == 109 || id == 108 || id == 107|| id == 110 || id == 106 || id == 105 || id == 158 || id == 159;
+    public boolean MapCold() {
+        return id == 109 || id == 108 || id == 107 || id == 110 || id == 106 || id == 105 || id == 158 || id == 159;
     }
+
     public boolean MapSaoDen() {
         return (id >= 85 && id <= 91);
     }
+
     public boolean MapThanhDia() {
         return id == 156 || id == 157 || id == 158 || id == 159;
     }
+
     public boolean MapThanhDia1() {
         return id == 156 || id == 157;
     }
+
     public boolean MapThanhDia2() {
         return id == 158 || id == 159;
     }
 
     public boolean MapCell() {
-        return id == 92 || id == 93 || id == 94|| id == 96 || id == 97 || id == 98 || id == 99 || id == 100;
+        return id == 92 || id == 93 || id == 94 || id == 96 || id == 97 || id == 98 || id == 99 || id == 100;
     }
 
     public boolean MapSetKichHoat() {
-        return id == 1 || id == 2 || id == 3|| id == 8 || id == 9 || id == 11 || id == 15 || id == 16 || id == 17;
+        return id == 1 || id == 2 || id == 3 || id == 8 || id == 9 || id == 11 || id == 15 || id == 16 || id == 17;
     }
+
     public boolean MapNrNamec() {
-        return id == 8 || id == 9 || id == 10|| id == 11 || id == 12 || id == 13 || id == 31 || id == 32 || id == 33 || id == 34;
+        return id == 8 || id == 9 || id == 10 || id == 11 || id == 12 || id == 13 || id == 31 || id == 32 || id == 33 || id == 34;
     }
+
     public boolean MapDropNrNamec() {
-        return id == 7 || id == 8 || id == 9 || id == 10|| id == 11 || id == 12 || id == 13 || id == 31 || id == 32 || id == 33 || id == 34 || id == 43 || id == 25;
+        return id == 7 || id == 8 || id == 9 || id == 10 || id == 11 || id == 12 || id == 13 || id == 31 || id == 32 || id == 33 || id == 34 || id == 43 || id == 25;
     }
+
     public boolean MapKhiGas() {
         return id == 146 || id == 147 || id == 148 || id == 149 || id == 151 || id == 152 || id == 155;
     }
@@ -62,11 +70,21 @@ public final class Map{
     public boolean MapFarmThienSu() {
         return id == 155 || (id >= 160 && id <= 163);
     }
+
     public boolean MapHome() {
         return id == 21 || id == 22 || id == 23 || id == 39 || id == 40 || id == 41;
     }
+
+    public boolean MapTest() {
+        return id == 5;
+    }
+
     private class RunPlace implements Runnable {
-        public RunPlace(){};
+
+        public RunPlace() {
+        }
+
+        ;
         public void run() {
             long l1;
             long l2;
@@ -83,6 +101,7 @@ public final class Map{
             return;
         }
     }
+
     public Map(MapTemplate mapTemplate) {
         this.LOCK = new Object();
         this.id = mapTemplate.id;
@@ -99,6 +118,7 @@ public final class Map{
         this.initMob();
         this.threadUpdate = new Thread(new RunPlace());
     }
+
     public void initMob() {
         for (byte j = 0; j < area.length; j++) {
             area[j].mobs.clear();
@@ -111,13 +131,13 @@ public final class Map{
                 m.maxHp = this.template.arrMaxhp[i];
                 m.hp = m.maxHp;
                 m.status = 5;
-                if (m.status== 3) {
-                    if ( j%5==0) {
+                if (m.status == 3) {
+                    if (j % 5 == 0) {
                         m.hp = m.maxHp *= 200;
                     } else {
                         m.status = 0;
                     }
-                } else if (m.status== 2) {
+                } else if (m.status == 2) {
                     m.hp = m.maxHp *= 100;
                 } else if (m.status == 1) {
                     m.hp = m.maxHp *= 10;
@@ -127,6 +147,7 @@ public final class Map{
             }
         }
     }
+
     public int getId() {
         return id;
     }
@@ -134,8 +155,8 @@ public final class Map{
     //random khu khong co BROLY
     public int getIndexMapNoBroly() {
         ArrayList<Integer> indexMap = new ArrayList<>();
-        for(int i = 0; i < area.length; i++) {
-            if(!area[i].haveBROLY) {
+        for (int i = 0; i < area.length; i++) {
+            if (!area[i].haveBROLY) {
                 indexMap.add(i);
             }
         }
@@ -222,6 +243,7 @@ public final class Map{
     public void setItems(ArrayList<ItemMap> items) {
         this.items = items;
     }
+
     public void loadMapFromResource() {
         ByteArrayInputStream bai = null;
         DataInputStream dis = null;
@@ -229,17 +251,18 @@ public final class Map{
             byte[] ab = GameScr.loadFile("res/map/" + this.id).toByteArray();
             bai = new ByteArrayInputStream(ab);
             dis = new DataInputStream(bai);
-            this.template.tmw = this.ushort((short)dis.read());
-            this.template.tmh = this.ushort((short)dis.read());
+            this.template.tmw = this.ushort((short) dis.read());
+            this.template.tmh = this.ushort((short) dis.read());
             this.template.maps = new char[dis.available()];
             int i;
-            for (i = 0; i < this.template.tmw * this.template.tmh; i++)
-                this.template.maps[i] = (char)dis.readByte();
+            for (i = 0; i < this.template.tmw * this.template.tmh; i++) {
+                this.template.maps[i] = (char) dis.readByte();
+            }
             this.template.types = new int[this.template.maps.length];
-            if(dis != null) {
+            if (dis != null) {
                 dis.close();
             }
-            if(bai != null) {
+            if (bai != null) {
                 bai.close();
             }
         } catch (Exception e) {
@@ -250,7 +273,7 @@ public final class Map{
     void update() {
         byte i;
         for (i = 0; i < this.area.length; ++i) {
-            if(this.area[i] != null) {
+            if (this.area[i] != null) {
                 this.area[i].update();
                 this.area[i].updateItemMap();
             }
@@ -264,14 +287,16 @@ public final class Map{
         this.runing = true;
         this.threadUpdate.start();
     }
+
     public int ushort(short s) {
         return s & 0xFFFF;
     }
+
     public void close() {
         this.runing = false;
         byte i;
         for (i = 0; i < this.area.length; ++i) {
-            if(this.area[i] != null) {
+            if (this.area[i] != null) {
                 this.area[i].close();
                 this.area[i] = null;
             }

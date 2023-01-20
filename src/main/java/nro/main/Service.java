@@ -1,9 +1,7 @@
 package nro.main;
 
-import io.LogHistory;
 import nro.part.Part;
 import nro.part.PartImage;
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.ByteArrayInputStream;
@@ -33,24 +31,19 @@ import nro.player.Player;
 import nro.player.Detu;
 import nro.player.Boss;
 import nro.player.PlayerManger;
-import nro.task.PetProtectTask;
 import nro.task.TaskService;
 import nro.skill.Skill;
-
 import static nro.main.GameScr.saveFile;
-
 import nro.io.Message;
-
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
+import nro.clan.ClanDAO;
 
 public class Service {
 
     private static Service instance;
-    public LogHistory LogHistory = new LogHistory(getClass());
 
     public static Service gI() {
         if (instance == null) {
@@ -164,6 +157,22 @@ public class Service {
             m.writer().writeShort(time);
             m.writer().flush();
 
+            session.sendMessage(m);
+            m.cleanup();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loginThongBao(Session session) {
+        Message m = null;
+        try {
+            m = new Message(-70);
+            m.writer().writeShort(1139);
+            m.writer().writeUTF("|7|Thông Báo Máy Chủ\n|2|Cập nhật nhận quà giáng sinh tại NPC Santa\nChúc các bạn có 1 mùa giáng sinh thật là vui vẻ");
+            m.writer().writeByte(0);
+            //return message;
+            m.writer().flush();
             session.sendMessage(m);
             m.cleanup();
         } catch (Exception e) {
@@ -438,21 +447,25 @@ public class Service {
             if (item != null) {
                 if (actionBuy == 0) {
                     if (item.template.id == 457) {
-                        Service.gI().SaleDone(player, typeBuy, "Bạn có muốn bán\n" + " x1 " + player.ItemBag[indexBuy].template.name + "\nVới giá 500tr vàng không?", indexBuy);
-                    }
-                    else{
+                        Service.gI().SaleDone(player, typeBuy, "Bạn có muốn bán\n" + "x1" + player.ItemBag[indexBuy].template.name + "\nVới giá 500tr vàng không?", indexBuy);
+                    } else {
                         Service.gI().SaleDone(player, typeBuy, "Bạn có muốn bán\n" + "x" + player.ItemBag[indexBuy].quantity + " " + player.ItemBag[indexBuy].template.name + "\nVới giá 1 vàng không?", indexBuy);
                     }
                 } else if (actionBuy == 1) {
                     if(item.template.id == 457 && player.ItemBag[indexBuy].quantity >= 1){
-                        int soluong =  player.ItemBag[indexBuy].quantity - 1;
-                        player.vang += 500000000;
+                        player.vang += 500000000L;
+                        player.updateQuantityItemBag(indexBuy,player.ItemBag[indexBuy].quantity -1);
+                        if(player.ItemBag[indexBuy].quantity == 1 ){
+                            player.removeItemBag(indexBuy);
+                        }
                     }
                     else{
-                        player.vang += 1;
+                         player.removeItemBag(indexBuy);
+                         player.vang += 1;
                     }
-                    player.removeItemBag(indexBuy);
+                   
                     Service.gI().updateItemBag(player);
+                   
                     Service.gI().buyDone(player);
                 } else {
                     player.sendAddchatYellow("Bán vật phẩm không thành công");
@@ -569,7 +582,7 @@ public class Service {
             dos.writeInt(parts.toByteArray().length);
             dos.write(parts.toByteArray());
             byte[] ab = bas.toByteArray();
-            saveFile("res/cache/data/NR_part", ab);
+            saveFile("res/cache/vhalloween/data/NR_part", ab);
             ds.close();
             parts.close();
             dos.close();
@@ -662,7 +675,7 @@ public class Service {
         }
     }
 
-    //    public void imageSource(Session session) {
+//    public void imageSource(Session session) {
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -945,7 +958,7 @@ public class Service {
             msg.writer().writeByte(0);
             //send exp
 //            msg.writer().writeByte(15);
-            msg.writer().writeByte(20);
+            msg.writer().writeByte(27);
             msg.writer().writeLong(1000);
             msg.writer().writeLong(3000);
             msg.writer().writeLong(15000);
@@ -966,7 +979,14 @@ public class Service {
             msg.writer().writeLong(70010000000L);
             msg.writer().writeLong(81000000000L);
             msg.writer().writeLong(100010000000L);
-//            msg.writer().write(FileIO.readFile("data/NRexp"));
+            msg.writer().writeLong(130010000000L);
+            msg.writer().writeLong(160010000000L);
+            msg.writer().writeLong(180010000000L);
+            msg.writer().writeLong(200010000000L);
+            msg.writer().writeLong(230010000000L);
+            msg.writer().writeLong(260010000000L);
+            msg.writer().writeLong(300010000000L);
+            msg.writer().write(FileIO.readFile("data/NRexp"));
             session.sendMessage(msg);
             msg.cleanup();
 
@@ -1431,6 +1451,10 @@ public class Service {
             m.writer().writeLong(p.vang);
             m.writer().writeInt(p.ngoc);
             m.writer().writeInt(p.ngocKhoa);
+            m.writer().writeInt(p.thanhvien);
+            m.writer().writeInt(p.sotien);
+            m.writer().writeInt(p.pointSuKien);
+            m.writer().writeInt(p.nhanqua);
             p.session.sendMessage(m);
             m.cleanup();
         } catch (Exception e) {
@@ -2304,8 +2328,7 @@ public class Service {
                 }
                 timerHs.cancel();
             }
-
-            ;
+        ;
         };
         timerHs.schedule(tt, 10000);
         p.timerHSDe = timerHs;
@@ -2540,7 +2563,7 @@ public class Service {
             _player._indexUpStar = _index2;
             _player._indexEpStar = _index;
         } else {
-            Service.gI().serverMessage(_player.session, "Không nghịch ngu!");
+            Service.gI().serverMessage(_player.session, "Không thể kết hợp!");
             return;
         }
         if (starUse < 8 && starUse < starItem && starItem > 0 && starItem <= 8 && _player._itemUseEpStar.quantity >= 1 && _player._checkDapDo && (System.currentTimeMillis() - _player._timeDapDo) >= 1000) {
@@ -2570,7 +2593,7 @@ public class Service {
                 }
             }
         } else {
-            Service.gI().serverMessage(_player.session, "Không có lỗ mà đòi ép à, không được đâu bé ạ!");
+            Service.gI().serverMessage(_player.session, "Vật phẩm của bạn không có sao pha lê!");
         }
     }
 
@@ -2653,7 +2676,7 @@ public class Service {
             return;
         }
         if (_item.template.type != 0 && _item.template.type != 1 && _item.template.type != 2 && _item.template.type != 3 && _item.template.type != 4 && _item.template.type != 32) {
-            Service.gI().serverMessage(_player.session, "Không nâng được đâu lêu lêu!");
+            Service.gI().serverMessage(_player.session, "Không thể nâng cấp!");
             return;
         } else {
             _player._itemUpStar = _item;
@@ -2686,7 +2709,7 @@ public class Service {
                     }
                 }
             } else {
-                Service.gI().serverMessage(_player.session, "Hiện tại máy chủ chỉ cho phép đập đồ 8 sao!!!");
+                Service.gI().serverMessage(_player.session, "Trang bị của ngươi đã Max Sao Pha Lê!");
             }
         }
 
@@ -2698,7 +2721,7 @@ public class Service {
             return;
         }
         if (_itemUp.template.type != 0 && _itemUp.template.type != 1 && _itemUp.template.type != 2 && _itemUp.template.type != 3 && _itemUp.template.type != 4 && _itemUp.template.type != 32) {
-            Service.gI().serverMessage(_player.session, "Không nâng được đâu lêu lêu!");
+            Service.gI().serverMessage(_player.session, "Không thể nâng cấp!");
             return;
         } else {
             Message m = null;
@@ -2772,12 +2795,12 @@ public class Service {
         }
     }
 
-    public void sendOpenItem(Player _player, short IDICON) {
+    public void sendOpenItem(Player _player, short IDICON, short IDICONOPEN) {
         Message m = null;
         try {
             m = new Message(-81);
             m.writer().writeByte(6);
-            m.writer().writeShort((short) 2759);
+            m.writer().writeShort((short) IDICONOPEN);
             m.writer().writeShort(IDICON);
             m.writer().flush();
             _player.session.sendMessage(m);
@@ -2875,7 +2898,7 @@ public class Service {
                 _player._itemDaBaoVe = _daBaoVe;
             }
         } else {
-            Service.gI().serverMessage(_player.session, "Không nghịch ngu!");
+            Service.gI().serverMessage(_player.session, "Không thể kết hợp!");
             return;
         }
         if (lvItem < 8 && _info != "") {
@@ -2906,7 +2929,7 @@ public class Service {
                 }
             }
         } else {
-            Service.gI().serverMessage(_player.session, "Không nghịch ngu!");
+            Service.gI().serverMessage(_player.session, "Không thể kết hợp!");
         }
     }
 
@@ -2936,7 +2959,7 @@ public class Service {
                 if (_player.ItemBag[_player._indexEpStar].quantity == 0) {
                     _player.ItemBag[_player._indexEpStar] = null;
                 }
-                int rdUp = Util.nextInt(0, 5);
+                int rdUp = Util.nextInt(0, 100);
                 if (rdUp <= _itemUp.getPercentUpItem(_itemUp._levelItem)) {
                     updateVangNgoc(_player);
                     if (_player.ItemBag[_player._indexUpStar].getParamItemByID(72) == 0) {
@@ -3094,7 +3117,7 @@ public class Service {
                 return;
             }
         } else {
-            Service.gI().serverMessage(_player.session, "Không nghịch ngu!");
+            Service.gI().serverMessage(_player.session, "Không thể kết hợp!");
             return;
         }
         if (_info != "") {
@@ -3123,7 +3146,7 @@ public class Service {
                 }
             }
         } else {
-            Service.gI().serverMessage(_player.session, "Không nghịch ngu!");
+            Service.gI().serverMessage(_player.session, "Không thể kết hợp!");
         }
     }
 
@@ -3141,7 +3164,7 @@ public class Service {
                 _player.vang -= 500000000;
                 _player.ngoc -= 5000;
                 updateVangNgoc(_player);
-                int rdUp = Util.nextInt(0, 10);
+                int rdUp = Util.nextInt(0, 100);
                 if (rdUp <= 49) {
                     _player.ItemBag[_player._indexEpStar] = null;
 
@@ -3196,7 +3219,7 @@ public class Service {
             _player._indexEpStar = _index;
             _player._indexEpStar2 = _index2;
         } else {
-            Service.gI().serverMessage(_player.session, "Không nghịch ngu!");
+            Service.gI().serverMessage(_player.session, "Không thể kết hợp!");
             return;
         }
         if (_info != "") {
@@ -3225,7 +3248,7 @@ public class Service {
                 }
             }
         } else {
-            Service.gI().serverMessage(_player.session, "Không nghịch ngu!");
+            Service.gI().serverMessage(_player.session, "Không thể kết hợp!");
         }
     }
 
@@ -3322,11 +3345,11 @@ public class Service {
                     return;
                 }
             } else {
-                Service.gI().serverMessage(_player.session, "Không nghịch ngu!");
+                Service.gI().serverMessage(_player.session, "Không thể kết hợp!");
                 return;
             }
         } else {
-            Service.gI().serverMessage(_player.session, "Không nghịch ngu!");
+            Service.gI().serverMessage(_player.session, "Không thể kết hợp!");
             return;
         }
         if (_info != "") {
@@ -3355,7 +3378,7 @@ public class Service {
                 }
             }
         } else {
-            Service.gI().serverMessage(_player.session, "Không nghịch ngu!");
+            Service.gI().serverMessage(_player.session, "Không thể kết hợp!");
         }
     }
 
@@ -3373,8 +3396,8 @@ public class Service {
                 _player.vang -= 500000000;
                 _player.ngoc -= 5000;
                 updateVangNgoc(_player);
-                int rdUp = Util.nextInt(0, 6);
-                if (rdUp <= 5) {
+                int rdUp = Util.nextInt(0, 100);
+                if (rdUp <= 99) {
                     _player.ItemBag[_player._indexEpStar] = null;
 
                     _stone = ItemSell.getItemNotSell(_itemUp.template.id + 406);
@@ -3469,7 +3492,7 @@ public class Service {
                 Service.gI().serverMessage(_player.session, "Cần ít nhất 10 mảnh đá vụn và 1 bình nước phép!");
             }
         } else {
-            Service.gI().serverMessage(_player.session, "Không nghịch ngu!");
+            Service.gI().serverMessage(_player.session, "Không thể kết hợp!");
         }
     }
 
@@ -3731,7 +3754,6 @@ public class Service {
         Server.gI().khuKUKU = IDZONE;
         sendThongBaoServer("BOSS " + _rKuku.name + " vừa xuất hiện tại " + Server.gI().maps[idMap].template.name);
 //        Util.log("INIT KUKU XONG KHU MAP" + Server.gI().maps[idMap].template.name + ", " + IDZONE);
-        this.LogHistory.log1(String.format("Boss: %s Đã xuất hiện tại %s khu vực %s", new Object[]{_rKuku.name, Server.gI().maps[idMap].template.name, IDZONE}));
     }
 
     public void initMAPDAUDINH() {
@@ -3760,7 +3782,6 @@ public class Service {
         Server.gI().khuMDD = IDZONE;
         sendThongBaoServer("BOSS " + _rMapDinh.name + " vừa xuất hiện tại " + Server.gI().maps[idMap].template.name);
 //        Util.log("INIT _rMapDinh XONG MAP " + Server.gI().maps[idMap].template.name + ", " + IDZONE);
-        this.LogHistory.log1(String.format("Boss: %s Đã xuất hiện tại %s khu vực %s", new Object[]{_rMapDinh.name, Server.gI().maps[idMap].template.name, IDZONE}));
     }
 
     public void initRAMBO() {
@@ -3789,7 +3810,6 @@ public class Service {
         Server.gI().khuRAMBO = IDZONE;
         sendThongBaoServer("BOSS " + _rRambo.name + " vừa xuất hiện tại " + Server.gI().maps[idMap].template.name);
 //        Util.log("INIT _rRambo XONG MAP " + Server.gI().maps[idMap].template.name + ", " + IDZONE);
-        this.LogHistory.log1(String.format("Boss: %s Đã xuất hiện tại %s khu vực %s", new Object[]{_rRambo.name, Server.gI().maps[idMap].template.name, IDZONE}));
     }
 
     public void supportTDST() {
@@ -3802,13 +3822,11 @@ public class Service {
                     public void run() {
                         Server.gI().supportNV = false;
                     }
-
-                    ;
+                ;
                 };
                 endSupportTDST.schedule(endTDST, 7200000);
             }
-
-            ;
+        ;
         };
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 17); //SERVER 1
@@ -3885,8 +3903,7 @@ public class Service {
         sendThongBaoServer("BOSS " + _So0.name + " vừa xuất hiện tại " + Server.gI().maps[idMap].template.name);
         Server.gI().mapTDST = idMap;
         Server.gI().khuTDST = IDZONE;
-//        Util.log("INIT TDST XONG MAP " + Server.gI().maps[idMap].template.name + ", " + IDZONE);
-        this.LogHistory.log1(String.format("Boss: TDST Đã xuất hiện tại %s khu vực %s", new Object[]{Server.gI().maps[idMap].template.name, IDZONE}));
+        Util.log("INIT TDST XONG MAP " + Server.gI().maps[idMap].template.name + ", " + IDZONE);
     }
 
     public void initAndroid1920() {
@@ -3917,8 +3934,7 @@ public class Service {
         Server.gI().maps[idMap].area[IDZONE].bossMap.add(_Android20);
         Server.gI().maps[idMap].area[IDZONE].loadBossNoPet(_Android20);
         sendThongBaoServer("BOSS " + _Android20.name + " vừa xuất hiện tại " + Server.gI().maps[idMap].template.name);
-//        Util.log("INIT ANDROID 19,20 XONG MAP " + Server.gI().maps[idMap].template.name + ", " + IDZONE);
-        this.LogHistory.log1(String.format("Boss: apk Đã xuất hiện tại %s khu vực %s", new Object[]{Server.gI().maps[idMap].template.name, IDZONE}));
+        Util.log("INIT ANDROID 19,20 XONG MAP " + Server.gI().maps[idMap].template.name + ", " + IDZONE);
     }
 
     public void initAndroid15() {
@@ -3929,16 +3945,53 @@ public class Service {
 
         Server.gI().maps[101].area[IDZONE].bossMap.add(_Android15);
         Server.gI().maps[101].area[IDZONE].loadBossNoPet(_Android15);
-//        sendThongBaoServer("BOSS " + _Android15.name + " vừa xuất hiện tại " + Server.gI().maps[101].template.name);
+        sendThongBaoServer("BOSS " + _Android15.name + " vừa xuất hiện tại " + Server.gI().maps[101].template.name);
 
         Server.gI().maps[101].area[IDZONE].bossMap.add(_Android14);
         Server.gI().maps[101].area[IDZONE].loadBossNoPet(_Android14);
-//        sendThongBaoServer("BOSS " + _Android14.name + " vừa xuất hiện tại " + Server.gI().maps[101].template.name);
+        sendThongBaoServer("BOSS " + _Android14.name + " vừa xuất hiện tại " + Server.gI().maps[101].template.name);
 
         Server.gI().maps[101].area[IDZONE].bossMap.add(_Android13);
         Server.gI().maps[101].area[IDZONE].loadBossNoPet(_Android13);
-//        sendThongBaoServer("BOSS " + _Android13.name + " vừa xuất hiện tại " + Server.gI().maps[101].template.name);
-//        Util.log("INIT ANDROID 15,14,13 XONG MAP " + Server.gI().maps[101].template.name + ", " + IDZONE);
+        sendThongBaoServer("BOSS " + _Android13.name + " vừa xuất hiện tại " + Server.gI().maps[101].template.name);
+        Util.log("INIT ANDROID 15,14,13 XONG MAP " + Server.gI().maps[101].template.name + ", " + IDZONE);
+    }
+
+    public void initBossNgoc() {
+        int IDZONE = Util.nextInt(0, Server.gI().maps[5].area.length);
+        int IDZONE1 = Util.nextInt(0, Server.gI().maps[0].area.length);
+        int IDZONE2 = Util.nextInt(0, Server.gI().maps[7].area.length);
+        Boss _rati = new Boss(490, (byte) 53, (short) 763, (short) 408);
+        Boss _antrom = new Boss(201, (byte) 55, (short) 1195, (short) 408);
+        Boss _rati1 = new Boss(490, (byte) 53, (short) 960, (short) 360);
+        Boss _antrom1 = new Boss(201, (byte) 55, (short) 1195, (short) 408);
+        Boss _rati2 = new Boss(490, (byte) 53, (short) 386, (short) 360);
+        Boss _antrom2 = new Boss(201, (byte) 55, (short) 964, (short) 336);
+
+        Server.gI().maps[5].area[IDZONE].bossMap.add(_rati);
+        Server.gI().maps[5].area[IDZONE].loadBossNoPet(_rati);
+        sendThongBaoServer("BOSS " + _rati.name + " vừa xuất hiện tại " + Server.gI().maps[5].template.name);
+
+        Server.gI().maps[5].area[IDZONE].bossMap.add(_antrom);
+        Server.gI().maps[5].area[IDZONE].loadBossNoPet(_antrom);
+        sendThongBaoServer("BOSS " + _antrom.name + " vừa xuất hiện tại " + Server.gI().maps[5].template.name);
+
+        Server.gI().maps[0].area[IDZONE1].bossMap.add(_rati1);
+        Server.gI().maps[0].area[IDZONE1].loadBossNoPet(_rati1);
+        sendThongBaoServer("BOSS Ngọc " + _rati1.name + " vừa xuất hiện tại " + Server.gI().maps[0].template.name);
+
+        Server.gI().maps[0].area[IDZONE1].bossMap.add(_antrom1);
+        Server.gI().maps[0].area[IDZONE1].loadBossNoPet(_antrom1);
+        sendThongBaoServer("BOSS Ngọc " + _antrom1.name + " vừa xuất hiện tại " + Server.gI().maps[0].template.name);
+
+        Server.gI().maps[7].area[IDZONE2].bossMap.add(_rati2);
+        Server.gI().maps[7].area[IDZONE2].loadBossNoPet(_rati2);
+        sendThongBaoServer("BOSS Ngọc " + _rati2.name + " vừa xuất hiện tại " + Server.gI().maps[7].template.name);
+
+        Server.gI().maps[7].area[IDZONE2].bossMap.add(_antrom2);
+        Server.gI().maps[7].area[IDZONE2].loadBossNoPet(_antrom2);
+        sendThongBaoServer("BOSS Ngọc " + _antrom2.name + " vừa xuất hiện tại " + Server.gI().maps[7].template.name);
+        Util.log("INIT Boss Ngoc XONG MAP " + Server.gI().maps[5].template.name + ", " + IDZONE);
     }
 
     public void initPicPoc() {
@@ -3962,16 +4015,16 @@ public class Service {
 
         Server.gI().maps[idMap].area[IDZONE].bossMap.add(_POC);
         Server.gI().maps[idMap].area[IDZONE].loadBossNoPet(_POC);
-//        sendThongBaoServer("BOSS " + _POC.name + " vừa xuất hiện tại " + Server.gI().maps[idMap].template.name);
+        sendThongBaoServer("BOSS " + _POC.name + " vừa xuất hiện tại " + Server.gI().maps[idMap].template.name);
 
         Server.gI().maps[idMap].area[IDZONE].bossMap.add(_PIC);
         Server.gI().maps[idMap].area[IDZONE].loadInfoBoss(_PIC);
-//        sendThongBaoServer("BOSS " + _PIC.name + " vừa xuất hiện tại " + Server.gI().maps[idMap].template.name);
+        sendThongBaoServer("BOSS " + _PIC.name + " vừa xuất hiện tại " + Server.gI().maps[idMap].template.name);
 
         Server.gI().maps[idMap].area[IDZONE].bossMap.add(_KK);
         Server.gI().maps[idMap].area[IDZONE].loadInfoBoss(_KK);
-//        sendThongBaoServer("BOSS " + _KK.name + " vừa xuất hiện tại " + Server.gI().maps[idMap].template.name);
-//        Util.log("INIT PICPOCKINGKONG XONG MAP " + Server.gI().maps[idMap].template.name + ", " + IDZONE);
+        sendThongBaoServer("BOSS " + _KK.name + " vừa xuất hiện tại " + Server.gI().maps[idMap].template.name);
+        Util.log("INIT PICPOCKINGKONG XONG MAP " + Server.gI().maps[idMap].template.name + ", " + IDZONE);
     }
 
     public void initXenGinder() {
@@ -3980,8 +4033,8 @@ public class Service {
 
         Server.gI().maps[98].area[IDZONE].bossMap.add(_XenGinder);
         Server.gI().maps[98].area[IDZONE].loadBossNoPet(_XenGinder);
-//        sendThongBaoServer("BOSS " + _XenGinder.name + " vừa xuất hiện tại " + Server.gI().maps[98].template.name);
-//        Util.log("INIT XEN GINDER XONG MAP " + Server.gI().maps[98].template.name + ", " + IDZONE);
+        sendThongBaoServer("BOSS " + _XenGinder.name + " vừa xuất hiện tại " + Server.gI().maps[98].template.name);
+        Util.log("INIT XEN GINDER XONG MAP " + Server.gI().maps[98].template.name + ", " + IDZONE);
     }
 
     public void initXenVoDai() {
@@ -3991,9 +4044,8 @@ public class Service {
         Server.gI().maps[100].area[IDZONE].bossMap.add(_XenVoDai);
         Server.gI().maps[100].area[IDZONE].loadBossNoPet(_XenVoDai);
         sendThongBaoServer("BOSS " + _XenVoDai.name + " vừa xuất hiện tại " + Server.gI().maps[100].template.name);
-        this.LogHistory.log1(String.format("Boss: %s Đã xuất hiện tại %s khu vực %s", new Object[]{_XenVoDai.name, Server.gI().maps[100].template.name, IDZONE}));
 
-//        Util.log("INIT XEN Vo DAI XONG MAP " + Server.gI().maps[100].template.name + ", " + IDZONE);
+        Util.log("INIT XEN Vo DAI XONG MAP " + Server.gI().maps[100].template.name + ", " + IDZONE);
     }
 
     public void initChilled() {
@@ -4003,8 +4055,7 @@ public class Service {
         Server.gI().maps[159].area[IDZONE].bossMap.add(_Chilled);
         Server.gI().maps[159].area[IDZONE].loadBossNoPet(_Chilled);
         sendThongBaoServer("BOSS " + _Chilled.name + " vừa xuất hiện tại " + Server.gI().maps[159].template.name);
-        this.LogHistory.log1(String.format("Boss: %s Đã xuất hiện tại %s khu vực %s", new Object[]{_Chilled.name, Server.gI().maps[159].template.name, IDZONE}));
-//        Util.log("INIT _Chilled XONG MAP " + Server.gI().maps[159].template.name + ", " + IDZONE);
+        Util.log("INIT _Chilled XONG MAP " + Server.gI().maps[159].template.name + ", " + IDZONE);
     }
 
     public void initZamasu() {
@@ -4014,8 +4065,7 @@ public class Service {
         Server.gI().maps[97].area[IDZONE].bossMap.add(_Zamasu);
         Server.gI().maps[97].area[IDZONE].loadBossNoPet(_Zamasu);
         sendThongBaoServer("BOSS " + _Zamasu.name + " vừa xuất hiện tại " + Server.gI().maps[97].template.name);
-        this.LogHistory.log1(String.format("Boss: %s Đã xuất hiện tại %s khu vực %s", new Object[]{_Zamasu.name, Server.gI().maps[97].template.name, IDZONE}));
-//        Util.log("INIT ZAMASU XONG MAP " + Server.gI().maps[97].template.name + ", " + IDZONE);
+        Util.log("INIT ZAMASU XONG MAP " + Server.gI().maps[97].template.name + ", " + IDZONE);
     }
 
     public void initBillWhis() {
@@ -4028,8 +4078,7 @@ public class Service {
         Server.gI().maps[5].area[IDZONE].bossMap.add(_Whis);
         Server.gI().maps[5].area[IDZONE].loadBossNoPet(_Whis);
         sendThongBaoServer("BOSS " + _Whis.name + " vừa xuất hiện tại " + Server.gI().maps[5].template.name);
-        this.LogHistory.log1(String.format("Boss: %s Đã xuất hiện tại %s khu vực %s", new Object[]{_Bill.name, Server.gI().maps[5].template.name, IDZONE}));
-//        Util.log("INIT initBillWhis XONG MAP " + Server.gI().maps[5].template.name + ", " + IDZONE);
+        Util.log("INIT initBillWhis XONG MAP " + Server.gI().maps[5].template.name + ", " + IDZONE);
     }
 
     //NGOC RONG SAO DEN
@@ -4118,32 +4167,30 @@ public class Service {
                             }
                         }
                     }
-
-                    ;
+                ;
                 };
                 timerEndNRSD.schedule(endNRSD, 3600000);
             }
-
-            ;
+        ;
         };
-        timerNRSD.schedule(NRSD, 10000);
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.HOUR_OF_DAY, 20); //SERVER 1
-////        calendar.set(Calendar.HOUR_OF_DAY, 8); //SERVER 2
-//        calendar.set(Calendar.MINUTE, 0);
-//        calendar.set(Calendar.SECOND, 0);
-//        calendar.set(Calendar.MILLISECOND, 0);
-//        Date dateSchedule = calendar.getTime();
-//        Date dateNow = new Date();
-//        if(dateNow.after(dateSchedule)) {
-//            calendar.setTime(dateSchedule);
-//            calendar.add(Calendar.DATE, 1);
-//            dateSchedule = calendar.getTime();
-//        }
-//
-//        long period = 24 * 60 * 60 * 1000;
-//
-//        timerNRSD.schedule(NRSD, dateSchedule, period);
+//        timerNRSD.schedule(NRSD, 10000);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 20); //SERVER 1
+//        calendar.set(Calendar.HOUR_OF_DAY, 8); //SERVER 2
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        Date dateSchedule = calendar.getTime();
+        Date dateNow = new Date();
+        if (dateNow.after(dateSchedule)) {
+            calendar.setTime(dateSchedule);
+            calendar.add(Calendar.DATE, 1);
+            dateSchedule = calendar.getTime();
+        }
+
+        long period = 24 * 60 * 60 * 1000;
+
+        timerNRSD.schedule(NRSD, dateSchedule, period);
     }
 
     //INIT MABU 12h
@@ -4215,13 +4262,11 @@ public class Service {
                             }
                         }
                     }
-
-                    ;
+                ;
                 };
                 timerEndMabu.schedule(endMabu, 3600000);
             }
-
-            ;
+        ;
         };
 //        timerMabu.schedule(Mabu, 10000);
 
@@ -4399,8 +4444,7 @@ public class Service {
                     listMap.remove(index);
                 }
             }
-
-            ;
+        ;
         };
         timerNRNM.schedule(NRNM, 5000);
 //        Calendar calendar = Calendar.getInstance();
@@ -4541,8 +4585,7 @@ public class Service {
                     //INIT LAI NGOC RONG NAMEC
                     initNgocRongNamec((byte) 0);
                 }
-
-                ;
+            ;
             };
             timerNRNM.schedule(NRNM, time);
         }
@@ -4694,16 +4737,14 @@ public class Service {
                             }
                         }
                     }
-
-                    ;
+                ;
                 };
                 timerEndNRSD.schedule(endNRSD, 3600000);
             }
-
-            ;
+        ;
         };
 //        timerNRSD.schedule(NRSD, 5000);
-
+        
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 22); //SERVER 1
 //        calendar.set(Calendar.HOUR_OF_DAY, 10); //SERVER 2
@@ -4808,8 +4849,7 @@ public class Service {
                     Server.gI().maps[129].area[i].loadBossNoCharge(_boss);
                 }
             }
-
-            ;
+        ;
         };
 
         timerYardrat.schedule(yardrat, 5000);
@@ -4829,7 +4869,7 @@ public class Service {
             clan.openDoanhTrai = true;
             clan.topen = System.currentTimeMillis();
             //UPDATE TIME OPEN DOANH TRAI LEN DATABASE
-//            ClanDAO.updateTimeOpenDT(clan.id);
+            ClanDAO.updateTimeOpenDT(clan.id);
             //TIME CON LAI
             Timer timerConLaiDT = new Timer();
             TimerTask conlaiDT = new TimerTask() {
@@ -4849,8 +4889,7 @@ public class Service {
                         timerConLaiDT.cancel();
                     }
                 }
-
-                ;
+            ;
             };
             timerConLaiDT.schedule(conlaiDT, 0, 300000);
 
@@ -4879,8 +4918,7 @@ public class Service {
                         timerEndDT.cancel();
                     }
                 }
-
-                ;
+            ;
             };
             timerEndDT.schedule(endDT, 1800000);
         } else if (index == (byte) 2) { //TUONG THANH3 INIT TRUNG UY TRANG
@@ -5454,8 +5492,7 @@ public class Service {
                     timerConLaiDT.cancel();
                 }
             }
-
-            ;
+        ;
         };
         timerConLaiDT.schedule(conlaiDT, 0, 300000);
 //        Util.log("AJCJKAHCKA :" + level);
@@ -5484,8 +5521,7 @@ public class Service {
                     timerEndDT.cancel();
                 }
             }
-
-            ;
+        ;
         };
         timerEndDT.schedule(endDT, 1800000);
         clan.timerGas = timerEndDT;
@@ -5531,8 +5567,7 @@ public class Service {
                         clan.timerGas.cancel();
                     }
                 }
-
-                ;
+            ;
             };
             timerEndDT.schedule(endDT, 30000);
         }
@@ -5635,8 +5670,7 @@ public class Service {
                     timerGiapLT.cancel();
                 }
             }
-
-            ;
+        ;
         };
         timerGiapLT.schedule(giapLT, 0, 60000);
         p.timerGLT = timerGiapLT;
@@ -5675,8 +5709,7 @@ public class Service {
                 }
                 timerTauNgam.cancel();
             }
-
-            ;
+        ;
         };
         timerTauNgam.schedule(tauNgam, time);
         p.timeTauNgam = timerTauNgam;
@@ -5798,8 +5831,7 @@ public class Service {
                         p.timerCSKB = null;
                         resetMayDo.cancel();
                     }
-
-                    ;
+                ;
                 };
                 resetMayDo.schedule(rsMayDo, time);
                 p.timerCSKB = resetMayDo;
@@ -5825,8 +5857,7 @@ public class Service {
                         Service.gI().loadPoint(p.session, p);
                         resetCN.cancel();
                     }
-
-                    ;
+                ;
                 };
                 resetCN.schedule(rsCN, time);
                 p.timerCN = resetCN;
@@ -5852,8 +5883,7 @@ public class Service {
                         Service.gI().loadPoint(p.session, p);
                         resetBH.cancel();
                     }
-
-                    ;
+                ;
                 };
                 resetBH.schedule(rsBH, time);
                 p.timerBH = resetBH;
@@ -5878,8 +5908,7 @@ public class Service {
                         Service.gI().loadPoint(p.session, p);
                         resetBK.cancel();
                     }
-
-                    ;
+                ;
                 };
                 resetBK.schedule(rsBK, time);
                 p.timerBK = resetBK;
@@ -5902,8 +5931,7 @@ public class Service {
                         p.timerGX = null;
                         resetGX.cancel();
                     }
-
-                    ;
+                ;
                 };
                 resetGX.schedule(rsGX, time);
                 p.timerGX = resetGX;
@@ -5930,8 +5958,7 @@ public class Service {
                         Service.gI().loadPoint(p.session, p);
                         resetTM.cancel();
                     }
-
-                    ;
+                ;
                 };
                 resetTM.schedule(rsTM, time);
                 p.timerTM = resetTM;
@@ -5965,8 +5992,7 @@ public class Service {
                         Service.gI().loadPoint(p.session, p);
                         resetTA.cancel();
                     }
-
-                    ;
+                ;
                 };
                 resetTA.schedule(rsTA, time);
                 p.timerTA = resetTA;

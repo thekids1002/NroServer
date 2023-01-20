@@ -16,7 +16,7 @@ import nro.io.Session;
 public class PlayerDAO {
 
     synchronized public static boolean create(Session userId, String name, int gender, int head) {
-        String CREATE_PLAYER = "INSERT INTO player(account_id,name,power,vang,luong,luong_khoa,gender,head,where_id,where_x,where_y,limit_power,hp_goc,mp_goc,dame_goc,def_goc,crit_goc,tiem_nang,maxluggage,maxbox,skill,itembody,itembag,itembox,nhapthe,amulet,noitai,bean,task,starblack,card,itemuse,friends) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String CREATE_PLAYER = "INSERT INTO player(account_id,name,power,vang,luong,luong_khoa,gender,head,where_id,where_x,where_y,limit_power,hp_goc,mp_goc,dame_goc,def_goc,crit_goc,tiem_nang,maxluggage,maxbox,skill,itembody,itembag,itembox,nhapthe,amulet,noitai,bean,task,starblack,card,itemuse,friends,thanhvien,sotien,sukien,nhanqua) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         String UPDATE_HAVECHAR = "UPDATE account SET havechar=1 WHERE id=?";
         boolean check = false;
         JSONArray jarr = new JSONArray();
@@ -24,8 +24,9 @@ public class PlayerDAO {
 
         ResultSet rss = null;
         int playerid = userId.userId;
+        Connection conn = null;
         try {
-            Connection conn = DataSource.getConnection();
+            conn = DataSource.getConnection();
             PreparedStatement ps = null;
             ps = conn.prepareStatement(CREATE_PLAYER, Statement.RETURN_GENERATED_KEYS);
             conn.setAutoCommit(false);
@@ -34,7 +35,7 @@ public class PlayerDAO {
             //sức mạnh
             ps.setLong(3, 1200);
             //vàng
-            ps.setLong(4, 2000000000);
+            ps.setLong(4, 20000);
             //ngọc
             ps.setInt(5, 20);
             //ngọc tím
@@ -94,20 +95,7 @@ public class PlayerDAO {
                     break;
             }
             jarr.clear();
-// set itembody khi create  nhan vat
-            switch (gender) {
-                case 0:
-                    ps.setString(22, "[{\"quantity\":1,\"index\":0,\"id\":0,\"option\":[{\"param\":2,\"id\":47}]},{\"quantity\":1,\"index\":1,\"id\":6,\"option\":[{\"param\":30,\"id\":6}]}]");
-                    break;
-                case 1:
-                    ps.setString(22, "[{\"quantity\":1,\"index\":0,\"id\":1,\"option\":[{\"param\":2,\"id\":47}]},{\"quantity\":1,\"index\":1,\"id\":7,\"option\":[{\"param\":20,\"id\":6}]}]");
-                    break;
-                case 2:
-                    ps.setString(22, "[{\"quantity\":1,\"index\":0,\"id\":2,\"option\":[{\"param\":3,\"id\":47}]},{\"quantity\":1,\"index\":1,\"id\":8,\"option\":[{\"param\":20,\"id\":6}]}]");
-                    break;
-
-            }
-            //   ps.setString(22, "[]");
+            ps.setString(22, "[]");
             ps.setString(23, "[]");
             ps.setString(24, "[]");
             ps.setInt(25, 0);
@@ -119,6 +107,10 @@ public class PlayerDAO {
             ps.setString(31, "[{\"id\":828,\"amount\":0,\"level\":0,\"use\":1,\"unlock\":0},{\"id\":829,\"amount\":0,\"level\":0,\"use\":1,\"unlock\":0},{\"id\":830,\"amount\":0,\"level\":0,\"use\":1,\"unlock\":0},{\"id\":831,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":832,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":833,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":834,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":835,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":836,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":837,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":838,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":839,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":840,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":841,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":842,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":859,\"amount\":0,\"level\":0,\"use\":0,\"unlock\":0},{\"id\":956,\"amount\":0,\"level\":0,\"use\":1,\"unlock\":0}]");
             ps.setString(32, "[]");
             ps.setString(33, "[]");
+            ps.setInt(34, 0);
+            ps.setInt(35, 0);
+            ps.setInt(36, 0);
+            ps.setInt(37, 0);
             if (ps.executeUpdate() == 1) {
                 check = true;
             }
@@ -134,6 +126,15 @@ public class PlayerDAO {
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return check;
     }
@@ -141,8 +142,8 @@ public class PlayerDAO {
     public static void updateDB(Player player) {
         String UPDATE_PLAYER = "UPDATE player SET power=?,vang=?,luong=?,luong_khoa=?,clan_id=?,task_id=?,head=?,where_id=?,where_x=?,where_y=?,maxluggage=?,maxbox=?,hp_goc=?,"
                 + "mp_goc=?,dame_goc=?,def_goc=?,crit_goc=?,tiem_nang=?,itembody=?,itembag=?,itembox=?,nhapthe=?,skill=?,amulet=?,limit_power=?,noitai=?,count_noitai=?,role_pt=?,bean=?,"
-                + "task=?,starblack=?,nhapthe2=?,hasmabu=?,istennis=?,card=?,logout=?,itemuse=?,crit_nr=?,friends=? WHERE account_id=?";
-        String UPDATE_PET = "UPDATE pet SET power=?,head=?,hp_goc=?,mp_goc=?,dame_goc=?,def_goc=?,crit_goc=?,tiem_nang=?,itembody=?,skill=?,gender=?,name=?,limit_power=?,stamina=?,ismabu=?,isdie=? WHERE account_id=?";
+                + "task=?,starblack=?,nhapthe2=?,hasmabu=?,istennis=?,card=?,logout=?,itemuse=?,crit_nr=?,friends=?,thanhvien=?,sotien=?,sukien=?,nhanqua=? WHERE account_id=?";
+        String UPDATE_PET = "UPDATE pet SET power=?,head=?,hp_goc=?,mp_goc=?,dame_goc=?,def_goc=?,crit_goc=?,tiem_nang=?,itembody=?,skill=?,gender=?,name=?,limit_power=?,stamina=?,ismabu=?,isdie=?,isberus=? WHERE account_id=?";
         String INSERT_PET = "INSERT INTO pet (name, power, head, gender, account_id, hp_goc, mp_goc, dame_goc, def_goc, crit_goc, tiem_nang, limit_power, skill, itembody) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         String UPDATE_ISON = "UPDATE account SET isOn=? WHERE id=?";
         Connection conn;
@@ -157,6 +158,10 @@ public class PlayerDAO {
             ps.setLong(2, player.vang);
             ps.setInt(3, player.ngoc);
             ps.setInt(4, player.ngocKhoa);
+            ps.setInt(40, player.thanhvien);
+            ps.setInt(41, player.sotien);//cuoi
+            ps.setInt(42, player.pointSuKien);//cuoi
+             ps.setInt(43, player.nhanqua);//cuoi
 //            ps.setInt(5, player.clanid); //SERVER 2
             if (player.clan != null) {
                 ps.setInt(5, player.clan.id);
@@ -306,7 +311,7 @@ public class PlayerDAO {
             ps.setString(39, jarr.toJSONString());
             jarr.clear();
 
-            ps.setInt(40, player.id);
+            ps.setInt(44, player.id);
             if (ps.executeUpdate() == 1) {
             }
             conn.commit();
@@ -352,7 +357,8 @@ public class PlayerDAO {
                 ps.setInt(14, (int) player.detu.stamina);
                 ps.setInt(15, player.detu.isMabu ? 1 : 0);
                 ps.setInt(16, player.detu.isdie ? 1 : 0);
-                ps.setInt(17, player.id);
+                ps.setInt(17, player.detu.isBerus ? 1 : 0);
+                ps.setInt(18, player.id);
                 if (ps.executeUpdate() == 1) {
                 }
                 conn.commit();
@@ -402,8 +408,9 @@ public class PlayerDAO {
 
         ResultSet rss = null;
         int playerid = id;
+        Connection conn = null;
         try {
-            Connection conn = DataSource.getConnection();
+            conn = DataSource.getConnection();
             PreparedStatement ps = null;
             //UPDATE NRSD
             ps = conn.prepareStatement(UPDATE_NRSD);
@@ -432,6 +439,15 @@ public class PlayerDAO {
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -457,8 +473,8 @@ public class PlayerDAO {
     public static void updateDBAuto(Player player, Connection conn) {
         String UPDATE_PLAYER = "UPDATE player SET power=?,vang=?,luong=?,luong_khoa=?,clan_id=?,task_id=?,head=?,where_id=?,where_x=?,where_y=?,maxluggage=?,maxbox=?,hp_goc=?,"
                 + "mp_goc=?,dame_goc=?,def_goc=?,crit_goc=?,tiem_nang=?,itembody=?,itembag=?,itembox=?,nhapthe=?,skill=?,amulet=?,limit_power=?,noitai=?,count_noitai=?,role_pt=?,bean=?,"
-                + "task=?,starblack=?,nhapthe2=?,hasmabu=?,istennis=?,card=?,logout=?,itemuse=?,crit_nr=?,friends=? WHERE account_id=?";
-        String UPDATE_PET = "UPDATE pet SET power=?,head=?,hp_goc=?,mp_goc=?,dame_goc=?,def_goc=?,crit_goc=?,tiem_nang=?,itembody=?,skill=?,gender=?,name=?,limit_power=?,stamina=?,ismabu=?,isdie=? WHERE account_id=?";
+                + "task=?,starblack=?,nhapthe2=?,hasmabu=?,istennis=?,card=?,logout=?,itemuse=?,crit_nr=?,friends=?,thanhvien=?,sotien=?,sukien=?,nhanqua=? WHERE account_id=?";
+        String UPDATE_PET = "UPDATE pet SET power=?,head=?,hp_goc=?,mp_goc=?,dame_goc=?,def_goc=?,crit_goc=?,tiem_nang=?,itembody=?,skill=?,gender=?,name=?,limit_power=?,stamina=?,ismabu=?,isdie=?,isberus=? WHERE account_id=?";
         String INSERT_PET = "INSERT INTO pet (name, power, head, gender, account_id, hp_goc, mp_goc, dame_goc, def_goc, crit_goc, tiem_nang, limit_power, skill, itembody) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         JSONArray jarr = new JSONArray();
         PreparedStatement ps;
@@ -469,6 +485,10 @@ public class PlayerDAO {
             ps.setLong(2, player.vang);
             ps.setInt(3, player.ngoc);
             ps.setInt(4, player.ngocKhoa);
+            ps.setInt(40, player.thanhvien);
+            ps.setInt(41, player.sotien);
+            ps.setInt(42, player.pointSuKien);
+            ps.setInt(43, player.pointSuKien);
 //            ps.setInt(5, player.clanid); //SERVER 2
             if (player.clan != null) {
                 ps.setInt(5, player.clan.id);
@@ -618,7 +638,7 @@ public class PlayerDAO {
             ps.setString(39, jarr.toJSONString());
             jarr.clear();
 
-            ps.setInt(40, player.id);
+            ps.setInt(44, player.id);
             if (ps.executeUpdate() == 1) {
             }
             conn.commit();
@@ -656,7 +676,8 @@ public class PlayerDAO {
                 ps.setInt(14, (int) player.detu.stamina);
                 ps.setInt(15, player.detu.isMabu ? 1 : 0);
                 ps.setInt(16, player.detu.isdie ? 1 : 0);
-                ps.setInt(17, player.id);
+                ps.setInt(17, player.detu.isBerus ? 1 : 0);
+                ps.setInt(18, player.id);
                 if (ps.executeUpdate() == 1) {
                 }
                 conn.commit();
@@ -699,8 +720,9 @@ public class PlayerDAO {
 
     public static void changePassword(int id, String pass) {
         String UPDATE_PASS = "UPDATE account SET password=? WHERE id=?";
+        Connection conn = null;
         try {
-            Connection conn = DataSource.getConnection();
+            conn = DataSource.getConnection();
             PreparedStatement ps = null;
             //UPDATE NRSD
             ps = conn.prepareStatement(UPDATE_PASS);
@@ -716,6 +738,15 @@ public class PlayerDAO {
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

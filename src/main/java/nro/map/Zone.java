@@ -1,6 +1,5 @@
 package nro.map;
 
-import io.LogHistory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -26,6 +25,7 @@ import nro.main.Util;
 import nro.io.Message;
 import nro.io.Session;
 import nro.daihoi.DaiHoiService;
+import nro.item.ItemBuff;
 
 import nro.task.TaskService;
 import nro.task.TaskManager;
@@ -41,7 +41,6 @@ import nro.task.DelayUseBomTask;
 
 public class Zone {
 
-    public LogHistory LogHistory = new LogHistory(getClass());
     public ArrayList<Mob> mobs = new ArrayList();
     public ArrayList<ItemMap> itemsMap = new ArrayList();
     public Map map;
@@ -160,7 +159,6 @@ public class Zone {
         if (p.petfucus == 1) {
             p.statusPet = 0;
         }
-
         //send dang co de trung namek thi xoa chim khoi map
         if (p.chimFollow == (byte) 1) {
             for (byte i = 0; i < players.size(); i++) {
@@ -284,6 +282,24 @@ public class Zone {
                         TaskService.gI().updateCountTask(p);
                     }
                     return;
+                } else if (itemPick.itemTemplateID == (short) 77) {
+                    Message m = new Message(-20);
+                    m.writer().writeShort(itemMapId);
+                    p.ngoc += 1;
+                    Service.gI().buyDone(p);
+                    m.writer().writeUTF("Bạn nhận được 1 ngọc xanh");
+                    p.session.sendMessage(m);
+                    m.cleanup();
+                    return;
+                } else if (itemPick.itemTemplateID == (short) 861) {
+                    Message m = new Message(-20);
+                    m.writer().writeShort(itemMapId);
+                    p.ngocKhoa += 1;
+                    Service.gI().buyDone(p);
+                    m.writer().writeUTF("Bạn nhận được 1 hồng ngọc");
+                    p.session.sendMessage(m);
+                    m.cleanup();
+                    return;
                 } else {
                     //            Util.log("SO LUONG itEM MAP: " + itemsMap.size());
                     //            for (int i = 0; i < itemsMap.size(); i++) {
@@ -291,7 +307,8 @@ public class Zone {
                     //                if (itemPick.itemMapID == itemMapId) {
                     if (itemPick.playerId == p.id || itemPick.playerId == -1) {
                         if (itemPick.item.template.id == 76 || itemPick.item.template.id == 188 || itemPick.item.template.id == 189 || itemPick.item.template.id == 190) { //TRUONG HOP ITEM LA VANG
-                            int rdVang = Util.nextInt(100, 1000);
+                            //int rdVang = Util.nextInt(100, 1000);
+                            int rdVang = Util.nextInt(20000, 50000);
                             //CHECK SET TANG VANG VA CAI TRANG DRACULA
                             rdVang += (int) (rdVang * Util.getPercentDouble(p.getPercentGold()));
                             //CHECK NOI TAI VANG
@@ -341,6 +358,8 @@ public class Zone {
                                     TaskService.gI().updateCountTask(p);
                                 } else if (p.taskId == (short) 29 && p.crrTask.index == (byte) 1 && itemPick.item.template.id == 380) { //NHIEM VU NHAT CAPSULE KI BI
                                     TaskService.gI().updateCountTask(p);
+                                } else if (itemPick.itemTemplateID >= (short) 555 && itemPick.itemTemplateID <= (short) 567) {
+                                    Service.gI().sendThongBaoServer(p.name + " Vừa nhặt được " + itemPick.item.template.name + " tại " + map.template.name);
                                 }
                                 itemsMap.remove(i);
                                 Message m = new Message(-20);
@@ -1219,19 +1238,19 @@ public class Zone {
                             && mapid != 115 && mapid != 116 && mapid != 117 && mapid != 118 && mapid != 119 && mapid != 120 && mapid != 122 && mapid != 123 && mapid != 124
                             && mapid != 131 && mapid != 132 && mapid != 133 && mapid != 147 && mapid != 148 && mapid != 149 && mapid != 151 && mapid != 152) {
                         if (p.taskId < (short) 8 && ((mapid >= 45 && mapid <= 50) || mapid == 12 || mapid == 18)) {
-                            p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                            p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                             p.map = mapold;
                             Service.gI().resetPoint(p.session, p.x - 50, p.y);
                             Service.gI().buyDone(p);
                             return;
                         } else if (p.taskId < (short) 9 && !MapSoSinh(mapid)) {
-                            p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                            p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                             p.map = mapold;
                             Service.gI().resetPoint(p.session, p.x - 50, p.y);
                             Service.gI().buyDone(p);
                             return;
                         } else if (p.taskId < (short) 20 && mapid >= 63) {
-                            p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                            p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                             p.map = mapold;
                             if (mapid >= 78) {
                                 Service.gI().resetPoint(p.session, p.x - 50, p.y);
@@ -1241,7 +1260,7 @@ public class Zone {
                             Service.gI().buyDone(p);
                             return;
                         } else if (((mapid >= 63 && mapid <= 67) || mapid >= 73) && (p.taskId < (short) 21 || (p.taskId == (short) 21 && p.crrTask.index < (byte) 1))) {
-                            p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                            p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                             p.map = mapold;
                             if (mapid >= 78) {
                                 Service.gI().resetPoint(p.session, p.x - 50, p.y);
@@ -1251,7 +1270,7 @@ public class Zone {
                             Service.gI().buyDone(p);
                             return;
                         } else if (mapid >= 73 && (p.taskId < (short) 21 || (p.taskId == (short) 21 && p.crrTask.index < (byte) 2))) {
-                            p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                            p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                             p.map = mapold;
                             if (mapid >= 78) {
                                 Service.gI().resetPoint(p.session, p.x - 50, p.y);
@@ -1261,7 +1280,7 @@ public class Zone {
                             Service.gI().buyDone(p);
                             return;
                         } else if (mapid >= 78 && (p.taskId < (short) 21 || (p.taskId == (short) 21 && p.crrTask.index < (byte) 3))) {
-                            p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                            p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                             p.map = mapold;
                             if (mapid >= 78) {
                                 Service.gI().resetPoint(p.session, p.x - 50, p.y);
@@ -1271,7 +1290,7 @@ public class Zone {
                             Service.gI().buyDone(p);
                             return;
                         } else if (mapid >= 92 && p.taskId < (short) 23) {
-                            p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                            p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                             p.map = mapold;
                             if (mapid >= 78) {
                                 Service.gI().resetPoint(p.session, p.x - 50, p.y);
@@ -1281,7 +1300,7 @@ public class Zone {
                             Service.gI().buyDone(p);
                             return;
                         } else if (p.taskId < (short) 26 && mapid >= 97) {
-                            p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                            p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                             p.map = mapold;
                             if (mapid >= 78) {
                                 Service.gI().resetPoint(p.session, p.x - 50, p.y);
@@ -1291,7 +1310,7 @@ public class Zone {
                             Service.gI().buyDone(p);
                             return;
                         } else if (p.taskId < (short) 27 && mapid >= 97 && mapid != 104) {
-                            p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                            p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                             p.map = mapold;
                             if (mapid >= 78) {
                                 Service.gI().resetPoint(p.session, p.x - 50, p.y);
@@ -1301,7 +1320,7 @@ public class Zone {
                             Service.gI().buyDone(p);
                             return;
                         } else if (p.taskId < (short) 28 && mapid >= 100 && mapid != 104) {
-                            p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                            p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                             p.map = mapold;
                             if (mapid >= 78) {
                                 Service.gI().resetPoint(p.session, p.x - 50, p.y);
@@ -1311,7 +1330,7 @@ public class Zone {
                             Service.gI().buyDone(p);
                             return;
                         } else if (p.taskId < (short) 29 && mapid >= 103 && mapid != 104) {
-                            p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                            p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                             p.map = mapold;
                             Service.gI().resetPoint(p.session, p.x - 50, p.y);
                             Service.gI().buyDone(p);
@@ -1685,6 +1704,9 @@ public class Zone {
                     if (pl.power < (pl.getPowerLimit() * 1000000000L)) {
                         pl.tiemNang += pl.crrTask.bonus;
                         pl.power += pl.crrTask.bonus;
+                        pl.ngoc += 30000;
+                        pl.ngocKhoa += 30000;
+                        pl.vang += 100000000;
                     }
                     pl.UpdateSMTN((byte) 2, pl.crrTask.bonus);
                     pl.sendAddchatYellow("Bạn vừa được thưởng " + Util.powerToString(pl.crrTask.bonus) + " sức mạnh");
@@ -1929,7 +1951,7 @@ public class Zone {
     public void upDownPointMapCool(Player pl) {
         if (map.MapCold() && !pl.checkCTCold() && !pl.isDownPointCold) {
             pl.isDownPointCold = true;
-            pl.sendAddchatYellow("Sức tấn công và HP của bạn bị giảm đi 50% vì lạnh");
+            pl.sendAddchatYellow("Sức tấn công và HP của bạn bị giảm đi 50% vì ảnh hưởng bởi cái lạnh");
             pl.hp = pl.hp > pl.getHpFull() ? pl.getHpFull() : pl.hp;
             Service.gI().loadPoint(pl.session, pl);
         } else if ((!map.MapCold() && pl.isDownPointCold) || (map.MapCold() && pl.checkCTCold())) {
@@ -2551,9 +2573,9 @@ public class Zone {
                         upSmTnDCTT = 1;
                     }
                     //MAP NGU HANH SON, TNSM x2
-//                    if (p.map.id >= 122 && p.map.id <= 124) {
-//                        upSmTnDCTT = upSmTnDCTT * 2;
-//                    }
+                    if (p.map.id >= 122 && p.map.id <= 124) {
+                        upSmTnDCTT = upSmTnDCTT * 4;
+                    }
                     //MAP THANH DIA GIAM TNSM
                     if (p.map.id >= 156 && p.map.id <= 159) {
                         upSmTnDCTT = (long) (upSmTnDCTT / 5);
@@ -2657,6 +2679,8 @@ public class Zone {
                         damage = damage * 2;
                     } else if (p.getSetKichHoatFull() == (byte) 7 && skillPlayerUse.template.id == (byte) 4) { //SET KICH HOAT KAKAROT
                         damage = damage * 2;
+                    } else if (p.getSetKichHoatFull() == (byte) 5 && skillPlayerUse.template.id == (byte) 17) { //SET KICH HOAT OC TIEU
+                        damage = damage * 2;
                     }
                     //CHECK DAME TANG DO HIEU UNG CAI TRANG
                     damage = p.dameUpByCaiTrang(damage);
@@ -2689,7 +2713,7 @@ public class Zone {
                         p.mp = 0;
                     } else {
                         //CHECK BUA BAT TU
-                        if (p.hp == 1 && p.getBuaBatTu()) {
+                        if (p.hp == 1 && p.getBuaBatTu() || p.hp == 1 && p.getSetKichHoatFull() == (byte) 6) {
                             damage = 0;
                             p.sendAddchatYellow("Bạn đang được bùa bất tử bảo vệ, không thể tấn công");
                         } else if (damage >= mob.maxHp && mob.hp == mob.maxHp) {
@@ -2701,7 +2725,6 @@ public class Zone {
                         }
 
                         long upSmTn = (long) (damage / 2);
-                        upSmTn = upSmTn * 4;
 //                        long upSmTn = (long) (damage * 10);
                         upSmTn = p.getPercentUpTnSm(upSmTn); //get tnsm spl tnsm
                         if (p.cPk > 0 && p.cPk < 12 && p.cPk != 8) { //flag
@@ -2726,9 +2749,9 @@ public class Zone {
                             upSmTn = (long) (upSmTn / 10);
                         }
                         //MAP NGU HANH SON, TNSM x2
-//                        if (p.map.id >= 122 && p.map.id <= 124) {
-//                            upSmTn = upSmTn * 2;
-//                        }
+                        if (p.map.id >= 122 && p.map.id <= 124) {
+                            upSmTn = upSmTn * 4;
+                        }
                         //MAP THANH DIA GIAM TNSM
                         if (p.map.id >= 156 && p.map.id <= 159) {
                             upSmTn = (long) (upSmTn / 5);
@@ -2857,41 +2880,58 @@ public class Zone {
                             itemsMap.addAll(itemDrop);
                         } else {
                             if (mob.template.tempId != 0) {
-//                            int idItemNotSell[] = {14,15,16,17,18,19,20, 441,442,443,444,445,446,447, 76,188,189,190, 225, 85, 993};
                                 int idItemNotSell[] = {17, 188, 189, 190, 18, 19, 20, 441, 442, 443, 444, 445, 446, 447, 17, 188, 189, 190, 225, 17, 188, 189, 190, 18, 19, 20, 76, 188, 189, 190, 18, 19, 20, 85, 993};
+                                int idItemMap[] = {18, 19, 20, 188, 189, 190, 220, 221, 222, 223, 224, 225};
                                 int percentDrop = Util.nextInt(0, 10);
-//                            int percentDropItemGod = Util.nextInt(0, 10000);
-//                            int percentDropKichHoat = Util.nextInt(0, 5000);
-                                int percentDropItemGod = Util.nextInt(0, 5000);
-                                int percentDropKichHoat = Util.nextInt(0, 2000);
+                                int percentDropItemGod = Util.nextInt(0, 10000);
+                                int percentDropKichHoat = Util.nextInt(0, 10000);
                                 int perTA = Util.nextInt(0, 1000);
-//                                if (percentDropKichHoat < 5 && map.MapSetKichHoat()) { //ITEM ROT LA ITEM KICH HOAT
-                                if (percentDropKichHoat < 50 && map.MapSetKichHoat()) { //ITEM ROT LA ITEM KICH HOAT
+                                int perSPL = Util.nextInt(0, 600);
+//                                int percentDropItemGod = Util.nextInt(0, 1000);
+//                                int percentDropKichHoat = Util.nextInt(0, 1000);
+//                                int perTA = Util.nextInt(0, 1000);
+//                                int perSPL = Util.nextInt(0, 1000);
+                                if (percentDropKichHoat < 100 && map.MapSetKichHoat()) { //ITEM ROT LA ITEM KICH HOAT
                                     int id = Util.nextInt(0, 5); //RANDOM TU 0,1,2,3,4
                                     int idItemKichHoat[][] = {{0, 6, 21, 27, 12}, {1, 7, 22, 28, 12}, {2, 8, 23, 29, 12}};
                                     int optionItemKichHoat[][] = {{127, 128, 129, 139, 140, 141}, {130, 131, 132, 142, 143, 144}, {133, 134, 135, 136, 137, 138}};
                                     ItemSell sellKichHoat = ItemSell.getItemSell(idItemKichHoat[(int) p.gender][id], (byte) 0);
-
                                     ItemMap itemROI = new ItemMap();
                                     itemROI.playerId = p.id;
                                     itemROI.x = mob.pointX;
                                     itemROI.y = mob.pointY;
-//                                itemROI.itemMapID = idItemKichHoat[(int)p.gender][id];
                                     itemROI.itemMapID = itemsMap.size();
-//                                itemROI.itemTemplateID = (short)itemROI.itemMapID;
                                     itemROI.itemTemplateID = (short) (idItemKichHoat[(int) p.gender][id]);
-                                    //                                itemGOD.item.template = ItemTemplate.ItemTemplateID(_ITEMMAPID);
-                                    //BUILD NEW ITEM + CHI SO CHO DO KICH HOAT
                                     Item _ITEMKICHHOAT = new Item(sellKichHoat.item);
                                     int rdOptionKichHoat = Util.nextInt(0, 3); //RANDOM 0,1,2
                                     _ITEMKICHHOAT.itemOptions.add(new ItemOption(optionItemKichHoat[(int) p.gender][rdOptionKichHoat], 0));
                                     _ITEMKICHHOAT.itemOptions.add(new ItemOption(optionItemKichHoat[(int) p.gender][rdOptionKichHoat + 3], 0));
                                     _ITEMKICHHOAT.itemOptions.add(new ItemOption(30, 0)); //OPTION KHONG THE GIAO DICH
+                                    if (perSPL < 100) {
+                                        _ITEMKICHHOAT.itemOptions.add(new ItemOption(107, Util.nextInt(1, 4)));
+                                    }
+                                    itemROI.item = _ITEMKICHHOAT;
+                                    itemDrop.add(itemROI);
+                                    itemsMap.addAll(itemDrop);
+                                } else if (percentDropKichHoat > 100 && percentDropKichHoat < 1000 && map.MapSetKichHoat()) { //ITEM ROT LA ITEM KICH HOAT
+                                    int id = Util.nextInt(0, 5); //RANDOM TU 0,1,2,3,4
+                                    int idItemKichHoat[][] = {{0, 6, 21, 27, 12}, {1, 7, 22, 28, 12}, {2, 8, 23, 29, 12}};
+                                    ItemSell sellKichHoat = ItemSell.getItemSell(idItemKichHoat[(int) p.gender][id], (byte) 0);
+                                    ItemMap itemROI = new ItemMap();
+                                    itemROI.playerId = p.id;
+                                    itemROI.x = mob.pointX;
+                                    itemROI.y = mob.pointY;
+                                    itemROI.itemMapID = itemsMap.size();
+                                    itemROI.itemTemplateID = (short) (idItemKichHoat[(int) p.gender][id]);
+                                    Item _ITEMKICHHOAT = new Item(sellKichHoat.item);
+                                    int percentSaoPhaLe = Util.nextInt(0, 100);
+                                    if (perSPL < 100) {
+                                        _ITEMKICHHOAT.itemOptions.add(new ItemOption(107, Util.nextInt(1, 4)));
+                                    }
                                     itemROI.item = _ITEMKICHHOAT;
                                     itemDrop.add(itemROI);
                                     itemsMap.addAll(itemDrop);
                                 } else if (percentDrop < 3 && map.MapCell() && p.useMayDoCapsule) { //ITEM ROT KHI DUNG RADA DO CAPSULE
-//                                int idItemNotSell2[] = {16,17,18,19,20, 441,442,443,444,445,446,447, 76,188,189,190, 225,16,17,18,19,20, 441,442,443,444,445,446,447, 76,188,189,190, 225, 380};
                                     int idItemNotSell2[] = {17, 225, 18, 19, 20, 441, 442, 443, 444, 445, 446, 447, 17, 188, 189, 190, 225, 17, 225, 18, 19, 20, 441, 442, 443, 444, 445, 446, 447, 76, 188, 189, 190, 225, 380};
                                     int id = Util.nextInt(0, 35);
                                     if (id >= 30) {
@@ -2902,16 +2942,12 @@ public class Zone {
                                     item.playerId = p.id;
                                     item.x = mob.pointX;
                                     item.y = mob.pointY;
-//                                item.itemMapID = idItemNotSell2[id];
-//                                item.itemTemplateID = (short) item.itemMapID;
                                     item.itemMapID = itemsMap.size();
                                     item.itemTemplateID = (short) idItemNotSell2[id];
                                     itemMap.template = ItemTemplate.ItemTemplateID(idItemNotSell2[id]);
                                     item.item = itemMap;
                                     itemDrop.add(item);
                                     itemsMap.addAll(itemDrop);
-
-//                                } else if (percentDropItemGod < 2 && map.MapCold()) {
                                 } else if (percentDropItemGod < 10 && map.MapCold()) {
                                     ItemSell itemGOD = null;
                                     int _ITEMMAPID = -1;
@@ -2919,33 +2955,13 @@ public class Zone {
                                     percentDropItemGod = Util.nextInt(0, 15);
                                     itemGOD = ItemSell.getItemSell(idItemGod[percentDropItemGod], (byte) 1);
                                     _ITEMMAPID = idItemGod[percentDropItemGod];
-//                                if(p.gender == 0) {
-//                                    int idItemGod[] = {555, 556, 561, 562, 563};
-//                                    percentDropItemGod = Util.nextInt(0, 5);
-//                                    itemGOD = ItemSell.getItemSell(idItemGod[percentDropItemGod], (byte)1);
-//                                    _ITEMMAPID = idItemGod[percentDropItemGod];
-//                                } else if (p.gender == 1) {
-//                                    int idItemGod[] = {557, 558, 561, 564, 565};
-//                                    percentDropItemGod = Util.nextInt(0, 5);
-//                                    itemGOD = ItemSell.getItemSell(idItemGod[percentDropItemGod], (byte)1);
-//                                    _ITEMMAPID = idItemGod[percentDropItemGod];
-//                                } else if (p.gender == 2) {
-//                                    int idItemGod[] = {559, 560, 561, 566, 567};
-//                                    percentDropItemGod = Util.nextInt(0, 5);
-//                                    itemGOD = ItemSell.getItemSell(idItemGod[percentDropItemGod], (byte)1);
-//                                    _ITEMMAPID = idItemGod[percentDropItemGod];
-//                                }
                                     if (_ITEMMAPID >= 555 && _ITEMMAPID <= 567) {
                                         ItemMap itemROI = new ItemMap();
                                         itemROI.playerId = p.id;
                                         itemROI.x = mob.pointX;
                                         itemROI.y = mob.pointY;
-//                                    itemROI.itemMapID = _ITEMMAPID;
-//                                    itemROI.itemTemplateID = (short)itemROI.itemMapID;
                                         itemROI.itemMapID = itemsMap.size();
                                         itemROI.itemTemplateID = (short) _ITEMMAPID;
-                                        //                                itemGOD.item.template = ItemTemplate.ItemTemplateID(_ITEMMAPID);
-                                        //BUILD NEW ITEM + CHI SO CHO DO THAN LINH
                                         Item _ITEMGOD = new Item(itemGOD.item);
                                         _ITEMGOD.itemOptions.clear();
                                         if (_ITEMGOD.template.id == 555 || _ITEMGOD.template.id == 557 || _ITEMGOD.template.id == 559) { //AO THAN
@@ -2975,15 +2991,19 @@ public class Zone {
                                             _ITEMGOD.itemOptions.add(new ItemOption(7, (Util.nextInt(350, 501) * 100)));
                                             _ITEMGOD.itemOptions.add(new ItemOption(28, Util.nextInt(9000, 9500)));
                                         } else { //NHAN THAN LINH
-                                            _ITEMGOD.itemOptions.add(new ItemOption(14, Util.nextInt(3, 16)));
+                                            _ITEMGOD.itemOptions.add(new ItemOption(14, Util.nextInt(10, 16)));
+                                        }
+                                        if (perSPL < 10) {//RA THEM SAO PHA LE
+                                            _ITEMGOD.itemOptions.add(new ItemOption(107, Util.nextInt(3, 7)));
+                                        } else if (perSPL > 10 && perSPL < 300) {
+                                            _ITEMGOD.itemOptions.add(new ItemOption(107, Util.nextInt(1, 4)));
                                         }
                                         _ITEMGOD.itemOptions.add(new ItemOption(21, 17));
                                         itemROI.item = _ITEMGOD;
                                         itemDrop.add(itemROI);
                                         itemsMap.addAll(itemDrop);
                                     }
-                                } else if (perTA < 100 && p.checkFullSetThan() && map.MapCold()) {
-//                                } else if (perTA < 500 && p.checkFullSetThan() && map.MapCold()) {
+                                } else if (perTA < 60 && p.checkFullSetThan() && map.MapCold()) {
                                     int idThucAn[] = {663, 664, 665, 666, 667};
                                     perTA = Util.nextInt(0, 5);
                                     Item itemMap = ItemSell.getItemNotSell(idThucAn[perTA]);
@@ -2991,8 +3011,6 @@ public class Zone {
                                     item.playerId = p.id;
                                     item.x = mob.pointX;
                                     item.y = mob.pointY;
-//                                item.itemMapID = idThucAn[perTA];
-//                                item.itemTemplateID = (short) item.itemMapID;
                                     item.itemMapID = itemsMap.size();
                                     item.itemTemplateID = (short) idThucAn[perTA];
                                     itemMap.template = ItemTemplate.ItemTemplateID(idThucAn[perTA]);
@@ -3014,7 +3032,6 @@ public class Zone {
                                     itemDrop.add(item);
                                     itemsMap.addAll(itemDrop);
                                 } else if (perTA < 500 && map.MapThanhDia()) {
-//                                int id = Util.nextInt(2,20);
                                     int id = Util.nextInt(0, 40);
                                     if (id >= 20) {
                                         if (map.MapThanhDia1()) {
@@ -3143,9 +3160,9 @@ public class Zone {
                             upSmTn += (long) (upSmTn * Util.getPercentDouble((int) p.noiTai.param));
                         }
                         //MAP NGU HANH SON, TNSM x2
-//                        if (p.map.id >= 122 && p.map.id <= 124) {
-//                            upSmTn = upSmTn * 2;
-//                        }
+                        if (p.map.id >= 122 && p.map.id <= 124) {
+                            upSmTn = upSmTn * 4;
+                        }
                         //MAP THANH DIA GIAM TNSM
                         if (p.map.id >= 156 && p.map.id <= 159) {
                             upSmTn = (long) (upSmTn / 5);
@@ -3249,8 +3266,8 @@ public class Zone {
                             ArrayList<ItemMap> itemDrop2 = new ArrayList<>();
                             int percentDrop2 = Util.nextInt(0, 10);
                             if (mob.template.tempId != 0 && percentDrop2 < 3) {
-                                int idItemNotSell2[] = {17, 188, 189, 190, 18, 19, 20, 441, 442, 443, 444, 445, 446, 447, 17, 188, 189, 190, 225, 17, 188, 189, 190, 18, 19, 20, 76, 188, 189, 190, 18, 19, 20};
-                                int id2 = Util.nextInt(0, 33);
+                                int idItemNotSell2[] = {20, 19, 18, 225, 225, 225, 225, 225, 225, 220, 221, 222, 223, 224, 220, 221, 222, 223, 224, 17};
+                                int id2 = Util.nextInt(0, 21);
                                 Item itemMap2 = ItemSell.getItemNotSell(idItemNotSell2[id2]);
                                 ItemMap item2 = new ItemMap();
                                 item2.playerId = p.id;
@@ -3992,6 +4009,9 @@ public class Zone {
                 if (_bTarget.isBOSS && (_bTarget._typeBoss == 1 || (_bTarget._typeBoss >= (byte) 44 && _bTarget._typeBoss <= (byte) 47))) {
                     damageDCTT = (int) (_bTarget.hpFull * 0.01);
                 }
+                if (_bTarget.isBOSS && (_bTarget._typeBoss == 53 || _bTarget._typeBoss == 54 || _bTarget._typeBoss == 55)) {
+                    damageDCTT = 1;
+                }
                 _bTarget.hp -= damageDCTT;
                 if (_bTarget.hp <= 0) {
                     _bTarget.isdie = true;
@@ -4014,7 +4034,6 @@ public class Zone {
                         if (_bTarget._typeBoss == 3 || _bTarget._typeBoss == 5 || (_bTarget._typeBoss >= (byte) 7 && _bTarget._typeBoss <= (byte) 30)) {
                             if (_bTarget._typeBoss != (byte) 29) {
                                 Service.gI().sendThongBaoServer(p.name + " vừa tiêu diệt " + _bTarget.name + " mọi người đều ngưỡng mộ");
-                                this.LogHistory.log1(String.format("%s da ha boss %s", new Object[]{p.name, _bTarget.name}));
                             }
                             if (_bTarget._typeBoss == (byte) 7) {
                                 Server.gI().mapKUKU = 0;
@@ -4031,7 +4050,6 @@ public class Zone {
                             }
                         } else if (_bTarget._typeBoss == 4 || _bTarget._typeBoss == 6) {
                             Service.gI().sendThongBaoServer(p.name + " vừa tiêu diệt " + _bTarget.name + " mọi người đều ngưỡng mộ");
-                            this.LogHistory.log1(String.format("%s da ha boss %s", new Object[]{p.name, _bTarget.name}));
                             ItemMap item = dropItemGOD(p, _bTarget.x, _bTarget.y);
 
                             //ADD ITEM TO MAP
@@ -4103,6 +4121,58 @@ public class Zone {
                             ItemMap itemM = newItemMAP(1055, p.id, _bTarget.x, _bTarget.y);
                             if (itemM != null) {
                                 addItemToMap(itemM, p.id, _bTarget.x, _bTarget.y);
+                            }
+                        } else if (_bTarget._typeBoss == (byte) 56 || _bTarget._typeBoss == (byte) 57 || _bTarget._typeBoss == (byte) 58) {//billwhis rot ruong
+                            int idItemMap[] = {571, 572, 573, 574, 648, 649, 533, 77, 861};
+                            ItemMap itemM = newItemMapBuff(idItemMap[Util.nextInt(0, 10)], p.id, _bTarget.x, _bTarget.y);
+                            if (itemM != null) {
+                                addItemToMap(itemM, p.id, _bTarget.x, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                            }
+                        } else if (_bTarget._typeBoss == (byte) 53 || _bTarget._typeBoss == (byte) 54 || _bTarget._typeBoss == (byte) 55) {//an trom 
+                            int idItemMap[] = {571, 572, 573, 574, 648, 649, 533, 77, 861};
+                            ItemMap itemM = newItemMapBuff(idItemMap[Util.nextInt(0, 10)], p.id, _bTarget.x, _bTarget.y);
+                            if (itemM != null) {
+                                addItemToMap(itemM, p.id, _bTarget.x, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
                             }
                         }
 //                        else {
@@ -4305,6 +4375,8 @@ public class Zone {
                     damage = damage * 2;
                 } else if (p.getSetKichHoatFull() == (byte) 7 && skillPlayerUse.template.id == (byte) 4) { //SET KICH HOAT KAKAROT
                     damage = damage * 2;
+                } else if (p.getSetKichHoatFull() == (byte) 5 && skillPlayerUse.template.id == (byte) 17) { //SET KICH HOAT OCTIEU
+                    damage = damage * 2;
                 }
                 //END CHECK SET KICH HOAT SONGOKU
                 //CHECK CAI TRANG X3,X4 CHUONG MOI PHUT
@@ -4326,8 +4398,11 @@ public class Zone {
                 //CHECK TANG TIME GIAP LUYEN TAP
                 Service.gI().upTimeGLT(p);
                 //BOSS BROLY
-              if (_bTarget.isBOSS && (_bTarget._typeBoss == 1 || _bTarget._typeBoss == 2 || (_bTarget._typeBoss >= (byte) 44 && _bTarget._typeBoss <= (byte) 47)) && damage > _bTarget.hpFull * 0.01) {
+                if (_bTarget.isBOSS && (_bTarget._typeBoss == 1 || (_bTarget._typeBoss >= (byte) 44 && _bTarget._typeBoss <= (byte) 47))) {
                     damage = (int) (_bTarget.hpFull * 0.01);
+                }
+                if (_bTarget.isBOSS && (_bTarget._typeBoss == 53 || _bTarget._typeBoss == 54 || _bTarget._typeBoss == 55)) {
+                    damage = 1;
                 }
                 // dame laze
                 if (p.idSkillselect == 11) {
@@ -4374,7 +4449,6 @@ public class Zone {
                                 Server.gI().khuTDST = 0;
                             }
                             Service.gI().sendThongBaoServer(p.name + " vừa tiêu diệt " + _bTarget.name + " mọi người đều ngưỡng mộ");
-                            this.LogHistory.log1(String.format("%s da ha boss %s", new Object[]{p.name, _bTarget.name}));
                             int perCapHong = Util.nextInt(0, 10);
                             if (perCapHong < 1) {
                                 ItemSell CapHong = ItemSell.getItemSell(722, (byte) 1);
@@ -4414,7 +4488,6 @@ public class Zone {
                             }
                         } else if (_bTarget._typeBoss == 4 || _bTarget._typeBoss == 6) {
                             Service.gI().sendThongBaoServer(p.name + " vừa tiêu diệt " + _bTarget.name + " mọi người đều ngưỡng mộ");
-                            this.LogHistory.log1(String.format("%s da ha boss %s", new Object[]{p.name, _bTarget.name}));
                             ItemMap item = dropItemGOD(p, _bTarget.x, _bTarget.y);
 
                             //ADD ITEM TO MAP
@@ -4480,6 +4553,58 @@ public class Zone {
                             ItemMap itemM = newItemMAP(1055, p.id, _bTarget.x, _bTarget.y);
                             if (itemM != null) {
                                 addItemToMap(itemM, p.id, _bTarget.x, _bTarget.y);
+                            }
+                        } else if (_bTarget._typeBoss == (byte) 56 || _bTarget._typeBoss == (byte) 57 || _bTarget._typeBoss == (byte) 58) {//rati
+                            int idItemMap[] = {571, 572, 573, 574, 648, 649, 533, 77, 861};
+                            ItemMap itemM = newItemMapBuff(idItemMap[Util.nextInt(0, 10)], p.id, _bTarget.x, _bTarget.y);
+                            if (itemM != null) {
+                                addItemToMap(itemM, p.id, _bTarget.x, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                            }
+                        } else if (_bTarget._typeBoss == (byte) 53 || _bTarget._typeBoss == (byte) 54 || _bTarget._typeBoss == (byte) 55) {//billwhis rot ruong
+                            int idItemMap[] = {571, 572, 573, 574, 648, 649, 533, 77, 861};
+                            ItemMap itemM = newItemMapBuff(idItemMap[Util.nextInt(0, 10)], p.id, _bTarget.x, _bTarget.y);
+                            if (itemM != null) {
+                                addItemToMap(itemM, p.id, _bTarget.x, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
                             }
                         }
 //                        else {
@@ -4651,7 +4776,6 @@ public class Zone {
                                     Server.gI().khuTDST = 0;
                                 }
                                 Service.gI().sendThongBaoServer(p.name + " vừa tiêu diệt " + _bTarget.name + " mọi người đều ngưỡng mộ");
-                                this.LogHistory.log1(String.format("%s da ha boss %s", new Object[]{p.name, _bTarget.name}));
                                 int perCapHong = Util.nextInt(0, 10);
                                 if (perCapHong < 1) {
                                     ItemSell CapHong = ItemSell.getItemSell(722, (byte) 1);
@@ -4694,7 +4818,6 @@ public class Zone {
                                 }
                             } else if (_bTarget._typeBoss == 4 || _bTarget._typeBoss == 6) {
                                 Service.gI().sendThongBaoServer(p.name + " vừa tiêu diệt " + _bTarget.name + " mọi người đều ngưỡng mộ");
-                                this.LogHistory.log1(String.format("%s da ha boss %s", new Object[]{p.name, _bTarget.name}));
                                 ItemMap item = dropItemGOD(p, _bTarget.x, _bTarget.y);
 
                                 //ADD ITEM TO MAP
@@ -4763,6 +4886,58 @@ public class Zone {
                                 ItemMap itemM = newItemMAP(1055, p.id, _bTarget.x, _bTarget.y);
                                 if (itemM != null) {
                                     addItemToMap(itemM, p.id, _bTarget.x, _bTarget.y);
+                                }
+                            } else if (_bTarget._typeBoss == (byte) 56 || _bTarget._typeBoss == (byte) 57 || _bTarget._typeBoss == (byte) 58) {//billwhis rot ruong
+                                int idItemMap[] = {571, 572, 573, 574, 648, 649, 533, 77, 861};
+                                ItemMap itemM = newItemMapBuff(idItemMap[Util.nextInt(0, 10)], p.id, _bTarget.x, _bTarget.y);
+                                if (itemM != null) {
+                                    addItemToMap(itemM, p.id, _bTarget.x, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                }
+                            } else if (_bTarget._typeBoss == (byte) 53 || _bTarget._typeBoss == (byte) 54 || _bTarget._typeBoss == (byte) 55) {//billwhis rot ruong
+                                int idItemMap[] = {571, 572, 573, 574, 648, 649, 533, 77, 861};
+                                ItemMap itemM = newItemMapBuff(idItemMap[Util.nextInt(0, 10)], p.id, _bTarget.x, _bTarget.y);
+                                if (itemM != null) {
+                                    addItemToMap(itemM, p.id, _bTarget.x, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
+                                    addItemToMap(itemM, p.id, _bTarget.x += 15, _bTarget.y);
                                 }
                             }
                         }
@@ -5343,6 +5518,8 @@ public class Zone {
                     if (p.getSetKichHoatFull() == (byte) 3 && skillPlayerUse.template.id == (byte) 1) {
                         damage = damage * 2;
                     } else if (p.getSetKichHoatFull() == (byte) 7 && skillPlayerUse.template.id == (byte) 4) { //SET KICH HOAT KAKAROT
+                        damage = damage * 2;
+                    } else if (p.getSetKichHoatFull() == (byte) 5 && skillPlayerUse.template.id == (byte) 17) { //SET KICH HOAT OC TIÊU
                         damage = damage * 2;
                     }
                     //END CHECK SET KICH HOAT SONGOKU
@@ -5933,6 +6110,8 @@ public class Zone {
                     if (p.getSetKichHoatFull() == (byte) 3 && skillPlayerUse.template.id == (byte) 1) {
                         damage = damage * 2;
                     } else if (p.getSetKichHoatFull() == (byte) 7 && skillPlayerUse.template.id == (byte) 4) { //SET KICH HOAT KAKAROT
+                        damage = damage * 2;
+                    } else if (p.getSetKichHoatFull() == (byte) 5 && skillPlayerUse.template.id == (byte) 17) { //SET KICH HOAT OC TIEU
                         damage = damage * 2;
                     }
                     //END CHECK SET KICH HOAT SONGOKU
@@ -6630,7 +6809,7 @@ public class Zone {
                         player.mp -= kiUse;
 
                         //CHECK BUA BAT TU
-                        if ((player.hp < 1 && player.getBuaBatTu()) || (player.getSetKichHoatFull() == (byte) 5)) {
+                        if ((player.hp < 1 && player.getBuaBatTu())) {
                             player.hp = 1;
                         }
                         player.isdie = (player.hp > 0) ? false : true;
@@ -7120,7 +7299,7 @@ public class Zone {
                                     p.liveFromDead();
                                 }
                                 //CHAT CAM ON
-                                chat(p, "Cảm ơn " + player.name + " đã hồi sinh mình!");
+                                chat(p, "Cảm ơn " + player.name + " đã trị thương mình!");
                             }
                         }
 
@@ -7142,7 +7321,7 @@ public class Zone {
                                     }
                                 }
                                 //CHAT CAM ON
-                                chat(pet, "Cảm ơn " + player.name + " đã hồi sinh mình!");
+                                chat(pet, "Cảm ơn " + player.name + " đã trị thương mình!");
                             }
                         }
                     }
@@ -7175,7 +7354,7 @@ public class Zone {
                                     p.liveFromDead();
                                 }
                                 //CHAT CAM ON
-                                chat(p, "Cảm ơn " + player.name + " đã hồi sinh mình!");
+                                chat(p, "Cảm ơn " + player.name + " đã trị thương mình!");
                             }
                         }
 
@@ -7197,7 +7376,7 @@ public class Zone {
                                     }
                                 }
                                 //CHAT CAM ON
-                                chat(pet, "Cảm ơn " + player.name + " đã hồi sinh mình!");
+                                chat(pet, "Cảm ơn " + player.name + " đã trị thương mình!");
                             }
                         }
                     }
@@ -7517,7 +7696,6 @@ public class Zone {
                                                 Server.gI().khuTDST = 0;
                                             }
                                             Service.gI().sendThongBaoServer(player.name + " vừa tiêu diệt " + bossMap.get(i).name + " mọi người đều ngưỡng mộ");
-                                            LogHistory.log1(String.format("%s da ha boss %s", new Object[]{player.name, bossMap.get(i).name}));
                                             int perCapHong = Util.nextInt(0, 10);
                                             if (perCapHong < 1) {
                                                 ItemSell CapHong = ItemSell.getItemSell(722, (byte) 1);
@@ -7555,7 +7733,6 @@ public class Zone {
                                             }
                                         } else if (bossMap.get(i)._typeBoss == 4 || bossMap.get(i)._typeBoss == 6) {
                                             Service.gI().sendThongBaoServer(player.name + " vừa tiêu diệt " + bossMap.get(i).name + " mọi người đều ngưỡng mộ");
-                                            LogHistory.log1(String.format("%s da ha boss %s", new Object[]{player.name, bossMap.get(i).name}));
                                             ItemMap item = dropItemGOD(player, bossMap.get(i).x, bossMap.get(i).y);
 
                                             //ADD ITEM TO MAP
@@ -7612,6 +7789,11 @@ public class Zone {
                                             }
                                         } else if (bossMap.get(i)._typeBoss == (byte) 49 || bossMap.get(i)._typeBoss == (byte) 50) {//billwhis rot ruong
                                             ItemMap itemM = newItemMAP(1055, player.id, bossMap.get(i).x, bossMap.get(i).y);
+                                            if (itemM != null) {
+                                                addItemToMap(itemM, player.id, bossMap.get(i).x, bossMap.get(i).y);
+                                            }
+                                        } else if (bossMap.get(i)._typeBoss == (byte) 53 || bossMap.get(i)._typeBoss == (byte) 54) {//billwhis rot ruong
+                                            ItemMap itemM = newItemMAP(77, player.id, bossMap.get(i).x, bossMap.get(i).y);
                                             if (itemM != null) {
                                                 addItemToMap(itemM, player.id, bossMap.get(i).x, bossMap.get(i).y);
                                             }
@@ -8214,72 +8396,72 @@ public class Zone {
                 && mapid != 118 && mapid != 119 && mapid != 120 && mapid != 122 && mapid != 123 && mapid != 124 && mapid != 147 && mapid != 148 && mapid != 149 && mapid != 151
                 && mapid != 152 && mapid != 131 && mapid != 132 && mapid != 133) {
             if (p.taskId < (short) 8 && ((mapid >= 45 && mapid <= 50) || mapid == 12 || mapid == 18)) {
-                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                 Service.gI().buyDone(p);
                 return;
             } else if (p.taskId < (short) 9 && !MapSoSinh(mapid)) {
-                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                 Service.gI().buyDone(p);
                 return;
             } else if (p.taskId < (short) 20 && mapid >= 63) {
-                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                 Service.gI().buyDone(p);
                 return;
             } else if (((mapid >= 63 && mapid <= 67) || mapid >= 73) && (p.taskId < (short) 21 || (p.taskId == (short) 21 && p.crrTask.index < (byte) 1))) {
-                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                 Service.gI().buyDone(p);
                 return;
             } else if (mapid >= 73 && (p.taskId < (short) 21 || (p.taskId == (short) 21 && p.crrTask.index < (byte) 2))) {
-                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                 Service.gI().buyDone(p);
                 return;
             } else if (mapid >= 78 && (p.taskId < (short) 21 || (p.taskId == (short) 21 && p.crrTask.index < (byte) 3))) {
-                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                 Service.gI().buyDone(p);
                 return;
             } else if (mapid >= 92 && p.taskId < (short) 23) {
-                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                 Service.gI().buyDone(p);
                 return;
             } else if (p.taskId < (short) 26 && mapid >= 97) {
-                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                 Service.gI().buyDone(p);
                 return;
             } else if (p.taskId < (short) 27 && mapid >= 97 && mapid != 104) {
-                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                 Service.gI().buyDone(p);
                 return;
             } else if (p.taskId < (short) 28 && mapid >= 100 && mapid != 104) {
-                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                 Service.gI().buyDone(p);
                 return;
             } else if (p.taskId < (short) 29 && mapid >= 103 && mapid != 104) {
-                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
                 Service.gI().buyDone(p);
                 return;
             }
 //            if(mapid >= 63 && p.taskId < (short)20) {
-//                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+//                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
 //                Service.gI().buyDone(p);
 //                return;
 //            } else if(((mapid >= 63 && mapid <= 67) || mapid >= 73) && (p.taskId < (short)21 || (p.taskId == (short)21 && p.crrTask.index < (byte)1))) {
-//                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+//                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
 //                Service.gI().buyDone(p);
 //                return;
 //            } else if(mapid >= 73 && (p.taskId < (short)21 || (p.taskId == (short)21 && p.crrTask.index < (byte)2))) {
-//                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+//                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
 //                Service.gI().buyDone(p);
 //                return;
 //            } else if(mapid >= 78 && (p.taskId < (short)21 || (p.taskId == (short)21 && p.crrTask.index < (byte)3))) {
-//                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+//                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
 //                Service.gI().buyDone(p);
 //                return;
 //            } else if(mapid >= 92 && p.taskId < (short)24) {
-//                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+//                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
 //                Service.gI().buyDone(p);
 //                return;
 //            } else if(mapid >= 105 && p.taskId < (short)29) {
-//                p.sendAddchatYellow("Vui lòng hoàn thành nhiệm vụ trước khi tới đây!");
+//                p.sendAddchatYellow("Nhiệm vụ chưa hoàn thành không thể tới đây!");
 //                Service.gI().buyDone(p);
 //                return;
 //            }
@@ -9055,7 +9237,7 @@ public class Zone {
                                     //send de tu attack
                                     if (_detu.mp >= petProSkill.manaUse && _detu.stamina >= (short) 2) {
                                         _detu.mp -= petProSkill.manaUse;
-                                        if (_detu.isMabu) {
+                                        if (_detu.isMabu || _detu.isBerus) {
                                             _detu.stamina = (short) (_detu.stamina - 5) < (short) 0 ? (short) 0 : (short) (_detu.stamina - 5);
                                         } else {
                                             _detu.stamina = (short) (_detu.stamina - 2) < (short) 0 ? (short) 0 : (short) (_detu.stamina - 2);
@@ -9205,7 +9387,7 @@ public class Zone {
                                     //send de tu attack
                                     if (_detu.mp >= petUseSkill.manaUse && _detu.stamina >= (short) 2) {
                                         _detu.mp -= petUseSkill.manaUse;
-                                        if (_detu.isMabu) {
+                                        if (_detu.isMabu || _detu.isBerus) {
                                             _detu.stamina = (short) (_detu.stamina - 5) < (short) 0 ? (short) 0 : (short) (_detu.stamina - 5);
                                         } else {
                                             _detu.stamina = (short) (_detu.stamina - 2) < (short) 0 ? (short) 0 : (short) (_detu.stamina - 2);
@@ -9295,7 +9477,7 @@ public class Zone {
 
                                     if (_detu.mp >= petUseSkill.manaUse && _detu.stamina >= (short) 2) {
                                         _detu.mp -= petUseSkill.manaUse;
-                                        if (_detu.isMabu) {
+                                        if (_detu.isMabu || _detu.isBerus) {
                                             _detu.stamina = (short) (_detu.stamina - 5) < (short) 0 ? (short) 0 : (short) (_detu.stamina - 5);
                                         } else {
                                             _detu.stamina = (short) (_detu.stamina - 2) < (short) 0 ? (short) 0 : (short) (_detu.stamina - 2);
@@ -9428,7 +9610,7 @@ public class Zone {
         } else if (_detu.cPk == 8) {
             upSmTn = (long) (upSmTn * 1.1);
         }
-        if (_detu.isMabu) {
+        if (_detu.isMabu || _detu.isBerus) {
             upSmTn = (long) (upSmTn / 3);
         }
         if (_player.ItemBody[5] != null && (_player.ItemBody[5].template.id == 710 || _player.ItemBody[5].template.id == 711)) {
@@ -9444,7 +9626,7 @@ public class Zone {
         }
         //MAP NGU HANH SON, TNSM x2
         if (_player.map.id >= 122 && _player.map.id <= 124) {
-            upSmTn = upSmTn * 2;
+            upSmTn = upSmTn * 4;
         }
         //MAP THANH DIA GIAM TNSM
         if (_player.map.id >= 156 && _player.map.id <= 159) {
@@ -10053,16 +10235,13 @@ public class Zone {
                     if (_broly.isdie) {
                         timerBroly.cancel();
                         haveBROLY = false;
-                        int rdAt = Util.nextInt(0, 10);
                         int numberBoss = _broly._numberBoss;
                         if (_broly._typeBoss == 1) {
                             int initSuper = 0;
                             if (_broly.hpFull >= 1500000) {
                                 initSuper = 1;
                             }
-                            if (rdAt <= 1) {
-                                initSuper = 1;
-                            }
+
                             // xoa broly khoi bossmap
 //                                    if(bossMap.contains(_broly)) {
 //                                        bossMap.remove(_broly);
@@ -10106,7 +10285,7 @@ public class Zone {
                                     }
                                 ;
                                 };
-                                timerSPBroly.schedule(ttSuper, 10000);
+                                timerSPBroly.schedule(ttSuper, 60000);
 //                                timerSPBroly.schedule(ttSuper, 15000);
                             } else {
                                 Timer timerBrolyBack = new Timer();
@@ -10147,7 +10326,7 @@ public class Zone {
                         //                        System.out.println("Brolyyyyy get char gan nhat: " + _charTarget.id);
                         //                    }
                         long timeNow = System.currentTimeMillis();
-                        if ((timeNow - _broly.lastTimeUseChargeSkill) > 45000 && _broly.hp < _broly.hpFull && !_broly.isTTNL && !_broly.checkBiKhongChe()) {
+                        if ((timeNow - _broly.lastTimeUseChargeSkill) > 45000 && _broly.hp < _broly.hpFull && !_broly.isTTNL) {
                             _broly.lastTimeUseChargeSkill = timeNow;
                             _broly.isTTNL = true;
                             if (_broly.hp <= (int) (_broly.hpFull * 0.5) && _broly._typeBoss == 1) { //duoi 0.5 thi moi len hp
@@ -10173,10 +10352,6 @@ public class Zone {
                                         timerPetTTNL.cancel();
                                     } else {
                                         _broly.bossChargeHPMP(_broly, 2);
-                                    }
-                                    if (_broly.isTTNL && _broly.checkBiKhongChe()) {
-                                        _broly.isTTNL = false;
-                                        timerPetTTNL.cancel();
                                     }
                                 }
                             ;
@@ -11192,6 +11367,16 @@ public class Zone {
                                 ;
                                 };
                                 timerZamasu.schedule(ttZamasu, 1200000);
+                            } else if (_BOSS._typeBoss == (byte) 53 || _BOSS._typeBoss == (byte) 55) { //ZAMASU
+                                Timer timerBossNgoc = new Timer();
+                                TimerTask ttBossNgoc = new TimerTask() {
+                                    public void run() {
+                                        Service.gI().initBossNgoc();
+                                        timerBossNgoc.cancel();
+                                    }
+                                ;
+                                };
+                                timerBossNgoc.schedule(ttBossNgoc, 900000);
                             } else if ((_BOSS._typeBoss == (byte) 49 || _BOSS._typeBoss == (byte) 50) && !isHoiSinhBill) {
                                 Boss Bill = getBossByID(-200529);
                                 Boss Whis = getBossByID(-200530);
@@ -11481,6 +11666,8 @@ public class Zone {
                             chat(_BOSS, "Tên Super Saiyan God ở đây sao?");
                         } else if (_BOSS._typeBoss == (byte) 50) {
                             chat(_BOSS, "Hành tinh này có đồ ăn gì ngon nhỉ, hôhôhô!");
+                        } else if (_BOSS._typeBoss == (byte) 53 || _BOSS._typeBoss == (byte) 54) {
+                            chat(_BOSS, "Mạnh mẽ lên, như thế này mà đòi giết ta à ??");
                         }
                     }
                 }
@@ -11766,6 +11953,22 @@ public class Zone {
 
     public ItemMap newItemMAP(int idItem, int idPlayer, short x, short y) {
         Item itemMap = ItemSell.getItemNotSell(idItem);
+        ItemMap itemM = new ItemMap();
+        itemM.playerId = idPlayer;
+        itemM.x = x;
+        itemM.y = y;
+        itemM.itemMapID = this.itemsMap.size();
+        itemM.itemTemplateID = (short) idItem;
+        itemMap.template = ItemTemplate.ItemTemplateID(idItem);
+        itemM.item = itemMap;
+        if (itemM != null) {
+            return itemM;
+        }
+        return null;
+    }
+
+    public ItemMap newItemMapBuff(int idItem, int idPlayer, short x, short y) {
+        Item itemMap = ItemBuff.getItem(idItem);
         ItemMap itemM = new ItemMap();
         itemM.playerId = idPlayer;
         itemM.x = x;

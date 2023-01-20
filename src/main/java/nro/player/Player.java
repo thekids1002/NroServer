@@ -38,7 +38,15 @@ import java.lang.Thread;
 import nro.map.Mob;
 
 public class Player {
+    public long timeDelayBuyItem;
 
+    public long getTimeDelayBuyItem() {
+        return timeDelayBuyItem;
+    }
+
+    public void setTimeDelayBuyItem(long timeDelayBuyItem) {
+        this.timeDelayBuyItem = timeDelayBuyItem;
+    }
     public boolean isLogin = false;
     public Zone zone = null;
     public Session session;
@@ -72,7 +80,6 @@ public class Player {
     public long sumTiemNang;
     public NClass nClass;
     public Clan clan;
-    public long buyitemdelay;
 //    public int clanid; //SERVER 2
     public Skill selectSkill;
     public short idSkillselect = 0;
@@ -95,7 +102,7 @@ public class Player {
     public boolean isBlind = false;
     public byte buffHuytSao = 0;
     public byte PEMCRIT = 0;
-    public int Role = 0;
+
     public boolean isCharFreez = false; // check player co bi khong che hay khong troisssss
     public boolean isCharSleep = false; // check player bi thoi mien
     public boolean isCharSocola = false;
@@ -202,6 +209,13 @@ public class Player {
     public int idTAUse = 0;
     public byte cItemBuff = 0;
     public ArrayList<Integer> idItemBuff = new ArrayList<>();
+    //thanhvien
+    public int thanhvien;
+    public int sotien;
+    //sukien
+    public int pointSuKien;
+    //nhanqua
+    public int nhanqua;
     //TIME CHAT THE GIOI
     public long _TIMECHATTG = 0;
     //BANG HOI
@@ -223,6 +237,9 @@ public class Player {
     //QUAY NGOC MAY MAN
     public ArrayList<Item> ItemQuay = new ArrayList<>();
     public boolean openItemQuay = false;
+    //QUAY NGOC MAY MAN
+    public ArrayList<Item> ItemQuay2 = new ArrayList<>();
+    public boolean openItemQuay2 = false;
     //NGOC RONG SAO DEN
     public boolean moveToSaoDen = false;
     public int[] mapSaoDen = new int[7];
@@ -240,7 +257,9 @@ public class Player {
     public int _indexEpStar2 = -1;
     //DE TU MABU
     public boolean isMabu = false;
+    public boolean isBerus = false;
     public boolean transfMabu = true;
+    public boolean transfBerus = true;
     public boolean hasTrungMabu = false;
     //SKILL DE TRUNG
     public byte chimFollow = 0;
@@ -412,6 +431,9 @@ public class Player {
         if (this.isPet && this.isMabu && this.transfMabu) {
             return 297;
         }
+        if (this.isPet && this.isBerus && this.transfBerus) {
+            return 508;
+        }
         if (NhapThe == 1 && gender == (byte) 1) {
             if (this.ItemBody[5] != null && ((this.ItemBody[5].template.id >= 601 && this.ItemBody[5].template.id <= 603) || (this.ItemBody[5].template.id >= 639 && this.ItemBody[5].template.id <= 641))) {
                 for (Item iad : ItemBody[5].entrys) {
@@ -574,6 +596,9 @@ public class Player {
         if (this.isPet && this.isMabu && this.transfMabu) {
             return 298;
         }
+        if (this.isPet && this.isBerus && this.transfBerus) {
+            return 509;
+        }
         if (this.ItemBody[0] == null) {
             return getDefaultBody();
         }
@@ -596,6 +621,9 @@ public class Player {
         }
         if (this.isPet && this.isMabu && this.transfMabu) {
             return 299;
+        }
+        if (this.isPet && this.isBerus && this.transfBerus) {
+            return 510;
         }
         if (this.ItemBody[1] == null) {
             return getDefaultLeg();
@@ -681,8 +709,14 @@ public class Player {
             skl = this.getSkillById(13);
             hp = (int) Math.ceil(hp * Util.getPercentDouble((10 + skl.point + 3) * 10));
         }
-        if (this.NhapThe == 1) {
+        if (this.NhapThe == 1 && (this.detu.isBerus == false && this.detu.isMabu == false)) {
+            hp += this.detu.isMabu ? (int) (this.detu.getHpFull() * 1) : this.detu.getHpFull();
+        }
+        if (this.NhapThe == 1 && this.detu.isMabu) {
             hp += this.detu.isMabu ? (int) (this.detu.getHpFull() * 1.2) : this.detu.getHpFull();
+        }
+        if (this.NhapThe == 1 && this.detu.isBerus) {
+            hp += this.detu.isBerus ? (int) (this.detu.getHpFull() * 2) : this.detu.getHpFull();
         }
         //XHP NGOC RONG SAO DEN
         if (this.xHPSaoDen > (byte) 0 && (map.id >= 85 && map.id <= 91)) {
@@ -761,8 +795,14 @@ public class Player {
         if (this.useBoKhi) {
             mp = mp * 2;
         }
-        if (this.NhapThe == 1) {
+        if (this.NhapThe == 1 && (this.detu.isBerus == false && this.detu.isMabu == false)) {
+            mp += this.detu.isMabu ? (int) (this.detu.getMpFull() * 1) : this.detu.getMpFull();
+        }
+        if (this.NhapThe == 1 && this.detu.isMabu) {
             mp += this.detu.isMabu ? (int) (this.detu.getMpFull() * 1.2) : this.detu.getMpFull();
+        }
+        if (this.NhapThe == 1 && this.detu.isBerus) {
+            mp += this.detu.isBerus ? (int) (this.detu.getMpFull() * 2) : this.detu.getMpFull();
         }
         return mp;
     }
@@ -777,7 +817,7 @@ public class Player {
                         if (PlayerManger.gI().conns.get(i) != null && PlayerManger.gI().conns.get(i).player != null) {
                             Player player = PlayerManger.gI().conns.get(i).player;
                             if (player != null && player.map == map) {
-                                player.zone.chat(player, "Bunma đẹp troaiiiii=))");
+                                player.zone.chat(player, "Wwow, sexy quá !");
                             }
                         }
                     }
@@ -889,8 +929,14 @@ public class Player {
 //                dam = (int)Math.ceil(dam*Util.getPercentDouble((100 + (skl.point + 9)*5)));
 //            }
 //        }
-        if (this.NhapThe == 1) {
+        if (this.NhapThe == 1 && (this.detu.isBerus == false && this.detu.isMabu == false)) {
+            dam += this.detu.isMabu ? (int) (this.detu.getDamFull() * 1) : this.detu.getDamFull();
+        }
+        if (this.NhapThe == 1 && this.detu.isMabu) {
             dam += this.detu.isMabu ? (int) (this.detu.getDamFull() * 1.2) : this.detu.getDamFull();
+        }
+        if (this.NhapThe == 1 && this.detu.isBerus) {
+            dam += this.detu.isBerus ? (int) (this.detu.getDamFull() * 2) : this.detu.getDamFull();
         }
         //CHECK MAP COOL
         if (this.isDownPointCold) {
@@ -1229,7 +1275,7 @@ public class Player {
                     }
                 } else {
                     index = this.getIndexBagNotItem();
-                    if (getBagNull() == 0) {
+                    if (getBagNull() <= 0) {
                         this.sendAddchatYellow("Hành trang không đủ chỗ trống!");
                         return false;
                     } else {
@@ -1245,7 +1291,7 @@ public class Player {
                     int countLeft = this.ItemBag[index].quantity - 9998;
                     if (countLeft > 0) {
                         byte index2 = this.getIndexBagNotItem();
-                        if (getBagNull() == 0) {
+                        if (getBagNull() <= 0) {
                             this.sendAddchatYellow("Hành trang không đủ chỗ trống!");
                             return false;
                         } else {
@@ -1265,7 +1311,7 @@ public class Player {
                     return true;
                 } else {
                     index = this.getIndexBagNotItem();
-                    if (getBagNull() == 0) {
+                    if (getBagNull() <= 0) {
                         this.sendAddchatYellow("Hành trang không đủ chỗ trống!");
                         return false;
                     } else {
@@ -1287,7 +1333,7 @@ public class Player {
                     }
                 } else {
                     index = this.getIndexBagNotItem();
-                    if (getBagNull() == 0) {
+                    if (getBagNull() <= 0) {
                         this.sendAddchatYellow("Hành trang không đủ chỗ trống!");
                         return false;
                     } else {
@@ -1301,7 +1347,7 @@ public class Player {
                 index = this.getIndexBagNotItem();
                 byte indexThucAn = getIndex99ThucAnHuyDiet();
                 if (indexThucAn != -1 && this.ItemBag[indexThucAn].quantity >= 99) {
-                    if (getBagNull() == 0) {
+                    if (getBagNull() <= 0) {
                         this.sendAddchatYellow("Hành trang không đủ chỗ trống!");
                         return false;
                     } else {
@@ -1380,7 +1426,7 @@ public class Player {
                 index = this.getIndexBagNotItem();
                 byte indexMedal = getIndexItemByIdAndQuantiy(979, 10); //id = 979: huy chuong dong
                 if (indexMedal != -1 && this.ItemBag[indexMedal].quantity >= 10) {
-                    if (getBagNull() == 0) {
+                    if (getBagNull() <= 0) {
                         this.sendAddchatYellow("Hành trang không đủ chỗ trống!");
                         return false;
                     } else {
@@ -1414,7 +1460,7 @@ public class Player {
                 int countLeft = this.ItemBag[index].quantity + item.quantity - 99;
                 if (countLeft > 0) {
                     byte index2 = this.getIndexBagNotItem();
-                    if (getBagNull() == 0) {
+                    if (getBagNull() <= 0) {
                         this.sendAddchatYellow("Hành trang không đủ chỗ trống!");
                         return false;
                     } else {
@@ -1434,7 +1480,7 @@ public class Player {
                 return true;
             } else {
                 index = this.getIndexBagNotItem();
-                if (getBagNull() == 0) {
+                if (getBagNull() <= 0) {
                     this.sendAddchatYellow("Hành trang không đủ chỗ trống!");
                     return false;
                 } else {
@@ -1682,8 +1728,15 @@ public class Player {
                 }
             }
             //effchat marron
-            if (this.ItemBody[index] != null && this.ItemBody[index].template.id == 1103) {
-                ItemService.gI().sendEffectChat(this);
+            int caitrang = this.ItemBody[index].template.id;
+            if (this.ItemBody[index] != null && this.ItemBody[index].template.id == caitrang) {
+                if (caitrang == 1103) {
+                    ItemService.gI().sendEffectChat(this);
+                } else if (caitrang == 455) {
+                    ItemService.gI().sendEffectChatCaiTrangODo(this);
+                } else if (caitrang >= 875 && caitrang <= 877 || caitrang == 883) {
+                    ItemService.gI().sendEffectChatCaiTrangDep(this);
+                }
             } else {
                 if (this.timerEffectChat != null) {
                     this.timerEffectChat.cancel();
@@ -1697,7 +1750,7 @@ public class Player {
     }
 
     public void itemBodyToBag(int index) {
-        if (getBagNull() == 0) {
+        if (getBagNull() <= 0) {
             sendAddchatYellow("Hành trang không đủ chỗ trống");
             return;
         }
@@ -1902,7 +1955,7 @@ public class Player {
                 sendAddchatYellow("Không thể thực hiện");
             }
         } else {
-            sendAddchatYellow("Đệ tử chưa lớn haha!");
+            sendAddchatYellow("Sức mạnh để tử đạt 1tr5 mới có thể mặc đồ!");
         }
     }
 
@@ -1911,7 +1964,7 @@ public class Player {
     }
 
     public void itemBodyToBagPet(byte index) {
-        if (getBagNull() == 0) {
+        if (getBagNull() <= 0) {
             sendAddchatYellow("Hành trang không đủ chỗ trống");
             return;
         }
@@ -2381,6 +2434,66 @@ public class Player {
         if (limitPower == 7) {
             return 80;
         }
+        if (limitPower == 8) {
+            return 90;
+        }
+        if (limitPower == 9) {
+            return 100;
+        }
+        if (limitPower == 10) {
+            return 110;
+        }
+        if (limitPower == 11) {
+            return 110;
+        }
+        if (limitPower == 12) {
+            return 110;
+        }
+        if (limitPower == 13) {
+            return 110;
+        }
+        if (limitPower == 14) {
+            return 110;
+        }
+        if (limitPower == 15) {
+            return 110;
+        }
+        if (limitPower == 16) {
+            return 110;
+        }
+        if (limitPower == 17) {
+            return 110;
+        }
+        if (limitPower == 18) {
+            return 110;
+        }
+        if (limitPower == 19) {
+            return 110;
+        }
+        if (limitPower == 20) {
+            return 110;
+        }
+        if (limitPower == 22) {
+            return 110;
+        }
+        if (limitPower == 23) {
+            return 110;
+        }
+        if (limitPower == 24) {
+            return 110;
+        }
+        if (limitPower == 25) {
+            return 110;
+        }
+        if (limitPower == 26) {
+            return 110;
+        }
+        if (limitPower == 27) {
+            return 110;
+        }
+        if (limitPower == 28) {
+            return 110;
+        }
         return 0;
     }
 
@@ -2408,6 +2521,69 @@ public class Player {
         }
         if (limitPower == 7) {
             return 550000;
+        }
+        if (limitPower == 8) {
+            return 600000;
+        }
+        if (limitPower == 9) {
+            return 650000;
+        }
+        if (limitPower == 10) {
+            return 700000;
+        }
+        if (limitPower == 11) {
+            return 700000;
+        }
+        if (limitPower == 12) {
+            return 700000;
+        }
+        if (limitPower == 13) {
+            return 700000;
+        }
+        if (limitPower == 14) {
+            return 700000;
+        }
+        if (limitPower == 15) {
+            return 700000;
+        }
+        if (limitPower == 16) {
+            return 700000;
+        }
+        if (limitPower == 17) {
+            return 700000;
+        }
+        if (limitPower == 18) {
+            return 700000;
+        }
+        if (limitPower == 19) {
+            return 700000;
+        }
+        if (limitPower == 20) {
+            return 700000;
+        }
+        if (limitPower == 21) {
+            return 700000;
+        }
+        if (limitPower == 22) {
+            return 700000;
+        }
+        if (limitPower == 23) {
+            return 700000;
+        }
+        if (limitPower == 24) {
+            return 700000;
+        }
+        if (limitPower == 25) {
+            return 700000;
+        }
+        if (limitPower == 26) {
+            return 700000;
+        }
+        if (limitPower == 27) {
+            return 700000;
+        }
+        if (limitPower == 28) {
+            return 700000;
         }
         return 0;
     }
@@ -2437,6 +2613,69 @@ public class Player {
         if (limitPower == 7) {
             return 25000;
         }
+        if (limitPower == 8) {
+            return 26000;
+        }
+        if (limitPower == 9) {
+            return 27000;
+        }
+        if (limitPower == 10) {
+            return 30000;
+        }
+        if (limitPower == 11) {
+            return 30000;
+        }
+        if (limitPower == 12) {
+            return 30000;
+        }
+        if (limitPower == 13) {
+            return 30000;
+        }
+        if (limitPower == 14) {
+            return 30000;
+        }
+        if (limitPower == 15) {
+            return 30000;
+        }
+        if (limitPower == 16) {
+            return 30000;
+        }
+        if (limitPower == 17) {
+            return 30000;
+        }
+        if (limitPower == 18) {
+            return 30000;
+        }
+        if (limitPower == 19) {
+            return 30000;
+        }
+        if (limitPower == 20) {
+            return 30000;
+        }
+        if (limitPower == 21) {
+            return 30000;
+        }
+        if (limitPower == 22) {
+            return 30000;
+        }
+        if (limitPower == 23) {
+            return 30000;
+        }
+        if (limitPower == 24) {
+            return 30000;
+        }
+        if (limitPower == 25) {
+            return 30000;
+        }
+        if (limitPower == 26) {
+            return 30000;
+        }
+        if (limitPower == 27) {
+            return 30000;
+        }
+        if (limitPower == 28) {
+            return 30000;
+        }
         return 0;
     }
 
@@ -2465,6 +2704,70 @@ public class Player {
         if (limitPower == 7) {
             return 1200;
         }
+        if (limitPower == 8) {
+            return 1300;
+        }
+        if (limitPower == 9) {
+            return 1400;
+        }
+        if (limitPower == 10) {
+            return 1500;
+        }
+        if (limitPower == 11) {
+            return 1500;
+        }
+        if (limitPower == 12) {
+            return 1500;
+        }
+        if (limitPower == 13) {
+            return 1500;
+        }
+        if (limitPower == 14) {
+            return 1500;
+        }
+        if (limitPower == 15) {
+            return 1500;
+        }
+        if (limitPower == 16) {
+            return 1500;
+        }
+        if (limitPower == 17) {
+            return 1500;
+        }
+        if (limitPower == 18) {
+            return 1500;
+        }
+        if (limitPower == 19) {
+            return 1500;
+        }
+        if (limitPower == 20) {
+            return 1500;
+        }
+        if (limitPower == 21) {
+            return 1500;
+        }
+        if (limitPower == 22) {
+            return 1500;
+        }
+        if (limitPower == 23) {
+            return 1500;
+        }
+        if (limitPower == 24) {
+            return 1500;
+        }
+        if (limitPower == 25) {
+            return 1500;
+        }
+        if (limitPower == 26) {
+            return 1500;
+        }
+        if (limitPower == 27) {
+            return 1500;
+        }
+        if (limitPower == 28) {
+            return 1500;
+        }
+
         return 0;
     }
 
@@ -2491,6 +2794,69 @@ public class Player {
             return 10;
         }
         if (limitPower == 7) {
+            return 10;
+        }
+        if (limitPower == 8) {
+            return 10;
+        }
+        if (limitPower == 9) {
+            return 10;
+        }
+        if (limitPower == 10) {
+            return 10;
+        }
+        if (limitPower == 11) {
+            return 10;
+        }
+        if (limitPower == 12) {
+            return 10;
+        }
+        if (limitPower == 13) {
+            return 10;
+        }
+        if (limitPower == 14) {
+            return 10;
+        }
+        if (limitPower == 15) {
+            return 10;
+        }
+        if (limitPower == 16) {
+            return 10;
+        }
+        if (limitPower == 17) {
+            return 10;
+        }
+        if (limitPower == 18) {
+            return 10;
+        }
+        if (limitPower == 19) {
+            return 10;
+        }
+        if (limitPower == 20) {
+            return 10;
+        }
+        if (limitPower == 21) {
+            return 10;
+        }
+        if (limitPower == 22) {
+            return 10;
+        }
+        if (limitPower == 23) {
+            return 10;
+        }
+        if (limitPower == 24) {
+            return 10;
+        }
+        if (limitPower == 25) {
+            return 10;
+        }
+        if (limitPower == 26) {
+            return 10;
+        }
+        if (limitPower == 27) {
+            return 10;
+        }
+        if (limitPower == 28) {
             return 10;
         }
         return 0;
@@ -3481,7 +3847,23 @@ public class Player {
 
     // END GET BUA
     public byte getLevelPower() {
-        if (this.power >= 100010000000L) {
+        if (this.power >= 300010000000L) {
+            return (byte) 28;
+        } else if (this.power >= 280010000000L) {
+            return (byte) 27;
+        } else if (this.power >= 260010000000L) {
+            return (byte) 26;
+        } else if (this.power >= 230010000000L) {
+            return (byte) 25;
+        } else if (this.power >= 200010000000L) {
+            return (byte) 24;
+        } else if (this.power >= 180010000000L) {
+            return (byte) 23;
+        } else if (this.power >= 160010000000L) {
+            return (byte) 22;
+        } else if (this.power >= 130010000000L) {
+            return (byte) 21;
+        } else if (this.power >= 100010000000L) {
             return (byte) 20;
         } else if (this.power >= 81000000000L) {
             return (byte) 19;
@@ -3527,7 +3909,17 @@ public class Player {
 
     public String getStringLevel() {
         String percent = Util.strPercentPower(this.power);
-        if (this.power >= 100010000000L) {
+        if (this.power >= 300010000000L) {
+            return "Thông Đại Thiên Sứ Cấp 4 + " + percent;
+        } else if (this.power >= 280010000000L) {
+            return "Thông Đại Thiên Sứ Cấp 3 + " + percent;
+        } else if (this.power >= 230010000000L) {
+            return "Thông Đại Thiên Sứ Cấp 2 + " + percent;
+        } else if (this.power >= 180010000000L) {
+            return "Thông Đại Thiên Sứ Cấp 1 + " + percent;
+        } else if (this.power >= 130010000000L) {
+            return "Giới Vương Thần Cấp 4 + " + percent;
+        } else if (this.power >= 100010000000L) {
             return "Giới Vương Thần Cấp 3 + " + percent;
         } else if (this.power >= 80000000000L) {
             return "Giới Vương Thần Cấp 2 + " + percent;
@@ -3700,70 +4092,73 @@ public class Player {
 
     public static Player setup(int account_id) {
         try {
-            synchronized (Server.LOCK_MYSQL) {
+            //synchronized (Server.LOCK_MYSQL) {
 //                ResultSet rs = SQLManager.stat.executeQuery("SELECT * FROM `player` WHERE `account_id`LIKE'" + account_id + "';");
-                ResultSet rs = SQLManager.stat.executeQuery("SELECT * FROM `player` WHERE `account_id`=" + account_id + ";");
-                if (rs != null && rs.first()) {
-                    Player player = new Player();
-                    player.id = rs.getInt("account_id");
-                    player.taskId = rs.getByte("task_id");
-                    player.name = rs.getString("name");
-                    player.head = rs.getShort("head");
-                    player.gender = rs.getByte("gender");
-                    player.nClass = SkillData.nClasss[player.gender];
-                    player.power = rs.getLong("power");
-                    player.vang = rs.getLong("vang");
-                    player.ngoc = rs.getInt("luong");
-                    player.ngocKhoa = rs.getInt("luong_khoa");
-                    player.Role = rs.getInt("role");
-                    player.x = rs.getShort("where_x");
-                    player.y = rs.getShort("where_y");
+            ResultSet rs = SQLManager.stat.executeQuery("SELECT * FROM `player` WHERE `account_id`=" + account_id + ";");
+            if (rs != null && rs.first()) {
+                Player player = new Player();
+                player.id = rs.getInt("account_id");
+                player.taskId = rs.getByte("task_id");
+                player.name = rs.getString("name");
+                player.head = rs.getShort("head");
+                player.gender = rs.getByte("gender");
+                player.nClass = SkillData.nClasss[player.gender];
+                player.power = rs.getLong("power");
+                player.vang = rs.getLong("vang");
+                player.ngoc = rs.getInt("luong");
+                player.ngocKhoa = rs.getInt("luong_khoa");
+                player.thanhvien = rs.getInt("thanhvien");
+                player.sotien = rs.getInt("sotien");
+                player.pointSuKien = rs.getInt("sukien");
+                player.nhanqua = rs.getInt("nhanqua");
+                player.x = rs.getShort("where_x");
+                player.y = rs.getShort("where_y");
 //                    player.clanid = rs.getInt("clan_id"); //SERVER 2
-                    if (rs.getInt("clan_id") != -1) {
-                        player.clan = ClanManager.gI().getClanById(rs.getInt("clan_id"));
-                    }
+                if (rs.getInt("clan_id") != -1) {
+                    player.clan = ClanManager.gI().getClanById(rs.getInt("clan_id"));
+                }
 //                    Map map = Manager.getMapid(rs.getByte("where_id"));
-                    Map map = MainManager.getMapid(rs.getInt("where_id"));
-                    map.getPlayers().add(player);
-                    player.map = map;
-                    player.hpGoc = rs.getInt("hp_goc");
-                    player.mpGoc = rs.getInt("mp_goc");
-                    player.hp = player.hpGoc;
-                    player.mp = player.mpGoc;
-                    player.damGoc = rs.getInt("dame_goc");
-                    player.defGoc = rs.getShort("def_goc");
-                    player.critGoc = rs.getByte("crit_goc");
-                    player.critNr = rs.getByte("crit_nr");
-                    player.tiemNang = rs.getLong("tiem_nang");
-                    player.limitPower = rs.getByte("limit_power");
-                    player.hpFull = rs.getInt("hp_goc");
-                    player.mpFull = rs.getInt("mp_goc");
-                    player.damFull = rs.getInt("dame_goc");
-                    player.defFull = rs.getShort("def_goc");
-                    player.NhapThe = rs.getInt("nhapthe");
-                    player.petfucus = (byte) 0;
-                    player.critFull = rs.getByte("crit_goc");
-                    player.rolePT = rs.getByte("role_pt");
-                    player.isPorata2 = rs.getByte("nhapthe2") == 1 ? true : false;
-                    player.hasTrungMabu = rs.getByte("hasmabu") == 1 ? true : false;
-                    player.isTennis = rs.getByte("istennis") == 1 ? true : false;
-                    player.tSwapZone = System.currentTimeMillis() + 30000;
-                    //SUM TOTAL TIEM NANG
-                    player.sumTiemNang = 0;
-                    if (player.hpGoc > 100) {
-                        player.sumTiemNang += ((long) player.hpGoc - (long) 100) / (long) 20 * ((long) 2 * ((long) 100 + (long) 1000) + ((long) player.hpGoc - (long) 100) - (long) 20) / (long) 2;
+                Map map = MainManager.getMapid(rs.getInt("where_id"));
+                map.getPlayers().add(player);
+                player.map = map;
+                player.hpGoc = rs.getInt("hp_goc");
+                player.mpGoc = rs.getInt("mp_goc");
+                player.hp = player.hpGoc;
+                player.mp = player.mpGoc;
+                player.damGoc = rs.getInt("dame_goc");
+                player.defGoc = rs.getShort("def_goc");
+                player.critGoc = rs.getByte("crit_goc");
+                player.critNr = rs.getByte("crit_nr");
+                player.tiemNang = rs.getLong("tiem_nang");
+                player.limitPower = rs.getByte("limit_power");
+                player.hpFull = rs.getInt("hp_goc");
+                player.mpFull = rs.getInt("mp_goc");
+                player.damFull = rs.getInt("dame_goc");
+                player.defFull = rs.getShort("def_goc");
+                player.NhapThe = rs.getInt("nhapthe");
+                player.petfucus = (byte) 0;
+                player.critFull = rs.getByte("crit_goc");
+                player.rolePT = rs.getByte("role_pt");
+                player.isPorata2 = rs.getByte("nhapthe2") == 1 ? true : false;
+                player.hasTrungMabu = rs.getByte("hasmabu") == 1 ? true : false;
+                player.isTennis = rs.getByte("istennis") == 1 ? true : false;
+                player.tSwapZone = System.currentTimeMillis() + 30000;
+                //SUM TOTAL TIEM NANG
+                player.sumTiemNang = 0;
+                if (player.hpGoc > 100) {
+                    player.sumTiemNang += ((long) player.hpGoc - (long) 100) / (long) 20 * ((long) 2 * ((long) 100 + (long) 1000) + ((long) player.hpGoc - (long) 100) - (long) 20) / (long) 2;
+                }
+                if (player.mpGoc > 100) {
+                    player.sumTiemNang += ((long) player.mpGoc - (long) 100) / (long) 20 * ((long) 2 * ((long) 100 + (long) 1000) + ((long) player.mpGoc - (long) 100) - (long) 20) / (long) 2;
+                }
+                if (player.damGoc > 15) {
+                    player.sumTiemNang += ((long) player.damGoc - (long) 100) * ((long) 30 + ((long) player.damGoc - (long) 100) - (long) 1) / (long) 2 * (long) 100;
+                }
+                if (player.defGoc > 0) {
+                    for (int i = 0; i < player.defGoc; i++) {
+                        player.sumTiemNang += ((long) i + (long) 5) * (long) 100000;
                     }
-                    if (player.mpGoc > 100) {
-                        player.sumTiemNang += ((long) player.mpGoc - (long) 100) / (long) 20 * ((long) 2 * ((long) 100 + (long) 1000) + ((long) player.mpGoc - (long) 100) - (long) 20) / (long) 2;
-                    }
-                    if (player.damGoc > 15) {
-                        player.sumTiemNang += ((long) player.damGoc - (long) 100) * ((long) 30 + ((long) player.damGoc - (long) 100) - (long) 1) / (long) 2 * (long) 100;
-                    }
-                    if (player.defGoc > 0) {
-                        for (int i = 0; i < player.defGoc; i++) {
-                            player.sumTiemNang += ((long) i + (long) 5) * (long) 100000;
-                        }
-                    }
+                }
 //                    if(player.critGoc > 0) {
 //                        for(int i = 1; i <= player.critGoc; i++) {
 //                            long TNCRIT = 50000000L;
@@ -3774,329 +4169,332 @@ public class Player {
 //                        }
 //                    }
 //                    Util.log("TIEM NANG: " + player.sumTiemNang);
-                    JSONArray jar = (JSONArray) JSONValue.parse(rs.getString("skill"));
-                    JSONObject job;
-                    int index;
-                    if (jar != null) {
-                        job = null;
-                        for (index = 0; index < jar.size(); index++) {
-                            Skill skill = new Skill();
+                JSONArray jar = (JSONArray) JSONValue.parse(rs.getString("skill"));
+                JSONObject job;
+                int index;
+                if (jar != null) {
+                    job = null;
+                    for (index = 0; index < jar.size(); index++) {
+                        Skill skill = new Skill();
 
-                            Skill Skill = new Skill();
-                            job = (JSONObject) JSONValue.parse(jar.get(index).toString());
-                            int id = Integer.parseInt(job.get("id").toString());
-                            int level = Integer.parseInt(job.get("point").toString());
-                            long lastuse = Long.parseLong(job.get("lastuse").toString());
-                            //SET UP SKILL
-                            Skill _SKILLTEMP = player.nClass.getSkillTemplate(id).skills[level - 1];
-                            skill.template = _SKILLTEMP.template;
-                            skill.skillId = _SKILLTEMP.skillId;
-                            skill.point = _SKILLTEMP.point;
-                            skill.powRequire = _SKILLTEMP.powRequire;
-                            skill.coolDown = _SKILLTEMP.coolDown;
-                            skill.lastTimeUseThisSkill = lastuse;
-                            skill.dx = _SKILLTEMP.dx;
-                            skill.dy = _SKILLTEMP.dy;
-                            skill.maxFight = _SKILLTEMP.maxFight;
-                            skill.manaUse = _SKILLTEMP.manaUse;
-                            skill.options = _SKILLTEMP.options;
-                            skill.paintCanNotUseSkill = _SKILLTEMP.paintCanNotUseSkill;
-                            skill.damage = _SKILLTEMP.damage;
-                            skill.moreInfo = _SKILLTEMP.moreInfo;
-                            skill.price = _SKILLTEMP.price;
-                            skill.genderSkill = (byte) player.gender;
-                            skill.tempSkillId = (short) _SKILLTEMP.template.id;
+                        Skill Skill = new Skill();
+                        job = (JSONObject) JSONValue.parse(jar.get(index).toString());
+                        int id = Integer.parseInt(job.get("id").toString());
+                        int level = Integer.parseInt(job.get("point").toString());
+                        long lastuse = Long.parseLong(job.get("lastuse").toString());
+                        //SET UP SKILL
+                        Skill _SKILLTEMP = player.nClass.getSkillTemplate(id).skills[level - 1];
+                        skill.template = _SKILLTEMP.template;
+                        skill.skillId = _SKILLTEMP.skillId;
+                        skill.point = _SKILLTEMP.point;
+                        skill.powRequire = _SKILLTEMP.powRequire;
+                        skill.coolDown = _SKILLTEMP.coolDown;
+                        skill.lastTimeUseThisSkill = lastuse;
+                        skill.dx = _SKILLTEMP.dx;
+                        skill.dy = _SKILLTEMP.dy;
+                        skill.maxFight = _SKILLTEMP.maxFight;
+                        skill.manaUse = _SKILLTEMP.manaUse;
+                        skill.options = _SKILLTEMP.options;
+                        skill.paintCanNotUseSkill = _SKILLTEMP.paintCanNotUseSkill;
+                        skill.damage = _SKILLTEMP.damage;
+                        skill.moreInfo = _SKILLTEMP.moreInfo;
+                        skill.price = _SKILLTEMP.price;
+                        skill.genderSkill = (byte) player.gender;
+                        skill.tempSkillId = (short) _SKILLTEMP.template.id;
 
-                            player.skill.add(skill);
-                            //END SET UP SKILL
-                            Skill.skillId = (short) id;
-                            Skill.point = level;
-                            player.listSkill.add(Skill);
-                            job.clear();
-                        }
+                        player.skill.add(skill);
+                        //END SET UP SKILL
+                        Skill.skillId = (short) id;
+                        Skill.point = level;
+                        player.listSkill.add(Skill);
+                        job.clear();
+                    }
 //                        for(Skill ss: player.skill) {
 //                            Util.log("SKILL: " + ss.template.name + ", " + ss.lastTimeUseThisSkill + ", " + ss.coolDown);
 //                        }
-                    }
+                }
 
-                    player.maxluggage = rs.getByte("maxluggage");
-                    player.maxBox = rs.getByte("maxbox");
-                    JSONObject job2 = null;
-                    player.ItemBag = new Item[player.maxluggage];
-                    jar = (JSONArray) JSONValue.parse(rs.getString("itembag"));
-                    int j;
-                    if (jar != null) {
-                        for (j = 0; j < jar.size(); ++j) {
-                            if (j >= player.maxluggage) {
-                                break;
-                            }
+                player.maxluggage = rs.getByte("maxluggage");
+                player.maxBox = rs.getByte("maxbox");
+                JSONObject job2 = null;
+                player.ItemBag = new Item[player.maxluggage];
+                jar = (JSONArray) JSONValue.parse(rs.getString("itembag"));
+                int j;
+                if (jar != null) {
+                    for (j = 0; j < jar.size(); ++j) {
+                        if (j >= player.maxluggage) {
+                            break;
+                        }
 //                        for (j = 0; j < player.maxluggage; j++) {
-                            job2 = (JSONObject) jar.get(j);
-                            index = Byte.parseByte(job2.get("index").toString());
-                            player.ItemBag[index] = ItemTemplate.parseItem(jar.get(j).toString());
-                            job2.clear();
-                        }
-                    }
-
-                    player.ItemBox = new Item[player.maxBox];
-                    jar = (JSONArray) JSONValue.parse(rs.getString("itembox"));
-                    if (jar != null) {
-                        for (j = 0; j < jar.size(); ++j) {
-                            if (j >= player.maxBox) {
-                                break;
-                            }
-                            job2 = (JSONObject) jar.get(j);
-                            index = Byte.parseByte(job2.get("index").toString());
-                            player.ItemBox[index] = ItemTemplate.parseItem(jar.get(j).toString());
-                            job2.clear();
-                        }
-                    }
-
-                    player.ItemBody = new Item[10];
-                    jar = (JSONArray) JSONValue.parse(rs.getString("itembody"));
-                    if (jar != null) {
-                        for (j = 0; j < jar.size(); ++j) {
-                            if (j >= 10) {
-                                break;
-                            }
-                            job2 = (JSONObject) jar.get(j);
-                            index = Byte.parseByte(job2.get("index").toString());
-                            player.ItemBody[index] = ItemTemplate.parseItem(jar.get(j).toString());
-                            job2.clear();
-                        }
-                    }
-
-                    jar = (JSONArray) JSONValue.parse(rs.getString("amulet"));
-                    if (jar != null) {
-                        for (j = 0; j < jar.size(); ++j) {
-                            Amulet _amulet = new Amulet();
-                            job2 = (JSONObject) jar.get(j);
-                            _amulet.id = Integer.parseInt(job2.get("id").toString());
-                            _amulet.timeEnd = Long.parseLong(job2.get("point").toString());
-                            player.listAmulet.add(_amulet);
-                            job2.clear();
-                        }
-                    }
-                    //THONG TIN DAU THAN
-                    jar = (JSONArray) JSONValue.parse(rs.getString("bean"));
-                    if (jar != null) {
-                        for (j = 0; j < jar.size(); ++j) {
-                            job2 = (JSONObject) jar.get(j);
-                            player.levelTree = Byte.parseByte(job2.get("level").toString());
-                            player.lastTimeTree = Long.parseLong(job2.get("time").toString());
-                            player.maxBean = Byte.parseByte(job2.get("max").toString());
-                            if (player.lastTimeTree > System.currentTimeMillis()) {
-                                player.upMagicTree = true;
-                            }
-                            job2.clear();
-                        }
-                    }
-                    //THONG TIN TASK
-                    jar = (JSONArray) JSONValue.parse(rs.getString("task"));
-                    if (jar != null) {
-                        job2 = (JSONObject) jar.get(0);
-                        Task _task = new Task();
-                        _task.setupTask(TaskManager.gI().getTasks().get(player.taskId), player.gender);
-                        _task.index = Byte.parseByte(job2.get("index").toString());
-                        _task.count = Short.parseShort(job2.get("count").toString());
-                        player.crrTask = _task;
+                        job2 = (JSONObject) jar.get(j);
+                        index = Byte.parseByte(job2.get("index").toString());
+                        player.ItemBag[index] = ItemTemplate.parseItem(jar.get(j).toString());
                         job2.clear();
                     }
-                    //THONG TIN NGOC RONG SAO DEN
-                    jar = (JSONArray) JSONValue.parse(rs.getString("starblack"));
-                    if (jar != null) {
-                        for (j = 0; j < jar.size(); ++j) {
-                            job2 = (JSONObject) jar.get(j);
-                            player.timeNRSD[j] = Long.parseLong(job2.get("time").toString());
-                            player.timeEndNRSD[j] = Long.parseLong(job2.get("timeend").toString());
-                            if (System.currentTimeMillis() < player.timeEndNRSD[j]) {
-                                player.indexNRSD.add((byte) j);
-                            }
-                            job2.clear();
+                }
+
+                player.ItemBox = new Item[player.maxBox];
+                jar = (JSONArray) JSONValue.parse(rs.getString("itembox"));
+                if (jar != null) {
+                    for (j = 0; j < jar.size(); ++j) {
+                        if (j >= player.maxBox) {
+                            break;
                         }
+                        job2 = (JSONObject) jar.get(j);
+                        index = Byte.parseByte(job2.get("index").toString());
+                        player.ItemBox[index] = ItemTemplate.parseItem(jar.get(j).toString());
+                        job2.clear();
                     }
-                    //THONG TIN ITEM DANG DUNG NEU CO
-                    jar = (JSONArray) JSONValue.parse(rs.getString("itemuse"));
-                    if (jar != null) {
-                        for (j = 0; j < jar.size(); ++j) {
-                            job2 = (JSONObject) jar.get(j);
-                            int idITEM = Integer.parseInt(job2.get("id").toString());
-                            Service.gI().itemBuffLogin(player, idITEM, Long.parseLong(job2.get("time").toString()));
-                            job2.clear();
+                }
+
+                player.ItemBody = new Item[10];
+                jar = (JSONArray) JSONValue.parse(rs.getString("itembody"));
+                if (jar != null) {
+                    for (j = 0; j < jar.size(); ++j) {
+                        if (j >= 10) {
+                            break;
                         }
+                        job2 = (JSONObject) jar.get(j);
+                        index = Byte.parseByte(job2.get("index").toString());
+                        player.ItemBody[index] = ItemTemplate.parseItem(jar.get(j).toString());
+                        job2.clear();
                     }
-                    //THONG TIN BAN BE
-                    jar = (JSONArray) JSONValue.parse(rs.getString("friends"));
-                    if (jar != null) {
-                        for (j = 0; j < jar.size(); ++j) {
-                            job2 = (JSONObject) jar.get(j);
-                            int idFriend = Integer.parseInt(job2.get("id").toString());
-                            boolean isOn = PlayerManger.gI().getPlayerByUserID(idFriend) != null ? true : false;
-                            Friend _friend = new Friend.Builder(idFriend)
-                                    .withHead(Short.parseShort(job2.get("head").toString()))
-                                    .withHeadICON(Short.parseShort(job2.get("headICON").toString()))
-                                    .withBody(Short.parseShort(job2.get("body").toString()))
-                                    .withLeg(Short.parseShort(job2.get("leg").toString()))
-                                    .withBag(Byte.parseByte(job2.get("bag").toString()))
-                                    .withName(job2.get("name").toString())
-                                    .isOnline(isOn)
-                                    .withPower(job2.get("strPower").toString())
-                                    .build();
-                            player.friends.add(_friend);
-                            job2.clear();
-                        }
+                }
+
+                jar = (JSONArray) JSONValue.parse(rs.getString("amulet"));
+                if (jar != null) {
+                    for (j = 0; j < jar.size(); ++j) {
+                        Amulet _amulet = new Amulet();
+                        job2 = (JSONObject) jar.get(j);
+                        _amulet.id = Integer.parseInt(job2.get("id").toString());
+                        _amulet.timeEnd = Long.parseLong(job2.get("point").toString());
+                        player.listAmulet.add(_amulet);
+                        job2.clear();
                     }
-                    //THONG TIN RADA CARD
-                    jar = (JSONArray) JSONValue.parse(rs.getString("card"));
-                    RadaCard card = null;
-                    player.cCardUse = (byte) 0;
-                    player.hpRada = 0;
-                    player.kiRada = 0;
-                    player.defRada = 0;
-                    player.damRada = 0;
-                    player.sdRada = 0;
-                    if (jar != null) {
-                        for (j = 0; j < jar.size(); ++j) {
-                            job2 = (JSONObject) jar.get(j);
-                            card = new RadaCard();
-                            card.buildCard(Short.parseShort(job2.get("id").toString()), Byte.parseByte(job2.get("amount").toString()), Byte.parseByte(job2.get("level").toString()), Byte.parseByte(job2.get("use").toString()));
-                            if (card.set_use == (byte) 1 && player.cCardUse <= (byte) 5) {
-                                player.cCardUse = (byte) (player.cCardUse + 1) > (byte) 5 ? (byte) 5 : (byte) (player.cCardUse + 1);
-                                RadaCardService.gI().updateBuffRada(player, card);
-                            }
-                            if (card.id == (short) 956 && card.level >= (byte) 1 && card.set_use == (byte) 1) {
-                                player.idAura = (short) 0;
-                            }
-                            player.cards.add(card);
-                            job2.clear();
-                        }
-                    }
-                    //GET NOI TAI TU DATABASE
-                    jar = (JSONArray) JSONValue.parse(rs.getString("noitai"));
-                    if (jar != null && jar.size() > 0) {
-                        job2 = (JSONObject) jar.get(0);
-                        player.noiTai = new NoiTai(Byte.parseByte(job2.get("id").toString()), Short.parseShort(job2.get("param").toString()));
-                        if (player.gender == 0) {
-                            player.noiTai.idIcon = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).idIcon;
-                            player.noiTai.min = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).min;
-                            player.noiTai.max = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).max;
-                            player.noiTai.idSkill = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).idSkill;
-                            player.noiTai.infoTemp = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).infoTemp;
-                            player.noiTai.infoHead = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).infoHead;
-                            player.noiTai.infoFoot = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).infoFoot;
-                        } else if (player.gender == 1) {
-                            player.noiTai.idIcon = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).idIcon;
-                            player.noiTai.min = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).min;
-                            player.noiTai.max = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).max;
-                            player.noiTai.idSkill = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).idSkill;
-                            player.noiTai.infoTemp = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).infoTemp;
-                            player.noiTai.infoHead = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).infoHead;
-                            player.noiTai.infoFoot = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).infoFoot;
-                        } else {
-                            player.noiTai.idIcon = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).idIcon;
-                            player.noiTai.min = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).min;
-                            player.noiTai.max = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).max;
-                            player.noiTai.idSkill = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).idSkill;
-                            player.noiTai.infoTemp = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).infoTemp;
-                            player.noiTai.infoHead = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).infoHead;
-                            player.noiTai.infoFoot = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).infoFoot;
+                }
+                //THONG TIN DAU THAN
+                jar = (JSONArray) JSONValue.parse(rs.getString("bean"));
+                if (jar != null) {
+                    for (j = 0; j < jar.size(); ++j) {
+                        job2 = (JSONObject) jar.get(j);
+                        player.levelTree = Byte.parseByte(job2.get("level").toString());
+                        player.lastTimeTree = Long.parseLong(job2.get("time").toString());
+                        player.maxBean = Byte.parseByte(job2.get("max").toString());
+                        if (player.lastTimeTree > System.currentTimeMillis()) {
+                            player.upMagicTree = true;
                         }
                         job2.clear();
+                    }
+                }
+                //THONG TIN TASK
+                jar = (JSONArray) JSONValue.parse(rs.getString("task"));
+                if (jar != null) {
+                    job2 = (JSONObject) jar.get(0);
+                    Task _task = new Task();
+                    _task.setupTask(TaskManager.gI().getTasks().get(player.taskId), player.gender);
+                    _task.index = Byte.parseByte(job2.get("index").toString());
+                    _task.count = Short.parseShort(job2.get("count").toString());
+                    player.crrTask = _task;
+                    job2.clear();
+                }
+                //THONG TIN NGOC RONG SAO DEN
+                jar = (JSONArray) JSONValue.parse(rs.getString("starblack"));
+                if (jar != null) {
+                    for (j = 0; j < jar.size(); ++j) {
+                        job2 = (JSONObject) jar.get(j);
+                        player.timeNRSD[j] = Long.parseLong(job2.get("time").toString());
+                        player.timeEndNRSD[j] = Long.parseLong(job2.get("timeend").toString());
+                        if (System.currentTimeMillis() < player.timeEndNRSD[j]) {
+                            player.indexNRSD.add((byte) j);
+                        }
+                        job2.clear();
+                    }
+                }
+                //THONG TIN ITEM DANG DUNG NEU CO
+                jar = (JSONArray) JSONValue.parse(rs.getString("itemuse"));
+                if (jar != null) {
+                    for (j = 0; j < jar.size(); ++j) {
+                        job2 = (JSONObject) jar.get(j);
+                        int idITEM = Integer.parseInt(job2.get("id").toString());
+                        Service.gI().itemBuffLogin(player, idITEM, Long.parseLong(job2.get("time").toString()));
+                        job2.clear();
+                    }
+                }
+                //THONG TIN BAN BE
+                jar = (JSONArray) JSONValue.parse(rs.getString("friends"));
+                if (jar != null) {
+                    for (j = 0; j < jar.size(); ++j) {
+                        job2 = (JSONObject) jar.get(j);
+                        int idFriend = Integer.parseInt(job2.get("id").toString());
+                        boolean isOn = PlayerManger.gI().getPlayerByUserID(idFriend) != null ? true : false;
+                        Friend _friend = new Friend.Builder(idFriend)
+                                .withHead(Short.parseShort(job2.get("head").toString()))
+                                .withHeadICON(Short.parseShort(job2.get("headICON").toString()))
+                                .withBody(Short.parseShort(job2.get("body").toString()))
+                                .withLeg(Short.parseShort(job2.get("leg").toString()))
+                                .withBag(Byte.parseByte(job2.get("bag").toString()))
+                                .withName(job2.get("name").toString())
+                                .isOnline(isOn)
+                                .withPower(job2.get("strPower").toString())
+                                .build();
+                        player.friends.add(_friend);
+                        job2.clear();
+                    }
+                }
+                //THONG TIN RADA CARD
+                jar = (JSONArray) JSONValue.parse(rs.getString("card"));
+                RadaCard card = null;
+                player.cCardUse = (byte) 0;
+                player.hpRada = 0;
+                player.kiRada = 0;
+                player.defRada = 0;
+                player.damRada = 0;
+                player.sdRada = 0;
+                if (jar != null) {
+                    for (j = 0; j < jar.size(); ++j) {
+                        job2 = (JSONObject) jar.get(j);
+                        card = new RadaCard();
+                        card.buildCard(Short.parseShort(job2.get("id").toString()), Byte.parseByte(job2.get("amount").toString()), Byte.parseByte(job2.get("level").toString()), Byte.parseByte(job2.get("use").toString()));
+                        if (card.set_use == (byte) 1 && player.cCardUse <= (byte) 5) {
+                            player.cCardUse = (byte) (player.cCardUse + 1) > (byte) 5 ? (byte) 5 : (byte) (player.cCardUse + 1);
+                            RadaCardService.gI().updateBuffRada(player, card);
+                        }
+                        if (card.id == (short) 956 && card.level >= (byte) 1 && card.set_use == (byte) 1) {
+                            player.idAura = (short) 0;
+                        }
+                        player.cards.add(card);
+                        job2.clear();
+                    }
+                }
+                //GET NOI TAI TU DATABASE
+                jar = (JSONArray) JSONValue.parse(rs.getString("noitai"));
+                if (jar != null && jar.size() > 0) {
+                    job2 = (JSONObject) jar.get(0);
+                    player.noiTai = new NoiTai(Byte.parseByte(job2.get("id").toString()), Short.parseShort(job2.get("param").toString()));
+                    if (player.gender == 0) {
+                        player.noiTai.idIcon = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).idIcon;
+                        player.noiTai.min = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).min;
+                        player.noiTai.max = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).max;
+                        player.noiTai.idSkill = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).idSkill;
+                        player.noiTai.infoTemp = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).infoTemp;
+                        player.noiTai.infoHead = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).infoHead;
+                        player.noiTai.infoFoot = NoiTaiTemplate.listNoiTaiTD.get(player.noiTai.id).infoFoot;
+                    } else if (player.gender == 1) {
+                        player.noiTai.idIcon = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).idIcon;
+                        player.noiTai.min = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).min;
+                        player.noiTai.max = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).max;
+                        player.noiTai.idSkill = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).idSkill;
+                        player.noiTai.infoTemp = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).infoTemp;
+                        player.noiTai.infoHead = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).infoHead;
+                        player.noiTai.infoFoot = NoiTaiTemplate.listNoiTaiNM.get(player.noiTai.id).infoFoot;
                     } else {
-                        player.noiTai = new NoiTai((byte) 0, (short) 0);
-                        player.noiTai.idIcon = (short) 5223;
-                        player.noiTai.infoTemp = "Chưa có nội tại";
-                        player.noiTai.infoHead = "Chưa có nội tại";
-                        player.noiTai.infoFoot = "Chưa có nội tại";
+                        player.noiTai.idIcon = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).idIcon;
+                        player.noiTai.min = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).min;
+                        player.noiTai.max = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).max;
+                        player.noiTai.idSkill = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).idSkill;
+                        player.noiTai.infoTemp = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).infoTemp;
+                        player.noiTai.infoHead = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).infoHead;
+                        player.noiTai.infoFoot = NoiTaiTemplate.listNoiTaiXD.get(player.noiTai.id).infoFoot;
                     }
-                    player.countMoNoiTai = (byte) (rs.getInt("count_noitai"));
+                    job2.clear();
+                } else {
+                    player.noiTai = new NoiTai((byte) 0, (short) 0);
+                    player.noiTai.idIcon = (short) 5223;
+                    player.noiTai.infoTemp = "Chưa có nội tại";
+                    player.noiTai.infoHead = "Chưa có nội tại";
+                    player.noiTai.infoFoot = "Chưa có nội tại";
+                }
+                player.countMoNoiTai = (byte) (rs.getInt("count_noitai"));
 
-                    rs = SQLManager.stat.executeQuery("SELECT * FROM `pet` WHERE `account_id`=" + account_id + ";");
-                    if (rs != null && rs.first()) {
-                        player.havePet = 1;
-                        player.detu = new Detu();
+                rs = SQLManager.stat.executeQuery("SELECT * FROM `pet` WHERE `account_id`=" + account_id + ";");
+                if (rs != null && rs.first()) {
+                    player.havePet = 1;
+                    player.detu = new Detu();
 //                        player.detu.id = (-player.id - 100000);
-                        player.detu.name = rs.getString("name");
-                        player.detu.head = rs.getShort("head");
-                        player.detu.gender = rs.getByte("gender");
-                        player.detu.power = rs.getLong("power");
-                        player.detu.hpGoc = rs.getInt("hp_goc");
-                        player.detu.mpGoc = rs.getInt("mp_goc");
-                        player.detu.hp = player.detu.hpGoc;
-                        player.detu.mp = player.detu.mpGoc;
-                        player.detu.damGoc = rs.getInt("dame_goc");
-                        player.detu.defGoc = rs.getShort("def_goc");
-                        player.detu.critGoc = rs.getByte("crit_goc");
-                        player.detu.tiemNang = rs.getLong("tiem_nang");
-                        player.detu.limitPower = rs.getByte("limit_power");
-                        player.detu.hpFull = rs.getInt("hp_goc");
-                        player.detu.mpFull = rs.getInt("mp_goc");
-                        player.detu.damFull = rs.getInt("dame_goc");
-                        player.detu.defFull = rs.getShort("def_goc");
-                        player.detu.critFull = rs.getByte("crit_goc");
-                        player.detu.stamina = rs.getShort("stamina");
+                    player.detu.name = rs.getString("name");
+                    player.detu.head = rs.getShort("head");
+                    player.detu.gender = rs.getByte("gender");
+                    player.detu.power = rs.getLong("power");
+                    player.detu.hpGoc = rs.getInt("hp_goc");
+                    player.detu.mpGoc = rs.getInt("mp_goc");
+                    player.detu.hp = player.detu.hpGoc;
+                    player.detu.mp = player.detu.mpGoc;
+                    player.detu.damGoc = rs.getInt("dame_goc");
+                    player.detu.defGoc = rs.getShort("def_goc");
+                    player.detu.critGoc = rs.getByte("crit_goc");
+                    player.detu.tiemNang = rs.getLong("tiem_nang");
+                    player.detu.limitPower = rs.getByte("limit_power");
+                    player.detu.hpFull = rs.getInt("hp_goc");
+                    player.detu.mpFull = rs.getInt("mp_goc");
+                    player.detu.damFull = rs.getInt("dame_goc");
+                    player.detu.defFull = rs.getShort("def_goc");
+                    player.detu.critFull = rs.getByte("crit_goc");
+                    player.detu.stamina = rs.getShort("stamina");
 //                        player.detu.maxStamina = (short)1000;
-                        player.detu.isPet = true;
-                        if (player.detu.power < 1500000) {
-                            player.detu.isSoSinh = true;
-                        }
-                        if (rs.getByte("ismabu") == 1) {
-                            player.detu.isMabu = true;
-                        }
-                        //CHECK DE TU IS DIE
-                        if (rs.getByte("isdie") == 1) {
-                            player.detu.isdie = true;
-                            player.detu.hp = 0;
-                        }
-                        jar = (JSONArray) JSONValue.parse(rs.getString("skill"));
+                    player.detu.isPet = true;
+                    if (player.detu.power < 1500000) {
+                        player.detu.isSoSinh = true;
+                    }
+                    if (rs.getByte("ismabu") == 1) {
+                        player.detu.isMabu = true;
+                    }
+                    if (rs.getByte("isberus") == 1) {
+                        player.detu.isBerus = true;
+                    }
+                    //CHECK DE TU IS DIE
+                    if (rs.getByte("isdie") == 1) {
+                        player.detu.isdie = true;
+                        player.detu.hp = 0;
+                    }
+                    jar = (JSONArray) JSONValue.parse(rs.getString("skill"));
 //                        JSONObject job;
-                        int indexPet;
-                        if (jar != null) {
-                            job = null;
-                            SkillData skilldata = new SkillData();
-                            Skill templateSkilldetu = null;
-                            for (indexPet = 0; indexPet < jar.size(); indexPet++) {
+                    int indexPet;
+                    if (jar != null) {
+                        job = null;
+                        SkillData skilldata = new SkillData();
+                        Skill templateSkilldetu = null;
+                        for (indexPet = 0; indexPet < jar.size(); indexPet++) {
 //                                Skill skillpet = new Skill();
-                                Skill Skillpet = new Skill();
-                                job = (JSONObject) JSONValue.parse(jar.get(indexPet).toString());
-                                int id = Integer.parseInt(job.get("id").toString());
-                                int level = Integer.parseInt(job.get("point").toString());
-                                int gender = Integer.parseInt(job.get("gender").toString());
-                                int template = Integer.parseInt(job.get("tempid").toString());
+                            Skill Skillpet = new Skill();
+                            job = (JSONObject) JSONValue.parse(jar.get(indexPet).toString());
+                            int id = Integer.parseInt(job.get("id").toString());
+                            int level = Integer.parseInt(job.get("point").toString());
+                            int gender = Integer.parseInt(job.get("gender").toString());
+                            int template = Integer.parseInt(job.get("tempid").toString());
 //                                skillpet = player.nClass.getSkillTemplate(id).skills[level - 1];
 //                                player.detu.skill.add(skillpet);
 
-                                Skillpet.skillId = (short) id;
-                                Skillpet.point = level;
-                                Skillpet.genderSkill = (byte) gender;
-                                Skillpet.tempSkillId = (short) template;
-                                //LAY TIME HIEN TAI KHONG CHO OUT RA VAO LAI DE HOA KHI LUON
-                                Skillpet.lastTimeUseThisSkill = System.currentTimeMillis();
-                                player.detu.listSkill.add(Skillpet);
+                            Skillpet.skillId = (short) id;
+                            Skillpet.point = level;
+                            Skillpet.genderSkill = (byte) gender;
+                            Skillpet.tempSkillId = (short) template;
+                            //LAY TIME HIEN TAI KHONG CHO OUT RA VAO LAI DE HOA KHI LUON
+                            Skillpet.lastTimeUseThisSkill = System.currentTimeMillis();
+                            player.detu.listSkill.add(Skillpet);
 
-                                job.clear();
-                            }
+                            job.clear();
                         }
-
-                        player.detu.ItemBody = new Item[7];
-                        jar = (JSONArray) JSONValue.parse(rs.getString("itembody"));
-                        if (jar != null) {
-                            for (j = 0; j < jar.size(); ++j) {
-                                job2 = (JSONObject) jar.get(j);
-                                indexPet = Byte.parseByte(job2.get("index").toString());
-                                player.detu.ItemBody[indexPet] = ItemTemplate.parseItem(jar.get(j).toString());
-                                job2.clear();
-                            }
-                        }
-                    } else {
-                        player.detu = null;
                     }
-                    rs.close();
-                    return player;
+
+                    player.detu.ItemBody = new Item[7];
+                    jar = (JSONArray) JSONValue.parse(rs.getString("itembody"));
+                    if (jar != null) {
+                        for (j = 0; j < jar.size(); ++j) {
+                            job2 = (JSONObject) jar.get(j);
+                            indexPet = Byte.parseByte(job2.get("index").toString());
+                            player.detu.ItemBody[indexPet] = ItemTemplate.parseItem(jar.get(j).toString());
+                            job2.clear();
+                        }
+                    }
                 } else {
-                    return null;
+                    player.detu = null;
                 }
+                rs.close();
+                return player;
+            } else {
+                return null;
             }
+            //}
         } catch (Exception var23) {
             var23.printStackTrace();
             return null;
@@ -4108,7 +4506,7 @@ public class Player {
         try {
             byte index = this.getIndexBagNotItem();
 
-            if (getBagNull() == 0) {
+            if (getBagNull() <= 0) {
                 this.sendAddchatYellow("Hành trang không đủ chỗ trống!");
                 return false;
             } else {
@@ -4127,7 +4525,7 @@ public class Player {
     //CHECK CAI TRANG CHONG CAI LANH
     public boolean checkCTCold() {
         if (ItemBody[5] != null && (ItemBody[5].template.id == 450 || ItemBody[5].template.id == 630 || ItemBody[5].template.id == 631 || ItemBody[5].template.id == 632
-                || ItemBody[5].template.id == 878 || ItemBody[5].template.id == 879)) {
+                || ItemBody[5].template.id == 878 || ItemBody[5].template.id == 879 || ItemBody[5].template.id >= 386 && ItemBody[5].template.id <= 394)) {
             return true;
         }
         return false;

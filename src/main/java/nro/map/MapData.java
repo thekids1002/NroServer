@@ -13,8 +13,9 @@ public class MapData {
     public static ArrayList<WayPoint> loadListWayPoint(int mapId) {
         ArrayList<WayPoint> wayPoints = new ArrayList<>();
 //        Connection conn = DBService.gI().getConnectionLocal();
+        Connection conn = null;
         try {
-            Connection conn = DataSource.getConnection();
+            conn = DataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM map_waypoint WHERE map_id=?");
             ps.setInt(1, mapId);
             ResultSet rs = ps.executeQuery();
@@ -35,6 +36,15 @@ public class MapData {
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return wayPoints;
     }

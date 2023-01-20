@@ -7,11 +7,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DataSource {
-    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/ngocrong";
+    private static final String DB_URL = "jdbc:mysql://127.0.0.1/ngocrong";
     private static final String USER = "root";
     private static final String PASS = "";
     private static final HikariConfig config = new HikariConfig();
-    private static final HikariDataSource ds;
+    private static HikariDataSource ds;
 
     public static Connection connLogin = null;
     public static Connection connSaveData = null;
@@ -23,12 +23,14 @@ public class DataSource {
     public static boolean flagUpdate = true;
     public static boolean flagCreate = true;
 
+    public static int maximumPoolSize = 100;
+
     static {
         config.setJdbcUrl(DB_URL);
         config.setUsername(USER);
         config.setPassword(PASS);
         config.setAutoCommit(false);
-        config.setMaximumPoolSize(100);
+        config.setMaximumPoolSize(maximumPoolSize);
         config.setConnectionTimeout(3000);
         config.addDataSourceProperty("cachePrepStmts", "true");
 //        config.addDataSourceProperty("prepStmtCacheSize", "250");
@@ -52,7 +54,7 @@ public class DataSource {
 
     public static Connection getConnection() throws SQLException {
 //        System.out.println("SIZE POOL: " + ds.getMaximumPoolSize());
-//        countActiveConnection();
+        countActiveConnection();
         return ds.getConnection();
     }
 
@@ -118,6 +120,20 @@ public class DataSource {
 
     public static void countActiveConnection() {
         int countActive = ds.getHikariPoolMXBean().getActiveConnections();
-        Util.log("countConnectionActive: " + countActive);
+        if(countActive >= maximumPoolSize - 1) {
+            ds.close();
+
+            ds = new HikariDataSource(config);
+
+            try {
+//            connLogin = ds.getConnection();
+                connSaveData = ds.getConnection();
+//            connUpdateLogout = ds.getConnection();
+//            connCreate = ds.getConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+//        Util.log("countConnectionActive: " + countActive);
     }
 }

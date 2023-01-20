@@ -14,70 +14,70 @@ import nro.task.TaskService;
 import nro.card.RadaCardService;
 
 public class useItem {
-    public static void uesItem(Player p, Item item, int index , short id) {
+
+    public static void uesItem(Player p, Item item, int index, short id) {
         try {
             int numbagnull = p.getBagNull();
-            if(item.template.type == (byte)7 && p._canUSEITEM)
-            { //su dung sach vo cong
+            if (item.template.type == (byte) 7 && p._canUSEITEM) { //su dung sach vo cong
                 p._canUSEITEM = false;
-                if(item.template.gender == p.gender || (item.id >= 434 && item.id <= 440)) {
-                    if((((item.id >= 66 && item.id <= 72) || (item.id >= 94 && item.id <= 100) || (item.id >= 115 && item.id <= 121) || (item.id >= 300 && item.id <= 313)
-                    || (item.id >= 488 && item.id <= 501) || (item.id >= 434 && item.id <= 440)) && (p.gender == (byte)0)) ||
-                    (((item.id >= 79 && item.id <= 86) || (item.id >= 101 && item.id <= 107) || (item.id >= 122 && item.id <= 128) || (item.id >= 328 && item.id <= 341)
-                    || (item.id >= 481 && item.id <= 487) || (item.id >= 474 && item.id <= 480) || (item.id >= 434 && item.id <= 440)) && (p.gender == (byte)1)) ||
-                    (((item.id >= 87 && item.id <= 93) || (item.id >= 108 && item.id <= 114) || (item.id >= 129 && item.id <= 135) || (item.id >= 314 && item.id <= 327)
-                    || (item.id >= 502 && item.id <= 515) || (item.id >= 434 && item.id <= 440)) && (p.gender == (byte)2))) {
+                if (item.template.gender == p.gender || (item.id >= 434 && item.id <= 440)) {
+                    if ((((item.id >= 66 && item.id <= 72) || (item.id >= 94 && item.id <= 100) || (item.id >= 115 && item.id <= 121) || (item.id >= 300 && item.id <= 313)
+                            || (item.id >= 488 && item.id <= 501) || (item.id >= 434 && item.id <= 440)) && (p.gender == (byte) 0))
+                            || (((item.id >= 79 && item.id <= 86) || (item.id >= 101 && item.id <= 107) || (item.id >= 122 && item.id <= 128) || (item.id >= 328 && item.id <= 341)
+                            || (item.id >= 481 && item.id <= 487) || (item.id >= 474 && item.id <= 480) || (item.id >= 434 && item.id <= 440)) && (p.gender == (byte) 1))
+                            || (((item.id >= 87 && item.id <= 93) || (item.id >= 108 && item.id <= 114) || (item.id >= 129 && item.id <= 135) || (item.id >= 314 && item.id <= 327)
+                            || (item.id >= 502 && item.id <= 515) || (item.id >= 434 && item.id <= 440)) && (p.gender == (byte) 2))) {
                         String idTempAndPoint = item.getIDTemplateAndLevelSkill(item.id);
                         String[] arrOfStr = idTempAndPoint.split(",", 3);
                         int _tempID = Integer.parseInt(arrOfStr[0]);
                         int _pointID = Integer.parseInt(arrOfStr[1]);
-                        if(p.power >= (Integer.parseInt(arrOfStr[2])*1000000L)) {
+                        if (p.power >= (Integer.parseInt(arrOfStr[2]) * 1000000L)) {
                             Skill skillNew = p.nClass.getSkillTemplate(_tempID).skills[_pointID - 1];
                             boolean isUpSkill = false;
                             boolean isNew = true;
                             boolean chkNotSkillLearn = true;
-                            for(int i = 0; i < p.skill.size(); i++) {
-                                if(((p.skill.get(i).skillId + 1) == skillNew.skillId) && ((p.skill.get(i).point + 1) == skillNew.point)) {
+                            for (int i = 0; i < p.skill.size(); i++) {
+                                if (((p.skill.get(i).skillId + 1) == skillNew.skillId) && ((p.skill.get(i).point + 1) == skillNew.point)) {
                                     Skill newSKILL = new Skill();
                                     newSKILL.newSkill(skillNew);
                                     newSKILL.genderSkill = p.gender;
                                     p.skill.remove(i);
-    //                                p.skill.add(skillNew);
+                                    //                                p.skill.add(skillNew);
                                     p.skill.add(newSKILL);
                                     isUpSkill = true;
                                     isNew = false;
                                 }
                             }
-                            for(int i = 0; i < p.listSkill.size(); i++) {
-                                if(p.listSkill.get(i).skillId == _tempID) {
+                            for (int i = 0; i < p.listSkill.size(); i++) {
+                                if (p.listSkill.get(i).skillId == _tempID) {
                                     Skill _skillnew = new Skill();
-                                    _skillnew.skillId = (short)_tempID;
+                                    _skillnew.skillId = (short) _tempID;
                                     _skillnew.point = _pointID;
                                     p.listSkill.remove(i);
                                     p.listSkill.add(_skillnew);
                                 }
                             }
-                            for(Skill skl: p.listSkill) {
-                                if(skl.skillId == skillNew.skillId) {
+                            for (Skill skl : p.listSkill) {
+                                if (skl.skillId == skillNew.skillId) {
                                     chkNotSkillLearn = false;
                                     break;
                                 }
                             }
-                            if(isNew && chkNotSkillLearn && 
-                            ((p.gender == 0 && (skillNew.skillId == 7 || skillNew.skillId == 42 || skillNew.skillId == 63 || skillNew.skillId == 70 || skillNew.skillId == 128 || skillNew.skillId == 142 || skillNew.skillId == 121))
-                            || (p.gender == 1 && (skillNew.skillId == 21 || skillNew.skillId == 49 || skillNew.skillId == 77 || skillNew.skillId == 84 || skillNew.skillId == 107 || skillNew.skillId == 114 || skillNew.skillId == 121))
-                            || (p.gender == 2 && (skillNew.skillId == 35 || skillNew.skillId == 56 || skillNew.skillId == 91 || skillNew.skillId == 98 || skillNew.skillId == 135 || skillNew.skillId == 149 || skillNew.skillId == 121)))) {
-    //                            Skill _skillnew = new Skill();
-    //                            _skillnew.skillId = (short)_tempID;
-    //                            _skillnew.point = _pointID;
-    //                            p.skill.add(skillNew);
-    //                            p.listSkill.add(_skillnew);
-    //                            isUpSkill = true;
+                            if (isNew && chkNotSkillLearn
+                                    && ((p.gender == 0 && (skillNew.skillId == 7 || skillNew.skillId == 42 || skillNew.skillId == 63 || skillNew.skillId == 70 || skillNew.skillId == 128 || skillNew.skillId == 142 || skillNew.skillId == 121))
+                                    || (p.gender == 1 && (skillNew.skillId == 21 || skillNew.skillId == 49 || skillNew.skillId == 77 || skillNew.skillId == 84 || skillNew.skillId == 107 || skillNew.skillId == 114 || skillNew.skillId == 121))
+                                    || (p.gender == 2 && (skillNew.skillId == 35 || skillNew.skillId == 56 || skillNew.skillId == 91 || skillNew.skillId == 98 || skillNew.skillId == 135 || skillNew.skillId == 149 || skillNew.skillId == 121)))) {
+                                //                            Skill _skillnew = new Skill();
+                                //                            _skillnew.skillId = (short)_tempID;
+                                //                            _skillnew.point = _pointID;
+                                //                            p.skill.add(skillNew);
+                                //                            p.listSkill.add(_skillnew);
+                                //                            isUpSkill = true;
 
                                 Skill _skillnew = new Skill();
                                 Skill Skill = new Skill();
 
-                                Skill _SKILLTEMP = p.nClass.getSkillTemplate((short)_tempID).skills[0];
+                                Skill _SKILLTEMP = p.nClass.getSkillTemplate((short) _tempID).skills[0];
                                 _skillnew.template = _SKILLTEMP.template;
                                 _skillnew.skillId = _SKILLTEMP.skillId;
                                 _skillnew.point = _SKILLTEMP.point;
@@ -93,24 +93,24 @@ public class useItem {
                                 _skillnew.damage = _SKILLTEMP.damage;
                                 _skillnew.moreInfo = _SKILLTEMP.moreInfo;
                                 _skillnew.price = _SKILLTEMP.price;
-                                _skillnew.genderSkill = (byte)p.gender;
-                                _skillnew.tempSkillId = (short)_SKILLTEMP.template.id;
+                                _skillnew.genderSkill = (byte) p.gender;
+                                _skillnew.tempSkillId = (short) _SKILLTEMP.template.id;
 
                                 p.skill.add(_skillnew);
                                 //END SET UP SKILL
-                                Skill.skillId = (short)_SKILLTEMP.template.id;
+                                Skill.skillId = (short) _SKILLTEMP.template.id;
                                 Skill.point = 1;
                                 p.listSkill.add(Skill);
                                 isUpSkill = true;
                             }
-                            if(isUpSkill) {
+                            if (isUpSkill) {
                                 //send update skill
                                 Message m = null;
                                 try {
                                     m = new Message(-30); //subcommand
                                     m.writer().writeByte(2); //type 
                                     m.writer().writeByte(p.skill.size()); // tong co skill da hoc
-                                    for(int i = 0; i < p.skill.size(); i++) {
+                                    for (int i = 0; i < p.skill.size(); i++) {
                                         m.writer().writeShort(p.skill.get(i).skillId); //skill id
                                     }
                                     m.writer().flush();
@@ -119,7 +119,7 @@ public class useItem {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 } finally {
-                                    if(m != null) {
+                                    if (m != null) {
                                         m.cleanup();
                                     }
                                 }
@@ -141,39 +141,37 @@ public class useItem {
                 }
                 p._canUSEITEM = true;
                 return;
-            }
-            else if(item.template.type == (byte)12)
-            { //GOI RONG THAN
-                if(item.id == 14 && item.quantity >= 1 && (p.map.id == 0 || p.map.id == 7 || p.map.id == 14)) { //RONG THAN TRAI DAT 1SAO
+            } else if (item.template.type == (byte) 12) { //GOI RONG THAN
+                if (item.id == 14 && item.quantity >= 1 && (p.map.id == 0 || p.map.id == 7 || p.map.id == 14)) { //RONG THAN TRAI DAT 1SAO
                     p._indexGiaoDich.clear();
-                    p._indexGiaoDich.add((byte)index);
-                    for(byte j = 2; j < 8; j++) {
-                        for(byte i = 0; i < p.ItemBag.length; i++) {
-                            if(p.ItemBag[i] != null && (p.ItemBag[i].template.id == ((int)j + 13)) && (p.ItemBag[i].quantity >= 1)) {
+                    p._indexGiaoDich.add((byte) index);
+                    for (byte j = 2; j < 8; j++) {
+                        for (byte i = 0; i < p.ItemBag.length; i++) {
+                            if (p.ItemBag[i] != null && (p.ItemBag[i].template.id == ((int) j + 13)) && (p.ItemBag[i].quantity >= 1)) {
                                 p._indexGiaoDich.add(i);
                                 break;
                             }
                         }
                     }
-                    if(p._indexGiaoDich.size() == 7) { //SEND GOI RONG THAN
+                    if (p._indexGiaoDich.size() == 7) { //SEND GOI RONG THAN
                         //TRU SO LUONG NGOC RONG TRUOC KHI GOI RONG THAN
-                        for(byte i = 0; i < p._indexGiaoDich.size(); i++) {
+                        for (byte i = 0; i < p._indexGiaoDich.size(); i++) {
                             p.ItemBag[p._indexGiaoDich.get(i)].quantity -= 1;
-                            if(p.ItemBag[p._indexGiaoDich.get(i)].quantity == 0) {
+                            if (p.ItemBag[p._indexGiaoDich.get(i)].quantity == 0) {
                                 p.ItemBag[p._indexGiaoDich.get(i)] = null;
                             }
                         }
                         p._indexGiaoDich.clear();
                         Service.gI().updateItemBag(p);
-                        
+
                         //SEND EFFECT CHO ALL MAP GOI RONG
-                        Service.gI().sendEffectServer((byte)1, (byte)1, (byte)20, p.x, (short)(p.y+150), (short)1, p);
+                        Service.gI().sendEffectServer((byte) 1, (byte) 1, (byte) 20, p.x, (short) (p.y + 150), (short) 1, p);
                         Message m = null;
                         try {
                             m = new Message(-83);
                             m.writer().writeByte(0);
-                            m.writer().writeShort((short)p.map.id); //id map
-                            m.writer().writeShort((short)p.map.bgId); //bg id map
+                            m.writer().writeShort((short) p.map.id); //id map
+                            m.writer().writeShort((short) p.map.bgId); //bg id map
                             m.writer().writeByte(p.zone.id); //khu vuc
                             m.writer().writeInt(p.id);
                             m.writer().writeUTF("");
@@ -181,8 +179,8 @@ public class useItem {
                             m.writer().writeShort(p.y);//y rong
                             m.writer().writeByte(0); //1 la rong namek
                             m.writer().flush();
-                            for(byte i = 0; i < p.zone.players.size(); i++) {
-                                if(p.zone.players.get(i) != null) {
+                            for (byte i = 0; i < p.zone.players.size(); i++) {
+                                if (p.zone.players.get(i) != null) {
                                     p.zone.players.get(i).session.sendMessage(m);
                                 }
                             }
@@ -193,14 +191,14 @@ public class useItem {
                         } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
-                            if(m != null) {
+                            if (m != null) {
                                 m.cleanup();
                             }
                         }
                         //UI CHON DIEU UOC
                         p.menuID = -1;
                         p.menuNPCID = 24;
-                        Menu.doMenuArray(p, 24,"Hãy mau chọn điều ước, hay ngươi muốn một chiếc quần như con lợn Uron kia?",new String[]{"Đẹp trai nhất\nvũ trụ","Găng đang mang\nlên 1 cấp","Đổi skill 2, 3\nđệ tử","Đổi skill 3, 4\nđệ tử", "Găng đệ tử đang\nmang lên 1 cấp", "200 Tr Sức\nmạnh, Tiềm năng","Chí mạng +2%"});
+                        Menu.doMenuArray(p, 24, "Hãy mau chọn điều ước, hay ngươi muốn một chiếc quần như con lợn Uron kia?", new String[]{"Đẹp trai nhất\nvũ trụ", "Găng đang mang\nlên 1 cấp", "Đổi skill 2, 3\nđệ tử", "Đổi skill 3, 4\nđệ tử", "Găng đệ tử đang\nmang lên 1 cấp", "200 Tr Sức\nmạnh, Tiềm năng", "Chí mạng +2%", "Giàu có\n5.000 ngọc"});
                     } else {
                         p.sendAddchatYellow("Hãy thu thập đủ 7 viên ngọc rồng để có thể ước");
                     }
@@ -210,8 +208,7 @@ public class useItem {
                 }
                 return;
             } //ITEM DEO LUNG
-            else if(item.template.type == (byte)11)
-            {
+            else if (item.template.type == (byte) 11) {
 //                if(item.id >= 995 || item.id == 954 || item.id == 955 || (item.id >= 467 && item.id <= 471) || (item.id >= 800 && item.id <= 804)) {
 //                    if(p.itemLung == null || p.itemLung.id != item.id) {
 //                        p.itemLung = item;
@@ -228,20 +225,18 @@ public class useItem {
 //                    }
 //                }
                 return;
-            }
-            else if(item.template.type == (byte)29 || item.template.type == (byte)31)
-            {//MAY DO CAPSULE KY BI VA CAC ITEM BUFF
+            } else if (item.template.type == (byte) 29 || item.template.type == (byte) 31) {//MAY DO CAPSULE KY BI VA CAC ITEM BUFF
                 boolean hasItem = p.isCanUseBuff(item.id);
-                if(((item.id >= 663 && item.id <= 667) || item.id == 465 || item.id == 466 || item.id == 472 || item.id == 473) && p.hasThucAnBuff(item.id)) {
+                if (((item.id >= 663 && item.id <= 667) || item.id == 465 || item.id == 466 || item.id == 472 || item.id == 473) && p.hasThucAnBuff(item.id)) {
                     p.sendAddchatYellow("Chỉ được sử dụng 1 loại thức ăn");
                     return;
                 }
-                if(p.cItemBuff < (byte)5 || (p.cItemBuff == (byte)5 && hasItem)) {
-                    if(!hasItem) {
-                        p.cItemBuff = (byte)(p.cItemBuff + 1) > (byte)5 ? (byte)5 : (byte)(p.cItemBuff + 1);
+                if (p.cItemBuff < (byte) 5 || (p.cItemBuff == (byte) 5 && hasItem)) {
+                    if (!hasItem) {
+                        p.cItemBuff = (byte) (p.cItemBuff + 1) > (byte) 5 ? (byte) 5 : (byte) (p.cItemBuff + 1);
                         p.idItemBuff.add(item.id);
                     }
-                    if(item.id == 379) { //MAY DO CAPSULE
+                    if (item.id == 379) { //MAY DO CAPSULE
                         //send 30p máy dò capsule
                         p.updateQuantityItemBag(index, 1);
                         p.zone.showIconItemUse(p, 2758, 1800);
@@ -251,130 +246,128 @@ public class useItem {
                         // TASK END TDLT NEU HET TIME
                         Timer resetMayDo = new Timer();
                         TimerTask rsMayDo = new TimerTask() {
-                            public void run()
-                            {
-                                p.cItemBuff = (byte)(p.cItemBuff - 1) < (byte)0 ? (byte)0 : (byte)(p.cItemBuff - 1);
+                            public void run() {
+                                p.cItemBuff = (byte) (p.cItemBuff - 1) < (byte) 0 ? (byte) 0 : (byte) (p.cItemBuff - 1);
                                 p.removeIdBuff(item.id);
                                 p.useMayDoCapsule = false;
                                 p.timeEndCSKB = 0;
                                 p.timerCSKB = null;
                                 resetMayDo.cancel();
-                            };
+                            }
+                        ;
                         };
                         resetMayDo.schedule(rsMayDo, 1800000);
                         p.timerCSKB = resetMayDo;
                         return;
-                    } else if(item.id == 381) { //USE CUONG NO
+                    } else if (item.id == 381) { //USE CUONG NO
                         p.updateQuantityItemBag(index, 1);
                         p.zone.showIconItemUse(p, 2754, 600);
-
                         p.useCuongNo = true;
                         p.timeEndCN = (System.currentTimeMillis() + 600000);
-                        if(p.timerCN != null) {
+                        if (p.timerCN != null) {
                             p.timerCN.cancel();
                         }
-
                         Service.gI().loadPoint(p.session, p);
                         // TASK END CUONG NO NEU HET TIME
                         Timer resetCN = new Timer();
                         TimerTask rsCN = new TimerTask() {
-                            public void run()
-                            {
-                                p.cItemBuff = (byte)(p.cItemBuff - 1) < (byte)0 ? (byte)0 : (byte)(p.cItemBuff - 1);
+                            public void run() {
+                                p.cItemBuff = (byte) (p.cItemBuff - 1) < (byte) 0 ? (byte) 0 : (byte) (p.cItemBuff - 1);
                                 p.removeIdBuff(item.id);
                                 p.useCuongNo = false;
                                 p.timeEndCN = 0;
                                 p.timerCN = null;
                                 Service.gI().loadPoint(p.session, p);
                                 resetCN.cancel();
-                            };
+                            }
+                        ;
                         };
                         resetCN.schedule(rsCN, 600000);
                         p.timerCN = resetCN;
                         return;
-                    } else if(item.id == 382) { //USE BO HUYET
+                    } else if (item.id == 382) { //USE BO HUYET
                         p.updateQuantityItemBag(index, 1);
                         p.zone.showIconItemUse(p, 2755, 600);
 
                         p.useBoHuyet = true;
                         p.timeEndBH = (System.currentTimeMillis() + 600000);
-                        if(p.timerBH != null) {
+                        if (p.timerBH != null) {
                             p.timerBH.cancel();
                         }
                         Service.gI().loadPoint(p.session, p);
                         // TASK END BO HUYET NEU HET TIME
                         Timer resetBH = new Timer();
                         TimerTask rsBH = new TimerTask() {
-                            public void run()
-                            {
-                                p.cItemBuff = (byte)(p.cItemBuff - 1) < (byte)0 ? (byte)0 : (byte)(p.cItemBuff - 1);
+                            public void run() {
+                                p.cItemBuff = (byte) (p.cItemBuff - 1) < (byte) 0 ? (byte) 0 : (byte) (p.cItemBuff - 1);
                                 p.removeIdBuff(item.id);
                                 p.useBoHuyet = false;
                                 p.timeEndBH = 0;
                                 p.timerBH = null;
                                 Service.gI().loadPoint(p.session, p);
                                 resetBH.cancel();
-                            };
+                            }
+                        ;
                         };
                         resetBH.schedule(rsBH, 600000);
                         p.timerBH = resetBH;
-                    } else if(item.id == 383) { //USE BO KHI
+                    } else if (item.id == 383) { //USE BO KHI
                         p.updateQuantityItemBag(index, 1);
                         p.zone.showIconItemUse(p, 2756, 600);
 
                         p.useBoKhi = true;
                         p.timeEndBK = (System.currentTimeMillis() + 600000);
-                        if(p.timerBK != null) {
+                        if (p.timerBK != null) {
                             p.timerBK.cancel();
                         }
                         Service.gI().loadPoint(p.session, p);
                         // TASK END BO KHI NEU HET TIME
                         Timer resetBK = new Timer();
                         TimerTask rsBK = new TimerTask() {
-                            public void run()
-                            {
-                                p.cItemBuff = (byte)(p.cItemBuff - 1) < (byte)0 ? (byte)0 : (byte)(p.cItemBuff - 1);
+                            public void run() {
+                                p.cItemBuff = (byte) (p.cItemBuff - 1) < (byte) 0 ? (byte) 0 : (byte) (p.cItemBuff - 1);
                                 p.removeIdBuff(item.id);
                                 p.useBoKhi = false;
                                 p.timeEndBK = 0;
                                 p.timerBK = null;
                                 Service.gI().loadPoint(p.session, p);
                                 resetBK.cancel();
-                            };
+                            }
+                        ;
                         };
                         resetBK.schedule(rsBK, 600000);
                         p.timerBK = resetBK;
-                    } else if(item.id == 384) { //USE GIAP XEN
+                    } else if (item.id == 384) { //USE GIAP XEN
                         p.updateQuantityItemBag(index, 1);
                         p.zone.showIconItemUse(p, 2757, 600);
 
                         p.useGiapXen = true;
                         p.timeEndGX = (System.currentTimeMillis() + 600000);
-                        if(p.timerGX != null) {
+                        if (p.timerGX != null) {
                             p.timerGX.cancel();
                         }
                         // TASK END GIAP XEN NEU HET TIME
                         Timer resetGX = new Timer();
                         TimerTask rsGX = new TimerTask() {
-                            public void run()
-                            {
-                                p.cItemBuff = (byte)(p.cItemBuff - 1) < (byte)0 ? (byte)0 : (byte)(p.cItemBuff - 1);
+                            public void run() {
+                                p.cItemBuff = (byte) (p.cItemBuff - 1) < (byte) 0 ? (byte) 0 : (byte) (p.cItemBuff - 1);
                                 p.removeIdBuff(item.id);
                                 p.useGiapXen = false;
                                 p.timeEndGX = 0;
                                 p.timerGX = null;
                                 resetGX.cancel();
-                            };
+                            }
+                        ;
                         };
                         resetGX.schedule(rsGX, 600000);
                         p.timerGX = resetGX;
-                    } else if(item.id == 385) { //USE AN DANH TODO:// UPDATE SAU
+                    } else if (item.id == 385) { //USE AN DANH TODO:// UPDATE SAU
                         p.updateQuantityItemBag(index, 1);
                         p.zone.showIconItemUse(p, 2760, 600);
-                    } else if(item.id == 1016 || item.id == 1017) { //USE THUOC MO
+                    } else if (item.id == 1016 || item.id == 1017) { //USE THUOC MO
                         p.updateQuantityItemBag(index, 1);
                         int timeThuoc = 600000;
-                        if(item.id == 1017) {
+                        if (item.id == 1017) {
                             p.zone.showIconItemUse(p, 9068, 1800);
                             timeThuoc = 1800000;
                         } else {
@@ -382,8 +375,8 @@ public class useItem {
                         }
 
                         p.useThuocMo = true;
-                        p.timeEndTM = (System.currentTimeMillis() + (long)timeThuoc);
-                        if(p.timerTM != null) {
+                        p.timeEndTM = (System.currentTimeMillis() + (long) timeThuoc);
+                        if (p.timerTM != null) {
                             p.timerTM.cancel();
                         }
 
@@ -391,46 +384,46 @@ public class useItem {
 
                         Timer resetTM = new Timer();
                         TimerTask rsTM = new TimerTask() {
-                            public void run()
-                            {
-                                p.cItemBuff = (byte)(p.cItemBuff - 1) < (byte)0 ? (byte)0 : (byte)(p.cItemBuff - 1);
+                            public void run() {
+                                p.cItemBuff = (byte) (p.cItemBuff - 1) < (byte) 0 ? (byte) 0 : (byte) (p.cItemBuff - 1);
                                 p.removeIdBuff(item.id);
                                 p.useThuocMo = false;
                                 p.timeEndTM = 0;
                                 p.timerTM = null;
                                 Service.gI().loadPoint(p.session, p);
                                 resetTM.cancel();
-                            };
+                            }
+                        ;
                         };
                         resetTM.schedule(rsTM, timeThuoc);
                         p.timerTM = resetTM;
                         //CHECK NHIEM VU THUOC MO
-                        if(p.taskId == (byte)32 && p.crrTask.index == (byte)3) {
+                        if (p.taskId == (byte) 32 && p.crrTask.index == (byte) 3) {
                             TaskService.gI().updateCountTask(p);
                         }
                         return;
-                    } else if((item.id >= 663 && item.id <= 667) || item.id == 465 || item.id == 466 || item.id == 472 || item.id == 473) { //USE THUC AN
+                    } else if ((item.id >= 663 && item.id <= 667) || item.id == 465 || item.id == 466 || item.id == 472 || item.id == 473) { //USE THUC AN
                         p.updateQuantityItemBag(index, 1);
                         int timeThucAn = 600000;
-                        if(item.id >= 663 && item.id <= 667) {
+                        if (item.id >= 663 && item.id <= 667) {
                             p.zone.showIconItemUse(p, (item.id + 5661), 600);
-                            if(p.havePet == 1) {
+                            if (p.havePet == 1) {
                                 p.detu.useThucAn = true;
                             }
                             p.timeEndTA = (System.currentTimeMillis() + 600000);
-                        } else if(item.id == 465){
+                        } else if (item.id == 465) {
                             p.zone.showIconItemUse(p, (item.id + 3577), 3600);
                             p.timeEndTA = (System.currentTimeMillis() + 3600000);
                             timeThucAn = 3600000;
-                        } else if(item.id == 466){
+                        } else if (item.id == 466) {
                             p.zone.showIconItemUse(p, (item.id + 3577), 5400);
                             p.timeEndTA = (System.currentTimeMillis() + 5400000);
                             timeThucAn = 5400000;
-                        } else if(item.id == 472){
+                        } else if (item.id == 472) {
                             p.zone.showIconItemUse(p, (item.id + 3653), 7200);
                             p.timeEndTA = (System.currentTimeMillis() + 7200000);
                             timeThucAn = 7200000;
-                        } else if(item.id == 473){
+                        } else if (item.id == 473) {
                             p.zone.showIconItemUse(p, (item.id + 3653), 9000);
                             p.timeEndTA = (System.currentTimeMillis() + 9000000);
                             timeThucAn = 9000000;
@@ -438,26 +431,26 @@ public class useItem {
 
                         p.useThucAn = true;
                         p.idTAUse = item.id;
-                        
-                        if(p.timerTA != null) {
+
+                        if (p.timerTA != null) {
                             p.timerTA.cancel();
                         }
 
                         Service.gI().loadPoint(p.session, p);
                         Timer resetTA = new Timer();
                         TimerTask rsTA = new TimerTask() {
-                            public void run()
-                            {
-                                p.cItemBuff = (byte)(p.cItemBuff - 1) < (byte)0 ? (byte)0 : (byte)(p.cItemBuff - 1);
+                            public void run() {
+                                p.cItemBuff = (byte) (p.cItemBuff - 1) < (byte) 0 ? (byte) 0 : (byte) (p.cItemBuff - 1);
                                 p.removeIdBuff(item.id);
                                 p.useThucAn = false;
-                                if(p.havePet == 1) {
+                                if (p.havePet == 1) {
                                     p.detu.useThucAn = false;
                                 }
                                 p.timerTA = null;
                                 Service.gI().loadPoint(p.session, p);
                                 resetTA.cancel();
-                            };
+                            }
+                        ;
                         };
                         resetTA.schedule(rsTA, timeThucAn);
                         p.timerTA = resetTA;
@@ -467,8 +460,7 @@ public class useItem {
                 }
                 return;
             } //ITEM BAY VIP
-            else if(item.template.type == (byte)24)
-            {
+            else if (item.template.type == (byte) 24) {
                 if (p.ItemBody[9] != null) {
                     p.ItemBag[index] = p.ItemBody[9];
                 } else {
@@ -479,112 +471,107 @@ public class useItem {
                 Service.gI().updateItemBody(p);
                 p.LOADCAITRANGTOME();
                 return;
-            }
-            else if(item.template.type == (byte)25)
-            { //RADA RO NGOC RONG
-                if(item.id == 361 && p.ItemBag[(byte)index].quantity >= 1) {
-                    p.ItemBag[(byte)index].quantity -= 1;
-                    if(p.ItemBag[(byte)index].quantity == 0) {
-                        p.ItemBag[(byte)index] = null;
+            } else if (item.template.type == (byte) 25) { //RADA RO NGOC RONG
+                if (item.id == 361 && p.ItemBag[(byte) index].quantity >= 1) {
+                    p.ItemBag[(byte) index].quantity -= 1;
+                    if (p.ItemBag[(byte) index].quantity == 0) {
+                        p.ItemBag[(byte) index] = null;
                     }
                     Service.gI().updateItemBag(p);
                     //UI RADA RO NGOC RONG
                     p.menuID = -1;
                     p.menuNPCID = 99;
-                    p.idNrNamecGo = (byte)Util.nextInt(0, 7);
-                    Menu.doMenuArray(p, 24,"1 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[0] +")" + (Server.gI().pNrNamec[0] != "" ? "("+Server.gI().pNrNamec[0]+")" : "") +"\b2 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[1] +")" + (Server.gI().pNrNamec[1] != "" ? "("+Server.gI().pNrNamec[1]+")" : "") +"\b3 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[2] +")" + (Server.gI().pNrNamec[2] != "" ? "("+Server.gI().pNrNamec[0]+")" : "") +"\b4 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[3] +")" + (Server.gI().pNrNamec[3] != "" ? "("+Server.gI().pNrNamec[3]+")" : "") +"\b5 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[4] +")" + (Server.gI().pNrNamec[4] != "" ? "("+Server.gI().pNrNamec[4]+")" : "") +"\b6 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[5] +")" + (Server.gI().pNrNamec[5] != "" ? "("+Server.gI().pNrNamec[5]+")" : "") +"\b7 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[6] +")" + (Server.gI().pNrNamec[6] != "" ? "("+Server.gI().pNrNamec[6]+")" : ""),new String[]{"Đến ngay\nViên "+(byte)(p.idNrNamecGo + 1)+" Sao\n10 ngọc","Đến ngay\nViên "+(byte)(p.idNrNamecGo + 1)+" Sao\n100k vàng","Kết thúc"});
+                    p.idNrNamecGo = (byte) Util.nextInt(0, 7);
+                    Menu.doMenuArray(p, 24, "1 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[0] + ")" + (Server.gI().pNrNamec[0] != "" ? "(" + Server.gI().pNrNamec[0] + ")" : "") + "\b2 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[1] + ")" + (Server.gI().pNrNamec[1] != "" ? "(" + Server.gI().pNrNamec[1] + ")" : "") + "\b3 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[2] + ")" + (Server.gI().pNrNamec[2] != "" ? "(" + Server.gI().pNrNamec[0] + ")" : "") + "\b4 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[3] + ")" + (Server.gI().pNrNamec[3] != "" ? "(" + Server.gI().pNrNamec[3] + ")" : "") + "\b5 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[4] + ")" + (Server.gI().pNrNamec[4] != "" ? "(" + Server.gI().pNrNamec[4] + ")" : "") + "\b6 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[5] + ")" + (Server.gI().pNrNamec[5] != "" ? "(" + Server.gI().pNrNamec[5] + ")" : "") + "\b7 Sao:Namếc ( ? m)(" + Server.gI().nameNrNamec[6] + ")" + (Server.gI().pNrNamec[6] != "" ? "(" + Server.gI().pNrNamec[6] + ")" : ""), new String[]{"Đến ngay\nViên " + (byte) (p.idNrNamecGo + 1) + " Sao\n10 ngọc", "Đến ngay\nViên " + (byte) (p.idNrNamecGo + 1) + " Sao\n100k vàng", "Kết thúc"});
                     return;
                 }
             } // UPDATE SKILL DE TU
-            else if(item.template.type == (byte)27)
-            {
-                if((item.id == 402 || item.id == 403 || item.id == 404 || item.id == 759) && p._canUSEITEM)
-                {
+            else if (item.template.type == (byte) 27) {
+                if ((item.id == 402 || item.id == 403 || item.id == 404 || item.id == 759) && p._canUSEITEM) {
                     p._canUSEITEM = false;
-                    if(p.detu != null && p.havePet == (byte)1)
-                    {
+                    if (p.detu != null && p.havePet == (byte) 1) {
                         boolean isUse = false;
                         short idOld = -1;
                         byte genderOld = -1;
                         short tempOld = -1;
-                        if(p.detu.listSkill.get(0).point < 7 && item.id == 402) {
+                        if (p.detu.listSkill.get(0).point < 7 && item.id == 402) {
                             genderOld = p.detu.listSkill.get(0).genderSkill;
                             tempOld = p.detu.listSkill.get(0).tempSkillId;
-                            if(tempOld == (short)0) {
-                                idOld = (short)0;
-                            } else if(tempOld == (short)2) {
-                                idOld = (short)14;
-                            } else if(tempOld == (short)4) {
-                                idOld = (short)28;
+                            if (tempOld == (short) 0) {
+                                idOld = (short) 0;
+                            } else if (tempOld == (short) 2) {
+                                idOld = (short) 14;
+                            } else if (tempOld == (short) 4) {
+                                idOld = (short) 28;
                             } else {
-                                idOld = (short)14;
+                                idOld = (short) 14;
                             }
                             p.detu.listSkill.get(0).point = (p.detu.listSkill.get(0).point + 1) > 7 ? 7 : (p.detu.listSkill.get(0).point + 1);
-                            p.detu.listSkill.get(0).skillId = ((short)(p.detu.listSkill.get(0).skillId + (short)1) >= idOld && (short)(p.detu.listSkill.get(0).skillId + (short)1) <= (short)(idOld + 6)) ? (short)(p.detu.listSkill.get(0).skillId + (short)1) : (short)(idOld + (short)6);
+                            p.detu.listSkill.get(0).skillId = ((short) (p.detu.listSkill.get(0).skillId + (short) 1) >= idOld && (short) (p.detu.listSkill.get(0).skillId + (short) 1) <= (short) (idOld + 6)) ? (short) (p.detu.listSkill.get(0).skillId + (short) 1) : (short) (idOld + (short) 6);
                             isUse = true;
-                        } else if(p.detu.listSkill.get(1).point < 7 && item.id == 403 && p.detu.power >= 150000000) {
+                        } else if (p.detu.listSkill.get(1).point < 7 && item.id == 403 && p.detu.power >= 150000000) {
                             genderOld = p.detu.listSkill.get(1).genderSkill;
                             tempOld = p.detu.listSkill.get(1).tempSkillId;
-                            if(tempOld == (short)1) {
-                                idOld = (short)7;
-                            } else if(tempOld == (short)3) {
-                                idOld = (short)21;
-                            } else if(tempOld == (short)5) {
-                                idOld = (short)35;
+                            if (tempOld == (short) 1) {
+                                idOld = (short) 7;
+                            } else if (tempOld == (short) 3) {
+                                idOld = (short) 21;
+                            } else if (tempOld == (short) 5) {
+                                idOld = (short) 35;
                             } else {
-                                idOld = (short)21;
+                                idOld = (short) 21;
                             }
                             p.detu.listSkill.get(1).point = (p.detu.listSkill.get(1).point + 1) > 7 ? 7 : (p.detu.listSkill.get(1).point + 1);
-                            p.detu.listSkill.get(1).skillId = ((short)(p.detu.listSkill.get(1).skillId + (short)1) >= idOld && (short)(p.detu.listSkill.get(1).skillId + (short)1) <= (short)(idOld + 6)) ? (short)(p.detu.listSkill.get(1).skillId + (short)1) : (short)(idOld + (short)6);
+                            p.detu.listSkill.get(1).skillId = ((short) (p.detu.listSkill.get(1).skillId + (short) 1) >= idOld && (short) (p.detu.listSkill.get(1).skillId + (short) 1) <= (short) (idOld + 6)) ? (short) (p.detu.listSkill.get(1).skillId + (short) 1) : (short) (idOld + (short) 6);
                             isUse = true;
-                        } else if(p.detu.listSkill.get(2).point < 7 && item.id == 404 && p.detu.power >= 1500000000L) {
+                        } else if (p.detu.listSkill.get(2).point < 7 && item.id == 404 && p.detu.power >= 1500000000L) {
                             genderOld = p.detu.listSkill.get(2).genderSkill;
                             tempOld = p.detu.listSkill.get(2).tempSkillId;
-                            if(tempOld == (short)6) {
-                                idOld = (short)42;
-                            } else if(tempOld == (short)9) {
-                                idOld = (short)63;
-                            } else if(tempOld == (short)8) {
-                                idOld = (short)56;
+                            if (tempOld == (short) 6) {
+                                idOld = (short) 42;
+                            } else if (tempOld == (short) 9) {
+                                idOld = (short) 63;
+                            } else if (tempOld == (short) 8) {
+                                idOld = (short) 56;
                             } else {
-                                idOld = (short)63;
+                                idOld = (short) 63;
                             }
                             p.detu.listSkill.get(2).point = (p.detu.listSkill.get(2).point + 1) > 7 ? 7 : (p.detu.listSkill.get(2).point + 1);
-                            p.detu.listSkill.get(2).skillId = ((short)(p.detu.listSkill.get(2).skillId + (short)1) >= idOld && (short)(p.detu.listSkill.get(2).skillId + (short)1) <= (short)(idOld + 6)) ? (short)(p.detu.listSkill.get(2).skillId + (short)1) : (short)(idOld + (short)6);
+                            p.detu.listSkill.get(2).skillId = ((short) (p.detu.listSkill.get(2).skillId + (short) 1) >= idOld && (short) (p.detu.listSkill.get(2).skillId + (short) 1) <= (short) (idOld + 6)) ? (short) (p.detu.listSkill.get(2).skillId + (short) 1) : (short) (idOld + (short) 6);
                             isUse = true;
-                        } else if(p.detu.listSkill.get(3).point < 7 && item.id == 759 && p.detu.power >= 20000000000L) {
+                        } else if (p.detu.listSkill.get(3).point < 7 && item.id == 759 && p.detu.power >= 20000000000L) {
                             genderOld = p.detu.listSkill.get(3).genderSkill;
                             tempOld = p.detu.listSkill.get(3).tempSkillId;
-                            if(tempOld == (short)13) {
-                                idOld = (short)91;
-                            } else if(tempOld == (short)19) {
-                                idOld = (short)121;
+                            if (tempOld == (short) 13) {
+                                idOld = (short) 91;
+                            } else if (tempOld == (short) 19) {
+                                idOld = (short) 121;
                             } else {
-                                idOld = (short)121;
+                                idOld = (short) 121;
                             }
                             p.detu.listSkill.get(3).point = (p.detu.listSkill.get(3).point + 1) > 7 ? 7 : (p.detu.listSkill.get(3).point + 1);
-                            p.detu.listSkill.get(3).skillId = ((short)(p.detu.listSkill.get(3).skillId + (short)1) >= idOld && (short)(p.detu.listSkill.get(3).skillId + (short)1) <= (short)(idOld + 6)) ? (short)(p.detu.listSkill.get(3).skillId + (short)1) : (short)(idOld + (short)6);
+                            p.detu.listSkill.get(3).skillId = ((short) (p.detu.listSkill.get(3).skillId + (short) 1) >= idOld && (short) (p.detu.listSkill.get(3).skillId + (short) 1) <= (short) (idOld + 6)) ? (short) (p.detu.listSkill.get(3).skillId + (short) 1) : (short) (idOld + (short) 6);
                             isUse = true;
                         }
-                        if(isUse) {
+                        if (isUse) {
                             p.zone.chat(p.detu, "Cám ơn sư phụ!");
                             p.updateQuantityItemBag(index, 1);
-        //                    p.removeItemBag(index);
-        //                    Service.gI().updateItemBag(p);
+                            //                    p.removeItemBag(index);
+                            //                    Service.gI().updateItemBag(p);
                         }
-                    }
-                    else
-                    {
+                    } else {
                         p.sendAddchatYellow("Không thể thực hiện");
                     }
                     p._canUSEITEM = true;
                     return;
                 } //DDOI DE TU
-                else if(item.id == 401)
-                {
-                    if(p.detu != null && p.havePet == (byte)1)
-                    {
-                        if(p.petfucus == 1) {
+                else if (item.id == 401) {
+                    if (p.NhapThe == 1) {
+                        p.sendAddchatYellow("Vui lòng tách hợp thể để thực hiện");
+                        return;
+                    }
+                    if (p.detu != null && p.havePet == (byte) 1) {
+                        if (p.petfucus == 1) {
                             p.zone.leaveDEEEEE(p.detu); //remove detu
                         } else {
                             p.petfucus = 1;
@@ -594,20 +581,22 @@ public class useItem {
                         p.detu = new Detu();
                         p.detu.initDetuBroly(p.detu);
                         p.detu.id = (-100000 - p.id);
-                        if(p.NhapThe == 0) {
+                        p.isBerus = false;
+                        p.isMabu = false;
+                        if (p.NhapThe == 0) {
                             p.zone.pets.add(p.detu);
                         }
-                        p.detu.x = (short)(p.x - (short)50);
-                        p.detu.y = (short)(p.y - (short)50);
+                        p.detu.x = (short) (p.x - (short) 50);
+                        p.detu.y = (short) (p.y - (short) 50);
 
                         //NEU LOAD DE TU O MAP COOL
-                        if(p.map.MapCold()) {
+                        if (p.map.MapCold()) {
                             p.zone.upDownPointPETMapCool(p);
                         }
                         //NEU LOAD DE TU O MAP COOL
-                        if(p.NhapThe == 0) {
-                            for(byte i = 0; i < p.zone.players.size(); i++) {
-                                if(p.zone.players.get(i) != null) {
+                        if (p.NhapThe == 0) {
+                            for (byte i = 0; i < p.zone.players.size(); i++) {
+                                if (p.zone.players.get(i) != null) {
                                     p.zone.loadInfoDeTu(p.zone.players.get(i).session, p.detu);
                                 }
                             }
@@ -616,23 +605,18 @@ public class useItem {
                             //                    }
                         }
                         p.updateQuantityItemBag(index, 1);
-                    }
-                    else
-                    {
+                    } else {
                         p.sendAddchatYellow("Không thể thực hiện");
                     }
                     return;
                 } //TU DONG LUYEN TAP
-                else if (item.id == 521)
-                {
-                    if(p.timeEndTDLT == 0)
-                    {
+                else if (item.id == 521) {
+                    if (p.timeEndTDLT == 0) {
                         int _timeP = item.getParamItemByID(1); //so phut tu dong luyen tap
-                        p.timeEndTDLT = (long)(System.currentTimeMillis() + (long)(_timeP*60000));
-
-                        for(byte i = 0; i < p.ItemBag[(byte)index].itemOptions.size(); i++) {
-                            if(p.ItemBag[(byte)index].itemOptions.get(i).id == 1) {
-                                p.ItemBag[(byte)index].itemOptions.get(i).param = 0;
+                        p.timeEndTDLT = (long) (System.currentTimeMillis() + (long) (_timeP));
+                        for (byte i = 0; i < p.ItemBag[(byte) index].itemOptions.size(); i++) {
+                            if (p.ItemBag[(byte) index].itemOptions.get(i).id == 1) {
+                                p.ItemBag[(byte) index].itemOptions.get(i).param = 0;
                             }
                         }
                         Service.gI().updateItemBag(p);
@@ -649,7 +633,7 @@ public class useItem {
                         } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
-                            if(m != null) {
+                            if (m != null) {
                                 m.cleanup();
                             }
                         }
@@ -657,9 +641,9 @@ public class useItem {
                         // TASK END TDLT NEU HET TIME
                         Timer resetTDLT = new Timer();
                         TimerTask rsTDLT = new TimerTask() {
-                            public void run()
-                            {
-                                if(p.timeEndTDLT == 0) {
+                            public void run() {
+                                if (p.timeEndTDLT <= 0) {
+                                    p.timeEndTDLT = 0;
                                     resetTDLT.cancel();
                                 }
                                 Message m = null;
@@ -672,21 +656,22 @@ public class useItem {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 } finally {
-                                    if(m != null) {
+                                    if (m != null) {
                                         m.cleanup();
                                     }
                                 }
-                            };
-                        };
-                        resetTDLT.schedule(rsTDLT, (long)(_timeP*60000));
-                    }
-                    else
-                    {
-                        int _timeConLai = (int)((p.timeEndTDLT - System.currentTimeMillis())/60000);
+                            }
+                        ;
+                    }  
+                        ;
+                        //p.timeEndTDLT = 0;
+                        //resetTDLT.schedule(rsTDLT, (long) (_timeP * 60000));
+                    } else {
+                        int _timeConLai = (int) ((p.timeEndTDLT - System.currentTimeMillis()) / 60000);
                         p.timeEndTDLT = 0;
-                        for(byte i = 0; i < p.ItemBag[(byte)index].itemOptions.size(); i++) {
-                            if(p.ItemBag[(byte)index].itemOptions.get(i).id == 1) {
-                                p.ItemBag[(byte)index].itemOptions.get(i).param = _timeConLai;
+                        for (byte i = 0; i < p.ItemBag[(byte) index].itemOptions.size(); i++) {
+                            if (p.ItemBag[(byte) index].itemOptions.get(i).id == 1) {
+                                p.ItemBag[(byte) index].itemOptions.get(i).param = _timeConLai;
                             }
                         }
 
@@ -703,56 +688,250 @@ public class useItem {
                         } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
-                            if(m != null) {
+                            if (m != null) {
                                 m.cleanup();
                             }
                         }
                     }
                     return;
                 } //USE CAPSULE KIBI
-                else if(item.id == 380 && p.ItemBag[(byte)index].quantity >= 1)
-                {
-                    p.ItemBag[(byte)index].quantity -= 1;
-                    if(p.ItemBag[(byte)index].quantity == 0) {
-                        p.ItemBag[(byte)index] = null;
+                else if (item.id == 380 && p.ItemBag[(byte) index].quantity >= 1) {
+                    if (p.getBagNull() <= 0) {
+                        p.sendAddchatYellow("Hành trang không đủ chỗ trống!");
+                        return;
+                    }
+                    p.ItemBag[(byte) index].quantity -= 1;
+                    if (p.ItemBag[(byte) index].quantity == 0) {
+                        p.ItemBag[(byte) index] = null;
                     }
 
                     int rdIDITEM = Util.nextInt(381, 386);
                     short IDICONITEMBUFF = 2760;
-                    if(rdIDITEM == 381) {
-                        IDICONITEMBUFF = (short)2754;
-                    } else if(rdIDITEM == 382) {
-                        IDICONITEMBUFF = (short)2755;
-                    } else if(rdIDITEM == 383) {
-                        IDICONITEMBUFF = (short)2756;
-                    } else if(rdIDITEM == 384) {
-                        IDICONITEMBUFF = (short)2757;
+                    if (rdIDITEM == 381) {
+                        IDICONITEMBUFF = (short) 2754;
+                    } else if (rdIDITEM == 382) {
+                        IDICONITEMBUFF = (short) 2755;
+                    } else if (rdIDITEM == 383) {
+                        IDICONITEMBUFF = (short) 2756;
+                    } else if (rdIDITEM == 384) {
+                        IDICONITEMBUFF = (short) 2757;
                     }
-                    Service.gI().sendOpenItem(p, IDICONITEMBUFF);
+                    Service.gI().sendOpenItem(p, IDICONITEMBUFF, (short) 2759);
+                    Item _itemBuffRandom = ItemSell.getItemNotSell(rdIDITEM);
+                    Item _ITEMBUFF = new Item(_itemBuffRandom);
+                    p.addItemToBag(_ITEMBUFF);
+                    Service.gI().updateItemBag(p);
+                    return;
+
+                } else if (item.id == 571 && p.ItemBag[(byte) index].quantity >= 1) {//ruong bac
+                    if (p.getBagNull() <= 0) {
+                        p.sendAddchatYellow("Hành trang không đủ chỗ trống!");
+                        return;
+                    }
+                    p.ItemBag[(byte) index].quantity -= 1;
+                    if (p.ItemBag[(byte) index].quantity == 0) {
+                        p.ItemBag[(byte) index] = null;
+                    }
+                    int rdIDITEM = Util.nextInt(441, 448);
+                    short IDICONITEMBUFF = 3893;
+                    if (rdIDITEM == 441) {
+                        IDICONITEMBUFF = (short) 3887;
+                    } else if (rdIDITEM == 442) {
+                        IDICONITEMBUFF = (short) 3888;
+                    } else if (rdIDITEM == 443) {
+                        IDICONITEMBUFF = (short) 3889;
+                    } else if (rdIDITEM == 444) {
+                        IDICONITEMBUFF = (short) 3890;
+                    } else if (rdIDITEM == 445) {
+                        IDICONITEMBUFF = (short) 3891;
+                    } else if (rdIDITEM == 446) {
+                        IDICONITEMBUFF = (short) 3892;
+                    }
+                    Service.gI().sendOpenItem(p, IDICONITEMBUFF, (short) 5006);
 
                     Item _itemBuffRandom = ItemSell.getItemNotSell(rdIDITEM);
                     Item _ITEMBUFF = new Item(_itemBuffRandom);
+                    _ITEMBUFF.quantity = Util.nextInt(1, 20);
 //                    _AVATARVIP.itemOptions.add(new ItemOption(77, Util.nextInt(15, 21)));
                     p.addItemToBag(_ITEMBUFF);
                     Service.gI().updateItemBag(p);
                     return;
+
+                } else if (item.id == 572 && p.ItemBag[(byte) index].quantity >= 1) {//ruong vang
+                    if (p.getBagNull() <= 0) {
+                        p.sendAddchatYellow("Hành trang không đủ chỗ trống!");
+                        return;
+                    }
+                    p.ItemBag[(byte) index].quantity -= 1;
+                    if (p.ItemBag[(byte) index].quantity == 0) {
+                        p.ItemBag[(byte) index] = null;
+                    }
+                    int rdIDITEM = Util.nextInt(221, 227);
+                    short IDICONITEMBUFF = 1422;
+                    if (rdIDITEM == 221) {
+                        IDICONITEMBUFF = (short) 1419;
+                    } else if (rdIDITEM == 222) {
+                        IDICONITEMBUFF = (short) 1416;
+                    } else if (rdIDITEM == 223) {
+                        IDICONITEMBUFF = (short) 1417;
+                    } else if (rdIDITEM == 224) {
+                        IDICONITEMBUFF = (short) 1418;
+                    } else if (rdIDITEM == 225) {
+                        IDICONITEMBUFF = (short) 1421;
+                    }
+                    Service.gI().sendOpenItem(p, IDICONITEMBUFF, (short) 5007);
+
+                    Item _itemBuffRandom = ItemSell.getItemNotSell(rdIDITEM);
+                    Item _ITEMBUFF = new Item(_itemBuffRandom);
+                    _ITEMBUFF.quantity = Util.nextInt(1, 20);
+                    p.addItemToBag(_ITEMBUFF);
+                    Service.gI().updateItemBag(p);
+                    return;
+                } else if (item.id == 573 && p.ItemBag[(byte) index].quantity >= 1) {//capsule bac
+                    if (p.getBagNull() <= 0) {
+                        p.sendAddchatYellow("Hành trang không đủ chỗ trống!");
+                        return;
+                    }
+                    p.ItemBag[(byte) index].quantity -= 1;
+                    if (p.ItemBag[(byte) index].quantity == 0) {
+                        p.ItemBag[(byte) index] = null;
+                    }
+                    int rdIDITEM = Util.nextInt(16, 21);
+                    short IDICONITEMBUFF = 425;
+                    if (rdIDITEM == 16) {
+                        IDICONITEMBUFF = (short) 421;
+                    } else if (rdIDITEM == 17) {
+                        IDICONITEMBUFF = (short) 422;
+                    } else if (rdIDITEM == 18) {
+                        IDICONITEMBUFF = (short) 423;
+                    } else if (rdIDITEM == 19) {
+                        IDICONITEMBUFF = (short) 424;
+                    }
+                    Service.gI().sendOpenItem(p, IDICONITEMBUFF, (short) 5005);
+
+                    Item _itemBuffRandom = ItemSell.getItemNotSell(rdIDITEM);
+                    Item _ITEMBUFF = new Item(_itemBuffRandom);
+                    p.addItemToBag(_ITEMBUFF);
+                    Service.gI().updateItemBag(p);
+                    return;
+
+                } else if (item.id == 574 && p.ItemBag[(byte) index].quantity >= 1) {//capsule vang
+                    if (p.getBagNull() <= 0) {
+                        p.sendAddchatYellow("Hành trang không đủ chỗ trống!");
+                        return;
+                    }
+                    p.ItemBag[(byte) index].quantity -= 1;
+                    if (p.ItemBag[(byte) index].quantity == 0) {
+                        p.ItemBag[(byte) index] = null;
+                    }
+                    int random = Util.nextInt(0, 20);
+                    short IDICONITEMBUFF = 0;
+                    if (random > 1 && random <= 3) {
+                        int rdAVTVIP = Util.nextInt(227, 230);
+                        if (rdAVTVIP == 227) {
+                            IDICONITEMBUFF = (short) 1477;
+                        } else if (rdAVTVIP == 228) {
+                            IDICONITEMBUFF = (short) 1454;
+                        } else if (rdAVTVIP == 229) {
+                            IDICONITEMBUFF = (short) 1478;
+                        }
+                        Item _itemBuffRandom = ItemSell.getItemNotSell(rdAVTVIP);
+                        Item _ITEMBUFF = new Item(_itemBuffRandom);
+                        _ITEMBUFF.itemOptions.add(new ItemOption(Util.nextInt(95, 98), Util.nextInt(5, 20)));
+                        _ITEMBUFF.itemOptions.add(new ItemOption(101, Util.nextInt(5, 20)));
+                        _ITEMBUFF.itemOptions.add(new ItemOption(93, Util.nextInt(5, 30)));
+                        p.addItemToBag(_ITEMBUFF);
+
+                    } else if (random <= 1) {
+                        int rdIDITEM = Util.nextInt(14, 16);
+                        if (rdIDITEM == 14) {
+                            IDICONITEMBUFF = (short) 419;
+                        } else if (rdIDITEM == 15) {
+                            IDICONITEMBUFF = (short) 420;
+                        }
+                        Item _itemBuffRandom = ItemSell.getItemNotSell(rdIDITEM);
+                        Item _ITEMBUFF = new Item(_itemBuffRandom);
+                        p.addItemToBag(_ITEMBUFF);
+
+                    } else if (random >= 4 && random < 10) {
+                        int rdIDITEM = Util.nextInt(1039, 1041);
+                        if (rdIDITEM == 1039) {
+                            IDICONITEMBUFF = (short) 9973;
+                        } else if (rdIDITEM == 1040) {
+                            IDICONITEMBUFF = (short) 9974;
+                        }
+                        Item _itemBuffRandom = ItemBuff.getItem(rdIDITEM);
+                        Item _ITEMBUFF = new Item(_itemBuffRandom);
+                        _ITEMBUFF.itemOptions.add(new ItemOption(50, Util.nextInt(1, 30)));
+                        _ITEMBUFF.itemOptions.add(new ItemOption(77, Util.nextInt(10, 30)));
+                        _ITEMBUFF.itemOptions.add(new ItemOption(93, Util.nextInt(5, 30)));
+                        p.addItemToBag(_ITEMBUFF);
+
+                    } else if (random >= 10 && random < 20) {
+                        int rdIDITEM = Util.nextInt(386, 395);
+                        if (rdIDITEM == 386) {
+                            IDICONITEMBUFF = (short) 2782;
+                        } else if (rdIDITEM == 387) {
+                            IDICONITEMBUFF = (short) 2783;
+                        } else if (rdIDITEM == 388) {
+                            IDICONITEMBUFF = (short) 2781;
+                        } else if (rdIDITEM == 389) {
+                            IDICONITEMBUFF = (short) 2785;
+                        } else if (rdIDITEM == 390) {
+                            IDICONITEMBUFF = (short) 2786;
+                        } else if (rdIDITEM == 391) {
+                            IDICONITEMBUFF = (short) 2766;
+                        } else if (rdIDITEM == 392) {
+                            IDICONITEMBUFF = (short) 2788;
+                        } else if (rdIDITEM == 393) {
+                            IDICONITEMBUFF = (short) 2780;
+                        } else if (rdIDITEM == 394) {
+                            IDICONITEMBUFF = (short) 2787;
+                        }
+                        Item _itemBuffRandom = ItemBuff.getItem(rdIDITEM);
+                        Item _ITEMBUFF = new Item(_itemBuffRandom);
+                        _ITEMBUFF.itemOptions.add(new ItemOption(Util.nextInt(42, 47), Util.nextInt(1, 5)));
+                        _ITEMBUFF.itemOptions.add(new ItemOption(93, Util.nextInt(5, 30)));
+                        p.addItemToBag(_ITEMBUFF);
+                    }
+                    Service.gI().sendOpenItem(p, IDICONITEMBUFF, (short) 5004);
+                    Service.gI().updateItemBag(p);
+                    return;
                 } //USE THOI VANG
-                // else if(item.id == 457 && p.ItemBag[(byte)index].quantity >= 1)
-                // {
-                //     p.ItemBag[(byte)index].quantity -= 1;
-                //     if(p.ItemBag[(byte)index].quantity == 0) {
-                //         p.ItemBag[(byte)index] = null;
-                //     }
-                //     Service.gI().updateItemBag(p);
-                //     long _vang = ((long)p.vang + 500000000) > 2000000000L ? 2000000000L : ((long)p.vang + 500000000);
-                //     p.vang = _vang;
-                //     Service.gI().buyDone(p);
-                //     return;
-                // } //USE PET
-                else if(item.id == 1008 || item.id == 967 || item.id == 944 || item.id == 943 || item.id == 942 || item.id == 936 ||
-                        item.id == 919 || item.id == 918 || item.id == 917 || item.id == 916 || item.id == 910 || item.id == 909 || item.id == 908 || item.id == 893 || item. id == 892 ||
-                        item.id == 1039 || item.id == 1040 || item.id == 1046 || item.id == 1107 || item.id == 1114)
-                {
+                else if (item.id == 457 && p.ItemBag[(byte) index].quantity >= 1) {
+//                    p.ItemBag[(byte) index].quantity -= 1;
+//                    if (p.ItemBag[(byte) index].quantity == 0) {
+//                        p.ItemBag[(byte) index] = null;
+//                    }
+//                    Service.gI().updateItemBag(p);
+//                    long _vang = ((long) p.vang + 500000000) > 2000000000L ? 2000000000L : ((long) p.vang + 500000000);
+//                    p.vang = _vang;
+//                    Service.gI().buyDone(p);
+                    return;
+                } else if (item.id == 649 || item.id == 648 || item.id == 533 && (p.ItemBag[(byte) index].quantity >= 1)) {
+                    p.ItemBag[(byte) index].quantity -= 1;
+                    if (p.ItemBag[(byte) index].quantity == 0) {
+                        p.ItemBag[(byte) index] = null;
+                    }
+                    int number648 = Util.nextInt(10, 20);
+                    int number649 = Util.nextInt(1, 10);
+                    if (item.id == 648) {
+                        p.pointSuKien += number648;
+                        p.sendAddchatYellow("Bạn vừa nhận được " + number648 + " điểm sự kiện");
+                    } else if (item.id == 649) {
+                        p.pointSuKien += number649;
+                        p.sendAddchatYellow("Bạn vừa nhận được " + number649 + " điểm sự kiện");
+                    } else if (item.id == 533) {
+                        p.pointSuKien += 1;
+                        p.sendAddchatYellow("Bạn vừa nhận được 1 điểm sự kiện");
+                    }
+                    Service.gI().updateItemBag(p);
+                    Service.gI().buyDone(p);
+                    return;
+                } //USE PET
+                else if (item.id == 1008 || item.id == 967 || item.id == 944 || item.id == 943 || item.id == 942 || item.id == 936
+                        || item.id == 919 || item.id == 918 || item.id == 917 || item.id == 916 || item.id == 910 || item.id == 909 || item.id == 908 || item.id == 893 || item.id == 892
+                        || item.id == 1039 || item.id == 1040 || item.id == 1046 || item.id == 1107 || item.id == 1114) {
 //                    if(p.pet2Follow == (byte)0) {
 //                        p.pet2Follow = (byte)1;
 //                        p.itemPet2 = item;
@@ -782,7 +961,7 @@ public class useItem {
                     }
                     p.ItemBody[7] = item;
                     //NEU THAO CAI TRANG O MAP COOL
-                    if(item.template.type == 5 && p.map.MapCold()) {
+                    if (item.template.type == 5 && p.map.MapCold()) {
                         p.zone.upDownPointMapCool(p);
                     }
 
@@ -801,12 +980,10 @@ public class useItem {
 //                    Service.gI().updateItemBag(p);
 //                    Service.gI().updateItemBody(p);
                     return;
-                }
-                else if(item.id == 1100)
-                {
-                    p.ItemBag[(byte)index].quantity -= 1;
-                    if(p.ItemBag[(byte)index].quantity == 0) {
-                        p.ItemBag[(byte)index] = null;
+                } else if (item.id == 1100) {
+                    p.ItemBag[(byte) index].quantity -= 1;
+                    if (p.ItemBag[(byte) index].quantity == 0) {
+                        p.ItemBag[(byte) index] = null;
                     }
                     Service.gI().updateItemBag(p);
 
@@ -814,13 +991,13 @@ public class useItem {
                     int rdItem = Util.nextInt(0, 100);
                     Item itemBox = null;
                     Item _itemCT = null;
-                    if(rdItem < 65) {
+                    if (rdItem < 65) {
                         rdItem = Util.nextInt(380, 386);
                         itemBox = ItemSell.getItemNotSell(rdItem);
                         _itemCT = new Item(itemBox);
-                    } else if(rdItem >= 65) {
+                    } else if (rdItem >= 65) {
                         rdItem = Util.nextInt(1048, 1055);
-                        if(rdItem == 1051) {
+                        if (rdItem == 1051) {
                             rdItem = 1049;
                         }
                         itemBox = ItemSell.getItemNotSell(rdItem);
@@ -835,19 +1012,18 @@ public class useItem {
                         _itemCT.itemOptions.add(new ItemOption(30, 0)); //KHONG THE GIAO DICH
                         int day = Util.nextInt(3, 8);
                         _itemCT.itemOptions.add(new ItemOption(93, day));
-                        _itemCT.timeHSD = System.currentTimeMillis() + (long)day*86400000;
+                        _itemCT.timeHSD = System.currentTimeMillis() + (long) day * 86400000;
                     }
-                    if(_itemCT != null) {
-                        if(p.addItemToBag(_itemCT)) {
+                    if (_itemCT != null) {
+                        if (p.addItemToBag(_itemCT)) {
                             p.sendAddchatYellow("Bạn vừa nhận được " + _itemCT.template.name);
                             Service.gI().updateItemBag(p);
                         }
                     }
                     return;
                 } //NHAN THOI KHONG SAI LECH
-                else if(item.id == 992)
-                {
-                    if(!p.isdie) {
+                else if (item.id == 992) {
+                    if (!p.isdie) {
 //                    p.waitTransport = true;
                         Service.gI().dropDragonBall(p);
 //                    Service.gI().transportTauNgam(p, (short)5, (byte)1);
@@ -856,46 +1032,42 @@ public class useItem {
                     }
                     return;
                 }
-            }
-            else if(item.template.type == (byte)6)
-            {
-                if(index != -1){
-                    if(p.ItemBag[index].template.type == 6 && !p.isdie){ //type 6 la dau than
+            } else if (item.template.type == (byte) 6) {
+                if (index != -1) {
+                    if (p.ItemBag[index].template.type == 6 && !p.isdie) { //type 6 la dau than
                         long _TIMENOW = System.currentTimeMillis();
-                        if(p.ItemBag[index].quantity > 0 && ((_TIMENOW - p._TIMEBUFFDAU) > 10000)){
+                        if (p.ItemBag[index].quantity > 0 && ((_TIMENOW - p._TIMEBUFFDAU) > 10000)) {
                             p._TIMEBUFFDAU = _TIMENOW;
                             int hpbuff = p.ItemBag[index].getParamItemByID(48);
-                            if(hpbuff == 0 ) {
-                                hpbuff = p.ItemBag[index].getParamItemByID(2)*1000;
+                            if (hpbuff == 0) {
+                                hpbuff = p.ItemBag[index].getParamItemByID(2) * 1000;
                             }
                             p.hp = (p.hp + hpbuff) > p.getHpFull() ? p.getHpFull() : (p.hp + hpbuff);
                             p.mp = (p.mp + hpbuff) > p.getMpFull() ? p.getMpFull() : (p.mp + hpbuff);
 
-                            if(p.havePet == 1 && !p.detu.isdie) {
+                            if (p.havePet == 1 && !p.detu.isdie) {
                                 p.detu.hp = (p.detu.hp + hpbuff) > p.detu.getHpFull() ? p.detu.getHpFull() : (p.detu.hp + hpbuff);
                                 p.detu.mp = (p.detu.mp + hpbuff) > p.detu.getMpFull() ? p.detu.getMpFull() : (p.detu.mp + hpbuff);
-                                p.detu.stamina = (short)(p.detu.stamina + (short)(p.ItemBag[index].template.level)*100) > (short)1000 ? (short)1000 : (short)(p.detu.stamina + (short)(p.ItemBag[index].template.level)*100);
+                                p.detu.stamina = (short) (p.detu.stamina + (short) (p.ItemBag[index].template.level) * 100) > (short) 1000 ? (short) 1000 : (short) (p.detu.stamina + (short) (p.ItemBag[index].template.level) * 100);
                                 p.updateHpDetu(p, p.detu);
-                                if(p.petfucus == 1 && p.statusPet != 3 && p.statusPet != 4) {
-                                    p.zone.chat(p.detu, "Con cám ơn sư phụ");
+                                if (p.petfucus == 1 && p.statusPet != 3 && p.statusPet != 4) {
+                                    p.zone.chat(p.detu, "Con cảm ơn sư phụ !");
                                 }
                             }
                             p.updateQuantityItemBag(index, 1);
-                            Service.gI().loadPoint(p.session,p);
+                            Service.gI().loadPoint(p.session, p);
 //                                    Service.gI().updateItemBag(p);
                         }
                     }
                 }
                 return;
-            }
-            else if(item.template.type == (byte)33)
-            { //DUNG RADA CARD
-                if(index != -1 && p.ItemBag[(byte)index] != null && p.ItemBag[(byte)index].quantity >= 1 && 
-                ((p.ItemBag[(byte)index].id >= 828 && p.ItemBag[(byte)index].id <= 842) || p.ItemBag[(byte)index].id == 859 || p.ItemBag[(byte)index].id == 956)){
-                    short idCard = (short)(p.ItemBag[(byte)index].id);
-                    p.ItemBag[(byte)index].quantity -= 1;
-                    if(p.ItemBag[(byte)index].quantity <= 0) {
-                        p.ItemBag[(byte)index] = null;
+            } else if (item.template.type == (byte) 33) { //DUNG RADA CARD
+                if (index != -1 && p.ItemBag[(byte) index] != null && p.ItemBag[(byte) index].quantity >= 1
+                        && ((p.ItemBag[(byte) index].id >= 828 && p.ItemBag[(byte) index].id <= 842) || p.ItemBag[(byte) index].id == 859 || p.ItemBag[(byte) index].id == 956)) {
+                    short idCard = (short) (p.ItemBag[(byte) index].id);
+                    p.ItemBag[(byte) index].quantity -= 1;
+                    if (p.ItemBag[(byte) index].quantity <= 0) {
+                        p.ItemBag[(byte) index] = null;
                     }
                     Service.gI().updateItemBag(p);
                     RadaCardService.gI().setAmountCard(p, idCard);
@@ -905,24 +1077,23 @@ public class useItem {
                 return;
             }
 
-            if(item.id == 454 || item.id == 921)
-            {
+            if (item.id == 454 || item.id == 921) {
                 Message m = null;
-                if(p.power >= 1500000) {
-                    if((p.map.id != 21 && p.map.id != 22 && p.map.id != 23) && (!p.isdie && p.detu != null && !p.detu.isdie && p.havePet == 1)) {
-                        if((System.currentTimeMillis() - p.tFusion) > 0) {
+                if (p.power >= 1500000) {
+                    if ((p.map.id != 21 && p.map.id != 22 && p.map.id != 23) && (!p.isdie && p.detu != null && !p.detu.isdie && p.havePet == 1)) {
+                        if ((System.currentTimeMillis() - p.tFusion) > 0) {
                             p.tFusion = System.currentTimeMillis() + 10000;
-                            if(item.id == 921) {
+                            if (item.id == 921) {
                                 p.isPorata2 = true;
                             } else {
                                 p.isPorata2 = false;
                             }
-                            if(p.NhapThe == 0){
+                            if (p.NhapThe == 0) {
                                 p.NhapThe = 1;
                                 p.detu.isMonkey = false;
                                 p.detu.hp = p.detu.hp > p.detu.getHpFull() ? p.detu.getHpFull() : p.detu.hp;
-        //                        Service.gI().loadPlayer(p.session, p);
-                                if(!p.isMonkey) {
+                                //                        Service.gI().loadPlayer(p.session, p);
+                                if (!p.isMonkey) {
                                     Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), p.PartHead() + 1, p.PartHead() + 2);
                                 }
                                 //HOP THE THI HOI FULL HP, KI
@@ -934,8 +1105,8 @@ public class useItem {
                                     m.writer().writeByte(6); //type hop the 6 la bongtai, 1 la huy hop the
                                     m.writer().writeInt(p.id); // id player use
                                     m.writer().flush();
-                                    for(byte i = 0; i < p.zone.players.size(); i++) {
-                                        if(p.zone.players.get(i) != null) {
+                                    for (byte i = 0; i < p.zone.players.size(); i++) {
+                                        if (p.zone.players.get(i) != null) {
                                             p.zone.players.get(i).session.sendMessage(m);
                                         }
                                     }
@@ -946,7 +1117,7 @@ public class useItem {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 } finally {
-                                    if(m != null) {
+                                    if (m != null) {
                                         m.cleanup();
                                     }
                                 }
@@ -959,34 +1130,32 @@ public class useItem {
                                 Service.gI().loadPoint(p.session, p);
                                 //send uphp to all player khac trong map
                                 p.updateHpToPlayerInMap(p, p.getHpFull());
-                            }
-                            else{
+                            } else {
                                 p.NhapThe = 0;
                                 p.isPorata2 = false;
-        //                        Service.gI().loadPlayer(p.session, p);  
-                                if(!p.isMonkey) {
-                                    if(p.ItemBody[5] != null && p.ItemBody[5].template.level != 0 && (p.ItemBody[5].template.id != 601 && p.ItemBody[5].template.id != 602 && 
-            p.ItemBody[5].template.id != 603 && p.ItemBody[5].template.id != 639 && p.ItemBody[5].template.id != 640 && p.ItemBody[5].template.id != 641)){
-                                        if(p.ItemBody[5] != null && p.ItemBody[5].template.id == 604) {//CAI TRANG VIP
+                                //                        Service.gI().loadPlayer(p.session, p);  
+                                if (!p.isMonkey) {
+                                    if (p.ItemBody[5] != null && p.ItemBody[5].template.level != 0 && (p.ItemBody[5].template.id != 601 && p.ItemBody[5].template.id != 602
+                                            && p.ItemBody[5].template.id != 603 && p.ItemBody[5].template.id != 639 && p.ItemBody[5].template.id != 640 && p.ItemBody[5].template.id != 641)) {
+                                        if (p.ItemBody[5] != null && p.ItemBody[5].template.id == 604) {//CAI TRANG VIP
                                             Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), 472, 473);
-                                        } else if(p.ItemBody[5] != null && p.ItemBody[5].template.id == 605) {//CAI TRANG VIP
+                                        } else if (p.ItemBody[5] != null && p.ItemBody[5].template.id == 605) {//CAI TRANG VIP
                                             Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), 476, 477);
-                                        } else if(p.ItemBody[5] != null && p.ItemBody[5].template.id == 606) {//CAI TRANG VIP
+                                        } else if (p.ItemBody[5] != null && p.ItemBody[5].template.id == 606) {//CAI TRANG VIP
                                             Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), 474, 475);
-                                        } else if(p.ItemBody[5].template.id >= 592 && p.ItemBody[5].template.id <= 594) { //YADART
-                                            if(p.id == 1) {
+                                        } else if (p.ItemBody[5].template.id >= 592 && p.ItemBody[5].template.id <= 594) { //YADART
+                                            if (p.id == 1) {
                                                 Service.gI().LoadBodyPlayerChange(p, 1, 126, 523, 524);
                                             } else {
                                                 Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), 523, 524);
                                             }
-                                        } else if(p.ItemBody[5] != null && (p.ItemBody[5].template.part != (short)(-1) || p.ItemBody[5].template.id == 545 || p.ItemBody[5].template.id == 546 || 
-                                        p.ItemBody[5].template.id == 857 || p.ItemBody[5].template.id == 858)) {
+                                        } else if (p.ItemBody[5] != null && (p.ItemBody[5].template.part != (short) (-1) || p.ItemBody[5].template.id == 545 || p.ItemBody[5].template.id == 546
+                                                || p.ItemBody[5].template.id == 857 || p.ItemBody[5].template.id == 858)) {
                                             Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), p.PartBody(), p.Leg());
                                         } else {
                                             Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), p.PartHead() + 1, p.PartHead() + 2);
                                         }
-                                    }
-                                    else{
+                                    } else {
                                         Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), p.PartBody(), p.Leg());
                                     }
                                 }
@@ -995,8 +1164,8 @@ public class useItem {
                                     m.writer().writeByte(1); //type hop the 6 la bongtai, 1 la huy hop the
                                     m.writer().writeInt(p.id); // id player use
                                     m.writer().flush();
-                                    for(byte i = 0; i < p.zone.players.size(); i++) {
-                                        if(p.zone.players.get(i) != null) {
+                                    for (byte i = 0; i < p.zone.players.size(); i++) {
+                                        if (p.zone.players.get(i) != null) {
                                             p.zone.players.get(i).session.sendMessage(m);
                                         }
                                     }
@@ -1007,7 +1176,7 @@ public class useItem {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 } finally {
-                                    if(m != null) {
+                                    if (m != null) {
                                         m.cleanup();
                                     }
                                 }
@@ -1020,7 +1189,7 @@ public class useItem {
                                 p.updateHpToPlayerInMap(p, p.getHpFull());
                             };
                         } else {
-                            p.sendAddchatYellow("Vui lòng chờ " + (int)((p.tFusion - System.currentTimeMillis())/1000) + " giây nữa");
+                            p.sendAddchatYellow("Vui lòng chờ " + (int) ((p.tFusion - System.currentTimeMillis()) / 1000) + " giây nữa");
                         }
                     } else {
                         p.sendAddchatYellow("Không thể thực hiện");
@@ -1030,18 +1199,18 @@ public class useItem {
                 }
                 return;
             }
-            
+
             switch (item.id) {
                 case 454: //bongtai porata
                     Message m = null;
-                    if(p.power >= 1500000) {
-                        if(!p.isdie && p.detu != null && !p.detu.isdie && p.havePet == 1) {
-                            if(p.NhapThe == 0){
+                    if (p.power >= 1500000) {
+                        if (!p.isdie && p.detu != null && !p.detu.isdie && p.havePet == 1) {
+                            if (p.NhapThe == 0) {
                                 p.NhapThe = 1;
                                 p.detu.isMonkey = false;
                                 p.detu.hp = p.detu.hp > p.detu.getHpFull() ? p.detu.getHpFull() : p.detu.hp;
-        //                        Service.gI().loadPlayer(p.session, p);
-                                if(!p.isMonkey) {
+                                //                        Service.gI().loadPlayer(p.session, p);
+                                if (!p.isMonkey) {
                                     Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), p.PartHead() + 1, p.PartHead() + 2);
                                 }
                                 //HOP THE THI HOI FULL HP, KI
@@ -1053,8 +1222,8 @@ public class useItem {
                                     m.writer().writeByte(6); //type hop the 6 la bongtai, 1 la huy hop the
                                     m.writer().writeInt(p.id); // id player use
                                     m.writer().flush();
-                                    for(byte i = 0; i < p.zone.players.size(); i++) {
-                                        if(p.zone.players.get(i) != null) {
+                                    for (byte i = 0; i < p.zone.players.size(); i++) {
+                                        if (p.zone.players.get(i) != null) {
                                             p.zone.players.get(i).session.sendMessage(m);
                                         }
                                     }
@@ -1065,7 +1234,7 @@ public class useItem {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 } finally {
-                                    if(m != null) {
+                                    if (m != null) {
                                         m.cleanup();
                                     }
                                 }
@@ -1078,33 +1247,31 @@ public class useItem {
                                 Service.gI().loadPoint(p.session, p);
                                 //send uphp to all player khac trong map
                                 p.updateHpToPlayerInMap(p, p.getHpFull());
-                            }
-                            else{
-                                p.NhapThe = 0;   
-        //                        Service.gI().loadPlayer(p.session, p);  
-                                if(!p.isMonkey) {
-                                    if(p.ItemBody[5] != null && p.ItemBody[5].template.level != 0 && (p.ItemBody[5].template.id != 601 && p.ItemBody[5].template.id != 602 && 
-            p.ItemBody[5].template.id != 603 && p.ItemBody[5].template.id != 639 && p.ItemBody[5].template.id != 640 && p.ItemBody[5].template.id != 641)){
-                                        if(p.ItemBody[5] != null && p.ItemBody[5].template.id == 604) {//CAI TRANG VIP
+                            } else {
+                                p.NhapThe = 0;
+                                //                        Service.gI().loadPlayer(p.session, p);  
+                                if (!p.isMonkey) {
+                                    if (p.ItemBody[5] != null && p.ItemBody[5].template.level != 0 && (p.ItemBody[5].template.id != 601 && p.ItemBody[5].template.id != 602
+                                            && p.ItemBody[5].template.id != 603 && p.ItemBody[5].template.id != 639 && p.ItemBody[5].template.id != 640 && p.ItemBody[5].template.id != 641)) {
+                                        if (p.ItemBody[5] != null && p.ItemBody[5].template.id == 604) {//CAI TRANG VIP
                                             Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), 472, 473);
-                                        } else if(p.ItemBody[5] != null && p.ItemBody[5].template.id == 605) {//CAI TRANG VIP
+                                        } else if (p.ItemBody[5] != null && p.ItemBody[5].template.id == 605) {//CAI TRANG VIP
                                             Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), 476, 477);
-                                        } else if(p.ItemBody[5] != null && p.ItemBody[5].template.id == 606) {//CAI TRANG VIP
+                                        } else if (p.ItemBody[5] != null && p.ItemBody[5].template.id == 606) {//CAI TRANG VIP
                                             Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), 474, 475);
-                                        } else if(p.ItemBody[5].template.id >= 592 && p.ItemBody[5].template.id <= 594) { //YADART
-                                            if(p.id == 1) {
+                                        } else if (p.ItemBody[5].template.id >= 592 && p.ItemBody[5].template.id <= 594) { //YADART
+                                            if (p.id == 1) {
                                                 Service.gI().LoadBodyPlayerChange(p, 1, 126, 523, 524);
                                             } else {
                                                 Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), 523, 524);
                                             }
-                                        } else if(p.ItemBody[5] != null && (p.ItemBody[5].template.part != (short)(-1) || p.ItemBody[5].template.id == 545 || p.ItemBody[5].template.id == 546 ||
-p.ItemBody[5].template.id == 857 || p.ItemBody[5].template.id == 858)) {
+                                        } else if (p.ItemBody[5] != null && (p.ItemBody[5].template.part != (short) (-1) || p.ItemBody[5].template.id == 545 || p.ItemBody[5].template.id == 546
+                                                || p.ItemBody[5].template.id == 857 || p.ItemBody[5].template.id == 858)) {
                                             Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), p.PartBody(), p.Leg());
                                         } else {
                                             Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), p.PartHead() + 1, p.PartHead() + 2);
                                         }
-                                    }
-                                    else{
+                                    } else {
                                         Service.gI().LoadBodyPlayerChange(p, 1, p.PartHead(), p.PartBody(), p.Leg());
                                     }
                                 }
@@ -1113,8 +1280,8 @@ p.ItemBody[5].template.id == 857 || p.ItemBody[5].template.id == 858)) {
                                     m.writer().writeByte(1); //type hop the 6 la bongtai, 1 la huy hop the
                                     m.writer().writeInt(p.id); // id player use
                                     m.writer().flush();
-                                    for(byte i = 0; i < p.zone.players.size(); i++) {
-                                        if(p.zone.players.get(i) != null) {
+                                    for (byte i = 0; i < p.zone.players.size(); i++) {
+                                        if (p.zone.players.get(i) != null) {
                                             p.zone.players.get(i).session.sendMessage(m);
                                         }
                                     }
@@ -1125,7 +1292,7 @@ p.ItemBody[5].template.id == 857 || p.ItemBody[5].template.id == 858)) {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 } finally {
-                                    if(m != null) {
+                                    if (m != null) {
                                         m.cleanup();
                                     }
                                 }
@@ -1159,7 +1326,7 @@ p.ItemBody[5].template.id == 857 || p.ItemBody[5].template.id == 858)) {
                     break;
                 }
             }
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -1173,8 +1340,8 @@ p.ItemBody[5].template.id == 857 || p.ItemBody[5].template.id == 858)) {
             m.writer().writeByte(6); //type hop the
             m.writer().writeInt(_player.id); // id player use
             m.writer().flush();
-            for(byte i = 0; i < _player.zone.players.size(); i++) {
-                if(_player.zone.players.get(i) != null) {
+            for (byte i = 0; i < _player.zone.players.size(); i++) {
+                if (_player.zone.players.get(i) != null) {
                     _player.zone.players.get(i).session.sendMessage(m);
                 }
             }
@@ -1185,7 +1352,7 @@ p.ItemBody[5].template.id == 857 || p.ItemBody[5].template.id == 858)) {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if(m != null) {
+            if (m != null) {
                 m.cleanup();
             }
         }

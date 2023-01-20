@@ -24,14 +24,16 @@ public class GiftCodeManager {
     }
 
     public void init() {
+        Connection conn = null;
         try {
-            Connection conn = DataSource.getConnection();
+            conn = DataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM giftcode");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 GiftCode giftcode = new GiftCode();
                 giftcode.code = rs.getString("code");
-                giftcode.countLeft = rs.getInt("count_left");
+                giftcode.Soluong = rs.getInt("soluong");
+                
 
                 JSONArray jar = (JSONArray) JSONValue.parse(rs.getString("detail"));
                 if (jar != null) {
@@ -46,13 +48,22 @@ public class GiftCodeManager {
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public GiftCode checkUseGiftCode(int idPlayer, String code) {
         for (GiftCode giftCode: listGiftCode) {
-            if (giftCode.code.equals(code) && giftCode.countLeft > 0 && !giftCode.isUsedGiftCode(idPlayer)) {
-                giftCode.countLeft -= 1;
+            if (giftCode.code.equals(code) && giftCode.Soluong > 0 && !giftCode.isUsedGiftCode(idPlayer)) {
+                giftCode.Soluong -= 1;
                 giftCode.addPlayerUsed(idPlayer);
                 return giftCode;
             }
@@ -60,10 +71,11 @@ public class GiftCodeManager {
         return null;
     }
 
+    
     public void checkInfomationGiftCode(Player p) {
         StringBuilder sb = new StringBuilder();
         for (GiftCode giftCode: listGiftCode) {
-            sb.append("Code: ").append(giftCode.code).append(", Count Left: ").append(giftCode.countLeft).append("\b");
+            sb.append("Code: ").append(giftCode.code).append(", Count Left: ").append(giftCode.Soluong).append("\b");
         }
         Service.chatNPC(p, (short)24, sb.toString());
     }

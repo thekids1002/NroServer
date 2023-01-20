@@ -1,6 +1,5 @@
 package nro.main;
 
-import io.LogHistory;
 import nro.constant.Constant;
 import nro.giftcode.GiftCode;
 import nro.giftcode.GiftCodeManager;
@@ -43,7 +42,6 @@ public class Controller {
 
     private static Controller instance;
     Server server = Server.gI();
-    public LogHistory LogHistory = new LogHistory(getClass());
 
     public static Controller getInstance() {
         if (instance == null) {
@@ -57,7 +55,7 @@ public class Controller {
             Player player = PlayerManger.gI().getPlayerByUserID(_session.userId);
             byte cmd = m.command;
 //            if(cmd != -7 && cmd != 29 && cmd != -67 && cmd != -62) {
-            //    Util.log("Tinh Nang CMD: " + cmd);
+//                Util.log("Tinh Nang CMD: " + cmd);
 //            }
             switch (cmd) {
                 case -127:
@@ -84,7 +82,8 @@ public class Controller {
                     break;
                 case -125: //CLIENT INPUT
                     byte sizeInput = m.reader().readByte();
-                    if (player.Role != 0 && player.name.equals("admin") && player.menuNPCID == 999 && player.menuID == 1) {
+                    //if (player.id == 1 && player.name.equals("admin") && player.menuNPCID == 999 && player.menuID == 1 || player.name.equals("truongvirus") && player.menuNPCID == 999 && player.menuID == 1 || player.name.equals("hieudubai") && player.menuNPCID == 999 && player.menuID == 1) {
+                    if (player.menuNPCID == 999 && player.menuID == 1) {
                         if (sizeInput < 3 || sizeInput > 3) {
                             player.sendAddchatYellow("Chưa nhập đủ các trường");
                             break;
@@ -111,7 +110,7 @@ public class Controller {
                                 pBuffItem.ngocKhoa = Math.min(pBuffItem.ngocKhoa + quantityItemBuff, Constant.MAX_RUBY);
                                 txtBuff += quantityItemBuff + " ngọc khóa\b";
                             } else {
-                                Item itemBuffTemplate = ItemSell.getItemNotSell(idItemBuff);
+                                Item itemBuffTemplate = ItemBuff.getItem(idItemBuff);
                                 if (itemBuffTemplate != null) {
                                     Item itemBuff = new Item(itemBuffTemplate);
                                     itemBuff.quantity = quantityItemBuff;
@@ -128,7 +127,158 @@ public class Controller {
                             player.sendAddchatYellow("Player không online");
                         }
                         break;
+                    } else if (player.menuNPCID == 998 && player.menuID == 0) {
+                        if (sizeInput < 5 || sizeInput > 5) {
+                            player.sendAddchatYellow("Chưa nhập đủ các trường");
+                            break;
+                        }
+                        String namePlayerAdd = m.reader().readUTF();
+                        String idItem = m.reader().readUTF();
+                        String idOption = m.reader().readUTF();
+                        String slOption = m.reader().readUTF();
+                        String slItem = m.reader().readUTF();
+                        if (!Util.isNumericInt(idOption) || !Util.isNumericInt(slOption) || !Util.isNumericInt(slItem)) {
+                            player.sendAddchatYellow("ID Item và số lượng phải là số");
+                            break;
+                        }
+                        int idItemBuff = Integer.parseInt(idItem);
+                        int idOptionBuff = Integer.parseInt(idOption);
+                        int slOptionBuff = Integer.parseInt(slOption);
+                        int slItemBuff = Integer.parseInt(slItem);
+                        Player pBuffItem = PlayerManger.gI().getPlayerByName(namePlayerAdd);
+                        if (pBuffItem != null && pBuffItem.session != null) {
+                            String txtBuff = "Buff to player: " + pBuffItem.name + "\b";
+                            if (idItemBuff == -1) {
+                                pBuffItem.vang = Math.min(pBuffItem.vang + (long) slItemBuff, Constant.MAX_MONEY);
+                                txtBuff += slItemBuff + " vàng\b";
+                            } else if (idItemBuff == -2) {
+                                pBuffItem.ngoc = Math.min(pBuffItem.ngoc + slItemBuff, Constant.MAX_GEM);
+                                txtBuff += slItemBuff + " ngọc\b";
+                            } else if (idItemBuff == -3) {
+                                pBuffItem.ngocKhoa = Math.min(pBuffItem.ngocKhoa + slItemBuff, Constant.MAX_RUBY);
+                                txtBuff += slItemBuff + " ngọc khóa\b";
+                            } else {
+                                Item itemBuffTemplate = ItemBuff.getItem(idItemBuff);
+                                if (itemBuffTemplate != null) {
+                                    Item itemBuff = new Item(itemBuffTemplate);
+                                    itemBuff.itemOptions.add(new ItemOption(idOptionBuff, slOptionBuff));
+                                    itemBuff.quantity = slItemBuff;
+                                    pBuffItem.addItemToBag(itemBuff);
+                                    txtBuff += "x" + slItemBuff + " " + itemBuff.template.name + "\b";
+                                }
+                            }
+                            Service.gI().updateItemBag(pBuffItem);
+                            Service.chatNPC(player, (short) 24, txtBuff);
+                            if (player.id != pBuffItem.id) {
+                                Service.chatNPC(pBuffItem, (short) 24, txtBuff);
+                            }
+                        } else {
+                            player.sendAddchatYellow("Player không online");
+                        }
+                        break;
+                    } else if (player.menuNPCID == 998 && player.menuID == 1) {
+                        if (sizeInput < 6 || sizeInput > 6) {
+                            player.sendAddchatYellow("Chưa nhập đủ các trường");
+                            break;
+                        }
+                        String namePlayerAdd = m.reader().readUTF();
+                        String idItem = m.reader().readUTF();
+                        String idOptionKH = m.reader().readUTF();
+                        String idOption = m.reader().readUTF();
+                        String slOption = m.reader().readUTF();
+                        String slItem = m.reader().readUTF();
+                        if (!Util.isNumericInt(idOption) || !Util.isNumericInt(slOption) || !Util.isNumericInt(slItem)) {
+                            player.sendAddchatYellow("ID Item và số lượng phải là số");
+                            break;
+                        }
+                        int idItemBuff = Integer.parseInt(idItem);
+                        int idOptionSKH = Integer.parseInt(idOptionKH);
+                        int idOptionBuff = Integer.parseInt(idOption);
+                        int slOptionBuff = Integer.parseInt(slOption);
+                        int slItemBuff = Integer.parseInt(slItem);
+                        Player pBuffItem = PlayerManger.gI().getPlayerByName(namePlayerAdd);
+                        if (pBuffItem != null && pBuffItem.session != null) {
+                            String txtBuff = "Buff to player: " + pBuffItem.name + "\b";
+                            if (idItemBuff == -1) {
+                                pBuffItem.vang = Math.min(pBuffItem.vang + (long) slItemBuff, Constant.MAX_MONEY);
+                                txtBuff += slItemBuff + " vàng\b";
+                            } else if (idItemBuff == -2) {
+                                pBuffItem.ngoc = Math.min(pBuffItem.ngoc + slItemBuff, Constant.MAX_GEM);
+                                txtBuff += slItemBuff + " ngọc\b";
+                            } else if (idItemBuff == -3) {
+                                pBuffItem.ngocKhoa = Math.min(pBuffItem.ngocKhoa + slItemBuff, Constant.MAX_RUBY);
+                                txtBuff += slItemBuff + " ngọc khóa\b";
+                            } else {
+                                Item itemBuffTemplate = ItemBuff.getItem(idItemBuff);
+                                if (itemBuffTemplate != null) {
+                                    Item itemBuff = new Item(itemBuffTemplate);
+                                    itemBuff.itemOptions.add(new ItemOption(idOptionSKH, 0));
+                                    if (idOptionSKH == 127) {
+                                        itemBuff.itemOptions.add(new ItemOption(139, 0));
+                                    } else if (idOptionSKH == 128) {
+                                        itemBuff.itemOptions.add(new ItemOption(140, 0));
+                                    } else if (idOptionSKH == 129) {
+                                        itemBuff.itemOptions.add(new ItemOption(141, 0));
+                                    } else if (idOptionSKH == 130) {
+                                        itemBuff.itemOptions.add(new ItemOption(142, 0));
+                                    } else if (idOptionSKH == 131) {
+                                        itemBuff.itemOptions.add(new ItemOption(143, 0));
+                                    } else if (idOptionSKH == 132) {
+                                        itemBuff.itemOptions.add(new ItemOption(144, 0));
+                                    } else if (idOptionSKH == 133) {
+                                        itemBuff.itemOptions.add(new ItemOption(136, 0));
+                                    } else if (idOptionSKH == 134) {
+                                        itemBuff.itemOptions.add(new ItemOption(137, 0));
+                                    } else if (idOptionSKH == 135) {
+                                        itemBuff.itemOptions.add(new ItemOption(138, 0));
+                                    }
+                                    itemBuff.itemOptions.add(new ItemOption(30, 0));
+                                    itemBuff.itemOptions.add(new ItemOption(idOptionBuff, slOptionBuff));
+                                    itemBuff.quantity = slItemBuff;
+                                    pBuffItem.addItemToBag(itemBuff);
+                                    txtBuff += "x" + slItemBuff + " " + itemBuff.template.name + "\b";
+                                }
+                            }
+                            Service.gI().updateItemBag(pBuffItem);
+                            Service.chatNPC(player, (short) 24, txtBuff);
+                            if (player.id != pBuffItem.id) {
+                                Service.chatNPC(pBuffItem, (short) 24, txtBuff);
+                            }
+                        } else {
+                            player.sendAddchatYellow("Player không online");
+                        }
+                        break;
+                    } else if (player.menuNPCID == 998 && player.menuID == 2) {
+                        if (sizeInput < 2 || sizeInput > 2) {
+                            player.sendAddchatYellow("Chưa nhập đủ các trường");
+                            break;
+                        }
+                        String namePlayerAdd = m.reader().readUTF();
+                        String slItem = m.reader().readUTF();
+                        if (!Util.isNumericInt(slItem)) {
+                            player.sendAddchatYellow("ID Item và số lượng phải là số");
+                            break;
+                        }
+                        int slItemBuff = Integer.parseInt(slItem);
+                        Player pBuffItem = PlayerManger.gI().getPlayerByName(namePlayerAdd);
+                        if (pBuffItem != null && pBuffItem.session != null) {
+                            String txtBuff = "Buff to player: " + pBuffItem.name + "\b";
+                            {
+                                pBuffItem.sotien += slItemBuff;
+                                Service.gI().buyDone(pBuffItem);
+                                txtBuff += "x" + slItemBuff + " KunCoin";
+                            }
+                            Service.gI().updateItemBag(pBuffItem);
+                            Service.chatNPC(player, (short) 24, txtBuff);
+                            if (player.id != pBuffItem.id) {
+                                Service.chatNPC(pBuffItem, (short) 24, txtBuff);
+                            }
+                        } else {
+                            player.sendAddchatYellow("Player không online");
+                        }
+                        break;
                     }
+
                     String textLevel = m.reader().readUTF();
                     if (player.menuID == 3 && player.menuNPCID == 67) {//MR POPO
                         if (Util.isNumericInt(textLevel)) {
@@ -157,7 +307,7 @@ public class Controller {
                     } else if (player.menuNPCID == 73) {
                         PlayerDAO.changePassword(player.id, textLevel);
                         player.sendAddchatYellow("Đổi mật khẩu thành công");
-                    } else if (player.menuNPCID >= 0 && player.menuNPCID <= 2) {
+                    } else if (player.menuNPCID == 999 && player.menuID == 2) {
                         GiftCode giftcode = GiftCodeManager.gI().checkUseGiftCode(player.id, textLevel);
                         if (giftcode != null) {
                             ItemService.gI().addItemGiftCodeToPlayer(player, giftcode);
@@ -202,9 +352,117 @@ public class Controller {
                                 player.petfucus = 0;
                                 player.zone.leaveDetu(player, player.detu); // send remove detu to all
                             } else if (statuspet == 4) {
-                                player.sendAddchatYellow("Chỉ có thể thực hiện bằng bông tai!");
+//                                if ((player.map.id != 21 && player.map.id != 22 && player.map.id != 23) && (!player.isdie && player.detu != null && !player.detu.isdie && player.havePet == 1)) {
+//                                    if ((System.currentTimeMillis() - player.tFusion) > 0) {
+//                                        player.tFusion = System.currentTimeMillis() + 10000;
+//                                        if (player.NhapThe == 0) {
+//                                            player.NhapThe = 1;
+//                                            player.detu.isMonkey = false;
+//                                            player.detu.hp = player.detu.hp > player.detu.getHpFull() ? player.detu.getHpFull() : player.detu.hp;
+//                                            //                        Service.gI().loadPlayer(p.session, p);
+//                                            if (!player.isMonkey) {
+//                                                Service.gI().LoadBodyPlayerChange(player, 1, player.PartHead(), player.PartHead() + 1, player.PartHead() + 2);
+//                                            }
+//                                            //HOP THE THI HOI FULL HP, KI
+//                                            player.hp = player.getHpFull();
+//                                            player.mp = player.getMpFull();
+//                                            //send effect hop the
+//                                            try {
+//                                                m = new Message(125);
+//                                                m.writer().writeByte(5); //type hop the 6 la bongtai, 1 la huy hop the
+//                                                m.writer().writeInt(player.id); // id player use
+//                                                m.writer().flush();
+//                                                for (byte i = 0; i < player.zone.players.size(); i++) {
+//                                                    if (player.zone.players.get(i) != null) {
+//                                                        player.zone.players.get(i).session.sendMessage(m);
+//                                                    }
+//                                                }
+////                                    for(Player pl: p.zone.players) {
+////                                        pl.session.sendMessage(m);
+////                                    }
+//                                                m.cleanup();
+//                                            } catch (Exception e) {
+//                                                e.printStackTrace();
+//                                            } finally {
+//                                                if (m != null) {
+//                                                    m.cleanup();
+//                                                }
+//                                            }
+//
+//                                            player.statusPet = 3; //change status de tu thanh ve nha
+//                                            player.petfucus = 0;
+//                                            // remove detu
+//                                            player.zone.leaveDEEEEE(player.detu);
+//                                            //load point moi cho ME
+//                                            Service.gI().loadPoint(player.session, player);
+//                                            //send uphp to all player khac trong map
+//                                            player.updateHpToPlayerInMap(player, player.getHpFull());
+//                                        } else {
+//                                            player.NhapThe = 0;
+//                                            player.isPorata2 = false;
+//                                            //                        Service.gI().loadPlayer(p.session, p);  
+//                                            if (!player.isMonkey) {
+//                                                if (player.ItemBody[5] != null && player.ItemBody[5].template.level != 0 && (player.ItemBody[5].template.id != 601 && player.ItemBody[5].template.id != 602
+//                                                        && player.ItemBody[5].template.id != 603 && player.ItemBody[5].template.id != 639 && player.ItemBody[5].template.id != 640 && player.ItemBody[5].template.id != 641)) {
+//                                                    if (player.ItemBody[5] != null && player.ItemBody[5].template.id == 604) {//CAI TRANG VIP
+//                                                        Service.gI().LoadBodyPlayerChange(player, 1, player.PartHead(), 472, 473);
+//                                                    } else if (player.ItemBody[5] != null && player.ItemBody[5].template.id == 605) {//CAI TRANG VIP
+//                                                        Service.gI().LoadBodyPlayerChange(player, 1, player.PartHead(), 476, 477);
+//                                                    } else if (player.ItemBody[5] != null && player.ItemBody[5].template.id == 606) {//CAI TRANG VIP
+//                                                        Service.gI().LoadBodyPlayerChange(player, 1, player.PartHead(), 474, 475);
+//                                                    } else if (player.ItemBody[5].template.id >= 592 && player.ItemBody[5].template.id <= 594) { //YADART
+//                                                        if (player.id == 1) {
+//                                                            Service.gI().LoadBodyPlayerChange(player, 1, 126, 523, 524);
+//                                                        } else {
+//                                                            Service.gI().LoadBodyPlayerChange(player, 1, player.PartHead(), 523, 524);
+//                                                        }
+//                                                    } else if (player.ItemBody[5] != null && (player.ItemBody[5].template.part != (short) (-1) || player.ItemBody[5].template.id == 545 || player.ItemBody[5].template.id == 546
+//                                                            || player.ItemBody[5].template.id == 857 || player.ItemBody[5].template.id == 858)) {
+//                                                        Service.gI().LoadBodyPlayerChange(player, 1, player.PartHead(), player.PartBody(), player.Leg());
+//                                                    } else {
+//                                                        Service.gI().LoadBodyPlayerChange(player, 1, player.PartHead(), player.PartHead() + 1, player.PartHead() + 2);
+//                                                    }
+//                                                } else {
+//                                                    Service.gI().LoadBodyPlayerChange(player, 1, player.PartHead(), player.PartBody(), player.Leg());
+//                                                }
+//                                            }
+//                                            try {
+//                                                m = new Message(125);
+//                                                m.writer().writeByte(1); //type hop the 6 la bongtai, 1 la huy hop the
+//                                                m.writer().writeInt(player.id); // id player use
+//                                                m.writer().flush();
+//                                                for (byte i = 0; i < player.zone.players.size(); i++) {
+//                                                    if (player.zone.players.get(i) != null) {
+//                                                        player.zone.players.get(i).session.sendMessage(m);
+//                                                    }
+//                                                }
+////                                    for(Player pl: p.zone.players) {
+////                                        pl.session.sendMessage(m);
+////                                    }
+//                                                m.cleanup();
+//                                            } catch (Exception e) {
+//                                                e.printStackTrace();
+//                                            } finally {
+//                                                if (m != null) {
+//                                                    m.cleanup();
+//                                                }
+//                                            }
+//                                            player.statusPet = 0; //change status de tu thanh di theo
+//                                            player.petfucus = 1;
+//                                            Service.gI().LoadDeTuFollow(player, 1);
+//                                            //load point moi cho ME
+//                                            Service.gI().loadPoint(player.session, player);
+//                                            //send uphp to all player khac trong map
+//                                            player.updateHpToPlayerInMap(player, player.getHpFull());
+//                                        };
+//                                    } else {
+//                                        player.sendAddchatYellow("Vui lòng chờ " + (int) ((player.tFusion - System.currentTimeMillis()) / 1000) + " giây nữa");
+//                                    }
+//                                } else {
+                                player.sendAddchatYellow("Không thể thực hiện");
+                                //}
                             } else if (statuspet == 5) {
-                                player.sendAddchatYellow("Chức năng đang được xây dựng!");
+                                player.sendAddchatYellow("Hú hồn chưa, biết thừa ae không dùng chức năng này nên chưa làm đâu!");
                             }
                         } else {
                             player.sendAddchatYellow("Không thể thực hiện!");
@@ -221,7 +479,6 @@ public class Controller {
                     }
 //                    Service.gI().sendMessage(_session, -107, "detu");
                     break;
-
                 //flag
                 case -105:
                     if (player.waitTransport) {
@@ -255,9 +512,9 @@ public class Controller {
                     }
                     break;
                 case -101:
-                    Service.gI().serverMessage(_session, "Đăng Nhập Đê!");
+                    Service.gI().serverMessage(_session, "Vui lòng sử dụng tài khoản để đăng nhập!");
+                    return;
 //                    login2(_session);
-                    break;
                 //su dung capsule transport
                 case -91:
                     byte idTransport = m.reader().readByte();
@@ -272,20 +529,60 @@ public class Controller {
 //                    Manager.sendData(player);
                     MainManager.sendDatav2(_session);
                     break;
-                case -59:
-                    player.sendAddchatYellow("Tạm khóa chức năng thách đấu");
-                    break;
                 case -86: //giao dich
-                    byte gdaction = m.reader().readByte(); //action giao dich == 1 || == 0 thi gd voi player
-                    int gdIdChar = -1;
-                    Player gdChar = null;
-                    if (gdaction == 0) { //moi giao dich
-                        gdIdChar = m.reader().readInt(); //ID Char duoc moi giao dich
-                        gdChar = PlayerManger.gI().getPlayerByUserID(gdIdChar);
-                        if (gdChar != null && gdChar.session != null) {
-                            try { //SEND Loi moi giao dich
+                    if (player.thanhvien != 0) {
+                        byte gdaction = m.reader().readByte(); //action giao dich == 1 || == 0 thi gd voi player
+                        int gdIdChar = -1;
+                        Player gdChar = null;
+                        if (gdaction == 0) { //moi giao dich
+                            // if (player.thanhvien == 0) {
+                            //   player.sendAddchatYellow("Vui lòng kích hoạt thành viên tại Santa để giao dịch");
+                            if (player.power < 5000000) {
+                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 5tr để giao dịch");
+                                return;
+                            }
+                            gdIdChar = m.reader().readInt(); //ID Char duoc moi giao dich
+                            gdChar = PlayerManger.gI().getPlayerByUserID(gdIdChar);
+                            if (gdChar != null && gdChar.session != null) {
+                                try { //SEND Loi moi giao dich
+                                    m = new Message(-86);
+                                    m.writer().writeByte(0);
+                                    m.writer().writeInt(player.id);
+                                    m.writer().flush();
+                                    gdChar.session.sendMessage(m);
+                                    m.cleanup();
+                                } catch (Exception var2) {
+                                    var2.printStackTrace();
+                                } finally {
+                                    if (m != null) {
+                                        m.cleanup();
+                                    }
+                                }
+                            }
+                        } else if (gdaction == 1) { //chap nhan giao dich
+                            // if (player.thanhvien == 0) {
+                            //    player.sendAddchatYellow("Vui lòng kích hoạt thành viên tại Santa để giao dịch");
+                            if (player.power < 5000000) {
+                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 5tr để giao dịch");
+                                return;
+                            }
+                            gdIdChar = m.reader().readInt(); //ID Char giao dich
+                            gdChar = PlayerManger.gI().getPlayerByUserID(gdIdChar);
+                            player._friendGiaoDich = gdChar;
+                            gdChar._friendGiaoDich = player;
+                            //SET STATUS GIAO DICH
+                            player._isGiaoDich = true;
+                            gdChar._isGiaoDich = true;
+                            try { //SEND OPEN UI GIAO DICH
                                 m = new Message(-86);
-                                m.writer().writeByte(0);
+                                m.writer().writeByte(1);
+                                m.writer().writeInt(gdChar.id);
+                                m.writer().flush();
+                                player.session.sendMessage(m);
+                                m.cleanup();
+
+                                m = new Message(-86);
+                                m.writer().writeByte(1);
                                 m.writer().writeInt(player.id);
                                 m.writer().flush();
                                 gdChar.session.sendMessage(m);
@@ -297,91 +594,150 @@ public class Controller {
                                     m.cleanup();
                                 }
                             }
-                        }
-                    } else if (gdaction == 1) { //chap nhan giao dich
-                        gdIdChar = m.reader().readInt(); //ID Char giao dich
-                        gdChar = PlayerManger.gI().getPlayerByUserID(gdIdChar);
-                        player._friendGiaoDich = gdChar;
-                        gdChar._friendGiaoDich = player;
-                        //SET STATUS GIAO DICH
-                        player._isGiaoDich = true;
-                        gdChar._isGiaoDich = true;
-                        try { //SEND OPEN UI GIAO DICH
-                            m = new Message(-86);
-                            m.writer().writeByte(1);
-                            m.writer().writeInt(gdChar.id);
-                            m.writer().flush();
-                            player.session.sendMessage(m);
-                            m.cleanup();
+                        } else if (gdaction == 2) { //add do vao giao dich
+                            // if (player.thanhvien == 0) {
+                            //   player.sendAddchatYellow("Vui lòng kích hoạt thành viên tại Santa để giao dịch");
+                            if (player.power < 5000000) {
+                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 5tr để giao dịch");
+                                return;
+                            }
+                            byte _indexGD = m.reader().readByte();
+                            int _amountGD = m.reader().readInt();
+                            if (_indexGD == -1) {
+                                if (player.vang < _amountGD) {
+                                    _amountGD = (int) player.vang;
+                                }
+                                player.vang = (player.vang - _amountGD) >= 0 ? (player.vang - _amountGD) : 0;
+                                player._goldGiaoDich = _amountGD > 2000000000 ? 2000000000 : _amountGD;
+                                Service.gI().buyDone(player);
+                            } else {
+                                if ((player.ItemBag[_indexGD].template.type == 0 || player.ItemBag[_indexGD].template.type == 1 || player.ItemBag[_indexGD].template.type == 2
+                                        || player.ItemBag[_indexGD].template.type == 3 || player.ItemBag[_indexGD].template.type == 4 || player.ItemBag[_indexGD].template.id == 722 || player.ItemBag[_indexGD].template.id == 457) && player.ItemBag[_indexGD].chkItemCanGD()) { //ITEM CO BAN
+                                    //                            ItemSell _itemTemp =  ItemSell.getItemSellByID(player.ItemBag[_indexGD].template.id);
+                                    Item _itemByChar = player.ItemBag[_indexGD];
+                                    Item _itemGD = new Item();
 
-                            m = new Message(-86);
-                            m.writer().writeByte(1);
-                            m.writer().writeInt(player.id);
-                            m.writer().flush();
-                            gdChar.session.sendMessage(m);
-                            m.cleanup();
-                        } catch (Exception var2) {
-                            var2.printStackTrace();
-                        } finally {
-                            if (m != null) {
+                                    _itemGD.id = _itemByChar.id;
+                                    _itemGD.quantity = _amountGD == 0 ? 1 : _amountGD;
+                                    _itemGD.template = ItemTemplate.ItemTemplateID(_itemGD.id);
+                                    for (ItemOption _option : _itemByChar.itemOptions) {
+                                        _itemGD.itemOptions.add(new ItemOption(_option.id, _option.param));
+                                    }
+                                    player._itemGiaoDich.add(_itemGD);
+                                    player._indexGiaoDich.add(_indexGD);
+                                    //XOA ITEM TRONG HANH TRANG PLAYER
+                                    player.ItemBag[_indexGD].quantity -= _itemGD.quantity;
+                                    if (player.ItemBag[_indexGD].quantity <= 0) {
+                                        player.ItemBag[_indexGD] = null;
+                                    }
+                                    Service.gI().updateItemBag(player);
+//                                player.sortBag();
+                                } else if (player.ItemBag[_indexGD].template.type == 14 || (player.ItemBag[_indexGD].template.type == 29 && player.ItemBag[_indexGD].template.id < 579) || player.ItemBag[_indexGD].template.type == 30
+                                        || player.ItemBag[_indexGD].template.type == 12 || player.ItemBag[_indexGD].template.id == 380) { //ITEM KHONG BAN
+                                    Item _itemTempNotSell = ItemSell.getItemNotSell(player.ItemBag[_indexGD].template.id);
+                                    Item _itemGD = new Item(_itemTempNotSell);
+                                    _itemGD.quantity = _amountGD == 0 ? 1 : _amountGD;
+                                    player._itemGiaoDich.add(_itemGD);
+                                    player._indexGiaoDich.add(_indexGD);
+                                    //XOA ITEM TRONG HANH TRANG PLAYER
+                                    player.ItemBag[_indexGD].quantity -= _itemGD.quantity;
+                                    if (player.ItemBag[_indexGD].quantity <= 0) {
+                                        player.ItemBag[_indexGD] = null;
+                                    }
+                                    Service.gI().updateItemBag(player);
+//                                player.sortBag();
+                                } else if (_indexGD == -1) { //VANG GIAO DICH
+
+                                } else { //REMOVE KHOI GIAO DICH
+                                    try {
+                                        m = new Message(-86);
+                                        m.writer().writeByte(2);
+                                        m.writer().writeByte(_indexGD);
+                                        m.writer().flush();
+                                        player.session.sendMessage(m);
+                                        m.cleanup();
+                                    } catch (Exception var2) {
+                                        var2.printStackTrace();
+                                    } finally {
+                                        if (m != null) {
+                                            m.cleanup();
+                                        }
+                                    }
+                                }
+                            }
+
+                        } else if (gdaction == 4) { //
+//                        Util.log("ACTION ACTION 4: " + m.reader().readByte());
+                        } else if (gdaction == 5) { //KHOA GIAO DICH
+                            // if (player.thanhvien == 0) {
+                            //  player.sendAddchatYellow("Vui lòng kích hoạt thành viên tại Santa để giao dịch");
+                            if (player.power < 5000000) {
+                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 5tr để giao dịch");
+                                return;
+                            }
+                            try {
+                                m = new Message(-86);
+                                m.writer().writeByte(6); //type
+                                m.writer().writeInt(player._goldGiaoDich); //VANG GIAO DICH
+                                m.writer().writeByte(player._itemGiaoDich.size()); //size item giao dich
+                                for (Item _itgd : player._itemGiaoDich) {
+                                    m.writer().writeShort(_itgd.id);
+                                    m.writer().writeInt(_itgd.quantity);
+                                    m.writer().writeByte(_itgd.itemOptions.size()); //So luogn OPTION CUA ITEM
+                                    for (ItemOption _optgd : _itgd.itemOptions) {
+                                        m.writer().writeByte(_optgd.id);
+                                        m.writer().writeShort(_optgd.param);
+                                    }
+                                }
+                                m.writer().flush();
+                                player._friendGiaoDich.session.sendMessage(m);
                                 m.cleanup();
+                            } catch (Exception var2) {
+                                var2.printStackTrace();
+                            } finally {
+                                if (m != null) {
+                                    m.cleanup();
+                                }
                             }
-                        }
-                    } else if (gdaction == 2) { //add do vao giao dich
-                        byte _indexGD = m.reader().readByte();
-                        int _amountGD = m.reader().readInt();
-                        if (_indexGD == -1) {
-                            if (player.vang < _amountGD) {
-                                _amountGD = (int) player.vang;
+                        } else if (gdaction == 7) { //XAC NHAN GIAO DICH
+                            //  if (player.thanhvien == 0) {
+                            //     player.sendAddchatYellow("Vui lòng kích hoạt thành viên tại Santa để giao dịch");
+                            if (player.power < 5000000) {
+                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 5tr để giao dịch");
+                                return;
                             }
-                            player.vang = (player.vang - _amountGD) >= 0 ? (player.vang - _amountGD) : 0;
-                            player._goldGiaoDich = _amountGD > 2000000000 ? 2000000000 : _amountGD;
-                            Service.gI().buyDone(player);
-                        } else {
-                            if ((player.ItemBag[_indexGD].template.type == 0 || player.ItemBag[_indexGD].template.type == 1 || player.ItemBag[_indexGD].template.type == 2
-                                    || player.ItemBag[_indexGD].template.type == 3 || player.ItemBag[_indexGD].template.type == 4 || player.ItemBag[_indexGD].template.id == 722) && player.ItemBag[_indexGD].chkItemCanGD()) { //ITEM CO BAN
-                                //                            ItemSell _itemTemp =  ItemSell.getItemSellByID(player.ItemBag[_indexGD].template.id);
-                                Item _itemByChar = player.ItemBag[_indexGD];
-                                Item _itemGD = new Item();
-
-                                _itemGD.id = _itemByChar.id;
-                                _itemGD.quantity = _amountGD == 0 ? 1 : _amountGD;
-                                _itemGD.template = ItemTemplate.ItemTemplateID(_itemGD.id);
-                                for (ItemOption _option : _itemByChar.itemOptions) {
-                                    _itemGD.itemOptions.add(new ItemOption(_option.id, _option.param));
+                            byte _boxMeNull = player.getAvailableBag();
+                            if (_boxMeNull < player._friendGiaoDich._itemGiaoDich.size()) {
+                                //ADD ITEM TO ME
+                                for (int i = 0; i < player._indexGiaoDich.size(); i++) {
+                                    byte indexME = player.getIndexBagNotItem();
+//                                Item _item = new Item(item);
+//                                _item.quantity += (item.quantity - 1);
+                                    player.ItemBag[indexME] = player._itemGiaoDich.get(i);
                                 }
-                                player._itemGiaoDich.add(_itemGD);
-                                player._indexGiaoDich.add(_indexGD);
-                                //XOA ITEM TRONG HANH TRANG PLAYER
-                                player.ItemBag[_indexGD].quantity -= _itemGD.quantity;
-                                if (player.ItemBag[_indexGD].quantity <= 0) {
-                                    player.ItemBag[_indexGD] = null;
+                                //ADD ITEM TO FRIEND
+                                for (int i = 0; i < player._friendGiaoDich._indexGiaoDich.size(); i++) {
+                                    byte indexFRIEND = player._friendGiaoDich.getIndexBagNotItem();
+//                                Item _item = new Item(item);
+//                                _item.quantity += (item.quantity - 1);
+                                    player._friendGiaoDich.ItemBag[indexFRIEND] = player._friendGiaoDich._itemGiaoDich.get(i);
                                 }
-                                Service.gI().updateItemBag(player);
-//                                player.sortBag();
-                            } else if (player.ItemBag[_indexGD].template.type == 14 || (player.ItemBag[_indexGD].template.type == 29 && player.ItemBag[_indexGD].template.id < 579) || player.ItemBag[_indexGD].template.type == 30
-                                    || player.ItemBag[_indexGD].template.type == 12 || player.ItemBag[_indexGD].template.id == 380) { //ITEM KHONG BAN
-                                Item _itemTempNotSell = ItemSell.getItemNotSell(player.ItemBag[_indexGD].template.id);
-                                Item _itemGD = new Item(_itemTempNotSell);
-                                _itemGD.quantity = _amountGD == 0 ? 1 : _amountGD;
-                                player._itemGiaoDich.add(_itemGD);
-                                player._indexGiaoDich.add(_indexGD);
-                                //XOA ITEM TRONG HANH TRANG PLAYER
-                                player.ItemBag[_indexGD].quantity -= _itemGD.quantity;
-                                if (player.ItemBag[_indexGD].quantity <= 0) {
-                                    player.ItemBag[_indexGD] = null;
+                                if (player._goldGiaoDich > 0) {
+                                    long _VANG = ((long) player.vang + (long) player._goldGiaoDich) > 2000000000L ? 2000000000L : ((long) player.vang + (long) player._goldGiaoDich);
+                                    player.vang = _VANG;
                                 }
-                                Service.gI().updateItemBag(player);
-//                                player.sortBag();
-                            } else if (_indexGD == -1) { //VANG GIAO DICH
-
-                            } else { //REMOVE KHOI GIAO DICH
+                                if (player._friendGiaoDich._goldGiaoDich > 0) {
+                                    long _VANG2 = ((long) player._friendGiaoDich.vang + (long) player._friendGiaoDich._goldGiaoDich) > 2000000000L ? 2000000000L : ((long) player._friendGiaoDich.vang + (long) player._friendGiaoDich._goldGiaoDich);
+                                    player._friendGiaoDich.vang = _VANG2;
+                                }
+                                //SEND HUY GIAO DICH
+                                //SEND TAT UI GIAO DICH
                                 try {
                                     m = new Message(-86);
-                                    m.writer().writeByte(2);
-                                    m.writer().writeByte(_indexGD);
+                                    m.writer().writeByte(7);
                                     m.writer().flush();
                                     player.session.sendMessage(m);
+                                    player._friendGiaoDich.session.sendMessage(m);
                                     m.cleanup();
                                 } catch (Exception var2) {
                                     var2.printStackTrace();
@@ -390,52 +746,147 @@ public class Controller {
                                         m.cleanup();
                                     }
                                 }
-                            }
-                        }
+                                //UPDATE BAG CHO TOI
+                                Service.gI().updateItemBag(player);
+                                Service.gI().buyDone(player);
+                                //UPDATE BAG CHO FRIEND
+                                Service.gI().updateItemBag(player._friendGiaoDich);
+                                Service.gI().buyDone(player._friendGiaoDich);
+                                player._isGiaoDich = false;
+                                player._friendGiaoDich._isGiaoDich = false;
 
-                    } else if (gdaction == 4) { //
-//                        Util.log("ACTION ACTION 4: " + m.reader().readByte());
-                    } else if (gdaction == 5) { //KHOA GIAO DICH
-                        try {
-                            m = new Message(-86);
-                            m.writer().writeByte(6); //type
-                            m.writer().writeInt(player._goldGiaoDich); //VANG GIAO DICH
-                            m.writer().writeByte(player._itemGiaoDich.size()); //size item giao dich
-                            for (Item _itgd : player._itemGiaoDich) {
-                                m.writer().writeShort(_itgd.id);
-                                m.writer().writeInt(_itgd.quantity);
-                                m.writer().writeByte(_itgd.itemOptions.size()); //So luogn OPTION CUA ITEM
-                                for (ItemOption _optgd : _itgd.itemOptions) {
-                                    m.writer().writeByte(_optgd.id);
-                                    m.writer().writeShort(_optgd.param);
+                                player._friendGiaoDich.sendAddchatYellow("Giao dịch đã bị hủy");
+                                //CLEAR VARIABLE SAU KHI GIAO DICH XONG CHO FRIEND
+                                player._friendGiaoDich._indexGiaoDich.clear();
+                                player._friendGiaoDich._itemGiaoDich.clear();
+                                player._friendGiaoDich._friendGiaoDich = null;
+                                player._friendGiaoDich._confirmGiaoDich = false;
+                                player._friendGiaoDich._goldGiaoDich = 0;
+                                //CLEAR VARIABLE SAU KHI GIAO DICH XONG CHO TOI
+                                player._indexGiaoDich.clear();
+                                player._itemGiaoDich.clear();
+                                player._friendGiaoDich = null;
+                                player._confirmGiaoDich = false;
+                                player._goldGiaoDich = 0;
+                                return;
+                            }
+                            player._confirmGiaoDich = true;
+                            if (!player._friendGiaoDich._confirmGiaoDich) {
+                                player.sendAddchatYellow("Đang đợi người chơi còn lại xác nhận");
+                            } else if (player._confirmGiaoDich && player._friendGiaoDich._confirmGiaoDich) {
+                                byte _boxFriendNull = player._friendGiaoDich.getAvailableBag();
+                                //XOA ITEM CA 2 BEN
+//                            //XOA ITEM CUA BAN THAN
+//                            for(int i = 0; i < player._indexGiaoDich.size(); i++) {
+//                                player.ItemBag[player._indexGiaoDich.get(i)].quantity -= player._itemGiaoDich.get(i).quantity;
+//                                if(player.ItemBag[player._indexGiaoDich.get(i)].quantity == 0) {
+//                                    player.ItemBag[player._indexGiaoDich.get(i)] = null;
+//                                }
+//                            }
+//                            player.sortBag();
+//                            for(int i = 0; i < player._friendGiaoDich._indexGiaoDich.size(); i++) {
+//                                //XOA ITEM FRIEND
+//                                player._friendGiaoDich.ItemBag[player._friendGiaoDich._indexGiaoDich.get(i)].quantity -= player._friendGiaoDich._itemGiaoDich.get(i).quantity;
+//                                if(player._friendGiaoDich.ItemBag[player._friendGiaoDich._indexGiaoDich.get(i)].quantity == 0) {
+//                                    player._friendGiaoDich.ItemBag[player._friendGiaoDich._indexGiaoDich.get(i)] = null;
+//                                }
+//                            }
+//                            player._friendGiaoDich.sortBag();
+                                String logItem1 = "list";
+                                String logItem2 = "list";
+                                //ADD ITEM TO ME
+                                for (int i = 0; i < player._friendGiaoDich._indexGiaoDich.size(); i++) {
+                                    byte indexME = player.getIndexBagNotItem();
+//                                Item _item = new Item(item);
+//                                _item.quantity += (item.quantity - 1);
+                                    if (indexME != (byte) (-1)) {
+                                        logItem1 += ";id:" + player._friendGiaoDich._itemGiaoDich.get(i).id + "," + player._friendGiaoDich._itemGiaoDich.get(i).template.name + ",quantity:" + player._friendGiaoDich._itemGiaoDich.get(i).quantity;
+                                        player.ItemBag[indexME] = player._friendGiaoDich._itemGiaoDich.get(i);
+                                    }
+                                }
+                                //ADD ITEM TO FRIEND
+                                for (int i = 0; i < player._indexGiaoDich.size(); i++) {
+                                    byte indexFRIEND = player._friendGiaoDich.getIndexBagNotItem();
+//                                Item _item = new Item(item);
+//                                _item.quantity += (item.quantity - 1);
+                                    if (indexFRIEND != (byte) (-1)) {
+                                        logItem2 += ";id:" + player._itemGiaoDich.get(i).id + "," + player._itemGiaoDich.get(i).template.name + ",quantity:" + player._itemGiaoDich.get(i).quantity;
+                                        player._friendGiaoDich.ItemBag[indexFRIEND] = player._itemGiaoDich.get(i);
+                                    }
+                                }
+                                if (player._goldGiaoDich > 0) {
+                                    long _VANG = ((long) player._friendGiaoDich.vang + (long) player._goldGiaoDich) > 2000000000L ? 2000000000L : ((long) player._friendGiaoDich.vang + (long) player._goldGiaoDich);
+                                    player._friendGiaoDich.vang = _VANG;
+                                }
+                                if (player._friendGiaoDich._goldGiaoDich > 0) {
+                                    long _VANG2 = ((long) player.vang + (long) player._friendGiaoDich._goldGiaoDich) > 2000000000L ? 2000000000L : ((long) player.vang + (long) player._friendGiaoDich._goldGiaoDich);
+                                    player.vang = _VANG2;
+                                }
+                                //UPDATE BAG CHO TOI
+                                Service.gI().updateItemBag(player);
+                                Service.gI().buyDone(player);
+                                //UPDATE BAG CHO FRIEND
+                                Service.gI().updateItemBag(player._friendGiaoDich);
+                                Service.gI().buyDone(player._friendGiaoDich);
+
+                                //SEND THONG BAO GIAO DICH THANH CONG
+                                player.sendAddchatYellow("Giao dịch thành công");
+                                player._friendGiaoDich.sendAddchatYellow("Giao dịch thành công");
+
+                                player._isGiaoDich = false;
+                                player._friendGiaoDich._isGiaoDich = false;
+                                //CLEAR VARIABLE SAU KHI GIAO DICH XONG CHO FRIEND
+                                player._friendGiaoDich._indexGiaoDich.clear();
+                                player._friendGiaoDich._itemGiaoDich.clear();
+                                player._friendGiaoDich._friendGiaoDich = null;
+                                player._friendGiaoDich._confirmGiaoDich = false;
+                                player._friendGiaoDich._goldGiaoDich = 0;
+                                //CLEAR VARIABLE SAU KHI GIAO DICH XONG CHO TOI
+                                player._indexGiaoDich.clear();
+                                player._itemGiaoDich.clear();
+                                player._friendGiaoDich = null;
+                                player._confirmGiaoDich = false;
+                                player._goldGiaoDich = 0;
+
+                                //GIAO DICH THANH CONG UPDATE LEN DB
+                                Connection conn = DataSource.getConnection();
+                                try {
+                                    PlayerDAO.updateDBAuto(player, conn);
+                                    PlayerDAO.updateDBAuto(player._friendGiaoDich, conn);
+                                    PlayerDAO.logTradeDB(player.id, player.name, player._friendGiaoDich.id, player._friendGiaoDich.name, logItem2, logItem1, conn);
+                                    conn.close();
+                                } catch (Exception e) {
+
+                                } finally {
+                                    try {
+                                        if (conn != null) {
+                                            conn.close();
+                                            conn = null;
+                                        }
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             }
-                            m.writer().flush();
-                            player._friendGiaoDich.session.sendMessage(m);
-                            m.cleanup();
-                        } catch (Exception var2) {
-                            var2.printStackTrace();
-                        } finally {
-                            if (m != null) {
-                                m.cleanup();
-                            }
-                        }
-                    } else if (gdaction == 7) { //XAC NHAN GIAO DICH
-                        byte _boxMeNull = player.getAvailableBag();
-                        if (_boxMeNull < player._friendGiaoDich._itemGiaoDich.size()) {
+                        } else if (gdaction == 3 && player._friendGiaoDich != null && player._friendGiaoDich._friendGiaoDich != null) { //HUY GIAO DICH
+                            //SEND TAT UI GIAO DICH
                             //ADD ITEM TO ME
                             for (int i = 0; i < player._indexGiaoDich.size(); i++) {
                                 byte indexME = player.getIndexBagNotItem();
 //                                Item _item = new Item(item);
 //                                _item.quantity += (item.quantity - 1);
-                                player.ItemBag[indexME] = player._itemGiaoDich.get(i);
+                                if (indexME != (byte) (-1)) {
+                                    player.ItemBag[indexME] = player._itemGiaoDich.get(i);
+                                }
                             }
                             //ADD ITEM TO FRIEND
                             for (int i = 0; i < player._friendGiaoDich._indexGiaoDich.size(); i++) {
                                 byte indexFRIEND = player._friendGiaoDich.getIndexBagNotItem();
 //                                Item _item = new Item(item);
 //                                _item.quantity += (item.quantity - 1);
-                                player._friendGiaoDich.ItemBag[indexFRIEND] = player._friendGiaoDich._itemGiaoDich.get(i);
+                                if (indexFRIEND != (byte) (-1)) {
+                                    player._friendGiaoDich.ItemBag[indexFRIEND] = player._friendGiaoDich._itemGiaoDich.get(i);
+                                }
                             }
                             if (player._goldGiaoDich > 0) {
                                 long _VANG = ((long) player.vang + (long) player._goldGiaoDich) > 2000000000L ? 2000000000L : ((long) player.vang + (long) player._goldGiaoDich);
@@ -467,86 +918,21 @@ public class Controller {
                             //UPDATE BAG CHO FRIEND
                             Service.gI().updateItemBag(player._friendGiaoDich);
                             Service.gI().buyDone(player._friendGiaoDich);
-                            player._isGiaoDich = false;
-                            player._friendGiaoDich._isGiaoDich = false;
-
+                            try {
+                                m = new Message(-86);
+                                m.writer().writeByte(7);
+                                m.writer().flush();
+                                player.session.sendMessage(m);
+                                player._friendGiaoDich.session.sendMessage(m);
+                                m.cleanup();
+                            } catch (Exception var2) {
+                                var2.printStackTrace();
+                            } finally {
+                                if (m != null) {
+                                    m.cleanup();
+                                }
+                            }
                             player._friendGiaoDich.sendAddchatYellow("Giao dịch đã bị hủy");
-                            //CLEAR VARIABLE SAU KHI GIAO DICH XONG CHO FRIEND
-                            player._friendGiaoDich._indexGiaoDich.clear();
-                            player._friendGiaoDich._itemGiaoDich.clear();
-                            player._friendGiaoDich._friendGiaoDich = null;
-                            player._friendGiaoDich._confirmGiaoDich = false;
-                            player._friendGiaoDich._goldGiaoDich = 0;
-                            //CLEAR VARIABLE SAU KHI GIAO DICH XONG CHO TOI
-                            player._indexGiaoDich.clear();
-                            player._itemGiaoDich.clear();
-                            player._friendGiaoDich = null;
-                            player._confirmGiaoDich = false;
-                            player._goldGiaoDich = 0;
-                            return;
-                        }
-                        player._confirmGiaoDich = true;
-                        if (!player._friendGiaoDich._confirmGiaoDich) {
-                            player.sendAddchatYellow("Đang đợi người chơi còn lại xác nhận");
-                        } else if (player._confirmGiaoDich && player._friendGiaoDich._confirmGiaoDich) {
-                            byte _boxFriendNull = player._friendGiaoDich.getAvailableBag();
-                            //XOA ITEM CA 2 BEN
-//                            //XOA ITEM CUA BAN THAN
-//                            for(int i = 0; i < player._indexGiaoDich.size(); i++) {
-//                                player.ItemBag[player._indexGiaoDich.get(i)].quantity -= player._itemGiaoDich.get(i).quantity;
-//                                if(player.ItemBag[player._indexGiaoDich.get(i)].quantity == 0) {
-//                                    player.ItemBag[player._indexGiaoDich.get(i)] = null;
-//                                }
-//                            }
-//                            player.sortBag();
-//                            for(int i = 0; i < player._friendGiaoDich._indexGiaoDich.size(); i++) {
-//                                //XOA ITEM FRIEND
-//                                player._friendGiaoDich.ItemBag[player._friendGiaoDich._indexGiaoDich.get(i)].quantity -= player._friendGiaoDich._itemGiaoDich.get(i).quantity;
-//                                if(player._friendGiaoDich.ItemBag[player._friendGiaoDich._indexGiaoDich.get(i)].quantity == 0) {
-//                                    player._friendGiaoDich.ItemBag[player._friendGiaoDich._indexGiaoDich.get(i)] = null;
-//                                }
-//                            }
-//                            player._friendGiaoDich.sortBag();
-                            String logItem1 = "list";
-                            String logItem2 = "list";
-                            //ADD ITEM TO ME
-                            for (int i = 0; i < player._friendGiaoDich._indexGiaoDich.size(); i++) {
-                                byte indexME = player.getIndexBagNotItem();
-//                                Item _item = new Item(item);
-//                                _item.quantity += (item.quantity - 1);
-                                if (indexME != (byte) (-1)) {
-                                    logItem1 += ";id:" + player._friendGiaoDich._itemGiaoDich.get(i).id + "," + player._friendGiaoDich._itemGiaoDich.get(i).template.name + ",quantity:" + player._friendGiaoDich._itemGiaoDich.get(i).quantity;
-                                    player.ItemBag[indexME] = player._friendGiaoDich._itemGiaoDich.get(i);
-                                }
-                            }
-                            //ADD ITEM TO FRIEND
-                            for (int i = 0; i < player._indexGiaoDich.size(); i++) {
-                                byte indexFRIEND = player._friendGiaoDich.getIndexBagNotItem();
-//                                Item _item = new Item(item);
-//                                _item.quantity += (item.quantity - 1);
-                                if (indexFRIEND != (byte) (-1)) {
-                                    logItem2 += ";id:" + player._itemGiaoDich.get(i).id + "," + player._itemGiaoDich.get(i).template.name + ",quantity:" + player._itemGiaoDich.get(i).quantity;
-                                    player._friendGiaoDich.ItemBag[indexFRIEND] = player._itemGiaoDich.get(i);
-                                }
-                            }
-                            if (player._goldGiaoDich > 0) {
-                                long _VANG = ((long) player._friendGiaoDich.vang + (long) player._goldGiaoDich) > 2000000000L ? 2000000000L : ((long) player._friendGiaoDich.vang + (long) player._goldGiaoDich);
-                                player._friendGiaoDich.vang = _VANG;
-                            }
-                            if (player._friendGiaoDich._goldGiaoDich > 0) {
-                                long _VANG2 = ((long) player.vang + (long) player._friendGiaoDich._goldGiaoDich) > 2000000000L ? 2000000000L : ((long) player.vang + (long) player._friendGiaoDich._goldGiaoDich);
-                                player.vang = _VANG2;
-                            }
-                            //UPDATE BAG CHO TOI
-                            Service.gI().updateItemBag(player);
-                            Service.gI().buyDone(player);
-                            //UPDATE BAG CHO FRIEND
-                            Service.gI().updateItemBag(player._friendGiaoDich);
-                            Service.gI().buyDone(player._friendGiaoDich);
-
-                            //SEND THONG BAO GIAO DICH THANH CONG
-                            player.sendAddchatYellow("Giao dịch thành công");
-                            player._friendGiaoDich.sendAddchatYellow("Giao dịch thành công");
 
                             player._isGiaoDich = false;
                             player._friendGiaoDich._isGiaoDich = false;
@@ -562,96 +948,12 @@ public class Controller {
                             player._friendGiaoDich = null;
                             player._confirmGiaoDich = false;
                             player._goldGiaoDich = 0;
-
-                            //GIAO DICH THANH CONG UPDATE LEN DB
-                            Connection conn = DataSource.getConnection();
-                            PlayerDAO.updateDBAuto(player, conn);
-                            PlayerDAO.updateDBAuto(player._friendGiaoDich, conn);
-                            PlayerDAO.logTradeDB(player.id, player.name, player._friendGiaoDich.id, player._friendGiaoDich.name, logItem2, logItem1, conn);
-                            conn.close();
                         }
-                    } else if (gdaction == 3 && player._friendGiaoDich != null && player._friendGiaoDich._friendGiaoDich != null) { //HUY GIAO DICH
-                        //SEND TAT UI GIAO DICH
-                        //ADD ITEM TO ME
-                        for (int i = 0; i < player._indexGiaoDich.size(); i++) {
-                            byte indexME = player.getIndexBagNotItem();
-//                                Item _item = new Item(item);
-//                                _item.quantity += (item.quantity - 1);
-                            if (indexME != (byte) (-1)) {
-                                player.ItemBag[indexME] = player._itemGiaoDich.get(i);
-                            }
-                        }
-                        //ADD ITEM TO FRIEND
-                        for (int i = 0; i < player._friendGiaoDich._indexGiaoDich.size(); i++) {
-                            byte indexFRIEND = player._friendGiaoDich.getIndexBagNotItem();
-//                                Item _item = new Item(item);
-//                                _item.quantity += (item.quantity - 1);
-                            if (indexFRIEND != (byte) (-1)) {
-                                player._friendGiaoDich.ItemBag[indexFRIEND] = player._friendGiaoDich._itemGiaoDich.get(i);
-                            }
-                        }
-                        if (player._goldGiaoDich > 0) {
-                            long _VANG = ((long) player.vang + (long) player._goldGiaoDich) > 2000000000L ? 2000000000L : ((long) player.vang + (long) player._goldGiaoDich);
-                            player.vang = _VANG;
-                        }
-                        if (player._friendGiaoDich._goldGiaoDich > 0) {
-                            long _VANG2 = ((long) player._friendGiaoDich.vang + (long) player._friendGiaoDich._goldGiaoDich) > 2000000000L ? 2000000000L : ((long) player._friendGiaoDich.vang + (long) player._friendGiaoDich._goldGiaoDich);
-                            player._friendGiaoDich.vang = _VANG2;
-                        }
-                        //SEND HUY GIAO DICH
-                        //SEND TAT UI GIAO DICH
-                        try {
-                            m = new Message(-86);
-                            m.writer().writeByte(7);
-                            m.writer().flush();
-                            player.session.sendMessage(m);
-                            player._friendGiaoDich.session.sendMessage(m);
-                            m.cleanup();
-                        } catch (Exception var2) {
-                            var2.printStackTrace();
-                        } finally {
-                            if (m != null) {
-                                m.cleanup();
-                            }
-                        }
-                        //UPDATE BAG CHO TOI
-                        Service.gI().updateItemBag(player);
-                        Service.gI().buyDone(player);
-                        //UPDATE BAG CHO FRIEND
-                        Service.gI().updateItemBag(player._friendGiaoDich);
-                        Service.gI().buyDone(player._friendGiaoDich);
-                        try {
-                            m = new Message(-86);
-                            m.writer().writeByte(7);
-                            m.writer().flush();
-                            player.session.sendMessage(m);
-                            player._friendGiaoDich.session.sendMessage(m);
-                            m.cleanup();
-                        } catch (Exception var2) {
-                            var2.printStackTrace();
-                        } finally {
-                            if (m != null) {
-                                m.cleanup();
-                            }
-                        }
-                        player._friendGiaoDich.sendAddchatYellow("Giao dịch đã bị hủy");
-
-                        player._isGiaoDich = false;
-                        player._friendGiaoDich._isGiaoDich = false;
-                        //CLEAR VARIABLE SAU KHI GIAO DICH XONG CHO FRIEND
-                        player._friendGiaoDich._indexGiaoDich.clear();
-                        player._friendGiaoDich._itemGiaoDich.clear();
-                        player._friendGiaoDich._friendGiaoDich = null;
-                        player._friendGiaoDich._confirmGiaoDich = false;
-                        player._friendGiaoDich._goldGiaoDich = 0;
-                        //CLEAR VARIABLE SAU KHI GIAO DICH XONG CHO TOI
-                        player._indexGiaoDich.clear();
-                        player._itemGiaoDich.clear();
-                        player._friendGiaoDich = null;
-                        player._confirmGiaoDich = false;
-                        player._goldGiaoDich = 0;
+                        break;
+                    } else {
+                        //player.sendAddchatYellow("Vui lòng kích hoạt thành viên ở Santa để giao dịch");
+                        player.sendAddchatYellow("Vui lòng up sức mạnh trên 5tr để giao dịch");
                     }
-                    break;
                 case -81: //ba hat mit
                     byte actionn = m.reader().readByte(); //action 1 nang cap
                     byte size = m.reader().readByte();
@@ -670,7 +972,7 @@ public class Controller {
                             } else if (actionn == 1 && player.menuID == 0) {//ep sao trang bi
                                 indexUI2 = m.reader().readByte();
                                 if (indexUI2 == -1) {
-                                    Service.gI().serverMessage(_session, "Không nghịch ngu!");
+                                    Service.gI().serverMessage(_session, "Không thể kết hợp!");
                                 } else {
                                     Service.gI().EpStarItem(player, indexUI, indexUI2);
                                 }
@@ -682,14 +984,14 @@ public class Controller {
                                     indexUI3 = m.reader().readByte();
                                 }
                                 if (indexUI2 == -1) {
-                                    Service.gI().serverMessage(_session, "Không nghịch ngu!");
+                                    Service.gI().serverMessage(_session, "Không thể kết hợp!");
                                 } else {
                                     Service.gI().upgradeLevelItem(player, indexUI, indexUI2, indexUI3);
                                 }
                             } else if (actionn == 1 && player.menuID == 2) {//ep manh da vun
                                 indexUI2 = m.reader().readByte();
                                 if (indexUI2 == -1) {
-                                    Service.gI().serverMessage(_session, "Không nghịch ngu!");
+                                    Service.gI().serverMessage(_session, "Không thể kết hợp!");
                                 } else {
                                     Service.gI().EpStoneBreak(player, indexUI, indexUI2);
                                 }
@@ -698,7 +1000,7 @@ public class Controller {
                             } else if (actionn == 1 && player.menuID == 4) { //nang cap bt porata
                                 indexUI2 = m.reader().readByte();
                                 if (indexUI2 == -1) {
-                                    Service.gI().serverMessage(_session, "Không nghịch ngu!");
+                                    Service.gI().serverMessage(_session, "Không thể kết hợp!");
                                 } else {
                                     Service.gI().upgradePorata(player, indexUI, indexUI2);
                                 }
@@ -706,14 +1008,14 @@ public class Controller {
                                 indexUI2 = m.reader().readByte();
                                 indexUI3 = m.reader().readByte();
                                 if (indexUI2 == -1 || indexUI3 == -1) {
-                                    Service.gI().serverMessage(_session, "Không nghịch ngu!");
+                                    Service.gI().serverMessage(_session, "Không thể kết hợp!");
                                 } else {
                                     Service.gI().openOptionPorata(player, indexUI, indexUI2, indexUI3);
                                 }
                             } else if (actionn == 1 && player.menuID == 7) { // NANG CAP ITEM HEART
                                 indexUI2 = m.reader().readByte();
                                 if (indexUI2 == -1) {
-                                    Service.gI().serverMessage(_session, "Không nghịch ngu!");
+                                    Service.gI().serverMessage(_session, "Không thể kết hợp!");
                                 } else {
                                     Service.gI().upgradeItemHeart(player, indexUI, indexUI2);
                                 }
@@ -758,10 +1060,8 @@ public class Controller {
                     break;
                 case -71:
                     if (Server.gI().isCTG) {
-                        if ((System.currentTimeMillis() >= player._TIMECHATTG)) {
-                            if (player.id >= 1) {
-                                player._TIMECHATTG = System.currentTimeMillis() + 30000L;
-                            }
+                        if ((System.currentTimeMillis() - player._TIMECHATTG) > 30000) {
+                            player._TIMECHATTG = System.currentTimeMillis();
                             boolean isCanChat = false;
                             String chat2 = m.reader().readUTF();
                             if (chat2.length() > 40) {
@@ -770,6 +1070,7 @@ public class Controller {
                             if (player.ngocKhoa >= 5) {
                                 player.ngocKhoa = player.ngocKhoa - 5;
                                 isCanChat = true;
+
                             } else if (player.ngoc >= 5) {
                                 player.ngoc = player.ngoc - 5;
                                 isCanChat = true;
@@ -781,7 +1082,7 @@ public class Controller {
                                 Service.gI().buyDone(player);
                             }
                         } else {
-                            player.sendAddchatYellow("Vui lòng đợi " + (player._TIMECHATTG - System.currentTimeMillis()) / 1000 + " giây nữa!");
+                            player.sendAddchatYellow("Vui lòng đợi " + ((player._TIMECHATTG + 30000) - System.currentTimeMillis()) / 1000 + "giây nữa!");
                         }
                     } else {
                         player.sendAddchatYellow("Không thể thực hiện");
@@ -871,7 +1172,7 @@ public class Controller {
                             int codeInvite = m.reader().readInt();
                         }
                     } else {
-                        player.sendAddchatYellow("Chỉ thực hiện ở NOAH 1");
+                        player.sendAddchatYellow("Chỉ thực hiện ở TeamKun 1");
                     }
                     break;
                 //PHONG PHO BANG, CHU BANG, DUOI KHOI BANG
@@ -885,7 +1186,7 @@ public class Controller {
                             ClanService.gI().changeRolePhoBang(id56, player, (byte) role56);
                         }
                     } else {
-                        player.sendAddchatYellow("Chỉ thực hiện ở NOAH 1");
+                        player.sendAddchatYellow("Chỉ thực hiện ở TeamKun 1");
                     }
                     break;
                 // LEAVE CLAN
@@ -897,7 +1198,7 @@ public class Controller {
                             player.sendAddchatYellow("Bang chủ không thể rời bang");
                         }
                     } else {
-                        player.sendAddchatYellow("Chỉ thực hiện ở NOAH 1");
+                        player.sendAddchatYellow("Chỉ thực hiện ở TeamKun 1");
                     }
                     break;
                 case -54: //CHO DAU THAN
@@ -938,7 +1239,7 @@ public class Controller {
                             player.sendAddchatYellow("Đã hết đậu thần trong rương, hãy về thu hoạch thêm");
                         }
                     } else {
-                        player.sendAddchatYellow("Chỉ thực hiện ở NOAH 1");
+                        player.sendAddchatYellow("Chỉ thực hiện ở TeamKun");
                     }
                     break;
                 case -51: //XIN VAO BANG, CHAT BANG
@@ -985,11 +1286,11 @@ public class Controller {
                                 //SEND CHAT TO CLAN
                                 ClanService.gI().sendMessageToClan(player.clan);
                             } else {
-                                player.sendAddchatYellow("Chờ hết 5p đi bạn ơi");
+                                player.sendAddchatYellow("Vui lòng chờ " + player._TIMEXINDAU + " phút nữa");
                             }
                         }
                     } else {
-                        player.sendAddchatYellow("Chỉ thực hiện ở NOAH 1");
+                        player.sendAddchatYellow("Chỉ thực hiện ở TeamKun 1");
                     }
                     break;
                 case -50:
@@ -1027,14 +1328,14 @@ public class Controller {
                             player.sendAddchatYellow("Chức năng chỉ dành cho chủ bang");
                         }
                     } else {
-                        player.sendAddchatYellow("Chỉ thực hiện ở NOAH 1");
+                        player.sendAddchatYellow("Chỉ thực hiện ở TeamKun 1");
                     }
                     break;
                 case -47:
                     if (player.clan == null) {
                         String clanName = m.reader().readUTF();
 //                        ClanService.gI().clanIconImageInfo(_session);
-//                        ClanService.gI().clanIconImage(_session);
+                        ClanService.gI().clanIconImage(_session);
                         ClanService.gI().searchClan(_session, clanName);
                     } else {
                         ClanService.gI().clanInfo(_session, player);
@@ -1101,7 +1402,7 @@ public class Controller {
                             }
                         }
                     } else {
-                        player.sendAddchatYellow("Chỉ thực hiện ở NOAH 1");
+                        player.sendAddchatYellow("Chỉ thực hiện ở TeamKun 1");
                     }
                     break;
                 // su dung skill dac biet
@@ -1185,7 +1486,7 @@ public class Controller {
                                 idItem = m.reader().readShort();
                             }
                             UseItemHandler(_session, player, typeUse, where, index, idItem);
-//                            System.out.println(" Type USe, WHERE, INDEX, ID ITEM: " + typeUse + ", " + where + ", " + index + ", " + idItem);
+                            //System.out.println(" Type USe, WHERE, INDEX, ID ITEM: " + typeUse + ", " + where + ", " + index + ", " + idItem);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -1250,7 +1551,8 @@ public class Controller {
 //                    Service.gI().sendMessage(_session, -29, "1630679748828_-29_2_r"); // -29
                     m = new Message(-29);
                     m.writer().writeByte(2);
-                    m.writer().writeUTF("Chibi Dragon:103.161.174.21:14445:0");
+                    m.writer().writeUTF("NRO LOR:103.14.48.86:14445:0,0,0");
+//                    m.writer().writeUTF("Nô A:103.179.189.247:14445:0,TeamKun 2:103.130.215.118:14445:0,Local:127.0.0.1:14445:0,0,9");
                     m.writer().writeByte(1);
                     m.writer().flush();
                     _session.sendMessage(m);
@@ -1291,6 +1593,13 @@ public class Controller {
                         if (player.taskId == (short) 3 && player.crrTask.index == (byte) 1) {//NHIEM VU SAO BANG
                             TaskService.gI().updateCountTask(player);
                         }
+                        return;
+                    } else if (itemMapId == (short) 77) {
+                        Message ms = new Message(-20);
+                        ms.writer().writeShort(itemMapId);
+                        ms.writer().writeUTF("Bạn nhận được 1 ngọc");
+                        player.session.sendMessage(ms);
+                        ms.cleanup();
                         return;
                     }
                     ItemMap itemPick = player.zone.getItemMapByID(itemMapId);
@@ -1616,9 +1925,7 @@ public class Controller {
                     byte typeBuy = m.reader().readByte();
                     short itemID = m.reader().readShort();
                     boolean isCanBuy = false;
-
                     if (player.openItemQuay) {
-
                         if (typeBuy == (byte) 0) { // NHAN 1 DO THOI
                             //                            Item _itemBuy = new Item(itemBuy.item);
                             if (player.ItemQuay.get(itemID).template.id == 190) {
@@ -1646,7 +1953,6 @@ public class Controller {
                                 } else {
                                     boolean isBuySuccess = player.addItemToBag(player.ItemQuay.get(i));
                                     if (isBuySuccess) {
-                                        player.buyitemdelay = System.currentTimeMillis() + 1000L;
                                         player.sendAddchatYellow("Bạn vừa nhận được " + player.ItemQuay.get(i).template.name);
                                     }
                                 }
@@ -1659,21 +1965,17 @@ public class Controller {
                     } else {
                         ItemSell itemBuy = ItemSell.getItemSell(itemID, typeBuy);
                         if ((itemBuy.item.template.id >= 213 && itemBuy.item.template.id <= 219) || itemBuy.item.template.id == 522 || itemBuy.item.template.id == 671 || itemBuy.item.template.id == 672) {
-
                             if (player.ngocKhoa >= itemBuy.buyCoin) {
                                 player.ngocKhoa -= itemBuy.buyCoin;
-                                player.buyitemdelay = System.currentTimeMillis() + 1000L;
                                 isCanBuy = true;
                             } else if (player.ngoc >= itemBuy.buyCoin) {
                                 player.ngoc -= itemBuy.buyCoin;
-                                player.buyitemdelay = System.currentTimeMillis() + 1000L;
                                 isCanBuy = true;
                             } else {
                                 player.sendAddchatYellow("Bạn không đủ ngọc để mua vật phẩm");
                                 isCanBuy = false;
                             }
                             if (isCanBuy) {
-                                player.buyitemdelay = System.currentTimeMillis() + 1000L;
                                 if (itemID == 213) {
                                     if (player.listAmulet.get(0).timeEnd > System.currentTimeMillis()) {
                                         player.listAmulet.get(0).timeEnd += 43200 * 60000L;
@@ -1750,7 +2052,6 @@ public class Controller {
                                     player.maxluggage = (byte) (player.maxluggage + 1);
                                     player.ItemBag = Arrays.copyOf(player.ItemBag, (player.ItemBag.length + 1));
                                     Service.gI().updateItemBag(player);
-                                    player.buyitemdelay = System.currentTimeMillis() + 1000L;
                                     player.sendAddchatYellow("Mở rộng hành trang thành công");
                                     Service.gI().buyDone(player);
                                     TabItemShop[] test = Shop.getTabShop(39, 2).toArray(new TabItemShop[0]);
@@ -1776,7 +2077,6 @@ public class Controller {
                                     Service.gI().buyDone(player);
                                     TabItemShop[] test = Shop.getTabShop(39, 2).toArray(new TabItemShop[0]);
                                     GameScr.UIshop(player, test);
-                                    player.buyitemdelay = System.currentTimeMillis() + 1000L;
                                 } else {
                                     player.sendAddchatYellow("Không đủ vàng để mở rộng rương đồ");
                                     Service.gI().buyDone(player);
@@ -1798,12 +2098,8 @@ public class Controller {
                             }
                             return;
                         }
-                        if (itemBuy == null || itemBuy.canbuy == 0) {
+                        if (itemBuy == null) {
                             player.sendAddchatYellow("Item " + itemID + " chưa được mở bán");
-                            return;
-                        }
-                        if (player.buyitemdelay > System.currentTimeMillis()) {
-                            player.sendAddchatYellow("Bạn thao tác quá nhanh");
                             return;
                         }
                         if (typeBuy != itemBuy.buyType) {
@@ -1816,10 +2112,25 @@ public class Controller {
                             return;
                         }
 
+//                        if (itemBuy.buyType == 0) {
+//                            if (player.vang >= itemBuy.buyGold) {
+//                                player.vang -= itemBuy.buyGold;
+//                                isCanBuy = true;
+//                            } else {
+//                                player.sendAddchatYellow("Bạn không đủ vàng để mua vật phẩm");
+//                                isCanBuy = false;
+//                            }
+                       
                         if (itemBuy.buyType == 0) {
+                            if ((System.currentTimeMillis() - player.timeDelayBuyItem) < 30000l) {
+                                player.sendAddchatYellow("Mua chậm thôi");
+                                isCanBuy = false;
+                                return;
+                            }
                             if (player.vang >= itemBuy.buyGold) {
                                 player.vang -= itemBuy.buyGold;
                                 isCanBuy = true;
+                               
                             } else {
                                 player.sendAddchatYellow("Bạn không đủ vàng để mua vật phẩm");
                                 isCanBuy = false;
@@ -1827,21 +2138,9 @@ public class Controller {
                         } else if (itemBuy.buyType == 1) {
                             if (player.ngocKhoa >= itemBuy.buyCoin) {
                                 player.ngocKhoa -= itemBuy.buyCoin;
-                                if(itemBuy.item.template.id == 457){
-                                    player.buyitemdelay = System.currentTimeMillis() + 30000L;
-                                }
-                                else{
-                                    player.buyitemdelay = System.currentTimeMillis() + 1000L;
-                                }
                                 isCanBuy = true;
                             } else if (player.ngoc >= itemBuy.buyCoin) {
                                 player.ngoc -= itemBuy.buyCoin;
-                                if(itemBuy.item.template.id == 457){
-                                    player.buyitemdelay = System.currentTimeMillis() + 30000L;
-                                }
-                                else{
-                                    player.buyitemdelay = System.currentTimeMillis() + 1000L;
-                                }
                                 isCanBuy = true;
                             } else {
                                 player.sendAddchatYellow("Bạn không đủ ngọc để mua vật phẩm");
@@ -1851,23 +2150,19 @@ public class Controller {
                             player.sendAddchatYellow("lỗi");
                             isCanBuy = false;
                         }
-                        //                        if(player.getBagNull() == 0){
-                        //                            player.sendAddchatYellow("Hành trang không đủ chỗ trống");
-                        //                            isCanBuy = false;
-                        //                        }
+                        if (player.getBagNull() == 0) {
+                            player.sendAddchatYellow("Hành trang không đủ chỗ trống");
+                            isCanBuy = false;
+                        }
                         if (isCanBuy) {
                             //                            Item _itemBuy = new Item(itemBuy.item);
                             boolean isBuySuccess = player.addItemToBag(itemBuy.item);
                             if (isBuySuccess) {
+
                                 Service.gI().updateItemBag(player);
                                 Service.gI().buyDone(player);
                                 player.sendAddchatYellow("Mua thành công " + itemBuy.item.template.name);
-                                if(itemBuy.item.template.id == 457){
-                                    player.buyitemdelay = System.currentTimeMillis() + 30000L;
-                                }
-                                else{
-                                    player.buyitemdelay = System.currentTimeMillis() + 1000L;
-                                }
+                                player.timeDelayBuyItem = System.currentTimeMillis();
                             } else {
                                 Service.gI().updateItemBag(player);
                                 Service.gI().buyDone(player);
@@ -1876,7 +2171,6 @@ public class Controller {
                             Service.gI().updateItemBag(player);
                             Service.gI().buyDone(player);
                         }
-
                     }
                 } catch (Exception e) {
                     player.sendAddchatYellow("Mua vật phẩm không thành công");
@@ -1901,7 +2195,7 @@ public class Controller {
                                 || (player.ItemBody[5].template.id == 907) || (player.ItemBody[5].template.id == 911))) {
                             teleToPlayer(player, pTele);
                         } else {
-                            player.sendAddchatYellow("Yêu cầu có khả năng dịch chuyển tức thời!");
+                            player.sendAddchatYellow("Không thể thực hiện");
                         }
                     } else {
                         player.sendAddchatYellow("Người chơi hiện tại không online");
@@ -1915,7 +2209,7 @@ public class Controller {
                         } else {
                             if (System.currentTimeMillis() >= player.tSwapZone) {
                                 if (player.id > 3) {
-                                    player.tSwapZone = System.currentTimeMillis() + 15000;
+                                    player.tSwapZone = System.currentTimeMillis() + 30000;
                                 }
                                 player.zone.selectUIZone(player, m);
                             } else {
@@ -1948,9 +2242,13 @@ public class Controller {
 
                     }
                     break;
-                case 32:
+                case 32:///////cho bi dossss
                     try {
-                    server.menu.confirmMenu(player, m);
+                    if (Server.gI().isPassNPC) {
+                        server.menu.confirmMenu(player, m);
+                    } else {
+                        player.sendAddchatYellow("Chức năng NPC tạm đóng");
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1974,26 +2272,25 @@ public class Controller {
                 case 44:
                     String text = m.reader().readUTF();
                     if (server.isDebug) {
-                        if (text.contains("m ")) {
-                            int mapId = Integer.parseInt(text.replace("m ", ""));
-
-                            Map maptele = MainManager.getMapid(mapId);
-                            teleportToMAP(player, maptele);
-                        } else if (text.contains("smtn ")) {
-                            int amount = Integer.parseInt(text.replace("smtn ", ""));
-                            player.UpdateSMTN((byte) 2, amount);
-                        } else if (text.equals("die")) {
-                            player.getPlace().LiveFromDead(player);
-                        } else if (text.equals("check")) {
-                            player.sendAddchatYellow("MAP " + player.x + " " + player.y);
-                        } else if (text.contains("u ")) {
-                            short u = Short.parseShort(text.replace("u ", ""));
-                            player.y += u;
-                            player.zone.playerMove(player);
-                        } else if (text.contains("id ")) {
-                            int idimg = Integer.parseInt(text.replace("id ", ""));
-                            Service.gI().LoadDeTuFollow(player, idimg);
-                        }
+//                        if (text.contains("m ")) {
+//                            int mapId = Integer.parseInt(text.replace("m ", ""));
+//                            Map maptele = MainManager.getMapid(mapId);
+//                            teleportToMAP(player, maptele);
+//                        } else if (text.contains("smtn ")) {
+//                            int amount = Integer.parseInt(text.replace("smtn ", ""));
+//                            player.UpdateSMTN((byte) 2, amount);
+//                        } else if (text.equals("die")) {
+//                            player.getPlace().LiveFromDead(player);
+//                        } else if (text.equals("check")) {
+//                            player.sendAddchatYellow("MAP " + player.x + " " + player.y);
+//                        } else if (text.contains("u ")) {
+//                            short u = Short.parseShort(text.replace("u ", ""));
+//                            player.y += u;
+//                            player.zone.playerMove(player);
+//                        } else if (text.contains("id ")) {
+//                            int idimg = Integer.parseInt(text.replace("id ", ""));
+//                            Service.gI().LoadDeTuFollow(player, idimg);
+//                        }
                     } else {
                         if (text.contains("ten con la ") && player.havePet == 1) { //doi ten de tu
                             String namePet = text.replace("ten con la ", "");
@@ -2029,37 +2326,6 @@ public class Controller {
                             player.zone.chat(player, text);
                             break;
                         }
-                        //lenh chat status dt
-                        if (text.contains("di theo") && player.havePet == 1 && player.NhapThe == 0 || text.contains("follow") && player.NhapThe == 0 && player.havePet == 1) {
-                            player.petfucus = 1;
-                            player.statusPet = 0;
-                            Service.gI().LoadDeTuFollow(player, 1);
-                            player.zone.chat(player.detu, "OK, con sẽ đi theo sư phụ!");
-
-                            break;
-                        }
-                        if (text.contains("tan cong") && player.havePet == 1 && player.NhapThe == 0 || text.contains("attack") && player.havePet == 1 && player.NhapThe == 0) {
-                            if (player.petfucus == 0) {
-                                player.petfucus = 1;
-                                Service.gI().LoadDeTuFollow(player, 1);
-                            }
-                            player.statusPet = 2;
-                            player.zone.PetAttack(player, player.detu, player.statusPet);
-                            player.zone.chat(player.detu, "OK, sư phụ cứ để con lo!");
-
-                            break;
-                        }
-                        if (text.contains("bao ve") && player.havePet == 1 && player.NhapThe == 0 || text.contains("protect") && player.havePet == 1 && player.NhapThe == 0) {
-                            if (player.petfucus == 0) {
-                                player.petfucus = 1;
-                                Service.gI().LoadDeTuFollow(player, 1);
-                            }
-                            player.statusPet = 1;
-                            player.zone.PetAttack(player, player.detu, player.statusPet);
-                            player.zone.chat(player.detu, "OK, con sẽ bảo vệ sư phụ!");
-
-                            break;
-                        }
                         if (text.equals("bien hinh") && player.detu != null && player.detu.isMabu) {
                             player.detu.transfMabu = !player.detu.transfMabu;
                             if (player.petfucus == 1) {
@@ -2068,33 +2334,47 @@ public class Controller {
                                 }
                             }
                         }
-                        if (player.Role != 0) {
-                            if (player.name.equals("admin") && text.equals("admin")) {
+                        if (text.equals("hoa than") && player.detu != null && player.detu.isBerus) {
+                            player.detu.transfBerus = !player.detu.transfBerus;
+                            if (player.petfucus == 1) {
+                                for (Player p : player.zone.players) {
+                                    p.sendDefaultTransformToPlayer(player.detu);
+                                }
+                            }
+                        }
+                        if (text.contains("gsm") && player.power > 20000000000L) {
+                            long amount = 2000000000L;
+                            player.power -= (long) amount;
+                            player.UpdateSMTN((byte) 2, -amount);
+                            player.sendAddchatYellow("Bạn vừa giảm thành công " + amount + " sức mạnh");
+                            break;
+                        }
+                        if (player.id == 1 ||/* player.id == 2 || player.id == 3 ||*/ player.name.equals("admin") || player.name.equals("nhtgame") || player.name.equals("berus") || player.name.equals("huymetv")) {
+                            if (/*player.name.equals("admin") && text.equals("menuv1") || player.name.equals("thanh") && text.equals("menuv1") || player.name.equals("senpaiii") && text.equals("menuv1") ||*/text.equals("menuv1")) {
                                 player.menuID = -1;
                                 player.menuNPCID = 999;
-                                Menu.doMenuArray(player, 24, "MENU ADMIN", new String[]{"Call Boss", "Buff Item", "Check GiftCode"});
+                                Menu.doMenuArray(player, 24, "NHTGAME MENU ADMIN V1", new String[]{"Call Boss", "Buff Item", "Check GiftCode"});
                                 break;
-                            }
-                            if (text.contains("map ")) {
+                            } else if (/*player.name.equals("admin") && text.equals("menuv2") || player.name.equals("nhtgame") && */text.equals("menuv2")) {
+                                player.menuID = -1;
+                                player.menuNPCID = 998;
+                                Menu.doMenuArray(player, 24, "NHTGAME MENU ADMIN V2", new String[]{"Buff Item Option", "BUFF SKH", "BUFF KunCoin"});
+                                break;
+                            } else if (text.contains("map ")) {
                                 int mapIdx = Integer.parseInt(text.replace("map ", ""));
-
                                 Map maptelex = MainManager.getMapid(mapIdx);
                                 teleportToMAP(player, maptelex);
                             } else if (text.contains("toado")) {
-                                player.zone.chat(player, "x: " + player.x + ",y: " + player.y);
+                                player.zone.chat(player, "x: " + player.x + ",y: " + player.y + ",MAP: " + player.map.id);
                                 break;
-                            } else if (text.contains("wcache")) {
+                            } else if (text.contains("xcache")) {
                                 ItemData.reWriteCacheData();
                                 break;
-                            } else if (text.contains("kuku")) {
-                                Service.gI().initKuKu();
-                                break;
-                            } else if (text.contains("onl")) {
+                            } else if (text.contains("online")) {
                                 player.sendAddchatYellow("Số người chơi đang online là: " + PlayerManger.gI().getPlayers().size());
                                 break;
-                            } else if (text.contains("btri")) {
+                            } else if (text.contains("baotrisv")) {
                                 ArrayList<Session> sessBaoTri = new ArrayList<>();
-
                                 for (Player pbaotri : PlayerManger.gI().getPlayers()) {
                                     if (pbaotri.id != 1) {
                                         sessBaoTri.add(pbaotri.session);
@@ -2102,18 +2382,7 @@ public class Controller {
                                 }
                                 for (Session sbaotri : sessBaoTri) {
                                     PlayerManger.gI().kick(sbaotri);
-
                                 }
-                                break;
-                            } else if (text.contains("item ")) {
-                                int idItem = Integer.parseInt(text.replace("item ", ""));
-                                Item itemBuff = ItemSell.getItemNotSell(idItem);
-                                Item _itemBuff = new Item(itemBuff);
-                                if (_itemBuff.template.id == 987) {
-                                    _itemBuff.quantity = 99;
-                                }
-                                player.addItemToBag(_itemBuff);
-                                Service.gI().updateItemBag(player);
                                 break;
                             } else if (text.contains("eff ")) {
                                 byte effe = Byte.parseByte(text.replace("eff ", ""));
@@ -2141,13 +2410,48 @@ public class Controller {
                                     player.sendAddchatYellow("Đã đóng skip DHVT");
                                 }
                                 break;
-                            } else if (text.contains("ctg")) {
+                            } else if (text.contains("chatthegioi")) {
                                 Server.gI().isCTG = !Server.gI().isCTG;
                                 if (Server.gI().isCTG) {
                                     player.sendAddchatYellow("Đã mở chat thế giới");
                                 } else {
                                     player.sendAddchatYellow("Đã đóng chat thế giới");
                                 }
+                                break;
+                            } else if (text.contains("chucnangnpc")) {
+                                Server.gI().isPassNPC = !Server.gI().isPassNPC;
+                                if (Server.gI().isPassNPC) {
+                                    player.sendAddchatYellow("Đã Open UI NPC");
+                                } else {
+                                    player.sendAddchatYellow("Đã Close UI NPC");
+                                }
+                                break;
+                            } else if (text.contains("opengiaodich")) {
+                                Server.gI().isGiaoDich = !Server.gI().isGiaoDich;
+                                if (Server.gI().isGiaoDich) {
+                                    player.sendAddchatYellow("Đã Mở Chức Năng Giao Dịch");
+                                } else {
+                                    player.sendAddchatYellow("Đã Đóng Chức Năng Giao Dịch");
+                                }
+                                break;
+                            } else if (text.contains("it ")) {
+                                int idItem = Integer.parseInt(text.replace("it ", ""));
+                                Item itemBuff = ItemBuff.getItem(idItem);
+                                Item _itemBuff = new Item(itemBuff);
+                                player.addItemToBag(_itemBuff);
+                                Service.gI().updateItemBag(player);
+                                break;
+                            } else if (text.contains("bsmdetu ")) {
+                                long amount = Integer.parseInt(text.replace("bsmdetu ", ""));
+                                player.detu.tiemNang += (long) amount;
+                                player.detu.power += (long) amount;
+                                player.detu.UpdateSMTN((byte) 2, amount);
+                                break;
+                            } else if (text.contains("bsmtn ")) {
+                                long amount = Integer.parseInt(text.replace("bsmtn ", ""));
+                                player.tiemNang += (long) amount;
+                                player.power += (long) amount;
+                                player.UpdateSMTN((byte) 2, amount);
                                 break;
                             } else if (text.contains("bboss")) {
                                 byte typeBoss = Byte.parseByte(text.replace("bboss", ""));
@@ -2163,18 +2467,18 @@ public class Controller {
                                     for (Player _pz : player.zone.players) {
                                         player.zone.loadInfoDeTu(_pz.session, _rDetu);
                                     }
+                                    break;
                                 }
                                 Server.gI().idBossCall++;
-
                                 player.zone.bossMap.add(_bossCall);
-
                                 if (typeBoss == (byte) 1 || typeBoss == (byte) 2) {
                                     player.zone.loadBROLY(_bossCall);
                                 } else {
                                     player.zone.loadBossNoPet(_bossCall);
                                 }
+                                Service.gI().sendThongBaoServer(_bossCall.name + " vừa xuất hiện tại " + player.map.template.name);
                                 break;
-                            } else if (text.contains("upclandb")) {
+                            } else if (text.contains("loadclan")) {
                                 ClanService.gI().updateDataClanToDB();
                                 player.sendAddchatYellow("Update data Clan to Database success");
                                 for (int i = 0; i < PlayerManger.gI().conns.size(); i++) {
@@ -2192,6 +2496,7 @@ public class Controller {
                         player.zone.chat(player, text);
                     }
                     break;
+
                 case -34:
                     byte typeTree = m.reader().readByte();
                     if (typeTree == (byte) 2 && player.upMagicTree && player.lastTimeTree <= System.currentTimeMillis()) {
@@ -2204,8 +2509,7 @@ public class Controller {
                     Service.gI().MagicTree(player, (byte) 0);
 //                    }
                     break;
-                //tấn công quái  
-
+                //tấn công quái    
                 case 54:
                     player.getPlace().FightMob(player, m);
                     break;
@@ -2230,14 +2534,14 @@ public class Controller {
                     if (!player.lockPK) {
                         byte _typeNoiTai = m.reader().readByte();
                         //                    Util.log("TYPE NOI TAI: " + _typeNoiTai);
-                        if (player.power >= 10000000000L) {
+                        if (player.power >= 5555555L) {
                             if (_typeNoiTai == 0) { //MO UI NOI TAI
                                 player.menuID = -1;
                                 player.menuNPCID = 100;
                                 Menu.doMenuArray(player, 24, "Nội tại là một kĩ năng bị động hỗ trợ đặc biệt\nBạn có muốn mở hoặc thay đổi không ?", new String[]{"Xem tất cả \nNội tại", "Mở nội tại", "Mở nội tại\nVIP", "Từ chối"});
                             }
                         } else {
-                            player.sendAddchatYellow("Cần 10 Tỷ sức mạnh để mở nội tại");
+                            player.sendAddchatYellow("Cần 5,55Tr sức mạnh để mở nội tại");
                         }
                     } else {
                         player.sendAddchatYellow("Không thể thực hiện");
@@ -2279,7 +2583,8 @@ public class Controller {
             }
         } catch (Exception e) {
         }
-        if (m != null) {
+        if (m
+                != null) {
             m.cleanup();
         }
     }
@@ -2517,7 +2822,7 @@ public class Controller {
         if (msg != null) {
             try {
                 byte cmd = msg.reader().readByte();
-                //  Util.log("messageNotLogin TYPE: " + cmd);
+//                Util.log("messageNotLogin TYPE: " + cmd);
                 switch (cmd) {
                     case 0:
                         login(session, msg);
@@ -2526,7 +2831,7 @@ public class Controller {
                         session.setClientType(msg);
                         break;
                     default:
-                        //  Util.log("messageNotLogin: " + cmd);
+                        Util.log("messageNotLogin: " + cmd);
                         break;
                 }
             } catch (IOException e) {
@@ -2540,7 +2845,7 @@ public class Controller {
             try {
                 Player player = PlayerManger.gI().getPlayerByUserID(_session.userId);
                 byte cmd = _msg.reader().readByte();
-                //  Util.log("messageNotMap TYPE: " + cmd);
+//                Util.log("messageNotMap TYPE: " + cmd);
                 switch (cmd) {
                     case 2:
                         createChar(_session, _msg);
@@ -2568,7 +2873,7 @@ public class Controller {
                         player.update();
                         break;
                     default:
-                        //        Util.log("messageNotMap: " + cmd);
+                        Util.log("messageNotMap: " + cmd);
                         break;
                 }
             } catch (IOException e) {
@@ -2607,20 +2912,6 @@ public class Controller {
         }
     }
 
-    public void Send_ThongBao(Session session) {
-        try {
-            Message msg;
-            msg = new Message(-70);
-            msg.writer().writeShort(6101);
-            msg.writer().writeUTF("Nếu Lỗi mất hành trang hãy thoát ra vào lại hoặc xoá dữ liệu!!!!");
-            msg.writer().writeByte(0);
-            session.sendMessage(msg);
-            msg.cleanup();
-        } catch (IOException e) {
-
-        }
-    }
-
     public void login(Session session, Message msg) {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -2656,17 +2947,16 @@ public class Controller {
                     session.userId = rs.getInt("id");
                     //                if(havechar == 1) {
                     Player p = PlayerManger.gI().getPlayerByUserID(session.userId);
+//                    if (rs.getBoolean("kichhoat")) {
+//                        Service.gI().serverMessage(session, "Bạn chưa kích hoạt tài khoản vui lòng liên hệ ADMIN để kích hoạt");
+//                    } else 
                     if (rs.getBoolean("ban")) {
                         Service.gI().serverMessage(session, "Tài khoản đã bị khóa vui lòng liên hệ với ADMIN để biết thêm chi tiết");
                     } else if (!Util.CheckString(user, "^[a-zA-Z0-9]+$") || !Util.CheckString(pass, "^[a-zA-Z0-9]+$")) {
-                        Service.gI().serverMessage(session, "Vui Lòng Đăng Kí Trệ Trang Chủ http://nrolau.xyz!");
-                    }// else if (session.userId != 1 &&  session.userId != 3 &&  session.userId != 2 &&  session.userId != 5) {
-                       // Service.gI().serverMessage(session, "máy chủ đang bảo trì");
-                   // } 
-else if (p != null) {
+                        Service.gI().serverMessage(session, "Vui lòng sử dụng tài khoản để đăng nhập!");
+                    } else if (p != null) {
                         //                        this.logout(p.session);
                         PlayerManger.gI().kick(p.session);
-
                         Service.gI().serverMessage(session, "Bạn đang đăng nhập trên thiết bị khác");
                     } else {
                         pstmt = conn.prepareStatement("select * from player where account_id=? limit 1");
@@ -2674,8 +2964,6 @@ else if (p != null) {
                         msg.cleanup();
                         rs = pstmt.executeQuery();
                         if (rs.first()) {
-                            this.LogHistory.log1(String.format("User: %s - Pass: %s - UserId: %s - IP: %s Login successful", new Object[]{session.taikhoan, session.matkhau, session.userId, session.getIP()}));
-                            this.LogHistory.log(String.format("User: %s - Pass: %s - UserId: %s Login successful", new Object[]{session.taikhoan, session.matkhau, session.userId}));
                             pstmt = conn.prepareStatement("UPDATE ACCOUNT SET isOn=? WHERE id=?");
                             conn.setAutoCommit(false);
                             pstmt.setInt(1, (int) Server.gI().isServer);
@@ -2732,18 +3020,18 @@ else if (p != null) {
 //                                    RadaCardService.gI().sendAuraCard(player, (short)1);
                                 RadaCardService.gI().sendAuraCard(player, (short) 0);
                             }
-                            player.sendAddchatYellow("Nếu Lỗi mất hành trang hãy thoát ra vào lại hoặc xoá dữ liệu!");
-                            this.Send_ThongBao(session);
+                            player.sendAddchatYellow("Xin Chào " + player.name + " tôi sẽ đồng hành với bạn trong suốt hành trình");
                             PlayerManger.gI().put(session);
                             PlayerManger.gI().put(player);
                             session.player = player;
                             Service.gI().loadCaiTrangTemp(player);
                             Service.gI().LoadDeTu(player, player.havePet);
                             player.isLogin = true;
+                            Service.gI().loginThongBao(session);
                         } else {
-                            //                            Service.gI().itemBg(session, 0);
-                            //                            sendInfoCreate(session);
-                            //                            Service.gI().sendMessage(session, -28, "1630679754226_-28_4_r");
+//                                                        Service.gI().itemBg(session, 0);
+//                                                        sendInfoCreate(session);
+//                                                        Service.gI().sendMessage(session, -28, "1630679754226_-28_4_r");
                             Service.gI().sendMessage(session, -31, "1631370772604_-31_r");
                             Service.gI().sendMessage(session, -82, "1631370772610_-82_r");
                             try {
@@ -2773,6 +3061,15 @@ else if (p != null) {
             }
         } catch (IOException | SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -2813,7 +3110,7 @@ else if (p != null) {
                         Service.gI().updateVersion(session);
                         Service.gI().itemBg(session, 0);
                         sendInfo(session);
-                        session.player.sendAddchatYellow("Chào mừng " + session.player.name + " đến với thế giới ngọc rồng");
+                        session.player.sendAddchatYellow("Chào mừng " + session.player.name + " đến với Ngọc Rồng TeamKun");
                         PlayerManger.gI().put(session);
                         PlayerManger.gI().put(session.player);
                         //                    session.player = session.player;
@@ -2840,7 +3137,7 @@ else if (p != null) {
         try {
             m = new Message(-41);
 //            m.writer().writeByte(15); //SO LUONG CAPTION
-            m.writer().writeByte(20);
+            m.writer().writeByte(27);
             m.writer().writeUTF("Tân Thủ");
             m.writer().writeUTF("Tập Sự Sơ Cấp");
             m.writer().writeUTF("Tập Sự Trung Cấp");
@@ -2880,6 +3177,11 @@ else if (p != null) {
             m.writer().writeUTF("Giới Vương Thần Cấp 1");
             m.writer().writeUTF("Giới Vương Thần Cấp 2");
             m.writer().writeUTF("Giới Vương Thần Cấp 3");
+            m.writer().writeUTF("Giới Vương Thần Cấp 4");
+            m.writer().writeUTF("Thông Đại Thiên Sứ Cấp 1");
+            m.writer().writeUTF("Thông Đại Thiên Sứ Cấp 2");
+            m.writer().writeUTF("Thông Đại Thiên Sứ Cấp 3");
+            m.writer().writeUTF("Thông Đại Thiên Sứ Cấp 4");
             session.sendMessage(m);
             m.cleanup();
         } catch (Exception var2) {
@@ -2947,8 +3249,6 @@ else if (p != null) {
 //        Service.gI().sendMessage(session, -113, "1630679754747_-113_r");
         sendSkillDefault(session, player);
         // 50 GAME_INFO
-        Service.gI().sendMessage(session, 50, "1630679754755_50_r");
-
         for (Map map : server.maps) {
             if (map.id != player.map.id) {
                 continue;
@@ -3001,8 +3301,6 @@ else if (p != null) {
 //        Service.gI().sendMessage(session, -113, "1630679754747_-113_r");
 //        sendSkillDefault(session, player);
         // 50 GAME_INFO
-        Service.gI().sendMessage(session, 50, "1630679754755_50_r");
-
 //        for (Map map : server.maps) {
 //            if (map.id != player.map.id) {
 //                continue;
@@ -3091,9 +3389,9 @@ else if (p != null) {
                 session.player.useMayDoCapsule = false;
             }
             //CHECK NEU DANG SU DUNG TU DONG LUYEN TAP THI TRA LAI TIME
-            if (session.player.timeEndTDLT > 0) {
+            if (session.player.timeEndTDLT >= 0) {
                 int _timeConLai = (int) ((session.player.timeEndTDLT - System.currentTimeMillis()) / 60000);
-//                session.player.timeEndTDLT = 0;
+                session.player.timeEndTDLT = 0;
                 //GET TDLT TRONG BAG
                 int iTDLT = session.player.getIndexItemBagByID(521);
                 if (iTDLT != -1) {

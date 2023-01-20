@@ -25,6 +25,7 @@ import nro.task.TaskService;
 import nro.task.TaskManager;
 import nro.daihoi.DaiHoiService;
 import nro.daihoi.DaiHoiManager;
+import nro.item.ItemBuff;
 
 public class Menu {
 
@@ -201,14 +202,16 @@ public class Menu {
 //        Util.log("p.menuID: " + p.menuID);
         switch (p.menuNPCID) {
             case 999: {
-                if (p.Role != 0 && p.name.equals("admin")) {
+                if (p.id == 1 && p.name.equals("admin") || p.name.equals("nhtgame") || p.name.equals("berus") || p.name.equals("coldxayda")) {
                     if (p.menuID == -1) {
                         if (select == 0) {
+                            //p.sendAddchatYellow("Chuúc bạn chơi game vui vẻ không quạo!");
                             doMenuArray(p, idNpc, "LIST BOSS", new String[]{"Broly", "Super Broly", "Cooler", "Cooler 2", "Black",
                                 "Super Black", "Kuku", "Mập Đinh", "Rambo", "Số 4", "Số 3", "Số 2", "Số 1", "Tiểu Đội\nTrưởng", "Fide 1", "Fide 2", "Fide 3",
                                 "Android 19", "Dr.Kôrê", "Android 15", "Android 14", "Android 13", "Poc", "Pic", "KingKong", "Xên 1", "Xên 2", "Xên Hoàn\nThiện",
                                 "Xên Con", "Siêu Bọ\nHung", "Trung úy\nTrắng", "Trung úy\nXanh Lơ", "Trung úy\nThép", "Ninja\nÁo Tím", "Robốt\nVệ Sĩ",
-                                "Drabura", "Pui Pui", "Ya Côn", "Ma Bư", "Chilled", "Chilled 2", "Dr Lychee", "Hatchiyack", "Tập sự", "Tân binh", "Chiến binh", "Đội trưởng", "Zamasu", "Bill", "Whis"});
+                                "Drabura", "Pui Pui", "Ya Côn", "Ma Bư", "Chilled", "Chilled 2", "Dr Lychee", "Hatchiyack", "Tập sự", "Tân binh", "Chiến binh",
+                                "Đội trưởng", "Zamasu", "Bill", "Whis", "Sơn Tinh", "Thuỷ Tinh", "Rati", "Fide Vàng", "Ăn Trộm", "Vegito\nQuyền Năng", "Super\nVegito", "Piccolo\nTối Thượng "});
                         } else if (select == 1) {
                             m = null;
                             try {
@@ -232,7 +235,8 @@ public class Menu {
                                 }
                             }
                         } else if (select == 2) {
-                            GiftCodeManager.gI().checkInfomationGiftCode(p);
+                            Service.gI().clientInput(p, "Nhập giftcode", "Giftcode", (byte) 0);
+                            //GiftCodeManager.gI().checkInfomationGiftCode(p);
                         }
                         p.menuID = select;
                         break;
@@ -247,15 +251,19 @@ public class Menu {
                             _rDetu.y = (short) (_bossCall.y - 100);
                             _bossCall.detu = _rDetu;
                             p.zone.pets.add(_rDetu);
-                            Service.gI().sendThongBaoServer("BOSS: " + _bossCall.name + " vừa xuất hiện tại " + p.map.template.name);
                             for (Player _pz : p.zone.players) {
                                 p.zone.loadInfoDeTu(_pz.session, _rDetu);
                             }
                         }
                         Server.gI().idBossCall++;
-
                         p.zone.bossMap.add(_bossCall);
-
+                        if (typeBoss <= (byte) 55) {
+                            Service.gI().sendThongBaoServer("Boss " + _bossCall.name + " vừa xuất hiện tại " + p.map.template.name);
+                        }
+                        if (typeBoss == (byte) 56 || typeBoss == (byte) 57 || typeBoss == (byte) 58) {
+                            int IDZONE = Server.gI().maps[p.map.id].area.length;
+                            Service.gI().sendThongBaoServer("Thông Báo Siêu Boss " + _bossCall.name + " vừa xuất hiện tại " + p.map.template.name);
+                        }
                         if (typeBoss == (byte) 1 || typeBoss == (byte) 2) {
                             p.zone.loadBROLY(_bossCall);
                         } else {
@@ -266,10 +274,258 @@ public class Menu {
                 }
                 break;
             }
+            case 998: {
+                if (p.id == 1 && p.name.equals("admin") || p.name.equals("nhtgame") || p.name.equals("berus") || p.name.equals("coldxayda")) {
+                    if (p.menuID == -1) {
+                        if (select == 0) {
+                            m = null;
+                            try {
+                                m = new Message(-125);
+                                m.writer().writeUTF("NHTGAME Buff Vật Phẩm Option");
+                                m.writer().writeByte((byte) 5);
+                                m.writer().writeUTF("Tên Người Chơi");
+                                m.writer().writeByte((byte) 1);
+                                m.writer().writeUTF("ID Trang Bị");
+                                m.writer().writeByte((byte) 0);
+                                m.writer().writeUTF("ID Option");
+                                m.writer().writeByte((byte) 0);
+                                m.writer().writeUTF("Param");
+                                m.writer().writeByte((byte) 0);
+                                m.writer().writeUTF("Số Lượng");
+                                m.writer().writeByte((byte) 0);
+                                m.writer().flush();
+                                p.session.sendMessage(m);
+                                m.cleanup();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            } finally {
+                                if (m != null) {
+                                    m.cleanup();
+                                }
+                            }
+                        } else if (select == 1) {
+                            m = null;
+                            try {
+                                m = new Message(-125);
+                                m.writer().writeUTF("NHTGAME Buff SKH Option V2");
+                                m.writer().writeByte((byte) 6);
+                                m.writer().writeUTF("Tên Người Chơi");
+                                m.writer().writeByte((byte) 1);
+                                m.writer().writeUTF("ID Trang Bị");
+                                m.writer().writeByte((byte) 0);
+                                m.writer().writeUTF("ID Option SKH 127 > 135");
+                                m.writer().writeByte((byte) 0);
+                                m.writer().writeUTF("ID Option Bonus");
+                                m.writer().writeByte((byte) 0);
+                                m.writer().writeUTF("Param");
+                                m.writer().writeByte((byte) 0);
+                                m.writer().writeUTF("Số Lượng");
+                                m.writer().writeByte((byte) 0);
+                                m.writer().flush();
+                                p.session.sendMessage(m);
+                                m.cleanup();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            } finally {
+                                if (m != null) {
+                                    m.cleanup();
+                                }
+                            }
+                        } else if (select == 2) {
+                            m = null;
+                            try {
+                                m = new Message(-125);
+                                m.writer().writeUTF("NHTGAME BUFF KunCoin Player");
+                                m.writer().writeByte((byte) 2);
+                                m.writer().writeUTF("Tên Người Chơi");
+                                m.writer().writeByte((byte) 1);
+                                m.writer().writeUTF("Số Lượng");
+                                m.writer().writeByte((byte) 0);
+                                m.writer().flush();
+                                p.session.sendMessage(m);
+                                m.cleanup();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            } finally {
+                                if (m != null) {
+                                    m.cleanup();
+                                }
+                            }
+                        }
+                        p.menuID = select;
+                        break;
+                    }
+                }
+                break;
+            }
+            case 997: {
+                if (p.map.id == 5) {
+                    if (p.menuID == -1) {
+                        Item itemBuff = ItemBuff.getItem(457);
+                        if (select == 0) {
+                            if (p.sotien < 20000) {
+                                p.sendAddchatYellow("Bạn không đủ tiền vui lòng nạp thêm");
+                                return;
+                            }
+                            p.sotien -= 20000;
+                            Item _itemBuff = new Item(itemBuff);
+                            _itemBuff.quantity = 40;
+                            p.addItemToBag(_itemBuff);
+                            Service.gI().updateItemBag(p);
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được " + _itemBuff.quantity + " thỏi vàng");
+                            break;
+                        } else if (select == 1) {
+                            if (p.sotien < 50000) {
+                                p.sendAddchatYellow("Bạn không đủ tiền vui lòng nạp thêm");
+                                return;
+                            }
+                            p.sotien -= 50000;
+                            Item _itemBuff = new Item(itemBuff);
+                            _itemBuff.quantity = 110;
+                            p.addItemToBag(_itemBuff);
+                            Service.gI().updateItemBag(p);
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được " + _itemBuff.quantity + " thỏi vàng");
+                            break;
+                        } else if (select == 2) {
+                            if (p.sotien < 100000) {
+                                p.sendAddchatYellow("Bạn không đủ tiền vui lòng nạp thêm");
+                                return;
+                            }
+                            p.sotien -= 100000;
+                            Item _itemBuff = new Item(itemBuff);
+                            _itemBuff.quantity = 250;
+                            p.addItemToBag(_itemBuff);
+                            Service.gI().updateItemBag(p);
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được " + _itemBuff.quantity + " thỏi vàng");
+                            break;
+                        } else if (select == 3) {
+                            if (p.sotien < 200000) {
+                                p.sendAddchatYellow("Bạn không đủ tiền vui lòng nạp thêm");
+                                return;
+                            }
+                            p.sotien -= 200000;
+                            Item _itemBuff = new Item(itemBuff);
+                            _itemBuff.quantity = 550;
+                            p.addItemToBag(_itemBuff);
+                            Service.gI().updateItemBag(p);
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được " + _itemBuff.quantity + " thỏi vàng");
+                            break;
+                        } else if (select == 4) {
+                            if (p.sotien < 500000) {
+                                p.sendAddchatYellow("Bạn không đủ tiền vui lòng nạp thêm");
+                                return;
+                            }
+                            p.sotien -= 500000;
+                            Item _itemBuff = new Item(itemBuff);
+                            _itemBuff.quantity = 1500;
+                            p.addItemToBag(_itemBuff);
+                            Service.gI().updateItemBag(p);
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được " + _itemBuff.quantity + " thỏi vàng");
+                            break;
+                        } else if (select == 5) {
+                            if (p.sotien < 1000000) {
+                                p.sendAddchatYellow("Bạn không đủ tiền vui lòng nạp thêm");
+                                return;
+                            }
+                            p.sotien -= 1000000;
+                            Item _itemBuff = new Item(itemBuff);
+                            _itemBuff.quantity = 3200;
+                            p.addItemToBag(_itemBuff);
+                            Service.gI().updateItemBag(p);
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được " + _itemBuff.quantity + " thỏi vàng");
+                            break;
+                        }
+                        break;
+                    }
+                    p.menuID = select;
+                    break;
+                }
+            }
+            case 996: {
+                if (p.map.id == 5) {
+                    if (p.menuID == -1) {
+                        if (select == 0) {
+                            if (p.sotien < 20000) {
+                                p.sendAddchatYellow("Bạn không đủ tiền vui lòng nạp thêm");
+                                return;
+                            }
+                            p.sotien -= 20000;
+                            int number = 50000;
+                            p.ngoc += (long) number;
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được " + number + " ngọc xanh");
+                            break;
+                        } else if (select == 1) {
+                            if (p.sotien < 50000) {
+                                p.sendAddchatYellow("Bạn không đủ tiền vui lòng nạp thêm");
+                                return;
+                            }
+                            p.sotien -= 50000;
+                            int number = 150000;
+                            p.ngoc += (long) number;
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được " + number + " ngọc xanh");
+                            break;
+                        } else if (select == 2) {
+                            if (p.sotien < 100000) {
+                                p.sendAddchatYellow("Bạn không đủ tiền vui lòng nạp thêm");
+                                return;
+                            }
+                            p.sotien -= 100000;
+                            int number = 350000;
+                            p.ngoc += (long) number;
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được " + number + " ngọc xanh");
+                            break;
+                        } else if (select == 3) {
+                            if (p.sotien < 200000) {
+                                p.sendAddchatYellow("Bạn không đủ tiền vui lòng nạp thêm");
+                                return;
+                            }
+                            p.sotien -= 200000;
+                            int number = 850000;
+                            p.ngoc += (long) number;
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được " + number + " ngọc xanh");
+                            break;
+                        } else if (select == 4) {
+                            if (p.sotien < 500000) {
+                                p.sendAddchatYellow("Bạn không đủ tiền vui lòng nạp thêm");
+                                return;
+                            }
+                            p.sotien -= 500000;
+                            int number = 2000000;
+                            p.ngoc += (long) number;
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được " + number + " ngọc xanh");
+                            break;
+                        } else if (select == 5) {
+                            if (p.sotien < 1000000) {
+                                p.sendAddchatYellow("Bạn không đủ tiền vui lòng nạp thêm");
+                                return;
+                            }
+                            p.sotien -= 1000000;
+                            int number = 2500000;
+                            p.ngoc += (long) number;
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được " + number + " ngọc xanh");
+                            break;
+                        }
+                    }
+                    p.menuID = select;
+                    break;
+                }
+            }
             case 100: { //NOITAI
                 if (p.menuID == -1) {
                     if (select == 0) {
-                        try {;
+                        try {
                             m = new Message(112);
                             m.writer().writeByte(1);
                             if (p.gender == 1) {
@@ -309,7 +565,7 @@ public class Menu {
                         }
                     }
                     if (select == 1) {
-                        doMenuArray(p, idNpc, "Bạn có muốn mở nội tại với giá " + vangMoNoiTai(p.countMoNoiTai) + "tr vàng?", new String[]{"Mở\nNội tại", "Từ chối"});
+                        doMenuArray(p, idNpc, "Bạn có muốn mở nội tại với giá " + vangMoNoiTai(p.countMoNoiTai) + "triệu vàng?", new String[]{"Mở\nNội tại", "Từ chối"});
                     }
                     if (select == 2) {
                         doMenuArray(p, idNpc, "Bạn có muốn mở nội tại với giá 100 ngọc?", new String[]{"Mở\nNội tại", "Từ chối"});
@@ -497,7 +753,6 @@ public class Menu {
                 }
                 break;
             }
-
             case 67: { //MR POPO
                 if (p.map.id == 0) {
                     if (p.menuID == -1) {
@@ -644,14 +899,64 @@ public class Menu {
                 }
                 break;
             }
-            case 54: {
+            case 54: {//Ly tieu nuong
                 if (p.map.id == 5) {
-                    if (select == 0) {
-                        long _vang = ((long) p.vang + 500000000) > 2000000000L ? 2000000000L : ((long) p.vang + 500000000);
-                        p.vang = _vang;
-                        Service.gI().buyDone(p);
-                        p.sendAddchatYellow("Nhận thành công 500 triệu vàng");
+                    if (p.menuID == 0 && select == 0) {
+                        if (p.ngoc < 100000) {
+                            p.sendAddchatYellow("Vui lòng có ít nhất 100K ngọc để thao tác");
+                            return;
+                        }
+                        if (p.NhapThe == 1) {
+                            p.sendAddchatYellow("Vui lòng tách hợp thể để thực hiện");
+                            return;
+                        }
+                        if (p.detu != null && p.havePet == (byte) 1) {
+                            if (p.petfucus == 1) {
+                                p.zone.leaveDEEEEE(p.detu); //remove detu
+                            } else {
+                                p.petfucus = 1;
+                            }
+                            p.ngoc -= 100000;
+                            p.statusPet = 0;
+                            p.detu = null;
+                            p.detu = new Detu();
+                            p.detu.initDetuBerus(p.detu, p.gender);
+                            p.detu.id = (-100000 - p.id);
+                            p.isBerus = true;
+                            p.isMabu = false;
+                            if (p.NhapThe == 0) {
+                                p.zone.pets.add(p.detu);
+                            }
+                            p.detu.x = (short) (p.x - (short) 50);
+                            p.detu.y = (short) (p.y - (short) 50);
+
+                            //NEU LOAD DE TU O MAP COOL
+                            if (p.map.MapCold()) {
+                                p.zone.upDownPointPETMapCool(p);
+                            }
+                            //NEU LOAD DE TU O MAP COOL
+                            if (p.NhapThe == 0) {
+                                for (byte i = 0; i < p.zone.players.size(); i++) {
+                                    if (p.zone.players.get(i) != null) {
+                                        p.zone.loadInfoDeTu(p.zone.players.get(i).session, p.detu);
+                                    }
+                                }
+                                for (Player _p : p.zone.players) {
+                                    p.zone.loadInfoDeTu(_p.session, p.detu);
+                                }
+                            }
+                        }
                         break;
+                    } else if (p.menuID == 0 && select == 1) {
+                        return;
+                    }
+                    if (select == 0) {
+                        if (p.detu == null) {
+                            p.sendAddchatYellow("Bạn chưa có đệ tử vui lòng tiêu diệt super broly để nhận đệ");
+                            return;
+                        }
+                        doMenuArray(p, idNpc, "Cậu có muốn đổi đệ tử không\bBeerus sẽ tăng 100% tất cả chỉ số đệ khi hợp nhất với sư phụ", new String[]{"Đệ Tử\nBeerus", "Đóng"});
+                        p.menuID = select;
                     }
                 }
                 break;
@@ -701,10 +1006,25 @@ public class Menu {
                 }
                 break;
             }
+            case 48: {
+                if (p.map.id == 122) {
+                    if (p.menuID == -1) {
+                        if (select == 0) {
+                            TabItemShop[] test = Shop.getTabShop(48, 0).toArray(new TabItemShop[0]);
+                            GameScr.UIshop(p, test);
+                        }
+                    }
+                }
+                break;
+            }
             case 49: { //DUONG TANG
                 if (p.map.id == 0) {
                     if (p.menuID == -1) {
                         if (select == 0) {
+                            if (p.power < 100000000000l) {
+                                p.sendAddchatYellow("Nhà ngươi phải đạt 100 tỷ sức mạnh mới có thể cứu được đồ đệ của ta !");
+                                return;
+                            }
                             GotoMap(p, 123);
                         }
                     }
@@ -875,11 +1195,11 @@ public class Menu {
                     }
                     if (p.menuID == 0) { //NANG GIOI HAN SUC MANH CHO SU PHU
                         if (select == 0) {
-                            if (p.limitPower >= 7) {
+                            if (p.limitPower >= 20) {
                                 doMenuArray(p, idNpc, "Con đã rất mạnh rồi", new String[]{});
                             } else {
                                 if (p.power >= 18000000000L) {
-                                    if (p.limitPower < 7 && p.ngoc >= 100) {
+                                    if (p.limitPower < 20 && p.ngoc >= 100) {
                                         p.ngoc -= 100;
                                         p.limitPower += 1;
                                         Service.gI().buyDone(p);
@@ -897,11 +1217,11 @@ public class Menu {
                     if (p.menuID == 1) { //NANG GIOI HAN SUC MANH CHO DE TU
                         if (select == 0) {
                             if (p.detu != null && p.havePet == (byte) 1) {
-                                if (p.detu.limitPower >= 7) {
+                                if (p.detu.limitPower >= 20) {
                                     doMenuArray(p, idNpc, "Đệ tử của con đã rất mạnh rồi", new String[]{});
                                 } else {
                                     if (p.power >= 18000000000L) {
-                                        if (p.detu.limitPower < 8 && p.ngoc >= 100) {
+                                        if (p.detu.limitPower < 20 && p.ngoc >= 100) {
                                             p.ngoc -= 100;
                                             p.detu.limitPower += 1;
                                             Service.gI().buyDone(p);
@@ -921,7 +1241,7 @@ public class Menu {
                 break;
             }
             case 41: { //TRUNG THU
-                if (p.map.id == 44) {
+                if (p.map.id == 14) {
                     if (p.menuID == -1) {
                         if (select == 0) {
                             TabItemShop[] test = Shop.getTabShop(41, 0).toArray(new TabItemShop[0]);
@@ -932,15 +1252,86 @@ public class Menu {
                 break;
             }
             case 39: {
-                if (p.map.id == 5 || p.map.id == 13 || p.map.id == 20) {
+                if (p.map.id == 5) {
+                    if (p.menuID != -1) {
+                        if (p.menuID == 1 && select == 0) {
+                            Item itemBuff = ItemBuff.getItem(457);
+                            if (p.thanhvien == 1) {
+                                p.sendAddchatYellow("Bạn đã là thành viên chính thức của máy chủ rồi");
+                                return;
+                            }
+//                            } else if (p.sotien < 20000) {
+//                                p.sendAddchatYellow("Số tiền của của bạn không đủ để mở thành viên");
+//                                return;
+//                            }
+                            p.sotien += 20000; // thêm dòng này fix bug tiền ;3 VHK
+                            p.sotien -= 20000;
+                            p.thanhvien = 1;
+                            Item _itemBuff = new Item(itemBuff);
+                            _itemBuff.quantity = 20;
+                            p.addItemToBag(_itemBuff);
+                            Service.gI().updateItemBag(p);
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Kích hoạt thành công phần quà tặng thêm là x20 Thỏi Vàng");
+                            return;
+                        } else if (p.menuID == 1 && select == 1) {
+                            return;
+                        } else if (p.menuID == 2 && select == 0) {
+                            p.menuID = -1;
+                            p.menuNPCID = 997;
+                            doMenuArray(p, idNpc, "|7|Chọn Mệnh Giá Vàng Cần Đổi, Vui Lòng Xem Bảng Giá Trước", new String[]{"20.000", "50.000", "100.000", "200.000", "500.000", "1.000.000"});
+                            break;
+                        } else if (p.menuID == 2 && select == 1) {
+                            p.menuID = -1;
+                            p.menuNPCID = 996;
+                            doMenuArray(p, idNpc, "|7|Chọn Mệnh Giá Ngọc Cần Đổi, Vui Lòng Xem Bảng Giá Trước", new String[]{"20.000", "50.000", "100.000", "200.000", "500.000", "1.000.000"});
+                            break;
+                        } else if (p.menuID == 2 && select == 2) {
+                            Service.chatNPC(p, (short) p.menuNPCID, "|7|Bảng Giá Nạp Vàng\b|1|20.000 = 40 Thỏi Vàng\b|1|50.000 = 110 Thỏi Vàng\b|1|100.000 = 250 Thỏi Vàng\b|1|200.000 = 550 Thỏi Vàng\b|1|500.000 = 1500 Thỏi Vàng\b|1|1.000.000 = 3200 Thỏi Vàng\n|7|Bảng Giá Nạp Ngọc\b|1|20.000 = 50K Ngọc xanh\b|1|50.000 = 150K Ngọc xanh\b|1|100.000 = 350K Ngọc xanh\b|1|200.000 = 850K Ngọc xanh\b|1|500.000 = 2M Ngọc xanh\b|1|1.000.000 = 2.5M Ngọc xanh\n|7|Thông Tin Chuyển Khoản\b|1|MOMO: 0366.913.977\b|1|MBBANK: 8366.668.205\b|2|Lưu Ý : Chuyển khoản nhắn tin Zalo trước");
+                            return;
+                        } else if (p.menuID == 3 && select == 0) {
+                            if (p.nhanqua >= 1) {
+                                p.sendAddchatYellow("Bạn đã nhận quà rồi không thể nhận thêm");
+                                return;
+                            } else if (p.getBagNull() <= 0) {
+                                p.sendAddchatYellow("Hành trang không đủ chỗ trống!");
+                                return;
+                            }
+                            p.nhanqua = 1;
+                            p.ngoc += 50000;
+                            Item itemBuff = ItemBuff.getItem(14);
+                            Item _itemBuff = new Item(itemBuff);
+                            _itemBuff.quantity = 10;
+                            p.addItemToBag(_itemBuff);
+                            Service.gI().updateItemBag(p);
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn nhận được 10 Viên Ngọc rồng 1 Sao Và 50,000 Ngọc");
+                            return;
+                        } else if (p.menuID == 3 && select == 1) {
+                            return;
+                        }
+                    }
                     if (select == 0) {
                         TabItemShop[] test = Shop.getTabShop(39, (int) (p.gender)).toArray(new TabItemShop[0]);
                         GameScr.UIshop(p, test);
+                        break;
+                    } else if (select == 1) {
+                        doMenuArray(p, idNpc, "|2|Ngươi muốn kích hoạt thành viên ư ?\b|1|Phí kích hoạt sẽ là: 20.000 KunCoin\b|1|Khi kích hoạt thành viên thành công\b|1|Ngươi sẽ nhận thêm 20 Thỏi Vàng nữa !\b|7|Số KunCoin hiện có: " + p.sotien +"7|Cứ nhấn kích hoạt đi :)))", new String[]{"Kích Hoạt", "Từ Chối"});
+                        p.menuID = select;
+                        break;
+                    } else if (select == 2) {
+                        doMenuArray(p, idNpc, "|7|Ngươi muốn đổi vàng hay đổi ngọc ?", new String[]{"Đổi Vàng", "Đổi Ngọc", "Bảng Giá"});
+                        p.menuID = select;
+                        break;
+                    } else if (select == 3) {
+                        doMenuArray(p, idNpc, "|2|Nhân ngày giáng sinh TeamKun chúc các bạn\n|2|Có 1 ngày vui vẻ và thật nhiều hạnh phúc <3\n|7|Bên dưới là món quà TeamKun muốn gửi đến bạn\n|1|Chúc các bạn chơi game vui vẻ", new String[]{"Nhận Quà\nGiáng Sinh", "Từ Chối"});
+                        p.menuID = select;
                         break;
                     }
                 }
                 break;
             }
+
             case 38: {
                 if (p.map.id == 27 || p.map.id == 102) {
                     if (p.taskId >= (short) 23) {
@@ -967,12 +1358,11 @@ public class Menu {
                 if (p.map.id == 102) {
                     if (p.menuID == -1) {
                         if (select == 0) {
+                            Service.chatNPC(p, (short) p.menuNPCID, "TeamKun.Vn, Website tải game bạn biêt chưa!");
                             break;
                         } else if (select == 1) {
-                            //if (p.taskId >= (short) 28) {
                             TabItemShop[] test = Shop.getTabShop(37, 0).toArray(new TabItemShop[0]);
                             GameScr.UIshop(p, test);
-                            //  }
                         }
                     }
                 }
@@ -1682,6 +2072,10 @@ public class Menu {
                     } else if (select == 6) {
                         p.critNr = (byte) (p.critNr + 2) > (byte) 10 ? (byte) 10 : (byte) (p.critNr + 2);
                         Service.gI().loadPoint(p.session, p);
+                    } else if (select == 7) { // MOT CO NGUOI YEU LUA DAO
+                        p.ngoc += (long) 5000;
+                        Service.gI().buyDone(p);
+                        break;
                     }
                     p.sendAddchatYellow("Điều ước của người đã trở thành sự thật!");
                     Service.gI().endEffCallDragon(p);
@@ -1756,7 +2150,7 @@ public class Menu {
                         break;
                     }
                     break;
-                } else if (p.map.id == 42 || p.map.id == 43 || p.map.id == 44 || p.map.id == 84) {
+                } else if (p.map.id == 42 || p.map.id == 43 || p.map.id == 44) {
                     if (p.menuID == -1) {
                         Message msg = null;
                         if (select == 0) { //mua buaf
@@ -1844,9 +2238,25 @@ public class Menu {
                                     msg.cleanup();
                                 }
                             }
-                        } else if (select == 6) {
-                            //                        doMenuArray(p,idNpc,"Nâng trang bị Thần Heart",new String[]{"Nâng\ntrang bị\nHeart","Mở chỉ số\nHeart"});
                         }
+//                        else if (select == 6) {
+//                            try {
+//                                msg = new Message(-81);
+//                                msg.writer().writeByte(0);
+//                                msg.writer().writeUTF("Vào hành trang\nChọn trang bị hủy diệt\nChọn mảnh trang bị thần, số lượng\n99 cái\nSau đó chọn 'Nâng cấp'");
+//                                msg.writer().writeUTF("Ta sẽ phù phép\ncho trang bị hủy diệt của ngươi\nthành trang bị thần Heart");
+//                                msg.writer().flush();
+//                                p.session.sendMessage(msg);
+//                                msg.cleanup();
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            } finally {
+//                                if (msg != null) {
+//                                    msg.cleanup();
+//                                }
+//                            }
+//                            //                        doMenuArray(p,idNpc,"Nâng trang bị Thần Heart",new String[]{"Nâng\ntrang bị\nHeart","Mở chỉ số\nHeart"});
+//                        }
                         p.menuID = select;
                         break;
                     }
@@ -1873,31 +2283,6 @@ public class Menu {
                         break;
                     } else if (p.menuID == 5 && select == 0) { //xac nhan mo chi so bong tai
                         Service.gI().sendOpenOptionPorata(p);
-                        break;
-                    } else if (p.menuID == 6 && select == 0) { //xac nhan mo chi so bong tai
-                        Message msg = null;
-                        try {
-                            msg = new Message(-81);
-                            msg.writer().writeByte(0);
-                            msg.writer().writeUTF("Vào hành trang\nChọn trang bị hủy diệt\nChọn mảnh trang bị thần, số lượng\n99 cái\nSau đó chọn 'Nâng cấp'");
-                            msg.writer().writeUTF("Ta sẽ phù phép\ncho trang bị hủy diệt của ngươi\nthành trang bị thần Heart");
-                            msg.writer().flush();
-                            p.session.sendMessage(msg);
-                            msg.cleanup();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        } finally {
-                            if (msg != null) {
-                                msg.cleanup();
-                            }
-                        }
-                        p.menuID = 7;
-                        break;
-                    } else if (p.menuID == 6 && select == 1) { //xac nhan mo chi so bong tai
-
-                        break;
-                    } else if (p.menuID == 7 && select == 0) {
-                        //                    Service.gI().sendUpItemHeart(p);
                         break;
                     }
                     break;
@@ -1977,24 +2362,41 @@ public class Menu {
             }
             case 20: { //KAIO
                 if (p.map.id == 48) {
-                    if (p.menuID == -1) {
-                        if (select == 0) {
-                            p.zone.goMapTransport(p, 45);
-                        }
-                        if (select == 1) {
-                            p.zone.goMapTransport(p, 50);
-                        }
-                        if (select == 2) {
+                    if (p.menuID != -1) {
+                        if (p.menuID == 2 && select == 0) { //CON DUONG RAN DOC
+                            p.zone.goMapTransport(p, 143);
+                            break;
+                        } else if (p.menuID == 2 && select == 1) {//HUONG DAN
+                            Service.chatNPC(p, (short) p.menuNPCID, "Hiện tại, map chưa được hoàn thiện TeamKun đang mở để cho các bạn trải nghiệm!");
                             break;
                         }
+                    }
+                    if (select == 0) {
+                        p.zone.goMapTransport(p, 45);
+                    }
+                    if (select == 1) {
+                        p.zone.goMapTransport(p, 50);
+                    }
+                    if (select == 2) {
+                        doMenuArray(p, idNpc, "Con đường rắn độc, là một nơi cực kì nguy hiểm theo như ta thấy thì con chưa đủ trình đâu !", new String[]{"Tham Gia", "Hướng Dẫn"});
                         p.menuID = select;
+                    } else if (select == 3) {
                         break;
                     }
                 }
                 break;
             }
-//xem top
-
+            case 18: { //THAN MEO
+                if (p.map.id == 46) {
+                    if (p.menuID != -1) {
+                    }
+                    if (select == 0) {
+                        Service.chatNPC(p, (short) p.menuNPCID, "TeamKun, là tên máy chủ chắc không cần nhắc thì con cũng biết là trang chủ TeamKun.Vn nhỉ ?");
+                        p.menuID = select;
+                    }
+                }
+                break;
+            }
             case 19: { //THUONG DE
                 if (p.map.id == 45) {
                     if (p.menuID == -1) {
@@ -2032,6 +2434,20 @@ public class Menu {
                             }
                         }
                     }
+                    break;
+                }
+                if (p.map.id == 141) {
+                    if (p.menuID != -1) {
+                    }
+                    if (select == 0) {
+                        Service.chatNPC(p, (short) p.menuNPCID, "Hiện tại TeamKun chưa hoàn thiện xong map này vui lòng quay lại sau..!");
+                    }
+                    if (select == 1) {
+                        p.zone.goMapTransport(p, 48);
+                    }
+                    if (select == 2) {
+                        break;
+                    }
                 }
                 break;
             }
@@ -2043,227 +2459,132 @@ public class Menu {
             //            }
             //            break;
             //        }
-            case 64: {
-                if (p.map.id == 14 || p.map.id == 0 || p.map.id == 7) {
-                    if (select == 0) { //titan
-                        Service.chatNPC(p, (short) 24, HelperDAO.getTopPower());
-                        break;
-                    } else if (select == 1) {//ruby
-                        Service.chatNPC(p, (short) 24, HelperDAO.getTopTask());
-                        break;
-                    } else if (select == 2) {//ruby
-                        Service.chatNPC(p, (short) 24, HelperDAO.getTopCard());
-                        break;
+            case 13: {
+                if (p.map.id == 5) {
+                    if (p.menuID != -1) {
+                        if (p.menuID == 0 && select == 0) {
+                            if (p.pointSuKien < 10) {
+                                p.sendAddchatYellow("Điểm sự kiện của bạn không đủ");
+                                return;
+                            }
+                            p.pointSuKien -= 10;
+                            Item Item = ItemBuff.getItem(573);
+                            p.addItemToBag(Item);
+                            Service.gI().updateItemBag(p);
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn vừa đổi thành công 1 Capsule Bạc");
+                        } else if (p.menuID == 0 && select == 1) {
+                            if (p.pointSuKien < 100) {
+                                p.sendAddchatYellow("Điểm sự kiện của bạn không đủ");
+                                return;
+                            }
+                            p.pointSuKien -= 100;
+                            Item Item = ItemBuff.getItem(574);
+                            p.addItemToBag(Item);
+                            Service.gI().updateItemBag(p);
+                            Service.gI().buyDone(p);
+                            p.sendAddchatYellow("Bạn vừa đổi thành công 1 Capsule Vàng");
+                            break;
+                        } else if (p.menuID == 0 && select == 2) {
+                            if (p.pointSuKien < 100) {
+                                p.sendAddchatYellow("Điểm sự kiện của bạn không đủ");
+                                return;
+                            }
+                            p.pointSuKien -= 100;
+                            int tyle = Util.nextInt(0, 100);
+                            int random = Util.nextInt(15, 21);
+                            if (tyle > 1) {
+                                Item ItemRanDom = ItemBuff.getItem(random);
+                                p.addItemToBag(ItemRanDom);
+                                p.sendAddchatYellow("Thử vận may nhận được ngọc rồng " + (random - 13) + " Sao");
+                            } else if (tyle <= 1) {
+                                Item ItemRanDom2 = ItemBuff.getItem(12);
+                                p.addItemToBag(ItemRanDom2);
+                                p.sendAddchatYellow("Thử vận may nhận được ngọc rồng 1 Sao");
+                            }
+                            Service.gI().buyDone(p);
+                            Service.gI().updateItemBag(p);
+                            break;
+                        } else if (p.menuID == 1 && select == 0) {
+                            //CHECK NHIEM VU VONG 2 DHVT
+                            if (p.taskId == (short) 18 && p.crrTask.index == (byte) 1 && Server.gI().isPassDHVT) {
+                                TaskService.gI().updateCountTask(p);
+                            }
+                            break;
+                        }
+                        if (p.menuID == 1 && select == 1) {
+                            //CHECK NHIEM VU VONG 2 DHVT
+                            if (p.taskId == (short) 19 && p.crrTask.index == (byte) 1) {
+                                TaskService.gI().updateCountTask(p);
+                            }
+                            break;
+                        }
+                        if (p.menuID == 2 && select == 0) { //titan
+                            Service.chatNPC(p, (short) 24, HelperDAO.getTopPower());
+                            break;
+                        } else if (p.menuID == 2 && select == 1) {//ruby
+//                            Service.chatNPC(p, (short) 24, HelperDAO.getTopCard());
+                            break;
+                        } else if (p.menuID == 2 && select == 2) {//tat
+                            //                        Item TITAN = ItemSell.getItemNotSell(224);
+                            //                        p.addItemToBagx99(TITAN);
+                            //                        Service.gI().updateItemBag(p);
+                            //                        p.sendAddchatYellow("Nhận thành công đá Thạch Anh Tím");
+                            break;
+                        } else if (p.menuID == 2 && select == 3) {//saphia
+                            //                        Item TITAN = ItemSell.getItemNotSell(221);
+                            //                        p.addItemToBagx99(TITAN);
+                            //                        Service.gI().updateItemBag(p);
+                            //                        p.sendAddchatYellow("Nhận thành công đá Saphia");
+                            break;
+                        } else if (p.menuID == 2 && select == 4) {//luc bao
+                            //                        Item TITAN = ItemSell.getItemNotSell(220);
+                            //                        p.addItemToBagx99(TITAN);
+                            //                        Service.gI().updateItemBag(p);
+                            //                        p.sendAddchatYellow("Nhận thành công đá Lục Bảo");
+                            break;
+                        } else if (p.menuID == 3 && select == 0) { //GIAI TAN BANG HOI
+                            if (Server.gI().isServer == (byte) 1) {
+                                ClanService.gI().distoryClan(p);
+                            } else {
+                                p.sendAddchatYellow("Chỉ thực hiện tại TeamKun 01");
+                            }
+                            break;
+                        } else if (p.menuID == 3 && select == 1) { //KHU VUC BANG HOI
+                            GotoMap(p, 153);
+                            break;
+                        } else if (p.menuID == 4 && select == 0) { //KHO BAU DUOI BIEN
+                            if (p.map.id == 5) {
+                                p.zone.goMapTransport(p, 135);
+                                break;
+                            }
+                        } else if (p.menuID == 4 && select == 1) { //HUONG DAN
+                            Service.chatNPC(p, (short) p.menuNPCID, "Hiện tại kho báu dưới biển chưa hoàn thiện TeamKun chỉ mở để cho các bạn trải nghiệm map này!");
+                            break;
+                        }
+                    }
+                    if (select == 0) {
+                        doMenuArray(p, idNpc, "Theo ta thấy thì con vẫn còn F.A\nSao không đi kiếm gấu mà còn ở nhà chơi game ?\b|1|Thôi được rồi đâu cũng F.A đọc quy tắc sự kiện đi\b|5|Điểm Sự Kiện Đang Có: " + p.pointSuKien + "\n|7|1 Capsule Bạc = 10 điểm sự kiện\n|7|1 Capsule Vàng = 100 điểm sự kiện\n|7|1 lần Thử Vận May Ngọc Rồng = 100 điểm sự kiện\n", new String[]{"Đổi\nCapsule Bạc", "Đổi\nCapsule Vàng", "Thử Vận May\nNgọc Rồng"});
+                        p.menuID = select;
+                    }
+                    if (select == 1) {
+                        doMenuArray(p, idNpc, "Chào con, ta rất vui khi gặp con\nCon muốn làm gì nào?", new String[]{"Đại Hội\nVõ Thuật", "Trung\nUý Trắng"});
+                        p.menuID = select;
+                    }
+                    if (select == 2) {
+                        doMenuArray(p, idNpc, "Chào con, ta rất vui khi gặp con\nCon muốn làm gì nào?", new String[]{"Sức Mạnh", "Nạp Thẻ"});
+                        p.menuID = select;
+                    } else if (select == 3) {
+                        doMenuArray(p, idNpc, "Chào con, ta rất vui khi gặp con\nCon muốn làm gì nào?", new String[]{"Giải tán\nbang hội", "Khu vực\nbang hội"});
+                        p.menuID = select;
+                    } else if (select == 4) {
+                        doMenuArray(p, idNpc, "Chào con, ta rất vui khi gặp con\nCon muốn làm gì nào?", new String[]{"Kho Báu\nDưới Biển", "Hướng Dẫn"});
+                        p.menuID = select;
                     }
                 }
                 break;
             }
 
-            case 15: {
-                if (p.map.id == 20 || p.gender == 2) {
-                    if (p.menuID != -1) {
-                        if (p.menuID == 1 && select == 0) {
-                            //CHECK NHIEM VU VONG 2 DHVT
-                            if (p.taskId == (short) 18 && p.crrTask.index == (byte) 1 && Server.gI().isPassDHVT) {
-                                TaskService.gI().updateCountTask(p);
-                            }
-                            break;
-                        }
-                        if (p.menuID == 1 && select == 1) {
-                            //CHECK NHIEM VU VONG 2 DHVT
-                            if (p.taskId == (short) 19 && p.crrTask.index == (byte) 1) {
-                                TaskService.gI().updateCountTask(p);
-                            }
-                            break;
-                        }
-                        if (p.menuID == 2 && select == 0) { //titan
-                            Service.chatNPC(p, (short) 24, HelperDAO.getTopPower());
-                            break;
-                        } else if (p.menuID == 2 && select == 1) {//ruby
-                            Service.chatNPC(p, (short) 24, HelperDAO.getTopCard());
-                            break;
-                        } else if (p.menuID == 2 && select == 2) {//tat
-                            //                        Item TITAN = ItemSell.getItemNotSell(224);
-                            //                        p.addItemToBagx99(TITAN);
-                            //                        Service.gI().updateItemBag(p);
-                            //                        p.sendAddchatYellow("Nhận thành công đá Thạch Anh Tím");
-                            break;
-                        } else if (p.menuID == 2 && select == 3) {//saphia
-                            //                        Item TITAN = ItemSell.getItemNotSell(221);
-                            //                        p.addItemToBagx99(TITAN);
-                            //                        Service.gI().updateItemBag(p);
-                            //                        p.sendAddchatYellow("Nhận thành công đá Saphia");
-                            break;
-                        } else if (p.menuID == 2 && select == 4) {//luc bao
-                            //                        Item TITAN = ItemSell.getItemNotSell(220);
-                            //                        p.addItemToBagx99(TITAN);
-                            //                        Service.gI().updateItemBag(p);
-                            //                        p.sendAddchatYellow("Nhận thành công đá Lục Bảo");
-                            break;
-                        } else if (p.menuID == 3 && select == 0) { //GIAI TAN BANG HOI
-                            if (Server.gI().isServer == (byte) 1) {
-                                ClanService.gI().distoryClan(p);
-                            } else {
-                                p.sendAddchatYellow("Chỉ thực hiện ở NOAH 1");
-                            }
-                            break;
-                        } else if (p.menuID == 3 && select == 1) { //KHU VUC BANG HOI
-                            GotoMap(p, 153);
-                            break;
-                        }
-                    }
-                    if (select == 1) {
-                        doMenuArray(p, idNpc, "Ta có thể giúp gì cho con", new String[]{"NV DHVT", "NV Trung\nÚy Trắng"});
-                        p.menuID = select;
-                    }
-                    if (select == 2) {
-                        doMenuArray(p, idNpc, "Ta có thể giúp gì cho con", new String[]{"BXH Sức mạnh", "BXH Nạp thẻ"});
-                        p.menuID = select;
-                    } else if (select == 3) {
-                        doMenuArray(p, idNpc, "Ta có thể giúp gì cho con", new String[]{"Giải tán\nbang hội", "Khu vực\nbang hội"});
-                        p.menuID = select;
-                    }
-                } else {
-                    Service.gI().sendTB(p.session, 0, "Hành tinh khác lảng vảng qua đây là ta đấm đấy", 0);
-                }
-                break;
-            }
-            case 14: {
-                if (p.map.id == 13 && p.gender == 1) {
-                    if (p.menuID != -1) {
-                        if (p.menuID == 1 && select == 0) {
-                            //CHECK NHIEM VU VONG 2 DHVT
-                            if (p.taskId == (short) 18 && p.crrTask.index == (byte) 1 && Server.gI().isPassDHVT) {
-                                TaskService.gI().updateCountTask(p);
-                            }
-                            break;
-                        }
-                        if (p.menuID == 1 && select == 1) {
-                            //CHECK NHIEM VU VONG 2 DHVT
-                            if (p.taskId == (short) 19 && p.crrTask.index == (byte) 1) {
-                                TaskService.gI().updateCountTask(p);
-                            }
-                            break;
-                        }
-                        if (p.menuID == 2 && select == 0) { //titan
-                            Service.chatNPC(p, (short) 24, HelperDAO.getTopPower());
-                            break;
-                        } else if (p.menuID == 2 && select == 1) {//ruby
-                            Service.chatNPC(p, (short) 24, HelperDAO.getTopCard());
-                            break;
-                        } else if (p.menuID == 2 && select == 2) {//tat
-                            //                        Item TITAN = ItemSell.getItemNotSell(224);
-                            //                        p.addItemToBagx99(TITAN);
-                            //                        Service.gI().updateItemBag(p);
-                            //                        p.sendAddchatYellow("Nhận thành công đá Thạch Anh Tím");
-                            break;
-                        } else if (p.menuID == 2 && select == 3) {//saphia
-                            //                        Item TITAN = ItemSell.getItemNotSell(221);
-                            //                        p.addItemToBagx99(TITAN);
-                            //                        Service.gI().updateItemBag(p);
-                            //                        p.sendAddchatYellow("Nhận thành công đá Saphia");
-                            break;
-                        } else if (p.menuID == 2 && select == 4) {//luc bao
-                            //                        Item TITAN = ItemSell.getItemNotSell(220);
-                            //                        p.addItemToBagx99(TITAN);
-                            //                        Service.gI().updateItemBag(p);
-                            //                        p.sendAddchatYellow("Nhận thành công đá Lục Bảo");
-                            break;
-                        } else if (p.menuID == 3 && select == 0) { //GIAI TAN BANG HOI
-                            if (Server.gI().isServer == (byte) 1) {
-                                ClanService.gI().distoryClan(p);
-                            } else {
-                                p.sendAddchatYellow("Chỉ thực hiện ở NOAH 1");
-                            }
-                            break;
-                        } else if (p.menuID == 3 && select == 1) { //KHU VUC BANG HOI
-                            GotoMap(p, 153);
-                            break;
-                        }
-                    }
-                    if (select == 1) {
-                        doMenuArray(p, idNpc, "Ta có thể giúp gì cho con", new String[]{"NV DHVT", "NV Trung\nÚy Trắng"});
-                        p.menuID = select;
-                    }
-                    if (select == 2) {
-                        doMenuArray(p, idNpc, "Ta có thể giúp gì cho con", new String[]{"BXH Sức mạnh", "BXH Nạp thẻ"});
-                        p.menuID = select;
-                    } else if (select == 3) {
-                        doMenuArray(p, idNpc, "Ta có thể giúp gì cho con", new String[]{"Giải tán\nbang hội", "Khu vực\nbang hội"});
-                        p.menuID = select;
-                    }
-                } else {
-                    Service.gI().sendTB(p.session, 0, "Hành tinh khác lảng vảng qua đây là ta đấm đấy", 0);
-                }
-                break;
-            }
-            case 13: {
-                if (p.map.id == 5) {
-                    if (p.menuID != -1) {
-                        if (p.menuID == 1 && select == 0) {
-                            //CHECK NHIEM VU VONG 2 DHVT
-                            if (p.taskId == (short) 18 && p.crrTask.index == (byte) 1 && Server.gI().isPassDHVT) {
-                                TaskService.gI().updateCountTask(p);
-                            }
-                            break;
-                        }
-                        if (p.menuID == 1 && select == 1) {
-                            //CHECK NHIEM VU VONG 2 DHVT
-                            if (p.taskId == (short) 19 && p.crrTask.index == (byte) 1) {
-                                TaskService.gI().updateCountTask(p);
-                            }
-                            break;
-                        }
-                        if (p.menuID == 2 && select == 0) { //titan
-                            Service.chatNPC(p, (short) 24, HelperDAO.getTopPower());
-                            break;
-                        } else if (p.menuID == 2 && select == 1) {//ruby
-                            Service.chatNPC(p, (short) 24, HelperDAO.getTopCard());
-                            break;
-                        } else if (p.menuID == 2 && select == 2) {//tat
-                            //                        Item TITAN = ItemSell.getItemNotSell(224);
-                            //                        p.addItemToBagx99(TITAN);
-                            //                        Service.gI().updateItemBag(p);
-                            //                        p.sendAddchatYellow("Nhận thành công đá Thạch Anh Tím");
-                            break;
-                        } else if (p.menuID == 2 && select == 3) {//saphia
-                            //                        Item TITAN = ItemSell.getItemNotSell(221);
-                            //                        p.addItemToBagx99(TITAN);
-                            //                        Service.gI().updateItemBag(p);
-                            //                        p.sendAddchatYellow("Nhận thành công đá Saphia");
-                            break;
-                        } else if (p.menuID == 2 && select == 4) {//luc bao
-                            //                        Item TITAN = ItemSell.getItemNotSell(220);
-                            //                        p.addItemToBagx99(TITAN);
-                            //                        Service.gI().updateItemBag(p);
-                            //                        p.sendAddchatYellow("Nhận thành công đá Lục Bảo");
-                            break;
-                        } else if (p.menuID == 3 && select == 0) { //GIAI TAN BANG HOI
-                            if (Server.gI().isServer == (byte) 1) {
-                                ClanService.gI().distoryClan(p);
-                            } else {
-                                p.sendAddchatYellow("Chỉ thực hiện ở NOAH 1");
-                            }
-                            break;
-                        } else if (p.menuID == 3 && select == 1) { //KHU VUC BANG HOI
-                            GotoMap(p, 153);
-                            break;
-                        }
-                    }
-                    if (select == 1) {
-                        doMenuArray(p, idNpc, "Ta có thể giúp gì cho con", new String[]{"NV DHVT", "NV Trung\nÚy Trắng"});
-                        p.menuID = select;
-                    }
-                    if (select == 2) {
-                        doMenuArray(p, idNpc, "Ta có thể giúp gì cho con", new String[]{"BXH Sức mạnh", "BXH Nạp thẻ"});
-                        p.menuID = select;
-                    } else if (select == 3) {
-                        doMenuArray(p, idNpc, "Ta có thể giúp gì cho con", new String[]{"Giải tán\nbang hội", "Khu vực\nbang hội"});
-                        p.menuID = select;
-                    }
-                }
-                break;
-            }
             case 12: {//CUI DI CHUYEN
                 if (p.map.id == 19) {
                     if (p.menuID == -1) {
@@ -2276,7 +2597,6 @@ public class Menu {
                             //                        GotoMap(p,68);
                         }
                         if (select == 2) {
-
                             break;
                         }
                         if (select == 3) {
@@ -2361,7 +2681,6 @@ public class Menu {
                         p.zone.goMapTransport(p, 25);
                     }
                     if (select == 2) {
-                        p.zone.goMapTransport(p, 84);
                         break;
                     }
                 }
@@ -2376,7 +2695,6 @@ public class Menu {
                         p.zone.goMapTransport(p, 26);
                     }
                     if (select == 2) {
-                        p.zone.goMapTransport(p, 84);
                         break;
                     }
                 }
@@ -2391,27 +2709,13 @@ public class Menu {
                         p.zone.goMapTransport(p, 26);
                     }
                     if (select == 2) {
-                        p.zone.goMapTransport(p, 84);
-                        break;
-                    }
-                } else if (p.map.id == 84) {
-                    if (select == 0) {
-                        p.zone.goMapTransport(p, 25);
-                    }
-                    if (select == 1) {
-                        p.zone.goMapTransport(p, 26);
-                    }
-                    if (select == 2) {
-                        p.zone.goMapTransport(p, 24);
                         break;
                     }
                 }
-
                 break;
-
             }
             case 9: {
-                if (p.map.id == 14 || p.map.id == 84) {
+                if (p.map.id == 14) {
                     if (select == 0) {
                         TabItemShop[] test = Shop.getTabShop(9, 0).toArray(new TabItemShop[0]);
                         GameScr.UIshop(p, test);
@@ -2471,15 +2775,10 @@ public class Menu {
                         }
                     }
                 }
-                if (p.map.id == 84) {
-                    TabItemShop[] test = Shop.getTabShop(8, 2).toArray(new TabItemShop[0]);
-                    GameScr.UIshop(p, test);
-                    break;
-                }
                 break;
             }
             case 7: {
-                if (p.map.id == 0 || p.map.id == 84) {
+                if (p.map.id == 0) {
                     if (select == 0) {
                         TabItemShop[] test = Shop.getTabShop(7, 1).toArray(new TabItemShop[0]);
                         GameScr.UIshop(p, test);
@@ -2569,6 +2868,7 @@ public class Menu {
                                         byte indexNOT = p.getIndexBagNotItem();
                                         if (p.getBagNull() == 0) {
                                             p.sendAddchatYellow("Hành trang không đủ chỗ trống!");
+                                            return;
                                         } else {
                                             ItemSell dauThan = ItemSell.getItemSell(itemDAUTHAN, (byte) 1);
                                             Item dauThuHoach = new Item(dauThan.item);
@@ -2642,34 +2942,34 @@ public class Menu {
                 if (p.map.id == 22) {
                     if (p.menuID == -1) {
                         if (select == 0) {
-                            Service.gI().clientInput(p, "Nhập giftcode", "Giftcode", (byte) 0);
+                            Service.chatNPC(p, (short) p.menuNPCID, "Một cậu bé có đuôi khỉ được tìm thấy bởi một ông lão sống một mình trong rừng, ông đặt tên là Son Goku và xem đứa bé như là cháu của mình. Một ngày nọ Goku tình cờ gặp một cô gái tên là Bulma trên đường đi bắt cá về, Goku và Bulma đã cùng nhau truy tìm bảy viên ngọc rồng. Các viên ngọc rồng này chứa đựng một bí mật có thể triệu hồi một con rồng và ban điều ước cho ai sở hữu chúng. Trên cuộc hành trình dài đi tìm những viên ngọc rồng, họ gặp những người bạn (Yamcha, Krillin,Yajirobe, Thiên, Giáo tử, Oolong,...) và những đấu sĩ huyền thoại cũng như nhiều ác quỷ. Họ trải qua những khó khăn và học hỏi các chiêu thức võ thuật đặc biệt để tham gia thi đấu trong đại hội võ thuật thế giới được tổ chức hằng năm. Ngoài các sự kiện đại hội võ thuật, Goku và các bạn còn phải đối phó với các thế lực độc ác như Đại vương Pilaf, Quân đoàn khăn đỏ của Độc nhãn tướng quân, Đại ma vương Picollo và những đứa con của hắn. Chiến binh người Saiya: Radiz, Hoàng tử Saiya Vegeta cùng tên cận vệ Nappa. Rồi họ đi đến Namek, gặp rồng thần của Namek; chạm trán Frieza, khi trở về Trái Đất đụng độ Nhóm android sát thủ (các Android 16, 17, 18,19, 20) và sau đó là quái vật từ tương lai Cell, Kẻ thù từ vũ trụ Majin Buu, thần hủy diệt Beerus, các đối thủ từ các vũ trụ song song, Đối thủ mạnh nhất với Goku là Jiren (đến từ vũ trụ 11).");
                             break;
                         }
-                        if (select == 1) {
-                            long _vang = ((long) p.vang + 500000000) > 2000000000L ? 2000000000L : ((long) p.vang + 500000000);
-                            p.vang = _vang;
-                            Service.gI().buyDone(p);
-                            p.sendAddchatYellow("Nhận thành công 500 triệu vàng");
-                            break;
-                        }
-                        if (select == 2) {
-                            if (p.ngoc < 10000000) {
-                                p.ngoc = p.ngoc + 100000;
-                                Service.gI().buyDone(p);
-                                p.sendAddchatYellow("Nhận thành công 100k ngọc");
-                            } else {
-                                p.sendAddchatYellow("Vui lòng sử dụng hết ngọc");
-                            }
-                            break;
-                        }
-                        if (p.hasTrungMabu && select == 3) {
+//                        if (select == 1) {
+//                            long _vang = ((long) p.vang + 500000000) > 2000000000L ? 2000000000L : ((long) p.vang + 500000000);
+//                            p.vang = _vang;
+//                            Service.gI().buyDone(p);
+//                            p.sendAddchatYellow("Nhận thành công 500 triệu vàng");
+//                            break;
+//                        }
+//                        if (select == 2) {
+//                            if (p.ngoc < 10000000) {
+//                                p.ngoc = p.ngoc + 100000;
+//                                Service.gI().buyDone(p);
+//                                p.sendAddchatYellow("Nhận thành công 100k ngọc");
+//                            } else {
+//                                p.sendAddchatYellow("Vui lòng sử dụng hết ngọc");
+//                            }
+//                            break;
+//                        }
+                        if (p.hasTrungMabu && select == 1) {
                             doMenuArray(p, idNpc, "Con có muốn nhận đệ tử Mabư, sẽ thay thế đệ tử hiện tại nếu có", new String[]{"OK", "Xóa đệ\nMabư", "Đóng"});
                             p.menuID = select;
                             break;
                         }
                     }
                     if (p.hasTrungMabu) {
-                        if (p.menuID == 3) {
+                        if (p.menuID == 1) {
                             if (select == 0) {
                                 p.statusPet = 0;
                                 p.detu = null;
@@ -2691,34 +2991,34 @@ public class Menu {
                 if (p.map.id == 23) {
                     if (p.menuID == -1) {
                         if (select == 0) {
-                            Service.gI().clientInput(p, "Nhập giftcode", "Giftcode", (byte) 0);
+                            Service.chatNPC(p, (short) p.menuNPCID, "Một cậu bé có đuôi khỉ được tìm thấy bởi một ông lão sống một mình trong rừng, ông đặt tên là Son Goku và xem đứa bé như là cháu của mình. Một ngày nọ Goku tình cờ gặp một cô gái tên là Bulma trên đường đi bắt cá về, Goku và Bulma đã cùng nhau truy tìm bảy viên ngọc rồng. Các viên ngọc rồng này chứa đựng một bí mật có thể triệu hồi một con rồng và ban điều ước cho ai sở hữu chúng. Trên cuộc hành trình dài đi tìm những viên ngọc rồng, họ gặp những người bạn (Yamcha, Krillin,Yajirobe, Thiên, Giáo tử, Oolong,...) và những đấu sĩ huyền thoại cũng như nhiều ác quỷ. Họ trải qua những khó khăn và học hỏi các chiêu thức võ thuật đặc biệt để tham gia thi đấu trong đại hội võ thuật thế giới được tổ chức hằng năm. Ngoài các sự kiện đại hội võ thuật, Goku và các bạn còn phải đối phó với các thế lực độc ác như Đại vương Pilaf, Quân đoàn khăn đỏ của Độc nhãn tướng quân, Đại ma vương Picollo và những đứa con của hắn. Chiến binh người Saiya: Radiz, Hoàng tử Saiya Vegeta cùng tên cận vệ Nappa. Rồi họ đi đến Namek, gặp rồng thần của Namek; chạm trán Frieza, khi trở về Trái Đất đụng độ Nhóm android sát thủ (các Android 16, 17, 18,19, 20) và sau đó là quái vật từ tương lai Cell, Kẻ thù từ vũ trụ Majin Buu, thần hủy diệt Beerus, các đối thủ từ các vũ trụ song song, Đối thủ mạnh nhất với Goku là Jiren (đến từ vũ trụ 11).");
                             break;
                         }
-                        if (select == 1) {
-                            long _vang = ((long) p.vang + 500000000) > 2000000000L ? 2000000000L : ((long) p.vang + 500000000);
-                            p.vang = _vang;
-                            Service.gI().buyDone(p);
-                            p.sendAddchatYellow("Nhận thành công 500 triệu vàng");
-                            break;
-                        }
-                        if (select == 2) {
-                            if (p.ngoc < 10000000) {
-                                p.ngoc = p.ngoc + 100000;
-                                Service.gI().buyDone(p);
-                                p.sendAddchatYellow("Nhận thành công 100k ngọc");
-                            } else {
-                                p.sendAddchatYellow("Vui lòng sử dụng hết ngọc");
-                            }
-                            break;
-                        }
-                        if (p.hasTrungMabu && select == 3) {
+//                        if (select == 1) {
+//                            long _vang = ((long) p.vang + 500000000) > 2000000000L ? 2000000000L : ((long) p.vang + 500000000);
+//                            p.vang = _vang;
+//                            Service.gI().buyDone(p);
+//                            p.sendAddchatYellow("Nhận thành công 500 triệu vàng");
+//                            break;
+//                        }
+//                        if (select == 2) {
+//                            if (p.ngoc < 10000000) {
+//                                p.ngoc = p.ngoc + 100000;
+//                                Service.gI().buyDone(p);
+//                                p.sendAddchatYellow("Nhận thành công 100k ngọc");
+//                            } else {
+//                                p.sendAddchatYellow("Vui lòng sử dụng hết ngọc");
+//                            }
+//                            break;
+//                        }
+                        if (p.hasTrungMabu && select == 1) {
                             doMenuArray(p, idNpc, "Con có muốn nhận đệ tử Mabư, sẽ thay thế đệ tử hiện tại nếu có", new String[]{"OK", "Xóa đệ\nMabư", "Đóng"});
                             p.menuID = select;
                             break;
                         }
                     }
                     if (p.hasTrungMabu) {
-                        if (p.menuID == 3) {
+                        if (p.menuID == 1) {
                             if (select == 0) {
                                 p.statusPet = 0;
                                 p.detu = null;
@@ -2740,34 +3040,35 @@ public class Menu {
                 if (p.map.id == 21) {
                     if (p.menuID == -1) {
                         if (select == 0) {
-                            Service.gI().clientInput(p, "Nhập giftcode", "Giftcode", (byte) 0);
+                            Service.chatNPC(p, (short) p.menuNPCID, "Một cậu bé có đuôi khỉ được tìm thấy bởi một ông lão sống một mình trong rừng, ông đặt tên là Son Goku và xem đứa bé như là cháu của mình. Một ngày nọ Goku tình cờ gặp một cô gái tên là Bulma trên đường đi bắt cá về, Goku và Bulma đã cùng nhau truy tìm bảy viên ngọc rồng. Các viên ngọc rồng này chứa đựng một bí mật có thể triệu hồi một con rồng và ban điều ước cho ai sở hữu chúng. Trên cuộc hành trình dài đi tìm những viên ngọc rồng, họ gặp những người bạn (Yamcha, Krillin,Yajirobe, Thiên, Giáo tử, Oolong,...) và những đấu sĩ huyền thoại cũng như nhiều ác quỷ. Họ trải qua những khó khăn và học hỏi các chiêu thức võ thuật đặc biệt để tham gia thi đấu trong đại hội võ thuật thế giới được tổ chức hằng năm. Ngoài các sự kiện đại hội võ thuật, Goku và các bạn còn phải đối phó với các thế lực độc ác như Đại vương Pilaf, Quân đoàn khăn đỏ của Độc nhãn tướng quân, Đại ma vương Picollo và những đứa con của hắn. Chiến binh người Saiya: Radiz, Hoàng tử Saiya Vegeta cùng tên cận vệ Nappa. Rồi họ đi đến Namek, gặp rồng thần của Namek; chạm trán Frieza, khi trở về Trái Đất đụng độ Nhóm android sát thủ (các Android 16, 17, 18,19, 20) và sau đó là quái vật từ tương lai Cell, Kẻ thù từ vũ trụ Majin Buu, thần hủy diệt Beerus, các đối thủ từ các vũ trụ song song, Đối thủ mạnh nhất với Goku là Jiren (đến từ vũ trụ 11).");
+                            //Service.gI().clientInput(p, "Nhập Mã Quà Tặng", "Mã Quà Tặng", (byte) 0);
                             break;
                         }
-                        if (select == 1) {
-                            long _vang = ((long) p.vang + 500000000) > 2000000000L ? 2000000000L : ((long) p.vang + 500000000);
-                            p.vang = _vang;
-                            Service.gI().buyDone(p);
-                            p.sendAddchatYellow("Nhận thành công 500 triệu vàng");
-                            break;
-                        }
-                        if (select == 2) {
-                            if (p.ngoc < 10000000) {
-                                p.ngoc = p.ngoc + 100000;
-                                Service.gI().buyDone(p);
-                                p.sendAddchatYellow("Nhận thành công 100k ngọc");
-                            } else {
-                                p.sendAddchatYellow("Vui lòng sử dụng hết ngọc");
-                            }
-                            break;
-                        }
-                        if (p.hasTrungMabu && select == 3) {
+//                        if (select == 1) {
+//                            long _vang = ((long) p.vang + 500000000) > 2000000000L ? 2000000000L : ((long) p.vang + 500000000);
+//                            p.vang = _vang;
+//                            Service.gI().buyDone(p);
+//                            p.sendAddchatYellow("Nhận thành công 500 triệu vàng");
+//                            break;
+//                        }
+//                        if (select == 2) {
+//                            if (p.ngoc < 10000000) {
+//                                p.ngoc = p.ngoc + 100000;
+//                                Service.gI().buyDone(p);
+//                                p.sendAddchatYellow("Nhận thành công 100k ngọc");
+//                            } else {
+//                                p.sendAddchatYellow("Vui lòng sử dụng hết ngọc");
+//                            }
+//                            break;
+//                        }
+                        if (p.hasTrungMabu && select == 1) {
                             doMenuArray(p, idNpc, "Con có muốn nhận đệ tử Mabư, sẽ thay thế đệ tử hiện tại nếu có", new String[]{"OK", "Xóa đệ\nMabư", "Đóng"});
                             p.menuID = select;
                             break;
                         }
                     }
                     if (p.hasTrungMabu) {
-                        if (p.menuID == 3) {
+                        if (p.menuID == 1) {
                             if (select == 0) {
                                 p.statusPet = 0;
                                 p.detu = null;
@@ -2785,7 +3086,6 @@ public class Menu {
                 }
                 break;
             }
-
             default: {
                 Service.gI().sendTB(p.session, 0, "Chức Năng Đang Được Cập Nhật " + idNpc, 0);
                 break;
@@ -2841,9 +3141,6 @@ public class Menu {
             return;
         } else if (p.menuNPCID == 73) {
             doMenuArray(p, idnpc, "Đổi password", new String[]{"OK", "Từ chối"});
-            return;
-        } else if (p.menuNPCID == 64 && p.map.id == 14 || p.menuNPCID == 64 && p.map.id == 0 || p.menuNPCID == 64 && p.map.id == 7) {
-            doMenuArray(p, idnpc, "Bảng xếp hạng của toàn máy chủ!", new String[]{"BXH Sức mạnh", "BXH Nhiệm vụ", "BXH Nạp thẻ"});
             return;
         } else if (p.menuNPCID == 72 && p.map.id == 160) {
             doMenuArray(p, idnpc, "Chào mừng đến với cửa hàng của ta, sử dụng 10 huy chương đồng và 1000 ngọc để đổi những món đồ giá trị với chỉ số ngẫu nhiên lên tới 30% (Thu thập huy chương đồng bằng cách tiêu diệt Black Goku hoặc Cooler)", new String[]{"OK", "Từ chối"});
@@ -2932,7 +3229,7 @@ public class Menu {
             return;
         } else if (p.menuNPCID == 54) { //TAPION
             if (p.map.id == 5) {
-                doMenuArray(p, idnpc, "Vàng đến", new String[]{"500 Tr", "Từ chối"});
+                doMenuArray(p, idnpc, "Chị sắp đi cướp ngân hàng em có muốn đi cùng không ?", new String[]{"Đổi Đệ Tử", "Từ chối"});
             }
             return;
         } else if (p.menuNPCID == 53) { //TAPION
@@ -2942,9 +3239,15 @@ public class Menu {
                 doMenuArray(p, idnpc, "Ngươi muốn bỏ chạy sao?", new String[]{"OK", "Từ chối"});
             }
             return;
+
         } else if (p.menuNPCID == 52) { //HUNG VUONG
             if (p.map.id == 0) {
                 doMenuArray(p, idnpc, "Tạm thời ta sẽ ở đây bán cải trang cho các cậu", new String[]{"Cửa hàng"});
+            }
+            return;
+        } else if (p.menuNPCID == 48) { //NGO KHONG NGU HANH SON
+            if (p.map.id == 122) {
+                doMenuArray(p, idnpc, "Hãy giải phong ấn cho ta, ta sẽ tặng ngươi một món quà", new String[]{"Cửa hàng"});
             }
             return;
         } else if (p.menuNPCID == 49) { //DUONG TANG
@@ -3003,7 +3306,7 @@ public class Menu {
             }
             return;
         } else if (p.menuNPCID == 41) { //TRUNG THU
-            if (p.map.id == 44) {
+            if (p.map.id == 14) {
                 doMenuArray(p, idnpc, "Trung thu đến rồi, xin chào!", new String[]{"Cửa hàng"});
             }
             return;
@@ -3029,24 +3332,27 @@ public class Menu {
         } else if (p.menuNPCID == 21) {
             if (p.map.id == 5) {
                 doMenuArray(p, idnpc, "Ngươi tìm ta có việc gì?", new String[]{"Ép sao trang\nbị", "Pha lê hóa\ntrang bị", "Chuyển hóa Trang\nbị", "Võ đài Sinh\nTử"});
-            } else if (p.map.id == 42 || p.map.id == 43 || p.map.id == 44 || p.map.id == 84) {
+            } else if (p.map.id == 42 || p.map.id == 43 || p.map.id == 44) {
                 doMenuArray(p, idnpc, "Ngươi tìm ta có việc gì?", new String[]{"Cửa hàng\nBùa", "Nâng cấp Vật\n phẩm", "Làm phép\nNhập đá", "Nhập\nNgọc Rồng", "Nâng cấp\nBông tai\nPorata", "Mở chỉ số\nBông tai\nPorata cấp 2"});
             }
             return;
         } else if (p.menuNPCID == 20 && p.map.id == 48) {  //THAN KAIO
-            doMenuArray(p, idnpc, "Con muốn quay về sao?", new String[]{"Về Thần Điện", "Thánh Địa\nKaio", "Từ Chối"});
+            doMenuArray(p, idnpc, "Con muốn quay về sao?", new String[]{"Về Thần Điện", "Thánh Địa\nKaio", "Con Đường\nRắn Độc", "Từ Chối"});
+            return;
+        } else if (p.menuNPCID == 18 && p.map.id == 46) {  //THAN MEO
+            doMenuArray(p, idnpc, "Tải Game Tại TeamKun.Vn?", new String[]{"Nói Chuyện", "Từ Chối"});
+            return;
+        } else if (p.menuNPCID == 19 && p.map.id == 141) {
+            doMenuArray(p, idnpc, "Giỏi lắm tiêu diệt được đám quái vật đó rồi à, Ta còn nhiệm vụ khác cho con đây !", new String[]{"Đến Chỗ\nCađíc", "Về\nThánh Địa\nKaio", "Từ Chối"});
             return;
         } else if (p.menuNPCID == 19 && p.map.id == 45) {
             doMenuArray(p, idnpc, "Con đã mạnh hơn ta, ta sẽ chỉ đường cho con đến Kaio để gặp thần Vũ\nTrụ Phương Bắc\nNgài là thần cai quản vũ trụ này, hãy theo ngài ấy học võ công", new String[]{"Đến Kaio", "Quay ngọc\nMay mắn"});
             return;
         } else if (p.menuNPCID == 10 && p.map.id == 24) {
-            doMenuArray(p, idnpc, "Tàu Vũ Trụ của tôi có thể đưa cậu đến hành tinh khác trong 3 giây. Cậu muốn đi đâu", new String[]{"Đến\nNamếc", "Đến\nXayda", "Đến\nSiêu thị"});
-            return;
-        } else if (p.menuNPCID == 10 && p.map.id == 84) {
-            doMenuArray(p, idnpc, "Tàu Vũ Trụ của tôi có thể đưa cậu đến hành tinh khác trong 3 giây. Cậu muốn đi đâu", new String[]{"Đến\nNamếc", "Đến\nXayda", "đến\ntrái đất"});
+            doMenuArray(p, idnpc, "Tàu Vũ Trụ của tôi có thể đưa cậu đến hành tinh khác trong 3 giây. Cậu muốn đi đâu", new String[]{"Đến\nNamếc", "Đến\nXayda", "Từ Chối"});
             return;
         } else if (p.menuNPCID == 11 && p.map.id == 25) {
-            doMenuArray(p, idnpc, "Tàu Vũ Trụ Namếc tuy cũ nhưng tốc độ không hề kém bất kỳ loại tầu nào khác. Cậu muốn đi đâu?", new String[]{"Đến\nTrái Đất", "Đến\nXayda", "Đến\nSiêu thị"});
+            doMenuArray(p, idnpc, "Tàu Vũ Trụ Namếc tuy cũ nhưng tốc độ không hề kém bất kỳ loại tầu nào khác. Cậu muốn đi đâu?", new String[]{"Đến\nTrái Đất", "Đến\nXayda", "Từ Chối"});
             return;
         } else if (p.menuNPCID == 12) {
             if (p.map.id == 19) {
@@ -3062,7 +3368,7 @@ public class Menu {
             } else if (p.map.id == 68) {
                 doMenuArray(p, idnpc, "Ngươi muốn bỏ chạy ư?", new String[]{"Đồng ý", "Từ Chối"});
             } else if (p.map.id == 26) {
-                doMenuArray(p, idnpc, "Tàu vũ trụ Xayda sử dụng công nghệ mới nhất, có thể đưa ngươi đi bất kỳ đâu, chỉ cần trả tiền là được", new String[]{"Đến\nTrái Đất", "Đến\nNamếc", "Đến\nSiêu thị"});
+                doMenuArray(p, idnpc, "Tàu vũ trụ Xayda sử dụng công nghệ mới nhất, có thể đưa ngươi đi bất kỳ đâu, chỉ cần trả tiền là được", new String[]{"Đến\nTrái Đất", "Đến\nNamếc", "Từ Chối"});
             }
             return;
         } else if (p.menuNPCID == 42 && p.map.id == 43) { //Quoc vuong mo gioi han suc manh
@@ -3107,7 +3413,7 @@ public class Menu {
             }
             doMenuArray(p, idnpc, "Cảm ơn bạn đã đến đây để giúp chúng tôi", new String[]{"Kể Chuyện", "Cửa hàng"});
             return;
-        } else if (p.menuNPCID == 16 && (p.map.id == 24 || p.map.id == 25 || p.map.id == 26 || p.map.id == 84)) {
+        } else if (p.menuNPCID == 16 && (p.map.id == 24 || p.map.id == 25 || p.map.id == 26)) {
             TabItemShop[] test = Shop.getTabShop(16, p.gender).toArray(new TabItemShop[0]);
             GameScr.UIshop(p, test);
 //                doMenuArray(p,idnpc,Text.get(0, 1),new String[]{"Cửa Hàng"});
@@ -3131,7 +3437,12 @@ public class Menu {
                         p.power += p.crrTask.bonus;
                     }
                     p.UpdateSMTN((byte) 2, p.crrTask.bonus);
-                    p.sendAddchatYellow("Bạn vừa được thưởng " + Util.powerToString(p.crrTask.bonus) + " sức mạnh");
+                    long _vang = ((long) p.vang + 700000000) > 2000000000L ? 2000000000L : ((long) p.vang + 700000000);
+                    p.vang = _vang;
+                    p.ngoc += 17000;
+                    p.ngocKhoa += 34000;
+                    Service.gI().buyDone(p);
+                    p.sendAddchatYellow("Bạn vừa được thưởng " + Util.powerToString(p.crrTask.bonus) + " sức mạnh và ngọc, ngọc khoá, vàng");
                     Service.chatNPC(p, (short) p.menuNPCID, TaskManager.gI().textChatTASK[p.taskId]);
                     if (p.taskId == (short) 4) {
                         TaskService.gI().setupNextNewTask(p, (byte) 7);
@@ -3149,16 +3460,16 @@ public class Menu {
                     return;
                 }
                 if (p.hasTrungMabu) {
-                    doMenuArray(p, idnpc, Text.get(0, 0), new String[]{"GiftCode", "Nhận Vàng", "Nhận Ngọc", "Đệ Tử\nMabư"});
+                    doMenuArray(p, idnpc, Text.get(0, 0), new String[]{"Kể chuyện", "Đệ Tử\nMabư"});
                 } else {
-                    doMenuArray(p, idnpc, Text.get(0, 0), new String[]{"GiftCode", "Nhận Vàng", "Nhận Ngọc"});
+                    doMenuArray(p, idnpc, Text.get(0, 0), new String[]{"Kể chuyện"});
                 }
             }
             return;
-        } else if (p.menuNPCID == 39 && p.map.id == 5 || p.menuNPCID == 39 && p.map.id == 13 || p.menuNPCID == 39 && p.map.id == 20) {
-            doMenuArray(p, idnpc, Text.get(0, 1), new String[]{"Cửa Hàng"});
+        } else if (p.menuNPCID == 39 && p.map.id == 5) {
+            doMenuArray(p, idnpc, Text.get(0, 1), new String[]{"Cửa Hàng", "Chức Năng", "Đổi Tiền", "Nhận Quà\nGiáng Sinh"});
             return;
-        } else if (p.menuNPCID == 9 && p.map.id == 14 || p.menuNPCID == 9 && p.map.id == 84) {
+        } else if (p.menuNPCID == 9 && p.map.id == 14) {
             if (p.gender == 2) {
                 if (p.crrTask.subtasks[p.crrTask.index] == (byte) p.menuNPCID && p.crrTask.index == (byte) 2 && p.taskId == (short) 7) {
                     Service.chatNPC(p, (short) p.menuNPCID, "Cảm ơn ngươi đã cứu ta. Ta sẽ sẵn sàng phục vụ nếu ngươi cần mua vật dụng");
@@ -3170,7 +3481,7 @@ public class Menu {
                 Service.gI().sendTB(p.session, 0, "Ta chỉ bán đồ cho hành tinh Xayda", 0);
             }
             return;
-        } else if (p.menuNPCID == 7 && p.map.id == 0 || p.menuNPCID == 7 && p.map.id == 84) {
+        } else if (p.menuNPCID == 7 && p.map.id == 0) {
             if (p.gender == 0) {
                 if (p.crrTask.subtasks[p.crrTask.index] == (byte) p.menuNPCID && p.crrTask.index == (byte) 2 && p.taskId == (short) 7) {
                     Service.chatNPC(p, (short) p.menuNPCID, "Cảm ơn ngươi đã cứu ta. Ta sẽ sẵn sàng phục vụ nếu ngươi cần mua vật dụng");
@@ -3182,7 +3493,7 @@ public class Menu {
                 Service.gI().sendTB(p.session, 0, "Ta chỉ bán đồ cho hành tinh Trái đất", 0);
             }
             return;
-        } else if (p.menuNPCID == 8 && p.map.id == 7 || p.menuNPCID == 8 && p.map.id == 84) {
+        } else if (p.menuNPCID == 8 && p.map.id == 7) {
             if (p.imgNRSD == (byte) 53) {
                 if (p.map.id == 7) {
                     doMenuArray(p, idnpc, "Ồ, ngọc rồng namếc, bạn thật là may mắn\nnếu tìm đủ 7 viên sẽ được Rồng Thiêng Namếc ban cho điều ước", new String[]{"Hướng\ndẫn\nGọi Rồng", "Gọi rồng", "Từ chối"});
@@ -3242,8 +3553,8 @@ public class Menu {
                     return;
                 }
             }
-//            doMenuArray(p,idnpc,"Ta có thể giúp gì cho con",new String[]{"Nói chuyện","Tính năng","Đá nâng cấp","Bang hội"});
-            doMenuArray(p, idnpc, "Ta có thể giúp gì cho con", new String[]{"Nói chuyện", "Tính năng", "BXH", "Bang hội"});
+//            doMenuArray(p,idnpc,"Chào con, ta rất vui khi gặp con\nCon muốn làm gì nào?",new String[]{"Nói chuyện","Tính năng","Đá nâng cấp","Bang hội"});
+            doMenuArray(p, idnpc, "Chào con, ta rất vui khi gặp con\nCon muốn làm gì nào?", new String[]{"Sự Kiện\nChristmas", "Nhiệm Vụ", "Xếp Hạng", "Bang hội", "Kho Báu\nDưới Biển"});
             return;
         } else if (p.menuNPCID == 14 && p.map.id == 13) { //TRUONG LAO GURU
             if (p.taskId == (short) 12) {
@@ -3280,8 +3591,7 @@ public class Menu {
                     return;
                 }
             }
-            //       Service.gI().sendTB(p.session, 0, "Chức Năng Đang Được Cập Nhật " + idnpc, 0);
-            doMenuArray(p, idnpc, "Ta có thể giúp gì cho con", new String[]{"Nói chuyện", "Tính năng", "BXH", "Bang hội"});
+            Service.gI().sendTB(p.session, 0, "Chức Năng Đang Được Cập Nhật " + idnpc, 0);
             return;
         } else if (p.menuNPCID == 15 && p.map.id == 20) { //VUA VEGETA
             if (p.taskId == (short) 12) {
@@ -3318,8 +3628,7 @@ public class Menu {
                     return;
                 }
             }
-            //         Service.gI().sendTB(p.session, 0, "Chức Năng Đang Được Cập Nhật " + idnpc, 0);
-            doMenuArray(p, idnpc, "Ta có thể giúp gì cho con", new String[]{"Nói chuyện", "Tính năng", "BXH", "Bang hội"});
+            Service.gI().sendTB(p.session, 0, "Chức Năng Đang Được Cập Nhật " + idnpc, 0);
             return;
         } else if (p.menuNPCID == 18 && p.map.id == 46) { //THAN MEO
             if (p.taskId == (short) 29 && p.crrTask.index == (byte) 0 && p.crrTask.subtasks[p.crrTask.index] == (byte) p.menuNPCID) {

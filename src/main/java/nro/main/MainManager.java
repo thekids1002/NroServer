@@ -16,6 +16,7 @@ import nro.io.Message;
 import nro.io.Session;
 
 import nro.item.Item;
+import nro.item.ItemBuff;
 import nro.item.ItemOption;
 import nro.item.ItemSell;
 import nro.item.ItemTemplate;
@@ -53,7 +54,7 @@ public class MainManager {
         this.loadConfigFile();
         this.loadDataBase();
     }
-
+ 
     private void loadConfigFile() {
         byte[] ab = GameScr.loadFile("nro.conf").toByteArray();
         if (ab == null) {
@@ -129,13 +130,13 @@ public class MainManager {
             this.mysql_pass = (String) configMap.get("mysql-password");
 //            this.mysql_pass = "AAbbcc123abc";
         } else {
-            this.mysql_pass = "12345678";
+            this.mysql_pass = "";
         }
 
         if (configMap.containsKey("mysql-database")) {
             this.mysql_database = (String) configMap.get("mysql-database");
         } else {
-            this.mysql_database = "vuatrochoi";
+            this.mysql_database = "";
         }
 
         if (configMap.containsKey("version-Data")) {
@@ -252,7 +253,7 @@ public class MainManager {
             i = 0;
             JSONObject job;
             for (res = SQLManager.stat.executeQuery("SELECT * FROM `item`;"); res.next(); ++i) {
-
+                
                 ItemTemplate item = new ItemTemplate();
                 item.id = Short.parseShort(res.getString("id"));
                 item.type = Byte.parseByte(res.getString("type"));
@@ -277,7 +278,7 @@ public class MainManager {
 
                 ItemTemplate.entrys.add(item);
             }
-
+            
             res.close();
 
             //load itemShell
@@ -290,8 +291,6 @@ public class MainManager {
                 sell.buyGold = Integer.parseInt(res.getString("buyGold"));
                 sell.buyType = Byte.parseByte(res.getString("buyType"));
                 sell.isNew = res.getBoolean("isNew");
-               // sell.canbuy = Integer.parseInt(res.getString("canbuy"));
-                sell.canbuy = 0; 
                 Item item = new Item();
                 item.id = sell.id;
                 item.template = ItemTemplate.ItemTemplateID(item.id);
@@ -304,8 +303,10 @@ public class MainManager {
                         JSONObject job2 = (JSONObject) Option.get(l);
                         item.itemOptions.add(new ItemOption(Integer.parseInt(job2.get("id").toString()), Integer.parseInt(job2.get("param").toString())));
                     }
-                } else {
-                    item.itemOptions.add(new ItemOption(73, 0));
+                }
+                else
+                {
+                     item.itemOptions.add(new ItemOption(73, 0));
                 }
                 sell.item = item;
                 ItemSell.items.add(item);
@@ -323,9 +324,37 @@ public class MainManager {
                 //663->667: THUC AN DOI DO HUY DIET
                 //74 DUI GA NUONG, 73 DUI GA NHIEM VU , 78 DUA BE NHIEM VU //85 TRUYEN DOREMON
 //                int idItemNotSell[] = {14,15,16,17,18,19,20, 380,381,382,383,384,385, 441,442,443,444,445,446,447, 76,188,189,190, 225, 220,221,222,223,224 ,516, 663,664,665,666,667, 74,73,78,85,};
-                //            for(i = 0; i < idItemNotSell.length; i++) {
-                Item _item = new Item();
+    //            for(i = 0; i < idItemNotSell.length; i++) {
+                    Item _item = new Item();
 //                    _item.id = idItemNotSell[i];
+                    _item.id = Integer.parseInt(res.getString("item_id"));
+                    _item.template = ItemTemplate.ItemTemplateID(_item.id);
+                    _item.quantity = 1;
+                    _item.quantityTemp = 99;
+                    _item.isExpires = true;
+                    Option = (JSONArray) JSONValue.parse(res.getString("optionItem"));
+                    if (Option.size() > 0) {
+                        for (int l = 0; l < Option.size(); l++) {
+                            JSONObject job2 = (JSONObject) Option.get(l);
+                            _item.itemOptions.add(new ItemOption(Integer.parseInt(job2.get("id").toString()), Integer.parseInt(job2.get("param").toString())));
+                        }
+                    }
+                    else
+                    {
+                         _item.itemOptions.add(new ItemOption(73, 0));
+                    }
+    //                _item.itemOptions.add(new ItemOption(73, 0));
+                    ItemSell.itemsNotSell.add(_item);
+    //            }
+                i++;
+            }
+            res.close();
+
+                        //load nhtgamebuff
+            i = 0;
+            res = SQLManager.stat.executeQuery("SELECT * FROM `nhtgamebuff`;");
+            while (res.next()) {
+                Item _item = new Item();
                 _item.id = Integer.parseInt(res.getString("item_id"));
                 _item.template = ItemTemplate.ItemTemplateID(_item.id);
                 _item.quantity = 1;
@@ -340,13 +369,13 @@ public class MainManager {
                 } else {
                     _item.itemOptions.add(new ItemOption(73, 0));
                 }
-                //                _item.itemOptions.add(new ItemOption(73, 0));
-                ItemSell.itemsNotSell.add(_item);
-                //            }
+                ItemBuff.items.add(_item);
                 i++;
             }
             res.close();
 
+            
+            
             //load Shops
             i = 0;
             res = SQLManager.stat.executeQuery("SELECT * FROM `shop`;");
@@ -378,7 +407,7 @@ public class MainManager {
                 item2.headTemp = res.getShort("head");
                 item2.bodyTemp = res.getShort("body");
                 item2.legTemp = res.getShort("leg");
-                item2.entrys.add(item2);
+                item2.entrys.add(item2);  
                 i++;
             }
             res.close();
@@ -442,7 +471,7 @@ public class MainManager {
         Message m = null;
         try {
             m = new Message(-28);
-            m.writer().writeByte((byte) 6);
+            m.writer().writeByte((byte)6);
             m.writer().write(Server.cache[1].toByteArray());
             m.writer().flush();
             session.sendMessage(m);
@@ -475,7 +504,7 @@ public class MainManager {
         Message m = null;
         try {
             m = new Message(-28);
-            m.writer().writeByte((byte) 7);
+            m.writer().writeByte((byte)7);
             m.writer().write(Server.cache[2].toByteArray());
             m.writer().flush();
             session.sendMessage(m);
@@ -508,7 +537,7 @@ public class MainManager {
 //            p.session.doSendMessage(m);
             p.session.sendMessage(m);
             m.cleanup();
-
+            
             m = new Message(-28);
             m.writer().write(Server.cache[6].toByteArray());
 //            p.session.doSendMessage(m);
@@ -527,19 +556,19 @@ public class MainManager {
         Message m = null;
         try {
             m = new Message(-28);
-            m.writer().writeByte((byte) 8);
+            m.writer().writeByte((byte)8);
             m.writer().write(Server.cache[3].toByteArray());
             session.sendMessage(m);
             m.cleanup();
 
             m = new Message(-28);
-            m.writer().writeByte((byte) 8);
+            m.writer().writeByte((byte)8);
             m.writer().write(Server.cache[4].toByteArray());
             session.sendMessage(m);
             m.cleanup();
 
             m = new Message(-28);
-            m.writer().writeByte((byte) 8);
+            m.writer().writeByte((byte)8);
 //            m.writer().write(Server.cache[5].toByteArray());
             //CUSTOM ITEM
             ByteArrayInputStream is = new ByteArrayInputStream(FileIO.readFile("res/cache/vhalloween/NRitem2"));
@@ -548,10 +577,10 @@ public class MainManager {
             m.writer().writeByte(dis.readByte()); //type item: 2
             m.writer().writeShort(dis.readShort()); //start item
             short endItem = dis.readShort();
-            m.writer().writeShort((short) 1145); //enditem v222
+            m.writer().writeShort((short)1145); //enditem v222
 //            m.writer().writeShort((short)1075); //enditem v221
 
-            for (short i = (short) 800; i < (short) 1118; i++) {
+            for(short i = (short)800; i < (short)1118; i++) {
                 m.writer().writeByte(dis.readByte()); //type item
                 m.writer().writeByte(dis.readByte()); //gender item
                 m.writer().writeUTF(dis.readUTF()); //name item
@@ -562,283 +591,283 @@ public class MainManager {
                 m.writer().writeShort(dis.readShort()); //part item
                 m.writer().writeBoolean(dis.readBoolean()); //isUptoUp item
             }
-            m.writer().writeByte((byte) 5); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)5); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Cải trang Black Goku"); //name item
             m.writer().writeUTF("Cải trang thành Black Goku"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 15000000); //strRequire item
-            m.writer().writeShort((short) 5141); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)15000000); //strRequire item
+            m.writer().writeShort((short)5141); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 5); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)5); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Cải trang Hóa Đá"); //name item
             m.writer().writeUTF("Cải trang thành Tượng Đá"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 15000000); //strRequire item
-            m.writer().writeShort((short) 4392); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)15000000); //strRequire item
+            m.writer().writeShort((short)4392); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 5); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)5); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Cải trang Bill"); //name item
             m.writer().writeUTF("Cải trang thành Thần Hủy Diệt Bill"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 15000000); //strRequire item
-            m.writer().writeShort((short) 4847); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)15000000); //strRequire item
+            m.writer().writeShort((short)4847); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 5); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)5); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Cải trang Champa"); //name item
             m.writer().writeUTF("Cải trang thành Thần Hủy Diệt Champa"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 15000000); //strRequire item
-            m.writer().writeShort((short) 4879); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)15000000); //strRequire item
+            m.writer().writeShort((short)4879); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 5); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)5); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Cải trang Whis"); //name item
             m.writer().writeUTF("Cải trang thành Thiên Sứ Whis"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 15000000); //strRequire item
-            m.writer().writeShort((short) 7679); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)15000000); //strRequire item
+            m.writer().writeShort((short)7679); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 5); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)5); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Cải trang Cadic"); //name item
             m.writer().writeUTF("Cải trang thành Cadic"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 15000000); //strRequire item
-            m.writer().writeShort((short) 6027); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)15000000); //strRequire item
+            m.writer().writeShort((short)6027); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 5); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)5); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Cải trang Nappa"); //name item
             m.writer().writeUTF("Cải trang thành Nappa"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 15000000); //strRequire item
-            m.writer().writeShort((short) 6058); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)15000000); //strRequire item
+            m.writer().writeShort((short)6058); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 27); //type item
-            m.writer().writeByte((byte) 3); //gender item
-            m.writer().writeUTF("Rương cải trang may mắn NOAH"); //name item
+            m.writer().writeByte((byte)27); //type item
+            m.writer().writeByte((byte)3); //gender item
+            m.writer().writeUTF("Rương cải trang may mắn HuyMe"); //name item
             m.writer().writeUTF("Giấu bên trong nhiều vật phẩm quý giá"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 5007); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)5007); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
             //SET HEART
-            m.writer().writeByte((byte) 0); //type item
-            m.writer().writeByte((byte) 0); //gender item
+            m.writer().writeByte((byte)0); //type item
+            m.writer().writeByte((byte)0); //gender item
             m.writer().writeUTF("Áo Heart Trái Đất"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6528); //iconID item
-            m.writer().writeShort((short) 589); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6528); //iconID item
+            m.writer().writeShort((short)589); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 1); //type item
-            m.writer().writeByte((byte) 0); //gender item
+            m.writer().writeByte((byte)1); //type item
+            m.writer().writeByte((byte)0); //gender item
             m.writer().writeUTF("Quần Heart Trái Đất"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6529); //iconID item
-            m.writer().writeShort((short) 590); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6529); //iconID item
+            m.writer().writeShort((short)590); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 0); //type item
-            m.writer().writeByte((byte) 1); //gender item
+            m.writer().writeByte((byte)0); //type item
+            m.writer().writeByte((byte)1); //gender item
             m.writer().writeUTF("Áo Heart Namếc"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6533); //iconID item
-            m.writer().writeShort((short) 583); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6533); //iconID item
+            m.writer().writeShort((short)583); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 1); //type item
-            m.writer().writeByte((byte) 1); //gender item
+            m.writer().writeByte((byte)1); //type item
+            m.writer().writeByte((byte)1); //gender item
             m.writer().writeUTF("Quần Heart Namếc"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6534); //iconID item
-            m.writer().writeShort((short) 584); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6534); //iconID item
+            m.writer().writeShort((short)584); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 0); //type item
-            m.writer().writeByte((byte) 2); //gender item
+            m.writer().writeByte((byte)0); //type item
+            m.writer().writeByte((byte)2); //gender item
             m.writer().writeUTF("Áo Heart Xayda"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6537); //iconID item
-            m.writer().writeShort((short) 586); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6537); //iconID item
+            m.writer().writeShort((short)586); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 1); //type item
-            m.writer().writeByte((byte) 2); //gender item
+            m.writer().writeByte((byte)1); //type item
+            m.writer().writeByte((byte)2); //gender item
             m.writer().writeUTF("Quần Heart Xayda"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6538); //iconID item
-            m.writer().writeShort((short) 587); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6538); //iconID item
+            m.writer().writeShort((short)587); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 4); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)4); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Nhẫn Heart"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6532); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6532); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 2); //type item
-            m.writer().writeByte((byte) 0); //gender item
+            m.writer().writeByte((byte)2); //type item
+            m.writer().writeByte((byte)0); //gender item
             m.writer().writeUTF("Găng Heart Trái Đất"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6530); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6530); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 3); //type item
-            m.writer().writeByte((byte) 0); //gender item
+            m.writer().writeByte((byte)3); //type item
+            m.writer().writeByte((byte)0); //gender item
             m.writer().writeUTF("Giầy Heart Trái Đất"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6531); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6531); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 2); //type item
-            m.writer().writeByte((byte) 1); //gender item
+            m.writer().writeByte((byte)2); //type item
+            m.writer().writeByte((byte)1); //gender item
             m.writer().writeUTF("Găng Heart Namếc"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6535); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6535); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 3); //type item
-            m.writer().writeByte((byte) 1); //gender item
+            m.writer().writeByte((byte)3); //type item
+            m.writer().writeByte((byte)1); //gender item
             m.writer().writeUTF("Giầy Heart Namếc"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6536); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6536); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 2); //type item
-            m.writer().writeByte((byte) 2); //gender item
+            m.writer().writeByte((byte)2); //type item
+            m.writer().writeByte((byte)2); //gender item
             m.writer().writeUTF("Găng Heart Xayda"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6539); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6539); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 3); //type item
-            m.writer().writeByte((byte) 2); //gender item
+            m.writer().writeByte((byte)3); //type item
+            m.writer().writeByte((byte)2); //gender item
             m.writer().writeUTF("Giầy Heart Xayda"); //name item
             m.writer().writeUTF("Trang bị Thần Heart"); //description item
-            m.writer().writeByte((byte) 13); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6540); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)13); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6540); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
             // ITEM TICKET
-            m.writer().writeByte((byte) 27); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)27); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Mảnh Áo Thần"); //name item
             m.writer().writeUTF("Mảnh ghép Áo Thần Heart"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6523); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6523); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 27); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)27); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Mảnh Quần Thần"); //name item
             m.writer().writeUTF("Mảnh ghép Quần Thần Heart"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6524); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6524); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 27); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)27); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Mảnh Găng Thần"); //name item
             m.writer().writeUTF("Mảnh ghép Găng Thần Heart"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6525); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6525); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 27); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)27); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Mảnh Giày Thần"); //name item
             m.writer().writeUTF("Mảnh ghép Giày Thần Heart"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6526); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6526); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
 
-            m.writer().writeByte((byte) 27); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            m.writer().writeByte((byte)27); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Mảnh Nhẫn Thần"); //name item
             m.writer().writeUTF("Mảnh ghép Nhẫn Thần Heart"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6527); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6527); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
-
-            m.writer().writeByte((byte) 27); //type item
-            m.writer().writeByte((byte) 3); //gender item
+            
+            m.writer().writeByte((byte)27); //type item
+            m.writer().writeByte((byte)3); //gender item
             m.writer().writeUTF("Bùa trang bị kích hoạt"); //name item
             m.writer().writeUTF("Vật phẩm dùng để mở trang bị kích hoạt"); //description item
-            m.writer().writeByte((byte) 1); //level item
-            m.writer().writeInt((int) 1500000); //strRequire item
-            m.writer().writeShort((short) 6847); //iconID item
-            m.writer().writeShort((short) (-1)); //part item
+            m.writer().writeByte((byte)1); //level item
+            m.writer().writeInt((int)1500000); //strRequire item
+            m.writer().writeShort((short)6847); //iconID item
+            m.writer().writeShort((short)(-1)); //part item
             m.writer().writeBoolean(false); //isUptoUp item
             //END CUSTOM ITEM
             session.sendMessage(m);
             m.cleanup();
-
+            
             m = new Message(-28);
-            m.writer().writeByte((byte) 8);
+            m.writer().writeByte((byte)8);
             m.writer().write(Server.cache[6].toByteArray());
             session.sendMessage(m);
             m.cleanup();
@@ -854,12 +883,12 @@ public class MainManager {
     public static Map getMapid(int id) {
 //        synchronized (server.maps) {
 
-        for (Map map : server.maps) {
-            if (map != null && map.template.id == id) {
-                return map;
+            for (Map map : server.maps) {
+                if (map != null && map.template.id == id) {
+                    return map;
+                }
             }
-        }
-        return null;
+            return null;
 
 //            for (short i = 0; i < server.maps.length; i++) {
 //                Map map = server.maps[i];

@@ -34,7 +34,7 @@ public class ItemData {
                 iOptionTemplates[i].type = (int) dis.readByte();
 //                Util.log("ITEM OPTION ID: " + i + ", NAME: " + iOptionTemplates[i].name + ", TYPE: " + iOptionTemplates[i].type);
             }
-            is = new ByteArrayInputStream(FileIO.readFile("res/cache/NRitem1"));
+            is = new ByteArrayInputStream(FileIO.readFile("res/cache/vhalloween/NRitem1"));
             dis = new DataInputStream(is);
             dis.readByte();
             dis.readByte();
@@ -56,7 +56,7 @@ public class ItemData {
 //                Util.log("ItemTemplate: " + j + ", TYPE: " + it.type + ", gender: " + it.gender + ", name: " + it.name + ", des: " + it.description + ", level: " + it.level
 //+ ", strRequire: " + it.strRequire + ", iconID: " + it.iconID + ", part: " + it.part + ", isUpToUp: " + it.isUpToUp );
             }
-            is = new ByteArrayInputStream(FileIO.readFile("res/cache/NRitem100"));
+            is = new ByteArrayInputStream(FileIO.readFile("res/cache/vhalloween/NRitem100"));
             dis = new DataInputStream(is);
             dis.readByte();
             dis.readByte();
@@ -64,7 +64,7 @@ public class ItemData {
             int num5 = dis.readShort();
             int[][] array;
             array = new int[num5][];
-            
+
             for (int i = 0; i < array.length; i++) {
                 int num6 = dis.readByte();
                 array[i] = new int[num6];
@@ -94,7 +94,7 @@ public class ItemData {
 //                    ItemDAO.insertPartDB(i, type, part[i]);
 //                }
             }
-            
+
             is = new ByteArrayInputStream(FileIO.readFile("res/cache/vhalloween/NRitem2"));
             dis = new DataInputStream(is);
             dis.readByte();
@@ -154,19 +154,19 @@ public class ItemData {
             DataInputStream dis = new DataInputStream(is);
 
             byte vcData = dis.readByte();
-    //        List<Byte> al = new ArrayList<Integer>();
+            //        List<Byte> al = new ArrayList<Integer>();
             ArrayList<Byte> bytes = new ArrayList<>();
             bytes.add(vcData);
-    //        byte bytes[] = {vcData};
+            //        byte bytes[] = {vcData};
             //NR_dart
             int vcInt = dis.readInt();
             ByteBuffer b = ByteBuffer.allocate(4);
             b.putInt(vcInt);
             byte[] result = b.array();
-            for(int i = 0; i < result.length; i++) {
+            for (int i = 0; i < result.length; i++) {
                 bytes.add(result[i]);
             }
-            for(int i = 0; i < vcInt; i++) {
+            for (int i = 0; i < vcInt; i++) {
                 bytes.add(dis.readByte());
             }
             //NR_arrow
@@ -174,10 +174,10 @@ public class ItemData {
             b = ByteBuffer.allocate(4);
             b.putInt(vcInt);
             result = b.array();
-            for(int i = 0; i < result.length; i++) {
+            for (int i = 0; i < result.length; i++) {
                 bytes.add(result[i]);
             }
-            for(int i = 0; i < vcInt; i++) {
+            for (int i = 0; i < vcInt; i++) {
                 bytes.add(dis.readByte());
             }
             //NR_effect
@@ -185,10 +185,10 @@ public class ItemData {
             b = ByteBuffer.allocate(4);
             b.putInt(vcInt);
             result = b.array();
-            for(int i = 0; i < result.length; i++) {
+            for (int i = 0; i < result.length; i++) {
                 bytes.add(result[i]);
             }
-            for(int i = 0; i < vcInt; i++) {
+            for (int i = 0; i < vcInt; i++) {
                 bytes.add(dis.readByte());
             }
             //NR_image
@@ -196,10 +196,10 @@ public class ItemData {
             b = ByteBuffer.allocate(4);
             b.putInt(vcInt);
             result = b.array();
-            for(int i = 0; i < result.length; i++) {
+            for (int i = 0; i < result.length; i++) {
                 bytes.add(result[i]);
             }
-            for(int i = 0; i < vcInt; i++) {
+            for (int i = 0; i < vcInt; i++) {
                 bytes.add(dis.readByte());
             }
             //NR_part
@@ -207,7 +207,7 @@ public class ItemData {
             b = ByteBuffer.allocate(4);
             b.putInt(vcInt);
             result = b.array();
-            for(int i = 0; i < result.length; i++) {
+            for (int i = 0; i < result.length; i++) {
                 bytes.add(result[i]);
             }
 //            Util.log("NUMBER byte item: " + vcInt);
@@ -215,7 +215,7 @@ public class ItemData {
             b = ByteBuffer.allocate(2);
             b.putShort(numPart);
             result = b.array();
-            for(int i = 0; i < result.length; i++) {
+            for (int i = 0; i < result.length; i++) {
                 bytes.add(result[i]);
             }
 //            Util.log("NUMBER PART REAL: " + numPart);
@@ -224,21 +224,21 @@ public class ItemData {
                 byte type = dis.readByte();
 
                 bytes.add(type);
-                if(i == 589 || i == 590 || i == 583 || i == 584 || i == 586 || i == 587) {
+                if (i == 589 || i == 590 || i == 583 || i == 584 || i == 586 || i == 587) {
                     String list = "";
-                    if(i == 589) {
+                    if (i == 589) {
                         list = "[{\"dx\":-13,\"dy\":0,\"id\":5498},{\"dx\":-4,\"dy\":-2,\"id\":5497},{\"dx\":-15,\"dy\":-2,\"id\":5499},{\"dx\":-11,\"dy\":-1,\"id\":5500},{\"dx\":-13,\"dy\":-1,\"id\":5501},{\"dx\":-9,\"dy\":0,\"id\":5502},{\"dx\":-11,\"dy\":0,\"id\":5503},{\"dx\":-7,\"dy\":0,\"id\":5504},{\"dx\":-9,\"dy\":1,\"id\":5505},{\"dx\":-11,\"dy\":0,\"id\":5506},{\"dx\":-9,\"dy\":0,\"id\":5507},{\"dx\":-7,\"dy\":0,\"id\":5508},{\"dx\":-5,\"dy\":-1,\"id\":5509},{\"dx\":-10,\"dy\":0,\"id\":5510},{\"dx\":0,\"dy\":0,\"id\":5511},{\"dx\":-12,\"dy\":0,\"id\":5512},{\"dx\":0,\"dy\":0,\"id\":3001}]";
-                    } else if(i == 590) {
+                    } else if (i == 590) {
                         list = "[{\"dx\":1,\"dy\":0,\"id\":5525},{\"dx\":-1,\"dy\":1,\"id\":5513},{\"dx\":0,\"dy\":0,\"id\":5514},{\"dx\":0,\"dy\":0,\"id\":5515},{\"dx\":0,\"dy\":0,\"id\":5516},{\"dx\":0,\"dy\":0,\"id\":5517},{\"dx\":0,\"dy\":0,\"id\":5524},{\"dx\":0,\"dy\":0,\"id\":5521},{\"dx\":-2,\"dy\":2,\"id\":5522},{\"dx\":0,\"dy\":0,\"id\":5523},{\"dx\":1,\"dy\":-1,\"id\":5519},{\"dx\":0,\"dy\":0,\"id\":5520},{\"dx\":0,\"dy\":0,\"id\":5518},{\"dx\":0,\"dy\":0,\"id\":3002}]";
-                    } else if(i == 583) {
+                    } else if (i == 583) {
 //                        list = "[{\"dx\":-13,\"dy\":0,\"id\":4614},{\"dx\":-5,\"dy\":-2,\"id\":4613},{\"dx\":-15,\"dy\":-4,\"id\":4615},{\"dx\":-9,\"dy\":-2,\"id\":4616},{\"dx\":-12,\"dy\":-3,\"id\":4617},{\"dx\":-9,\"dy\":-2,\"id\":4618},{\"dx\":-11,\"dy\":-1,\"id\":4619},{\"dx\":-5,\"dy\":2,\"id\":4620},{\"dx\":-10,\"dy\":1,\"id\":4621},{\"dx\":-11,\"dy\":0,\"id\":4622},{\"dx\":-9,\"dy\":0,\"id\":4623},{\"dx\":-7,\"dy\":0,\"id\":4624},{\"dx\":-6,\"dy\":1,\"id\":4625},{\"dx\":-8,\"dy\":0,\"id\":4626},{\"dx\":0,\"dy\":0,\"id\":4627},{\"dx\":-12,\"dy\":0,\"id\":4628},{\"dx\":0,\"dy\":0,\"id\":3001}]";
                         list = "[{\"dx\":-13,\"dy\":0,\"id\":5435},{\"dx\":-5,\"dy\":-2,\"id\":5434},{\"dx\":-15,\"dy\":-4,\"id\":5436},{\"dx\":-9,\"dy\":-2,\"id\":5437},{\"dx\":-12,\"dy\":-3,\"id\":5438},{\"dx\":-9,\"dy\":-2,\"id\":5439},{\"dx\":-11,\"dy\":-1,\"id\":5440},{\"dx\":-5,\"dy\":2,\"id\":5441},{\"dx\":-10,\"dy\":1,\"id\":5442},{\"dx\":-11,\"dy\":0,\"id\":5443},{\"dx\":-9,\"dy\":0,\"id\":5444},{\"dx\":-7,\"dy\":0,\"id\":5445},{\"dx\":-6,\"dy\":1,\"id\":5446},{\"dx\":-8,\"dy\":0,\"id\":5447},{\"dx\":0,\"dy\":0,\"id\":5448},{\"dx\":-12,\"dy\":0,\"id\":5449},{\"dx\":0,\"dy\":0,\"id\":3001}]";
-                    } else if(i == 584) {
+                    } else if (i == 584) {
                         list = "[{\"dx\":8,\"dy\":4,\"id\":5462},{\"dx\":0,\"dy\":1,\"id\":5450},{\"dx\":0,\"dy\":0,\"id\":5451},{\"dx\":0,\"dy\":0,\"id\":5452},{\"dx\":0,\"dy\":0,\"id\":5453},{\"dx\":0,\"dy\":0,\"id\":5454},{\"dx\":0,\"dy\":0,\"id\":5455},{\"dx\":2,\"dy\":1,\"id\":5459},{\"dx\":-1,\"dy\":1,\"id\":5460},{\"dx\":-2,\"dy\":0,\"id\":5461},{\"dx\":1,\"dy\":-1,\"id\":5457},{\"dx\":0,\"dy\":1,\"id\":5458},{\"dx\":-2,\"dy\":1,\"id\":5456},{\"dx\":0,\"dy\":0,\"id\":3002}]";
 //                        list = "[{\"dx\":8,\"dy\":4,\"id\":4663},{\"dx\":0,\"dy\":1,\"id\":4629},{\"dx\":0,\"dy\":0,\"id\":4630},{\"dx\":0,\"dy\":0,\"id\":4631},{\"dx\":0,\"dy\":0,\"id\":4632},{\"dx\":0,\"dy\":0,\"id\":4633},{\"dx\":0,\"dy\":0,\"id\":4634},{\"dx\":2,\"dy\":1,\"id\":4638},{\"dx\":-1,\"dy\":1,\"id\":4639},{\"dx\":-2,\"dy\":0,\"id\":4640},{\"dx\":1,\"dy\":-1,\"id\":4636},{\"dx\":0,\"dy\":1,\"id\":4637},{\"dx\":-2,\"dy\":1,\"id\":4635},{\"dx\":0,\"dy\":0,\"id\":3002}]";
-                    } else if(i == 586) {
+                    } else if (i == 586) {
                         list = "[{\"dx\":-13,\"dy\":0,\"id\":5467},{\"dx\":-6,\"dy\":-2,\"id\":5464},{\"dx\":-15,\"dy\":-2,\"id\":5468},{\"dx\":-10,\"dy\":-1,\"id\":5469},{\"dx\":-12,\"dy\":-1,\"id\":5470},{\"dx\":-8,\"dy\":0,\"id\":5471},{\"dx\":-10,\"dy\":-1,\"id\":5472},{\"dx\":-7,\"dy\":0,\"id\":5473},{\"dx\":-9,\"dy\":0,\"id\":5474},{\"dx\":-10,\"dy\":0,\"id\":5475},{\"dx\":-8,\"dy\":0,\"id\":5476},{\"dx\":-6,\"dy\":0,\"id\":5477},{\"dx\":-6,\"dy\":0,\"id\":5478},{\"dx\":-10,\"dy\":0,\"id\":5479},{\"dx\":0,\"dy\":0,\"id\":5480},{\"dx\":-12,\"dy\":0,\"id\":5481},{\"dx\":0,\"dy\":0,\"id\":3001}]";
-                    } else if(i == 587) {
+                    } else if (i == 587) {
                         list = "[{\"dx\":1,\"dy\":-1,\"id\":5494},{\"dx\":0,\"dy\":1,\"id\":5482},{\"dx\":0,\"dy\":0,\"id\":5483},{\"dx\":0,\"dy\":0,\"id\":5484},{\"dx\":0,\"dy\":0,\"id\":5485},{\"dx\":0,\"dy\":0,\"id\":5486},{\"dx\":0,\"dy\":0,\"id\":5493},{\"dx\":0,\"dy\":0,\"id\":5490},{\"dx\":0,\"dy\":0,\"id\":5491},{\"dx\":0,\"dy\":0,\"id\":5492},{\"dx\":0,\"dy\":0,\"id\":5488},{\"dx\":0,\"dy\":1,\"id\":5489},{\"dx\":0,\"dy\":0,\"id\":5487},{\"dx\":0,\"dy\":0,\"id\":3002}]";
                     }
                     JSONArray jar = (JSONArray) JSONValue.parse(list);
@@ -256,7 +256,7 @@ public class ItemData {
                             b = ByteBuffer.allocate(2);
                             b.putShort(idEdit);
                             result = b.array();
-                            for(int k = 0; k < result.length; k++) {
+                            for (int k = 0; k < result.length; k++) {
                                 bytes.add(result[k]);
                             }
                             bytes.add(dxEdit);
@@ -265,13 +265,13 @@ public class ItemData {
                         }
                     }
                 } else {
-                    if (type == (byte)0) {
+                    if (type == (byte) 0) {
                         num1part = 3;
-                    } else if (type == (byte)1) {
+                    } else if (type == (byte) 1) {
                         num1part = 17;
-                    } else if (type == (byte)2) {
+                    } else if (type == (byte) 2) {
                         num1part = 14;
-                    } else if (type == (byte)3) {
+                    } else if (type == (byte) 3) {
                         num1part = 2;
                     }
 //                    for (int j = 0; j < num1part; j++) {
@@ -282,7 +282,7 @@ public class ItemData {
                         b = ByteBuffer.allocate(2);
                         b.putShort(num1partShort);
                         result = b.array();
-                        for(int k = 0; k < result.length; k++) {
+                        for (int k = 0; k < result.length; k++) {
                             bytes.add(result[k]);
                         }
                         bytes.add(dis.readByte());
@@ -291,11 +291,11 @@ public class ItemData {
                 }
             }
             Util.log("DONE!!!0: " + bytes.size());
-            while(dis.available() > 0) {
+            while (dis.available() > 0) {
                 bytes.add(dis.readByte());
             }
             byte[] arr = new byte[bytes.size()];
-            for(int i = 0; i < bytes.size(); i++) {
+            for (int i = 0; i < bytes.size(); i++) {
                 arr[i] = bytes.get(i);
             }
             Util.log("DONE bytes!!!1: " + bytes.size());

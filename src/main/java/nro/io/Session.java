@@ -12,12 +12,7 @@ import nro.player.PlayerManger;
 
 public class Session {
 
-    public String getIP() {
-        return socket.getInetAddress().toString();
-    }
-
     public class Sender {
-
         public ArrayList<Message> sendingMessage;
 
         public Sender() {
@@ -57,13 +52,10 @@ public class Session {
     }
 
     private class MessageCollector {
-
         public Session session;
-
         public MessageCollector(Session session) {
             this.session = session;
         }
-
         public void run() {
             try {
                 while (connected) {
@@ -170,14 +162,13 @@ public class Session {
             throw new RuntimeException(e);
         }
     }
-
     private byte readKey(byte b) {
         byte[] bytes = KEY.getBytes();
         byte curR = this.curR;
-        this.curR = (byte) (curR + 1);
-        byte i = (byte) (bytes[curR] & 255 ^ b & 255);
+        this.curR = (byte)(curR + 1);
+        byte i = (byte)(bytes[curR] & 255 ^ b & 255);
         if (this.curR >= KEY.getBytes().length) {
-            this.curR %= (byte) KEY.getBytes().length;
+            this.curR %= (byte)KEY.getBytes().length;
         }
         return i;
     }
@@ -185,10 +176,10 @@ public class Session {
     private byte writeKey(byte b) {
         byte[] bytes = KEY.getBytes();
         byte curW = this.curW;
-        this.curW = (byte) (curW + 1);
-        byte i = (byte) (bytes[curW] & 255 ^ b & 255);
+        this.curW = (byte)(curW + 1);
+        byte i = (byte)(bytes[curW] & 255 ^ b & 255);
         if (this.curW >= KEY.getBytes().length) {
-            this.curW %= (byte) KEY.getBytes().length;
+            this.curW %= (byte)KEY.getBytes().length;
         }
         return i;
     }
@@ -204,7 +195,7 @@ public class Session {
             doSendMessage(msg);
             msg.cleanup();
             sendKeyComplete = true;
-            if (!sendThread.isAlive()) {
+            if(!sendThread.isAlive()) {
                 sendThread.start();
             }
         } catch (Exception e) {
@@ -212,10 +203,10 @@ public class Session {
         }
     }
 
-    public void sendMessage(Message message) {
+    public void sendMessage(Message message)
+    {
         sender.AddMessage(message);
     }
-
     public void doSendMessage(Message msg) {
         byte[] data = msg.getData();
         try {

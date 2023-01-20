@@ -43,7 +43,7 @@ public class DelayUseBomTask extends TimerTask {
             this.cancel();
         } else {
             Message m = null;
-            int dameBoom = player.hp;
+            int dameBoom = (int)(player.hp * Util.getPercentDouble((int)skill.damage));
             
             player.mp -= (int)(player.mp*0.5);
 

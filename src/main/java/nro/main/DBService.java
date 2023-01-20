@@ -19,11 +19,11 @@ public class DBService {
     public Connection getConnection() {
         Connection conn = null;
         try {
-            String url = "jdbc:mysql://127.0.0.1:3306/vuatrochoi";
+            String url = "jdbc:mysql://127.0.0.1/ngocrong";
 //            String url = "jdbc:mysql://103.166.182.237:3306/server2";
             String user = "root";
 //            String user = "foouser4";
-            String password = "Qmen0987650((";
+            String password = "";
 //            String password = "AAbbcc123abc";
 
             // create a connection to the database
