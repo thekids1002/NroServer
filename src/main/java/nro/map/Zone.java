@@ -10803,7 +10803,7 @@ public class Zone {
             // lap trinh boss tu dong
             long timeTuDong = 2000;
             if ((_BOSS._typeBoss >= (byte) 15 && _BOSS._typeBoss <= (byte) 17) || (_BOSS._typeBoss >= (byte) 18 && _BOSS._typeBoss != (byte) 29 && _BOSS._typeBoss <= (byte) 30)) {
-                Service.gI().sendThongBaoServer("BOSS " + _BOSS.name + " vừa xuất hiện tại " + map.template.name);
+                Service.gI().sendThongBaoServer("BOSS " + _BOSS.name + " vừa xuất hiện tại " + map.template.name );
                 timeTuDong = 1000;
             } else if ((_BOSS._typeBoss >= (byte) 31 && _BOSS._typeBoss <= (byte) 41) || _BOSS._typeBoss >= (byte) 48) {
                 timeTuDong = 1000;

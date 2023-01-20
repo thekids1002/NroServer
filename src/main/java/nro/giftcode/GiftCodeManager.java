@@ -33,8 +33,6 @@ public class GiftCodeManager {
                 GiftCode giftcode = new GiftCode();
                 giftcode.code = rs.getString("code");
                 giftcode.Soluong = rs.getInt("soluong");
-                
-
                 JSONArray jar = (JSONArray) JSONValue.parse(rs.getString("detail"));
                 if (jar != null) {
                     for (int i = 0; i < jar.size(); ++i) {

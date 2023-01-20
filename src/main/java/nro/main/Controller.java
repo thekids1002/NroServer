@@ -315,6 +315,14 @@ public class Controller {
                             player.sendAddchatYellow("Bạn đã nhận GiftCode này rồi hoặc GiftCode không tồn tại");
                         }
                     }
+                    else if(player.menuNPCID == 39){
+                        GiftCode giftcode = GiftCodeManager.gI().checkUseGiftCode(player.id, textLevel);
+                        if (giftcode != null) {
+                            ItemService.gI().addItemGiftCodeToPlayer(player, giftcode);
+                        } else {
+                            player.sendAddchatYellow("Bạn đã nhận GiftCode này rồi hoặc GiftCode không tồn tại");
+                        }
+                    }
                     break;
                 case -113:
                     UseSkill.useSkill(player, m);
@@ -537,8 +545,8 @@ public class Controller {
                         if (gdaction == 0) { //moi giao dich
                             // if (player.thanhvien == 0) {
                             //   player.sendAddchatYellow("Vui lòng kích hoạt thành viên tại Santa để giao dịch");
-                            if (player.power < 5000000) {
-                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 5tr để giao dịch");
+                            if (player.power < 20000000000l) {
+                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 20 tỷ để giao dịch");
                                 return;
                             }
                             gdIdChar = m.reader().readInt(); //ID Char duoc moi giao dich
@@ -562,8 +570,8 @@ public class Controller {
                         } else if (gdaction == 1) { //chap nhan giao dich
                             // if (player.thanhvien == 0) {
                             //    player.sendAddchatYellow("Vui lòng kích hoạt thành viên tại Santa để giao dịch");
-                            if (player.power < 5000000) {
-                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 5tr để giao dịch");
+                            if (player.power < 20000000000l) {
+                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 20 tỷ để giao dịch");
                                 return;
                             }
                             gdIdChar = m.reader().readInt(); //ID Char giao dich
@@ -597,8 +605,8 @@ public class Controller {
                         } else if (gdaction == 2) { //add do vao giao dich
                             // if (player.thanhvien == 0) {
                             //   player.sendAddchatYellow("Vui lòng kích hoạt thành viên tại Santa để giao dịch");
-                            if (player.power < 5000000) {
-                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 5tr để giao dịch");
+                            if (player.power < 20000000000l) {
+                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 20 tỷ để giao dịch");
                                 return;
                             }
                             byte _indexGD = m.reader().readByte();
@@ -671,8 +679,8 @@ public class Controller {
                         } else if (gdaction == 5) { //KHOA GIAO DICH
                             // if (player.thanhvien == 0) {
                             //  player.sendAddchatYellow("Vui lòng kích hoạt thành viên tại Santa để giao dịch");
-                            if (player.power < 5000000) {
-                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 5tr để giao dịch");
+                            if (player.power < 20000000000l) {
+                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 20 tỷ để giao dịch");
                                 return;
                             }
                             try {
@@ -702,8 +710,8 @@ public class Controller {
                         } else if (gdaction == 7) { //XAC NHAN GIAO DICH
                             //  if (player.thanhvien == 0) {
                             //     player.sendAddchatYellow("Vui lòng kích hoạt thành viên tại Santa để giao dịch");
-                            if (player.power < 5000000) {
-                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 5tr để giao dịch");
+                            if (player.power < 20000000000l) {
+                                player.sendAddchatYellow("Vui lòng up sức mạnh trên 20 tỷ để giao dịch");
                                 return;
                             }
                             byte _boxMeNull = player.getAvailableBag();
@@ -2122,7 +2130,7 @@ public class Controller {
 //                            }
                        
                         if (itemBuy.buyType == 0) {
-                            if ((System.currentTimeMillis() - player.timeDelayBuyItem) < 30000l) {
+                            if (itemBuy.item.template.id == 457  && (System.currentTimeMillis() - player.timeDelayBuyItem) < 30000l) {
                                 player.sendAddchatYellow("Mua chậm thôi");
                                 isCanBuy = false;
                                 return;

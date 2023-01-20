@@ -452,21 +452,31 @@ public class Service {
                         Service.gI().SaleDone(player, typeBuy, "Bạn có muốn bán\n" + "x" + player.ItemBag[indexBuy].quantity + " " + player.ItemBag[indexBuy].template.name + "\nVới giá 1 vàng không?", indexBuy);
                     }
                 } else if (actionBuy == 1) {
+                    if(player.vang  >= 2000000000L){
+                        player.sendAddchatYellow("Không được mang quá 2 tỷ vàng");
+                        player.vang = 2000000000L;
+                        return;
+                    }
                     if(item.template.id == 457 && player.ItemBag[indexBuy].quantity >= 1){
                         player.vang += 500000000L;
-                        player.updateQuantityItemBag(indexBuy,player.ItemBag[indexBuy].quantity -1);
                         if(player.ItemBag[indexBuy].quantity == 1 ){
                             player.removeItemBag(indexBuy);
                         }
+                        else{
+                            player.updateQuantityItemBag(indexBuy,1);
+                        }
+                        player.sendAddchatYellow("Bán thành công x1 thỏi vàng giá 500tr");
                     }
                     else{
                          player.removeItemBag(indexBuy);
                          player.vang += 1;
+                         player.sendAddchatYellow("Bán thành công "+ player.ItemBag[indexBuy].template.name );
                     }
                    
                     Service.gI().updateItemBag(player);
                    
                     Service.gI().buyDone(player);
+
                 } else {
                     player.sendAddchatYellow("Bán vật phẩm không thành công");
                 }

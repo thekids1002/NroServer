@@ -1328,6 +1328,11 @@ public class Menu {
                         p.menuID = select;
                         break;
                     }
+                    else if(select == 4){
+                        Service.gI().clientInput(p, "Nhập giftcode", "Giftcode", (byte) 0);
+                        //GiftCodeManager.gI().checkInfomationGiftCode(p);
+                        break;
+                    }
                 }
                 break;
             }
@@ -3467,7 +3472,7 @@ public class Menu {
             }
             return;
         } else if (p.menuNPCID == 39 && p.map.id == 5) {
-            doMenuArray(p, idnpc, Text.get(0, 1), new String[]{"Cửa Hàng", "Chức Năng", "Đổi Tiền", "Nhận Quà\nGiáng Sinh"});
+            doMenuArray(p, idnpc, Text.get(0, 1), new String[]{"Cửa Hàng", "Chức Năng", "Đổi Tiền", "Nhận Quà\nGiáng Sinh", "Giftcode"});
             return;
         } else if (p.menuNPCID == 9 && p.map.id == 14) {
             if (p.gender == 2) {
