@@ -10381,17 +10381,20 @@ public class Zone {
     public Player getCharNearest(int xP, int yP, int minSpace) {
         Player _CharNearest = null;
 //        short minSpace = 150;
-        for (Player _p : players) {
-            if ((int) (Math.hypot(Math.abs(xP - _p.x), Math.abs(yP - _p.y))) < minSpace && !_p.isdie) {
-                _CharNearest = _p;
-                minSpace = (int) (Math.hypot(Math.abs(xP - _p.x), Math.abs(yP - _p.y)));
+        if(players != null && players.size() > 0){
+            for (Player _p : players) {
+                if ((int) (Math.hypot(Math.abs(xP - _p.x), Math.abs(yP - _p.y))) < minSpace && !_p.isdie) {
+                    _CharNearest = _p;
+                    minSpace = (int) (Math.hypot(Math.abs(xP - _p.x), Math.abs(yP - _p.y)));
+                }
+            }
+            if (_CharNearest != null) {
+                return _CharNearest;
+            } else {
+                return null;
             }
         }
-        if (_CharNearest != null) {
-            return _CharNearest;
-        } else {
-            return null;
-        }
+        return  _CharNearest;
     }
 
     //check char in map

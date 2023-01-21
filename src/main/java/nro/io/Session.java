@@ -31,7 +31,7 @@ public class Session {
             while (connected) {
                 try {
                     if (sendKeyComplete) {
-                        while (sendingMessage.size() > 0) {
+                        while (sendingMessage!= null && sendingMessage.size() > 0) {
                             Message m = sendingMessage.get(0);
                             if (m != null) {
                                 doSendMessage(m);
