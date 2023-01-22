@@ -202,7 +202,7 @@ public class Menu {
 //        Util.log("p.menuID: " + p.menuID);
         switch (p.menuNPCID) {
             case 999: {
-                if (p.id == 1 && p.name.equals("admin") || p.name.equals("nhtgame") || p.name.equals("berus") || p.name.equals("coldxayda")) {
+                if (p.id == 1 && p.name.equals("ADMIN") || p.name.equals("huymetv") || p.name.equals("thanmeo") || p.name.equals("coldxayda")) {
                     if (p.menuID == -1) {
                         if (select == 0) {
                             //p.sendAddchatYellow("Chuúc bạn chơi game vui vẻ không quạo!");
@@ -275,7 +275,7 @@ public class Menu {
                 break;
             }
             case 998: {
-                if (p.id == 1 && p.name.equals("admin") || p.name.equals("nhtgame") || p.name.equals("berus") || p.name.equals("coldxayda")) {
+                if (p.id == 1 && p.name.equals("ADMIN") || p.name.equals("huymetv") || p.name.equals("thanmeo") || p.name.equals("coldxayda")) {
                     if (p.menuID == -1) {
                         if (select == 0) {
                             m = null;

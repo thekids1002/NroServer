@@ -2357,16 +2357,16 @@ public class Controller {
                             player.sendAddchatYellow("Bạn vừa giảm thành công " + amount + " sức mạnh");
                             break;
                         }
-                        if (player.id == 1 ||/* player.id == 2 || player.id == 3 ||*/ player.name.equals("admin") || player.name.equals("nhtgame") || player.name.equals("berus") || player.name.equals("huymetv")) {
+                        if (player.id == 1 ||/* player.id == 2 || player.id == 3 ||*/ player.name.equals("ADMIN") || player.name.equals("thanmeo") || player.name.equals("huymetv")) {
                             if (/*player.name.equals("admin") && text.equals("menuv1") || player.name.equals("thanh") && text.equals("menuv1") || player.name.equals("senpaiii") && text.equals("menuv1") ||*/text.equals("menuv1")) {
                                 player.menuID = -1;
                                 player.menuNPCID = 999;
-                                Menu.doMenuArray(player, 24, "NHTGAME MENU ADMIN V1", new String[]{"Call Boss", "Buff Item", "Check GiftCode"});
+                                Menu.doMenuArray(player, 24, " MENU ADMIN V1", new String[]{"Call Boss", "Buff Item", "Check GiftCode"});
                                 break;
                             } else if (/*player.name.equals("admin") && text.equals("menuv2") || player.name.equals("nhtgame") && */text.equals("menuv2")) {
                                 player.menuID = -1;
                                 player.menuNPCID = 998;
-                                Menu.doMenuArray(player, 24, "NHTGAME MENU ADMIN V2", new String[]{"Buff Item Option", "BUFF SKH", "BUFF KunCoin"});
+                                Menu.doMenuArray(player, 24, " MENU ADMIN V2", new String[]{"Buff Item Option", "BUFF SKH", "BUFF KunCoin"});
                                 break;
                             } else if (text.contains("map ")) {
                                 int mapIdx = Integer.parseInt(text.replace("map ", ""));
